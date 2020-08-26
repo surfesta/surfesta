@@ -22,12 +22,20 @@ $font-tertiary-color: #a0a0a2;
   border-radius: $radius;
   background: #fff;
   overflow: hidden;
-  width: calc(25% - 30px);
-  margin: 0 15px 30px;
+  width: calc(25% - 60px);
+  margin: 0 30px 30px;
   .thumbnail {
     width: 100%;
     height: 200px;
     background-color: $point-color;
+    background-size: cover;
+  }
+  .hostThumbnail {
+    display: inline-block;
+    width: 23px;
+    height: 23px;
+    background-color: $point-color;
+    border-radius: 50%;
   }
 }
 
@@ -42,18 +50,18 @@ $font-tertiary-color: #a0a0a2;
 
 @include tablet {
   .card {
-    width: calc(50% - 30px);
+    width: calc(50% - 60px);
     .thumbnail {
       background: skyblue;
     }
   }
 }
 
-// @include desktop {
-//   .card {
-//     margin: 0 15px 15px;
-//     .thumbnail {
-//       background: violet;
-//     }
-//   }
-// }
+@include desktop {
+  .card {
+    width: calc(33.33% - 60px);
+    .thumbnail {
+      background: palegreen;
+    }
+  }
+}

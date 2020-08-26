@@ -1,5 +1,6 @@
 import React from 'react';
+import AppleIcon from '@material-ui/icons/Apple';
 
-export default function Logo() {
-  return <div>로고</div>;
-}
+const Logo = () => <AppleIcon htmlColor="white" />;
+
+export default Logo;

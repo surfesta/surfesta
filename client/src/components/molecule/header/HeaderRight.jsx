@@ -5,15 +5,22 @@ import LoginButton from '../../atom/header/LoginButton';
 import DayButton from '../../atom/header/DayButton';
 import UserAvatar from '../../atom/header/UserAvatar';
 import './HeaderRight.css';
+import { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+import { setSignInModal } from '../../../redux/modules/modal';
 
 export default function HeaderRight() {
+  const dispatch = useDispatch();
+  const handleLogin = useCallback(() => {
+    dispatch(setSignInModal());
+  }, [dispatch]);
   return (
     <section>
       <DayButton />
       <NightButton />
       <FavButton />
       <UserAvatar />
-      <LoginButton />
+      <LoginButton handleclick={handleLogin} />
     </section>
   );
 }

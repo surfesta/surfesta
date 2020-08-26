@@ -1,5 +1,13 @@
 @import './mediaQuery.scss';
-
+.a11y-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  /* position이 absolute일때만 동작, 구형 browser에서 사용 */
+  clip-path: polygon(0 0, 0 0, 0 0, 0 0);
+}
 .cards {
   display: flex;
   flex-flow: row wrap;

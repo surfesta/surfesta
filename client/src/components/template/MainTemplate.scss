@@ -1,0 +1,20 @@
+@import './mediaQuery.scss';
+
+@include mobile {
+  .cards {
+  }
+}
+
+@include tablet {
+  .cards {
+    width: 660px;
+    margin: 0 auto;
+  }
+}
+
+.cards {
+  display: flex;
+  flex-flow: row wrap;
+  max-width: 1320px;
+  margin: 0 auto;
+}

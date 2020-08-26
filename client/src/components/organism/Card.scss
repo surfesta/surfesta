@@ -1,0 +1,59 @@
+@import '../template/mediaQuery.scss';
+
+$radius: 10px;
+$primary-color: #25272b;
+$secondary-color: #2c3035;
+$tertiary-color: #b4b4b5;
+$point-color: #3562ff;
+$font-primary-color: #454b58;
+$font-secondary-color: #717174;
+$font-tertiary-color: #a0a0a2;
+
+@mixin font($size, $color) {
+  font-size: $size;
+  color: $color;
+}
+@mixin font-normal {
+  font-size: 1.5rem;
+  color: $font-primary-color;
+}
+
+.card {
+  border-radius: $radius;
+  background: #fff;
+  overflow: hidden;
+  width: calc(25% - 30px);
+  margin: 0 15px 30px;
+  .thumbnail {
+    width: 100%;
+    height: 200px;
+    background-color: $point-color;
+  }
+}
+
+@include mobile {
+  .card {
+    width: 100%;
+    .thumbnail {
+      background: pink;
+    }
+  }
+}
+
+@include tablet {
+  .card {
+    width: calc(50% - 30px);
+    .thumbnail {
+      background: skyblue;
+    }
+  }
+}
+
+// @include desktop {
+//   .card {
+//     margin: 0 15px 15px;
+//     .thumbnail {
+//       background: violet;
+//     }
+//   }
+// }

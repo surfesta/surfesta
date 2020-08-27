@@ -1,0 +1,58 @@
+@import '../../template/mediaQuery.scss';
+
+@mixin flex {
+  display: flex;
+  flex-flow: wrap;
+}
+
+.offlineInfo-wrap {
+  @include flex;
+  h2 {
+    font-size: 4rem;
+  }
+  .left {
+    width: 60%;
+    .thumbnail {
+      width: 100%;
+      padding-bottom: 66.66%;
+      background-color: wheat;
+    }
+  }
+  .right {
+    width: calc(40% - 50px);
+    margin-left: 50px;
+    font-size: 2.4rem;
+    .price {
+      font-size: 3rem;
+      font-weight: 600;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      li {
+        @include flex;
+        .info-title {
+          display: block;
+          width: 200px;
+        }
+        .info-text {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+@include mobile {
+  .offlineInfo-wrap {
+    .left {
+      width: 100%;
+    }
+    .right {
+      width: 100%;
+      margin-left: 0;
+    }
+  }
+}
+@include tablet {
+}

@@ -17,11 +17,6 @@
   margin: 0 auto;
 }
 
-@include mobile {
-  .cards {
-  }
-}
-
 @include tablet {
   .cards {
     width: 660px;

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Card.scss';
-import Thumbnamil from '../atom/main/Thumbnail';
 import CardContent from '../molecule/main/CardContent';
 import CardButtons from '../molecule/main/CardButtons';
 

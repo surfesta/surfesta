@@ -1,0 +1,334 @@
+//PANTONE
+// $Cerulean: #9bb7d4;
+// $FuchsiaRose: #c74375;
+// $TrueRed: #bf1932;
+// $AquaSkyl: #7bc4c4;
+// $Tigerlily: #e2583e;
+// $BlueTurquoise: #53b0ae;
+// $SandDollar: #decdbe;
+// $ChiliPepper: #9b1b30;
+// $BlueIris: #5a5b9f;
+// $Mimosa: #f0c05a;
+// $Turquoise: #45b5aa;
+// $Honeysuckle: #d94f70;
+// $TangerineTango: #dd4124;
+// $Emeraldl: #009473;
+// $RadiantOrchid: #b163a3;
+// $Marsala: #955251;
+// $RoseQuartz: #f7cac9;
+// $Serenity: #92a8d1;
+// $Greenery: #88b04b;
+// $UltraViolet: #5f4b8b;
+// $LivingCoral: #ff6f61;
+// $ClassicBlue: #0f4c81;
+
+header {
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  width: 100%;
+  height: 60px;
+  background: rgb(31, 46, 63);
+  padding: 0 265px;
+  color: #fff;
+  svg {
+    fill: #fff !important;
+  }
+}
+
+$checkboxColor: #b4b4b5;
+$labelColor: #454b58;
+
+@mixin wrapSet {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #f2f3f6;
+  margin-top: 60px;
+}
+
+@mixin titleFontSet($size: 2.4rem, $weight: normal) {
+  color: $labelColor;
+  font-size: $size;
+  font-weight: $weight;
+}
+@mixin contentFontSet {
+  color: #717174;
+}
+@mixin placeholderSet {
+  color: #a0a0a2;
+}
+
+.a11y-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: polygon(0 0, 0 0, 0 0);
+}
+@mixin BgSet($path, $size, $pos: center) {
+  background: url($path);
+  background-size: $size;
+  background-position: $pos;
+  background-repeat: no-repeat;
+}
+@mixin Flex($justify: center, $align: center) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+}
+@mixin Grid($gap, $auto, $columns, $rows, $aria) {
+  display: grid;
+  grid-gap: $gap;
+  grid-auto-flow: $auto;
+  grid-template-columns: $columns;
+  grid-template-rows: $rows;
+  grid-area: $aria;
+}
+@mixin GridChild($column, $row) {
+  grid-column: $column;
+  grid-row: $row;
+}
+@mixin VirtualFill($pos: absolute) {
+  content: "";
+  position: $pos;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+@mixin Virtual($pos: absolute) {
+  content: "";
+  position: $pos;
+}
+@mixin Size($width: 100%, $height: 100%) {
+  width: $width;
+  height: $height;
+}
+@mixin Anim($duration, $timing, $delay: 0) {
+  $name: anim-#{unique-id()};
+
+  @keyframes #{$name} {
+    @content;
+  }
+
+  animation-name: $name;
+  animation-duration: $duration;
+  animation-timing-function: $timing;
+  animation-delay: $delay;
+}
+
+@mixin LinearGradient($deg, $color...) {
+  background: linear-gradient($deg, $color);
+}
+// @include Anim(1s, linear) {
+//   0% {
+//     left: -100%;
+//   }
+//   100% {
+//     left: 100%;
+//   }
+// } 키프레임 사용법
+
+.create-event-wrap {
+  box-sizing: border-box;
+  @include wrapSet;
+  width: 100%;
+  min-height: 100vh;
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .w1300-container {
+    width: 1440px;
+    margin: 0 auto;
+    padding: 0 30px;
+  }
+  .te-preview {
+    background: #fff;
+  }
+  .create-event-form {
+    padding: 7.3rem 0;
+    h1 {
+      @include titleFontSet(4rem, bold);
+      margin-bottom: 4rem;
+    }
+    form.online-active {
+      #off-online {
+        display: none;
+      }
+      h2#on-online {
+        display: block;
+      }
+      .event-sec#on-online {
+        @include Flex(space-between, flex-start);
+      }
+    }
+    form {
+      #on-online {
+        display: none;
+      }
+      h2#off-online {
+        display: block;
+      }
+      .eventform-title {
+        @include titleFontSet();
+        margin-bottom: 2.8rem;
+        margin-top: 5.5rem;
+      }
+      .create-event-submit {
+        display: grid;
+        place-items: center;
+        button {
+          all: unset;
+          cursor: pointer;
+          box-sizing: border-box;
+          margin-top: 10rem;
+          width: 18rem;
+          height: 6.5rem;
+          padding: 20px;
+          font-size: 1.5rem;
+          background: rgba(255, 255, 255, 0.05);
+          border: 2px solid #3465ef;
+          border-radius: 50px;
+          display: grid;
+          place-items: center;
+        }
+      }
+      .event-sec {
+        width: 100%;
+        @include Flex(space-between, flex-start);
+
+        .event-content {
+          width: 50rem;
+          margin-bottom: 5.5rem;
+          font-size: 1.5rem;
+          line-height: 2rem;
+          @include contentFontSet;
+        }
+        .input-box {
+          width: 68rem;
+          .yes {
+            display: none;
+          }
+          .not {
+            display: block;
+          }
+          &.active {
+            .yes {
+              display: block;
+            }
+            .not {
+              display: none;
+            }
+          }
+          &.label-box {
+            display: flex;
+            input:checked + label {
+              border-color: #3465ef;
+            }
+            input:checked + label::before {
+              @include Virtual();
+              bottom: 1.08rem;
+              right: 1px;
+              width: 80%;
+              height: 0.2rem;
+              background: #3465ef;
+              transform: rotate(-45deg);
+            }
+            input:checked + label::after {
+              @include Virtual();
+              bottom: 0.78rem;
+              left: 0.1rem;
+              width: 30%;
+              height: 0.2rem;
+              transform: rotate(45deg);
+              background: #3465ef;
+            }
+            input {
+              display: none;
+            }
+            .custom-label {
+              position: relative;
+              width: 2.55rem;
+              height: 2.55rem;
+              border: 2px solid $checkboxColor;
+              border-radius: 4px;
+            }
+            span {
+              margin-left: 1.6rem;
+              font-size: 1.5rem;
+              line-height: 3.2rem;
+              user-select: none;
+            }
+          }
+          .custom-label {
+            color: $labelColor;
+          }
+          .time-check {
+            @include Flex(space-between, flex-start);
+            &:nth-child(2) {
+              margin-top: 3rem;
+            }
+          }
+          input[type="text"],
+          input[type="date"],
+          input[type="time"] {
+            border: 0;
+            width: 100%;
+            height: 6.5rem;
+            border-radius: 10px;
+            font-size: 1.5rem;
+            line-height: 2rem;
+            padding: 2.2rem 2.1rem 2.3rem 3.5rem;
+            &::placeholder {
+              @include placeholderSet;
+            }
+          }
+          input[type="text"] {
+            &:nth-child(2) {
+              margin-top: 3rem;
+            }
+          }
+          input[type="date"] {
+            width: 39.5rem;
+          }
+          input[type="time"] {
+            flex: 1;
+            margin-left: 30px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.custom-file-label {
+  display: block;
+  width: 68rem;
+  height: 45.53rem;
+  background: #c4c4c4;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.custom-file-input {
+  display: none;
+}
+.custom-thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.upload-type {
+  @include contentFontSet;
+  font-size: 1.5rem;
+  line-height: 20px;
+  margin-top: 1.567rem;
+}

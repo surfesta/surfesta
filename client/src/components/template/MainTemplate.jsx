@@ -12,11 +12,11 @@ export default function MainTemplate() {
       <Filter />
       <section className='cards'>
         <h2 className='a11y-hidden'>이벤트 리스트</h2>
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        <Card eventId={1} />
+        <Card eventId={2} />
+        <Card eventId={3} />
+        <Card eventId={4} />
+        <Card eventId={5} />
       </section>
     </main>
   );

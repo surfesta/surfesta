@@ -1,4 +1,20 @@
 @import './mediaQuery.scss';
+.a11y-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  /* position이 absolute일때만 동작, 구형 browser에서 사용 */
+  clip-path: polygon(0 0, 0 0, 0 0, 0 0);
+}
+.cards {
+  display: flex;
+  flex-flow: row wrap;
+  padding: 0 30px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
 
 @include mobile {
   .cards {
@@ -10,11 +26,4 @@
     width: 660px;
     margin: 0 auto;
   }
-}
-
-.cards {
-  display: flex;
-  flex-flow: row wrap;
-  max-width: 1320px;
-  margin: 0 auto;
 }

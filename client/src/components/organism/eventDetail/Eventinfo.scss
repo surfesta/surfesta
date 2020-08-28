@@ -1,13 +1,9 @@
 @import '../../../style/variables';
 @import '../../../style/mediaQuery';
 
-@mixin flex {
+.offlineInfo-wrap {
   display: flex;
   flex-flow: wrap;
-}
-
-.offlineInfo-wrap {
-  @include flex;
   h2 {
     font-size: 4rem;
     color: $point-color;

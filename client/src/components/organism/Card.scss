@@ -1,22 +1,6 @@
-@import '../template/mediaQuery.scss';
-
-$radius: 10px;
-$primary-color: #25272b;
-$secondary-color: #2c3035;
-$tertiary-color: #b4b4b5;
-$point-color: #3562ff;
-$font-primary-color: #454b58;
-$font-secondary-color: #717174;
-$font-tertiary-color: #a0a0a2;
-
-@mixin font($size, $color) {
-  font-size: $size;
-  color: $color;
-}
-@mixin font-normal {
-  font-size: 1.5rem;
-  color: $font-primary-color;
-}
+@import '../../style/mediaQuery';
+@import '../../style/variables';
+@import '../../style/mixin';
 
 .card {
   border-radius: $radius;

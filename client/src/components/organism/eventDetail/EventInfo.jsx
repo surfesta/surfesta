@@ -1,7 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './Eventinfo.scss';
-import LinkIcon from '@material-ui/icons/Link';
 import OfflineInfo from '../../molecule/eventDetail/OfflineInfo';
 import OnlineInfo from '../../molecule/eventDetail/OnlineInfo';
 import FavoriteButton from '../../atom/main/FavoriteButton';
@@ -29,15 +27,11 @@ export default function EventInfo() {
                 <span className="time">오후 06:30 - 오후 09:00</span>
               </td>
             </tr>
-            <tr>
-              <th>
-                주최자 <LinkIcon />
-              </th>
+            <tr className="top-line">
+              <th>주최자</th>
               <td>
-                <Link to="/" className="info-text">
-                  <span className="host-thumbnail">img</span>
-                  <span>당근마켓</span>
-                </Link>
+                <span className="host-thumbnail"></span>
+                <span>당근마켓</span>
               </td>
             </tr>
             <tr>
@@ -66,8 +60,8 @@ export default function EventInfo() {
         </table>
 
         <div className="button-wrap">
-          <button>이벤트 참석하기</button>
-          <div className="test">
+          <button className="enlist-button">이벤트 참석하기</button>
+          <div className="fav-button">
             <FavoriteButton />
           </div>
         </div>

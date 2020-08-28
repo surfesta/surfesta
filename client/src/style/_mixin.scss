@@ -1,3 +1,5 @@
+// @import './variables';
+
 @mixin font($size, $color) {
   font-size: $size;
   color: $color;
@@ -5,4 +7,20 @@
 @mixin font-normal {
   font-size: 1.5rem;
   color: $font-primary-color;
+}
+@mixin text-button {
+  box-sizing: border-box;
+  border: 2px solid $point-color;
+  font-weight: 700;
+  color: $point-color;
+  text-align: center;
+  font-size: 1.5rem;
+  border-radius: 50px;
+  outline: 0;
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: $point-color;
+    color: #fff;
+  }
 }

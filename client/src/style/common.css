@@ -1,0 +1,44 @@
+/* 숨긴콘텐츠 */
+.a11y-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  /* position이 absolute일때만 동작, 구형 browser에서 사용 */
+  clip-path: polygon(0 0, 0 0, 0 0, 0 0);
+}
+/* 본문 기본설정 */
+html {
+  font-size: 13px;
+}
+/* 스타일 초기화*/
+body {
+  margin: 0;
+  font-family: 'Noto Sans', sans-serif;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-weight: normal;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+/* ul 초기화 */
+ul {
+  padding-left: 0;
+  margin: 0;
+  list-style-type: none;
+}
+/* button 초기화 */
+button {
+  padding: 0;
+  cursor: pointer;
+  border: none;
+}

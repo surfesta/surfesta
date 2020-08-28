@@ -20,9 +20,8 @@ export default function EventInfo() {
         </p>
         <table>
           <tbody>
-            <OfflineInfo />
             <OnlineInfo />
-
+            <OfflineInfo />
             <tr>
               <th>일시</th>
               <td>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 // import Message from "./Message";
 import axios from "axios";
 
-const FileUpload = () => {
+export default function FileUpload({ Ref }) {
   const [file, setFile] = useState("");
   const [filename, setFilename] = useState("Choose File");
   const [uploadedFile, setUploadedFile] = useState({});
@@ -36,7 +36,7 @@ const FileUpload = () => {
     formData.append("file", _file);
 
     try {
-      const res = await axios.post("/upload", formData, {
+      const res = await axios.post("http://localhost:5000/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -71,8 +71,7 @@ const FileUpload = () => {
         {uploadedFile ? (
           <img
             className="custom-thumbnail"
-            // src={uploadedFile.filePath}
-            // src="./snow1.jpg"
+            src={uploadedFile.filePath}
             alt=""
           />
         ) : null}
@@ -83,6 +82,4 @@ const FileUpload = () => {
       </p>
     </>
   );
-};
-
-export default FileUpload;
+}

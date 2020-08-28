@@ -34,13 +34,17 @@ app.post("/upload", (req, res) => {
   }
 
   const file = req.files.file;
-  console.log(file);
-  file.mv(`${__dirname}/client/public/uploads/${file.md5}`, (err) => {
+
+  file.mv(`${__dirname}/uploads/${file.md5}`, (err) => {
     if (err) {
+      console.log(err);
       return res.status(500).send(err);
     }
 
-    res.json({ fileName: file.name, filePath: `/uploads/${file.md5}` });
+    res.json({
+      fileName: file.name,
+      filePath: `/uploads/${file.md5}`,
+    });
   });
 });
 

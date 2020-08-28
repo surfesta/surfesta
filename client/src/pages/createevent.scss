@@ -133,6 +133,10 @@ $labelColor: #454b58;
 //   }
 // } 키프레임 사용법
 
+html::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
 .create-event-wrap {
   box-sizing: border-box;
   @include wrapSet;
@@ -157,23 +161,31 @@ $labelColor: #454b58;
       @include titleFontSet(4rem, bold);
       margin-bottom: 4rem;
     }
-    form.online-active {
-      #off-online {
-        display: none;
-      }
-      h2#on-online {
-        display: block;
-      }
-      .event-sec#on-online {
-        @include Flex(space-between, flex-start);
-      }
-    }
     form {
-      #on-online {
+      .custom-file-label {
+        display: block;
+        width: 68rem;
+        height: 45.53rem;
+        background: #c4c4c4;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+      .custom-file-input {
         display: none;
       }
-      h2#off-online {
-        display: block;
+      .custom-thumbnail {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .upload-type {
+        @include contentFontSet;
+        font-size: 1.5rem;
+        line-height: 20px;
+        margin-top: 1.567rem;
       }
       .eventform-title {
         @include titleFontSet();
@@ -197,6 +209,12 @@ $labelColor: #454b58;
           border-radius: 50px;
           display: grid;
           place-items: center;
+          color: #3465ef;
+          transition: 0.4s;
+          &:hover {
+            color: #fff;
+            background: #3465ef;
+          }
         }
       }
       .event-sec {
@@ -275,6 +293,22 @@ $labelColor: #454b58;
               margin-top: 3rem;
             }
           }
+          #date-picker-inline,
+          #time-picker {
+            padding: 6px 0 7px;
+            height: auto;
+          }
+          .MuiFormControl-root {
+            width: 50%;
+
+            &:nth-child(2) {
+              margin-left: 20px;
+            }
+          }
+          #date-picker-inline-label,
+          #time-picker-label {
+            font-size: 1.5rem;
+          }
           input[type="text"],
           input[type="date"],
           input[type="time"] {
@@ -305,30 +339,4 @@ $labelColor: #454b58;
       }
     }
   }
-}
-
-.custom-file-label {
-  display: block;
-  width: 68rem;
-  height: 45.53rem;
-  background: #c4c4c4;
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
-.custom-file-input {
-  display: none;
-}
-.custom-thumbnail {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.upload-type {
-  @include contentFontSet;
-  font-size: 1.5rem;
-  line-height: 20px;
-  margin-top: 1.567rem;
 }

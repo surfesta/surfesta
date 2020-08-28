@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import "./maps.scss";
 
-export default function Maps({ put }) {
+export default function Maps({ Ref }) {
   useEffect(() => {
     const map = new window.google.maps.Map(document.getElementById("map"), {
-      center: { lat: 37.5063963, lng: 127.054257 },
+      center: { lat: 37.5452619, lng: 127.0569794 },
       zoom: 17,
     });
     const card = document.getElementById("pac-card");
@@ -29,9 +29,9 @@ export default function Maps({ put }) {
 
     infowindowContent.children["place-icon"].src =
       "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png";
-    infowindowContent.children["place-name"].textContent = "저스트코 타워";
+    infowindowContent.children["place-name"].textContent = "제강빌딩";
     infowindowContent.children["place-address"].textContent =
-      "서울특별시 강남구 삼성동 테헨란로 431";
+      "대한민국 서울특별시 성동구 성수2가3동 289-10";
     infowindow.open(map, marker);
     autocomplete.addListener("place_changed", () => {
       infowindow.close();
@@ -78,10 +78,10 @@ export default function Maps({ put }) {
   return (
     <>
       <input
-        ref={put}
+        ref={Ref}
         id="pac-input"
         type="text"
-        placeholder="서울특별시 강남구 테헨란로 431 저스트코타워, 13층  OpenUP"
+        placeholder="대한민국 서울특별시 성동구 성수2가3동 289-10"
       />
       <div id="map"></div>
       <div id="infowindow-content">

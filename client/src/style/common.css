@@ -46,3 +46,9 @@ button {
   cursor: pointer;
   border: none;
 }
+/* table 초기화 */
+table {
+  border-color: transparent;
+  border-collapse: collapse;
+  border-spacing: 0;
+}

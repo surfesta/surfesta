@@ -1,12 +1,17 @@
 @import '../../../style/variables';
+@import '../../../style/mixin';
 @import '../../../style/mediaQuery';
 
 .offlineInfo-wrap {
   display: flex;
   flex-flow: wrap;
+  color: $font-primary-color;
   h2 {
     font-size: 4rem;
-    color: $point-color;
+    font-weight: 700;
+  }
+  p {
+    margin: 40px 0 20px 0;
   }
   .left {
     width: 50%;
@@ -25,10 +30,59 @@
       font-weight: 600;
     }
     table {
-      th {
-        text-align: left;
+      tr {
+        &.top-line {
+          th,
+          td {
+            border-top: 1px solid $tertiary-color;
+            padding-top: 20px;
+          }
+        }
+        th {
+          text-align: left;
+          vertical-align: top;
+          font-weight: 400;
+          color: $font-secondary-color;
+          width: 35%;
+          padding-bottom: 20px;
+        }
+        td {
+          padding-bottom: 20px;
+          .date {
+            display: block;
+          }
+          .host-thumbnail {
+            width: 25px;
+            height: 25px;
+            display: inline-block;
+            margin-right: 8px;
+            margin-top: -3px;
+            vertical-align: middle;
+            background-color: $point-color;
+            border-radius: 50%;
+          }
+        }
       }
-      td {
+    }
+    .button-wrap {
+      padding-top: 23px;
+      .enlist-button {
+        @include text-button;
+        width: calc(100% - 100px);
+        margin-right: 25px;
+        padding: 21px;
+      }
+      .fav-button {
+        display: inline-block;
+        border: 2px solid $tertiary-color;
+        border-radius: 50%;
+        button {
+          svg {
+            padding: 4px;
+            font-size: 3rem;
+            color: $tertiary-color;
+          }
+        }
       }
     }
   }

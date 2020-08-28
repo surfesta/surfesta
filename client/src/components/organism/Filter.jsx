@@ -11,7 +11,7 @@ export default function Filter() {
   const selectListRef = useRef();
 
   return (
-    <div className='filter-wrap'>
+    <div className="filter-wrap">
       <button
         selected={selected}
         onClick={() => {
@@ -19,11 +19,13 @@ export default function Filter() {
         }}
       >
         <span ref={selectRef}>Our Events </span> <i>🎉</i>
-        <span className='more'>
-          <ExpandMoreIcon className={selected ? 'arrow rotataion' : 'arrow'} />
+        <span className="more">
+          <ExpandMoreIcon
+            className={selected ? 'arrow rotataion' : 'arrow'}
+          />
         </span>
       </button>
-      <div className='selectList-wrap'>
+      <div className="selectList-wrap">
         <ul
           className={selected ? 'show' : 'hide'}
           ref={selectListRef}

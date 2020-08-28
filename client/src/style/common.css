@@ -13,7 +13,8 @@
 }
 /* 본문 기본설정 */
 html {
-  font-size: 13px;
+  font-size: 10px;
+  background-color: #f2f3f6;
 }
 /* 스타일 초기화*/
 body {

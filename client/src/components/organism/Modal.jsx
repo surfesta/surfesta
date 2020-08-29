@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { offModal } from '../../redux/modules/modal';
 import './Modal.css';
 import { useCallback } from 'react';
+import { useEffect } from 'react';
 
 export default function Modal() {
   const modal = useSelector((state) => state.modal);
@@ -26,7 +27,6 @@ export default function Modal() {
     },
     [dispatch]
   );
-
   // 모달은 redux-store에 저장된 상태에 따라 다른 UI가 됩니다(다른 자식컴포넌트를 보여줍니다)
   return (
     <Portal>

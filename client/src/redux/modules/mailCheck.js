@@ -1,5 +1,6 @@
 import UserService from '../../services/UserService';
 import { put, delay, call, takeEvery } from 'redux-saga/effects';
+import { setSignInModal } from './modal';
 
 const prefix = 'surfesta-mailCheck';
 
@@ -68,14 +69,10 @@ function* checkSaga(action) {
   try {
     yield put(checkStart());
     yield delay(300);
-    const { result, email } = yield call(
-      UserService.checkEmail,
-      action.payload
-    );
-    if (result) {
-      put(checkFail());
-    }
+    const { data, email } = yield call(UserService.checkEmail, action.payload);
+    if (!data.emailCheck) throw new Error();
     yield put(checkSuccess(email));
+    yield put(setSignInModal());
   } catch (error) {
     yield put(checkFail(error));
   }

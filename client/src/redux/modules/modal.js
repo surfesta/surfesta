@@ -42,7 +42,7 @@ export const setSingOutModal = (content = contentTypes.logout) => ({
 });
 
 const initialState = {
-  isModalOn: true,
+  isModalOn: false,
   content: contentTypes.preLogin,
   preLogin: true,
   forLogin: false,
@@ -73,12 +73,8 @@ export default function reducer(state = initialState, action) {
       };
     case OFF:
       return {
+        ...state,
         isModalOn: false,
-        content: '',
-        preLogin: false,
-        forLogin: false,
-        forConfirm: false,
-        forNoti: false,
       };
     default:
       return state;

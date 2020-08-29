@@ -1,6 +1,14 @@
 import { combineReducers } from 'redux';
 import modal from './modal';
-import auth from './user';
+import auth from './auth';
 import mailCheck from './mailCheck';
+import { connectRouter } from 'connected-react-router';
 
-export default combineReducers({ modal, auth, mailCheck });
+const rootReducer = (history) =>
+  combineReducers({
+    modal,
+    auth,
+    mailCheck,
+    router: connectRouter(history),
+  });
+export default rootReducer;

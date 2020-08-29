@@ -10,10 +10,8 @@ router.get('/', (req, res) => {
     .populate('hosting_events')
     .populate('liked_events')
     .exec((err, users) => {
-      if (err) {
-        console.log(err);
-        return;
-      }
+      if (err) return;
+
       res.json(users);
     });
 });
@@ -26,8 +24,7 @@ router.get('/:user_id', (req, res) => {
     .populate('liked_events')
     .exec((err, user) => {
       if (err) return res.status(500).json({ error: err });
-      if (!user)
-        return res.status(404).json({ error: 'User not found' });
+      if (!user) return res.status(404).json({ error: 'User not found' });
       res.json(user);
     });
 });
@@ -51,9 +48,7 @@ router.patch('/:user_id', (req, res) => {
     { $set: req.body },
     (err, output) => {
       if (err) res.status(500).json({ error: 'db failure' });
-      console.log(output);
-      if (!output.n)
-        return res.status(404).json({ error: 'User not found' });
+      if (!output.n) return res.status(404).json({ error: 'User not found' });
       res.json({ success: true });
     }
   );
@@ -73,11 +68,11 @@ router.post('/login', (req, res) => {
   User.findOne({ email: req.body.email }, (err, user) => {
     if (!user)
       return res.json({
-        loginSuccess: false,
+        emailCheck: false,
         message: 'Auth failed, email not found',
       });
     res.json({
-      loginSuccess: true,
+      emailCheck: true,
       message: 'email found',
     });
   });
@@ -101,8 +96,9 @@ router.post('/login/password', (req, res) => {
 
       user.generateToken((err, user) => {
         if (err) return res.status(400).send(err);
-        res.cookie('w_authExp', user.tokenExp);
-        res.cookie('w_auth', user.token).status(200).json({
+        res.cookie('surf_authExp', user.tokenExp);
+        res.cookie('surf_auth', user.token);
+        res.status(200).json({
           loginSuccess: true,
           user,
         });

@@ -7,12 +7,12 @@ import UserAvatar from '../../atom/header/UserAvatar';
 import './HeaderRight.css';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { setSignInModal } from '../../../redux/modules/modal';
+import { welcomeModal } from '../../../redux/modules/modal';
 
 export default function HeaderRight() {
   const dispatch = useDispatch();
   const handleLogin = useCallback(() => {
-    dispatch(setSignInModal());
+    dispatch(welcomeModal());
   }, [dispatch]);
   return (
     <section>

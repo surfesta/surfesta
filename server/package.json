@@ -7,7 +7,7 @@
     "start": "npx nodemon server.js",
     "backend": "npx nodemon server.js",
     "frontend": "npm start --prefix ../client",
-    "dev": "concurrently \"npm run backend\" \"npm run start --prefix ../client\""
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\""
   },
   "author": "",
   "license": "ISC",

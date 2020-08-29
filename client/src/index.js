@@ -5,10 +5,12 @@ import './style/common.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
-import { configStore } from './redux/configStore';
+import configStore from './redux/configStore';
+
+const store = configStore();
 
 ReactDOM.render(
-  <Provider store={configStore()}>
+  <Provider store={store}>
     <App />
   </Provider>,
   document.getElementById('root')

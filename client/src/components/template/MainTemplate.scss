@@ -1,4 +1,5 @@
-@import './mediaQuery.scss';
+@import '../../style/mediaQuery';
+
 .a11y-hidden {
   position: absolute;
   width: 1px;
@@ -14,11 +15,6 @@
   padding: 0 30px;
   max-width: 1440px;
   margin: 0 auto;
-}
-
-@include mobile {
-  .cards {
-  }
 }
 
 @include tablet {

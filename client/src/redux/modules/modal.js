@@ -42,7 +42,7 @@ export const setSingOutModal = (content = contentTypes.logout) => ({
 });
 
 const initialState = {
-  isModalOn: false,
+  isModalOn: true,
   content: contentTypes.preLogin,
   preLogin: true,
   forLogin: false,

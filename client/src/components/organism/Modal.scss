@@ -1,0 +1,72 @@
+@import '../../style/variables';
+@import '../../style/mixin';
+
+#modal-container {
+  background-color: 'rgba(3,3,3,.6)';
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#modal-container * {
+  box-sizing: border-box;
+}
+
+#modal {
+  background: $secondary-color;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  width: 55vw;
+  height: 50vh;
+  padding: 40px;
+
+  text-align: center;
+}
+
+.modal-headline {
+  padding: 15px;
+  font-size: 3rem;
+  color: white;
+}
+
+.social-login-button {
+  padding: 20px;
+  background-color: darkslateblue;
+  border-radius: 40px;
+  margin: 5px 15px 20px;
+}
+
+#modal-divider {
+  div {
+    height: 20px;
+    &:first-child {
+      border-bottom: white 1px solid;
+    }
+  }
+}
+
+.login-input {
+  margin: 1rem;
+  box-sizing: border-box;
+  font-size: 2rem;
+  border-radius: 50px;
+  outline: 0;
+  padding: 2rem 3rem;
+  width: 70%;
+}
+.basic-privacy-confirm {
+  color: white;
+}
+.login-button {
+  @include text-button;
+  width: 40%;
+  padding: 15px;
+  border: 3px white solid;
+  background-color: transparent;
+  color: white;
+  &:hover {
+    background-color: white;
+    color: $secondary-color;
+  }
+}

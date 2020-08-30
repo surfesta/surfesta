@@ -1,11 +1,11 @@
 import React, { useCallback } from 'react';
-import './Header.css';
 import HeaderRight from '../molecule/header/HeaderRight';
 import Logo from '../atom/header/Logo';
 import { useDispatch } from 'react-redux';
 import { welcomeModal } from '../../redux/modules/modal';
 import PostEventButton from '../atom/header/PostEventButton';
 import { push } from 'connected-react-router';
+import './Header.scss';
 
 export default function Header() {
   const dispatch = useDispatch();

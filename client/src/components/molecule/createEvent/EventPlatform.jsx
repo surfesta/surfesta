@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-export default function EventPlatform({ Ref }) {
+export default function EventPlatform() {
   return (
     <>
       <h2 className="eventform-title" id="on-online">

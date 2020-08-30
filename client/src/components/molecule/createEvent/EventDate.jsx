@@ -1,20 +1,18 @@
-import React from "react";
-import DateFnsUtils from "@date-io/date-fns";
+import React from 'react';
+import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
   KeyboardDatePicker,
-} from "@material-ui/pickers";
-import { useEffect } from "react";
-import { useRef } from "react";
+} from '@material-ui/pickers';
+import { useEffect } from 'react';
+import { useRef } from 'react';
 
-export default function EventDate({}) {
+export default function EventDate() {
   const $startDate = useRef(null);
   const $endDate = useRef(null);
 
-  const [selectedDate, setSelectedDate] = React.useState(
-    new Date("2014-08-18T21:11:54")
-  );
+  const [selectedDate, setSelectedDate] = React.useState(new Date());
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -37,21 +35,21 @@ export default function EventDate({}) {
                 format="MM/dd/yyyy"
                 margin="normal"
                 id="date-picker-inline"
-                label="Date picker inline"
+                label="행사 시작일"
                 value={selectedDate}
                 onChange={handleDateChange}
                 KeyboardButtonProps={{
-                  "aria-label": "change date",
+                  'aria-label': 'change date',
                 }}
               />
               <KeyboardTimePicker
                 margin="normal"
                 id="time-picker"
-                label="Time picker"
+                label="행사 시작 시간"
                 value={selectedDate}
                 onChange={handleDateChange}
                 KeyboardButtonProps={{
-                  "aria-label": "change time",
+                  'aria-label': 'change time',
                 }}
               />
             </MuiPickersUtilsProvider>
@@ -65,21 +63,21 @@ export default function EventDate({}) {
                 format="MM/dd/yyyy"
                 margin="normal"
                 id="date-picker-inline"
-                label="Date picker inline"
+                label="행사 종료일"
                 value={selectedDate}
                 onChange={handleDateChange}
                 KeyboardButtonProps={{
-                  "aria-label": "change date",
+                  'aria-label': 'change date',
                 }}
               />
               <KeyboardTimePicker
                 margin="normal"
                 id="time-picker"
-                label="Time picker"
+                label="행사 종료 시간"
                 value={selectedDate}
                 onChange={handleDateChange}
                 KeyboardButtonProps={{
-                  "aria-label": "change time",
+                  'aria-label': 'change time',
                 }}
               />
             </MuiPickersUtilsProvider>

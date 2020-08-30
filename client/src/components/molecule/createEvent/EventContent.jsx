@@ -1,7 +1,7 @@
-import React from "react";
-import ToastEditor from "./ToastEditor";
+import React from 'react';
+import ToastEditor from './ToastEditor';
 
-export default function EventContent({ Ref }) {
+export default function EventContent() {
   return (
     <>
       <h2 className="eventform-title">내용</h2>

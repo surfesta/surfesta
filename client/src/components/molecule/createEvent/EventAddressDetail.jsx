@@ -1,7 +1,7 @@
-import React from "react";
-import Maps from "./Maps";
+import React from 'react';
+import Maps from './Maps';
 
-export default function EventAddressDetail({ Ref }) {
+export default function EventAddressDetail() {
   return (
     <>
       <h2 className="eventform-title" id="off-online">
@@ -12,7 +12,7 @@ export default function EventAddressDetail({ Ref }) {
           <p>쉽게 찾아갈 수 있도록 정확한 주소를 입력해주세요.</p>
         </div>
         <div className="input-box">
-          <Maps put={Ref} />
+          <Maps />
         </div>
       </div>
     </>

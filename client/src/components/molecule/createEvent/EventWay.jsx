@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-export default function EventWay({ Ref }) {
+export default function EventWay() {
   return (
     <>
       <h2 className="eventform-title" id="on-online">

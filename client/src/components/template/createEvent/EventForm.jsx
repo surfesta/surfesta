@@ -1,18 +1,18 @@
-import React, { useRef, useState } from "react";
-import EventDislose from "../../molecule/createEvent/EventDisclose";
-import EventTitle from "../../molecule/createEvent/EventTitle";
-import EventOrganizer from "../../molecule/createEvent/EventOrganizer";
-import EventApplyLink from "../../molecule/createEvent/EventApplyLink";
-import EventOnlineCheck from "../../molecule/createEvent/EventOnlineCheck";
-import EventAddress from "../../molecule/createEvent/EventAddress";
-import EventAddressDetail from "../../molecule/createEvent/EventAddressDetail";
-import EventAddressDetailPlus from "../../molecule/createEvent/EventAddressDetailPlus";
-import EventPlatform from "../../molecule/createEvent/EventPlatform";
-import EventPrice from "../../molecule/createEvent/EventPrice";
-import EventMaxPerson from "../../molecule/createEvent/EventMaxPerson";
-import EventThumbnail from "../../molecule/createEvent/EventThumbnail";
-import EventContent from "../../molecule/createEvent/EventContent";
-import EventDate from "../../molecule/createEvent/EventDate";
+import React, { useRef, useState } from 'react';
+import EventDislose from '../../molecule/createEvent/EventDisclose';
+import EventTitle from '../../molecule/createEvent/EventTitle';
+import EventOrganizer from '../../molecule/createEvent/EventOrganizer';
+import EventApplyLink from '../../molecule/createEvent/EventApplyLink';
+import EventOnlineCheck from '../../molecule/createEvent/EventOnlineCheck';
+import EventAddress from '../../molecule/createEvent/EventAddress';
+import EventAddressDetail from '../../molecule/createEvent/EventAddressDetail';
+import EventAddressDetailPlus from '../../molecule/createEvent/EventAddressDetailPlus';
+import EventPlatform from '../../molecule/createEvent/EventPlatform';
+import EventPrice from '../../molecule/createEvent/EventPrice';
+import EventMaxPerson from '../../molecule/createEvent/EventMaxPerson';
+import EventThumbnail from '../../molecule/createEvent/EventThumbnail';
+import EventContent from '../../molecule/createEvent/EventContent';
+import EventDate from '../../molecule/createEvent/EventDate';
 
 function EventForm() {
   const [onlineCheck, setOnlineCheck] = useState(false);
@@ -41,10 +41,10 @@ function EventForm() {
     console.log(e);
   }
   function openToggle(e) {
-    e.target.parentNode.classList.toggle("active");
+    e.target.parentNode.classList.toggle('active');
   }
   function onlineToggle(e) {
-    e.target.parentNode.classList.toggle("active");
+    e.target.parentNode.classList.toggle('active');
     // $form.current.classList.toggle("online-active");
     // if ($form.current.className === "online-active") {
     //   $address.current.setAttribute("required", false);
@@ -62,19 +62,19 @@ function EventForm() {
         action="/upload_page"
         ref={$form}
       >
-        <EventDislose toggle={openToggle} Ref={$isOpen} />
-        <EventTitle Ref={$eventTitle} />
+        <EventDislose toggle={openToggle} />
+        <EventTitle />
         <EventOrganizer />
-        <EventApplyLink Ref={$forLink} />
+        <EventApplyLink />
         <EventDate />
-        <EventOnlineCheck toggle={onlineToggle} ref={$isOnline} />
+        <EventOnlineCheck toggle={onlineToggle} />
 
         {/* 온라인 OFF */}
         {!onlineCheck && (
           <>
-            <EventAddress Ref={$address} />
-            <EventAddressDetail Ref={$addressDetail} />
-            <EventAddressDetailPlus Ref={$addressDetailPlus} />
+            <EventAddress />
+            <EventAddressDetail />
+            <EventAddressDetailPlus />
           </>
         )}
         {/* 온라인 OFF */}
@@ -82,14 +82,14 @@ function EventForm() {
         {/* 온라인 ON */}
         {onlineCheck && (
           <>
-            <EventPlatform Ref={$onlinePlatform} />
+            <EventPlatform />
           </>
         )}
         {/* 온라인 ON */}
 
         <EventPrice />
         <EventMaxPerson />
-        <EventThumbnail Ref={$thumbnail} />
+        <EventThumbnail />
         <EventContent />
         <div className="create-event-submit">
           <button type="submit">이벤트 생성하기</button>

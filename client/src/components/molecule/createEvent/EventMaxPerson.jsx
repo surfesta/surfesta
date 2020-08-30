@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-export default function EventMaxPerson({ Ref }) {
+export default function EventMaxPerson() {
   return (
     <>
       <h2 className="eventform-title">참석 가능 인원수</h2>

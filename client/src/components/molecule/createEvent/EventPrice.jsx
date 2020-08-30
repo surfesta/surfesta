@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-export default function EventPrice({ Ref }) {
+export default function EventPrice() {
   return (
     <>
       <h2 className="eventform-title">이벤트 참가 비용</h2>

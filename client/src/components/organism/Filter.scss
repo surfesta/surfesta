@@ -1,0 +1,53 @@
+.filter-wrap {
+  button {
+    background: 0;
+    border: 0;
+    outline: transparent;
+    font-size: 3rem;
+    font-weight: 700;
+    cursor: pointer;
+    i {
+      font-size: 2.5rem;
+    }
+    .more {
+      margin-left: 20px;
+      padding: 0 5px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+      .arrow {
+        font-size: 2rem;
+        transition: 0.3s;
+      }
+      .rotataion {
+        transform: rotate(180deg);
+      }
+    }
+  }
+  .selectList-wrap {
+    position: absolute;
+    overflow: hidden;
+    ul {
+      list-style: none;
+      padding-left: 0;
+      background-color: #fff;
+      padding: 20px;
+      li {
+        cursor: pointer;
+        font-size: 2rem;
+        line-height: 3rem;
+      }
+    }
+    .hide {
+      transform: translateY(70%);
+      overflow: hidden;
+      opacity: 0;
+      transition: 0.5s;
+    }
+    .show {
+      transform: translateY(0%);
+      opacity: 1;
+      transition: 0.3s;
+    }
+  }
+}

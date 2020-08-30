@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-export default function EventTitle({ Ref }) {
+export default function EventTitle() {
   return (
     <>
       <h2 className="eventform-title">이벤트 제목</h2>

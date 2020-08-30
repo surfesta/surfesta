@@ -1,0 +1,51 @@
+@import '../../style/mediaQuery';
+@import '../../style/variables';
+@import '../../style/mixin';
+
+.card {
+  border-radius: $radius;
+  background: #fff;
+  overflow: hidden;
+  width: calc(25% - 60px);
+  margin: 0 30px 30px;
+  .thumbnail {
+    width: 100%;
+    height: 200px;
+    background-color: $point-color;
+    background-size: cover;
+  }
+  .host-thumbnail {
+    display: inline-block;
+    width: 23px;
+    height: 23px;
+    background-color: $point-color;
+    border-radius: 50%;
+  }
+}
+
+@include mobile {
+  .card {
+    width: 100%;
+    .thumbnail {
+      background: pink;
+    }
+  }
+}
+
+@include tablet {
+  .card {
+    width: calc(50% - 60px);
+    .thumbnail {
+      background: skyblue;
+    }
+  }
+}
+
+@include desktop {
+  .card {
+    width: calc(33.33% - 60px);
+    .thumbnail {
+      background: palegreen;
+    }
+  }
+}

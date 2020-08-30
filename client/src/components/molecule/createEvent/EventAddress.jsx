@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-export default function EventAddress({ Ref }) {
+export default function EventAddress() {
   return (
     <>
       <h2 className="eventform-title" id="off-online">

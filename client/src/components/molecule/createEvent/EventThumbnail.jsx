@@ -1,7 +1,7 @@
-import React from "react";
-import FileUpload from "./FileUpload";
+import React from 'react';
+import FileUpload from './FileUpload';
 
-export default function EventThumbnail({ Ref }) {
+export default function EventThumbnail() {
   return (
     <>
       <h2 className="eventform-title">대표 이미지</h2>

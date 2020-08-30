@@ -1,24 +1,24 @@
-import React, { useEffect } from "react";
-import "./maps.scss";
+import React, { useEffect } from 'react';
+import './maps.scss';
 
-export default function Maps({ Ref }) {
+export default function Maps() {
   useEffect(() => {
-    const map = new window.google.maps.Map(document.getElementById("map"), {
+    const map = new window.google.maps.Map(document.getElementById('map'), {
       center: { lat: 37.5452619, lng: 127.0569794 },
       zoom: 17,
     });
-    const card = document.getElementById("pac-card");
-    const input = document.getElementById("pac-input");
+    const card = document.getElementById('pac-card');
+    const input = document.getElementById('pac-input');
     map.controls[window.google.maps.ControlPosition.TOP_RIGHT].push(card);
     const autocomplete = new window.google.maps.places.Autocomplete(input);
     // Bind the map's bounds (viewport) property to the autocomplete object,
     // so that the autocomplete requests use the current map bounds for the
     // bounds option in the request.
-    autocomplete.bindTo("bounds", map);
+    autocomplete.bindTo('bounds', map);
     // Set the data fields to return when the user selects a place.
-    autocomplete.setFields(["address_components", "geometry", "icon", "name"]);
+    autocomplete.setFields(['address_components', 'geometry', 'icon', 'name']);
     const infowindow = new window.google.maps.InfoWindow();
-    const infowindowContent = document.getElementById("infowindow-content");
+    const infowindowContent = document.getElementById('infowindow-content');
     infowindow.setContent(infowindowContent);
     const marker = new window.google.maps.Marker({
       map,
@@ -27,13 +27,13 @@ export default function Maps({ Ref }) {
       zoom: 13,
     });
 
-    infowindowContent.children["place-icon"].src =
-      "https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png";
-    infowindowContent.children["place-name"].textContent = "제강빌딩";
-    infowindowContent.children["place-address"].textContent =
-      "대한민국 서울특별시 성동구 성수2가3동 289-10";
+    infowindowContent.children['place-icon'].src =
+      'https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png';
+    infowindowContent.children['place-name'].textContent = '제강빌딩';
+    infowindowContent.children['place-address'].textContent =
+      '대한민국 서울특별시 성동구 성수2가3동 289-10';
     infowindow.open(map, marker);
-    autocomplete.addListener("place_changed", () => {
+    autocomplete.addListener('place_changed', () => {
       infowindow.close();
       marker.setVisible(false);
       const place = autocomplete.getPlace();
@@ -54,31 +54,30 @@ export default function Maps({ Ref }) {
       }
       marker.setPosition(place.geometry.location);
       marker.setVisible(true);
-      let address = "";
+      let address = '';
 
       if (place.address_components) {
         address = [
           (place.address_components[0] &&
             place.address_components[0].short_name) ||
-            "",
+            '',
           (place.address_components[1] &&
             place.address_components[1].short_name) ||
-            "",
+            '',
           (place.address_components[2] &&
             place.address_components[2].short_name) ||
-            "",
-        ].join(" ");
+            '',
+        ].join(' ');
       }
-      infowindowContent.children["place-icon"].src = place.icon;
-      infowindowContent.children["place-name"].textContent = place.name;
-      infowindowContent.children["place-address"].textContent = address;
+      infowindowContent.children['place-icon'].src = place.icon;
+      infowindowContent.children['place-name'].textContent = place.name;
+      infowindowContent.children['place-address'].textContent = address;
       infowindow.open(map, marker);
     });
   }, []);
   return (
     <>
       <input
-        ref={Ref}
         id="pac-input"
         type="text"
         placeholder="대한민국 서울특별시 성동구 성수2가3동 289-10"

@@ -1,5 +1,10 @@
 import React from 'react';
 
-export default function LoginButton() {
-  return <div>로그인하기</div>;
-}
+const LoginButton = ({ handleclick }) => {
+  return (
+    <div id="login-button" onClick={handleclick}>
+      로그인하기
+    </div>
+  );
+};
+export default LoginButton;

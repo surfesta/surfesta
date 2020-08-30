@@ -1,11 +1,10 @@
 import React from 'react';
 import IconButton from '@material-ui/core/IconButton';
-import Brightness4RoundedIcon from '@material-ui/icons/Brightness4Rounded';
+import Brightness2OutlinedIcon from '@material-ui/icons/Brightness2Outlined';
 
-export default function NightButton() {
-  return (
-    <IconButton>
-      <Brightness4RoundedIcon />
-    </IconButton>
-  );
-}
+const NightButton = () => (
+  <IconButton>
+    <Brightness2OutlinedIcon htmlColor="dimgrey" />
+  </IconButton>
+);
+export default NightButton;

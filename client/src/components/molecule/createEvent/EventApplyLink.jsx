@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-export default function EventApplyLink({ Ref }) {
+export default function EventApplyLink() {
   return (
     <>
       <h2 className="eventform-title">이벤트 신청 링크</h2>

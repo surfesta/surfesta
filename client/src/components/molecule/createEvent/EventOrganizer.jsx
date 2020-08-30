@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-export default function EventOrganizer({ Ref }) {
+export default function EventOrganizer() {
   return (
     <>
       <h2 className="eventform-title">주최자 연락처</h2>

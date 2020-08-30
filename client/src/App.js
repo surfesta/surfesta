@@ -5,7 +5,6 @@ import EventDetail from './pages/EventDetail';
 import MyProfile from './pages/MyProfile';
 import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
-import { Route, Switch } from 'react-router-dom';
 import { history } from './index';
 import CreateEvent from './pages/CreateEvent';
 

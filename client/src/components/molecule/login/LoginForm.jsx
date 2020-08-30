@@ -20,13 +20,21 @@ export default function LoginForm() {
     >
       {({ isSubmitting }) => (
         <Form>
-          <Field name="email" type="email" />
+          <Field name="email" type="email" className="login-input" />
           <StyledErrorMessage />
-
-          <Field name="password" type="password" placeholder="비밀번호" />
+          <Field
+            name="password"
+            type="password"
+            placeholder="비밀번호"
+            className="login-input"
+          />
           <StyledErrorMessage />
-          <button type="submit" disabled={isSubmitting}>
-            Submit
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="login-button"
+          >
+            로그인
           </button>
         </Form>
       )}

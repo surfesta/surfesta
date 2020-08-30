@@ -55,5 +55,6 @@
   "main": "index.js",
   "devDependencies": {},
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "proxy": "http://ec2-15-164-210-226.ap-northeast-2.compute.amazonaws.com:5000"
 }

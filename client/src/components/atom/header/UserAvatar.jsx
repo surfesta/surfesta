@@ -1,9 +1,10 @@
 import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-export default function UserAvatar() {
+export default function UserAvatar({ goProfile }) {
   return (
     <div>
-      <Avatar sizes="small" />
+      <div className="user-avatar" onClick={goProfile}>
+        <div>E</div>
+      </div>
     </div>
   );
 }

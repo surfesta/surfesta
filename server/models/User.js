@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const moment = require('moment');
 
 const saltRounds = 10;
-const TOKEN_EXP_HOUR = 1;
+const TOKEN_EXP_HOUR = 20;
 
 const userSchema = mongoose.Schema(
   {
@@ -75,7 +75,7 @@ userSchema.methods.generateToken = function (cb) {
   const user = this;
 
   const token = jwt.sign(user._id.toHexString(), 'surfesta');
-  const tokenExp = moment().add(1, 'hour').valueOf();
+  const tokenExp = moment().add(TOKEN_EXP_HOUR, 'hour').valueOf();
 
   user.tokenExp = tokenExp;
   user.token = token;

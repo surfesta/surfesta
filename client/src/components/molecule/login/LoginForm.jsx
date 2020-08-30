@@ -2,27 +2,34 @@ import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import SignupSchema from '../../../utils/inputValidScheme';
 import StyledErrorMessage from '../../atom/StyledErrorMessage';
+import { useDispatch, useSelector } from 'react-redux';
+import { offModal } from '../../../redux/modules/modal';
+import { loginSagaActionCreator } from '../../../redux/modules/auth';
 
 export default function LoginForm() {
+  const dispatch = useDispatch();
+  const email = useSelector((state) => state.mailCheck.email);
   return (
     <Formik
-      initialValues={{ email: '' }}
+      initialValues={{ email, password: '123123' }}
       validationSchema={SignupSchema}
       onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
+        dispatch(loginSagaActionCreator(values));
+        setSubmitting(false);
       }}
     >
-      <Form>
-        <button>구글로 로그인</button>
-        <button>카카오로 로그인</button>
-        <hr />
-        <Field name="email" type="email" placeholder="이메일을 입력해주세요" />
-        <StyledErrorMessage />
-        <button type="submit">Submit</button>
-      </Form>
+      {({ isSubmitting }) => (
+        <Form>
+          <Field name="email" type="email" />
+          <StyledErrorMessage />
+
+          <Field name="password" type="password" placeholder="비밀번호" />
+          <StyledErrorMessage />
+          <button type="submit" disabled={isSubmitting}>
+            Submit
+          </button>
+        </Form>
+      )}
     </Formik>
   );
 }

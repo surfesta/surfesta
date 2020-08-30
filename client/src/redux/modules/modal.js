@@ -1,58 +1,82 @@
 const prefix = 'modal/';
 const OFF = `${prefix}OFF`;
-const SIGN_IN_ON = `${prefix}SIGN_IN_ON`;
+const WELCOME_IN = `${prefix}WELCOME_IN`;
+const SIGN_IN = `${prefix}SIGN_IN`;
+const SIGN_OUT = `${prefix}SIGN_OUT`;
 
 export const offModal = () => ({
   type: OFF,
 });
 
 const contentTypes = {
-  login: '🏄 시작하기',
+  preLogin: '🏄 시작하기',
+  login: '로그인',
+  logout: '로그아웃',
 };
 
-export const setSignInModal = (content = contentTypes.login) => ({
-  type: SIGN_IN_ON,
+export const welcomeModal = (content = contentTypes.preLogin) => ({
+  type: WELCOME_IN,
   content,
-  forLogin: true,
+  preLogin: true,
+  forLogin: false,
   forConfirm: false,
   forNoti: false,
 });
-export const setSingOutModal = (content = contentTypes.login) => ({
-  type: SIGN_IN_ON,
+
+export const setSignInModal = (content = contentTypes.login) => ({
+  type: SIGN_IN,
   content,
+  // preLogin: true,
   forLogin: true,
-  forConfirm: false,
-  forNoti: false,
+  // forConfirm: false,
+  // forNoti: false,
+});
+
+export const setSingOutModal = (content = contentTypes.logout) => ({
+  type: SIGN_OUT,
+  content,
+  // preLogin: false,
+  forLogin: false,
+  // forConfirm: false,
+  // forNoti: false,
 });
 
 const initialState = {
   isModalOn: false,
-  content: '',
-  forLogin: true,
+  content: contentTypes.preLogin,
+  preLogin: true,
+  forLogin: false,
   forConfirm: false,
   forNoti: false,
 };
 
-export default (state = initialState, action) => {
-  const { type, content, forLogin, forConfirm, forNoti } = action;
+export default function reducer(state = initialState, action) {
+  const { type, content, preLogin, forLogin, forConfirm, forNoti } = action;
   switch (type) {
-    case SIGN_IN_ON:
+    case WELCOME_IN:
       return {
         isModalOn: true,
         content,
+        preLogin,
         forLogin,
         forConfirm,
         forNoti,
       };
-    case OFF:
+    case SIGN_IN:
       return {
-        isModalOn: false,
-        content: '',
-        forLogin: false,
+        isModalOn: true,
+        content,
+        preLogin: false,
+        forLogin,
         forConfirm: false,
         forNoti: false,
+      };
+    case OFF:
+      return {
+        ...state,
+        isModalOn: false,
       };
     default:
       return state;
   }
-};
+}

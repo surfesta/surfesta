@@ -1,4 +1,6 @@
 import React from 'react';
+import { useRef, useEffect, useCallback } from 'react';
+// import { useScrollFadeIn } from '@/hooks';
 
 import './Eventinfo.scss';
 import OfflineInfo from '../../molecule/eventDetail/OfflineInfo';
@@ -6,9 +8,49 @@ import OnlineInfo from '../../molecule/eventDetail/OnlineInfo';
 import FavoriteButton from '../../atom/main/FavoriteButton';
 
 export default function EventInfo() {
+  const targetRef = useRef();
+  const useScrollFadeIn = () => {
+    const dom = useRef();
+
+    const handleScroll = useCallback(([entry]) => {
+      const { current } = dom;
+
+      if (entry.isIntersecting) {
+        console.log(targetRef);
+        targetRef.current.classList.remove('show');
+      } else {
+        targetRef.current.classList.add('show');
+      }
+    }, []);
+
+    useEffect(() => {
+      let observer;
+      const { current } = dom;
+
+      if (current) {
+        observer = new IntersectionObserver(handleScroll, {
+          threshold: 0.2,
+        });
+        observer.observe(current);
+
+        return () => observer && observer.disconnect();
+      }
+    }, [handleScroll]);
+
+    return {
+      ref: dom,
+      // style: {
+      //   opacity: 0,
+      //   transform: 'translate3d(0, 50%, 0)',
+      // },
+    };
+  };
+
+  const animatedItem = useScrollFadeIn();
+
   return (
-    <div className="offlineInfo-wrap">
-      <div className="top-fix">
+    <div className="offlineInfo-wrap" {...animatedItem}>
+      <div className="top-fix" ref={targetRef}>
         <div className="left">
           <h2>당근마켓 서버 개발 / SRE 채용 오픈세션</h2>
           <p>

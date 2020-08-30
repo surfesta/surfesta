@@ -3,84 +3,100 @@
 @import '../../../style/mediaQuery';
 
 .offlineInfo-wrap {
-  display: flex;
-  flex-flow: wrap;
-  color: $font-primary-color;
-  h2 {
-    font-size: 4rem;
-    font-weight: 700;
+  position: relative;
+  .top-fix {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    width: 100%;
+    padding: 30px;
+    box-shadow: 0 3px 10px #3333;
   }
-  p {
-    margin: 40px 0 20px 0;
+  .show {
+    display: block;
   }
-  .left {
-    width: 50%;
-    .thumbnail {
-      width: 100%;
-      padding-bottom: 66.66%;
-      background-color: wheat;
+  .flex-wrap {
+    display: flex;
+    flex-flow: wrap;
+    color: $font-primary-color;
+    h2 {
+      font-size: 4rem;
+      font-weight: 700;
     }
-  }
-  .right {
-    width: calc(50% - 50px);
-    margin-left: 50px;
-    font-size: 2.4rem;
-    .price {
-      font-size: 3rem;
-      font-weight: 600;
+    p {
+      margin: 40px 0 20px 0;
     }
-    table {
-      tr {
-        &.top-line {
-          th,
+    .left {
+      width: 50%;
+      .thumbnail {
+        width: 100%;
+        padding-bottom: 66.66%;
+        background-color: wheat;
+      }
+    }
+    .right {
+      width: calc(50% - 50px);
+      margin-left: 50px;
+      font-size: 2.4rem;
+      .price {
+        font-size: 3rem;
+        font-weight: 600;
+      }
+      table {
+        tr {
+          &.top-line {
+            th,
+            td {
+              border-top: 1px solid $tertiary-color;
+              padding-top: 20px;
+            }
+          }
+          th {
+            text-align: left;
+            vertical-align: top;
+            font-weight: 400;
+            color: $font-secondary-color;
+            width: 35%;
+            padding-bottom: 20px;
+          }
           td {
-            border-top: 1px solid $tertiary-color;
-            padding-top: 20px;
-          }
-        }
-        th {
-          text-align: left;
-          vertical-align: top;
-          font-weight: 400;
-          color: $font-secondary-color;
-          width: 35%;
-          padding-bottom: 20px;
-        }
-        td {
-          padding-bottom: 20px;
-          .date {
-            display: block;
-          }
-          .host-thumbnail {
-            width: 25px;
-            height: 25px;
-            display: inline-block;
-            margin-right: 8px;
-            margin-top: -3px;
-            vertical-align: middle;
-            background-color: $point-color;
-            border-radius: 50%;
+            padding-bottom: 20px;
+            .date {
+              display: block;
+            }
+            .host-thumbnail {
+              width: 25px;
+              height: 25px;
+              display: inline-block;
+              margin-right: 8px;
+              margin-top: -3px;
+              vertical-align: middle;
+              background-color: $point-color;
+              border-radius: 50%;
+            }
           }
         }
       }
-    }
-    .button-wrap {
-      padding-top: 23px;
-      .enlist-button {
-        @include text-button;
-        width: calc(100% - 100px);
-        margin-right: 25px;
-        padding: 21px;
-      }
-      .fav-button {
-        display: inline-block;
-        border: 2px solid $tertiary-color;
-        border-radius: 50%;
-        button {
-          svg {
-            padding: 4px;
-            font-size: 3rem;
-            color: $tertiary-color;
+      .button-wrap {
+        padding-top: 23px;
+        .enlist-button {
+          @include text-button;
+          width: calc(100% - 100px);
+          margin-right: 25px;
+          padding: 21px;
+        }
+        .fav-button {
+          display: inline-block;
+          border: 2px solid $tertiary-color;
+          border-radius: 50%;
+          button {
+            svg {
+              padding: 4px;
+              font-size: 3rem;
+              color: $tertiary-color;
+            }
           }
         }
       }
@@ -90,23 +106,44 @@
 
 @include mobile {
   .offlineInfo-wrap {
-    .left {
-      width: 100%;
-    }
-    .right {
-      width: 100%;
-      margin-left: 0;
+    .flex-wrap {
+      h2 {
+        margin-top: 50px;
+        font-size: 3.2rem;
+      }
+      .left {
+        width: 100%;
+      }
+      .right {
+        width: 100%;
+        margin-left: 0;
+        font-size: 1.8rem;
+        table {
+          width: 100%;
+        }
+      }
     }
   }
 }
+
 @include tablet {
   .offlineInfo-wrap {
-    .left {
-      width: 100%;
-    }
-    .right {
-      width: 100%;
-      margin-left: 0;
+    .flex-wrap {
+      h2 {
+        margin-top: 50px;
+        font-size: 3.2rem;
+      }
+      .left {
+        width: 100%;
+      }
+      .right {
+        width: 100%;
+        margin-left: 0;
+        font-size: 1.8rem;
+        table {
+          width: 100%;
+        }
+      }
     }
   }
 }

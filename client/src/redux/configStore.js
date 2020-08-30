@@ -3,20 +3,16 @@ import reducer from './modules/reducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './middlewares/saga';
+import { routerMiddleware } from 'connected-react-router';
 
 const sagaMiddleware = createSagaMiddleware();
 
-const configStore = () => {
+const configStore = (history) => {
   const store = createStore(
-    reducer,
-    {
-      auth: {
-        user: null,
-        loading: false,
-        error: null,
-      },
-    },
-    composeWithDevTools(applyMiddleware(sagaMiddleware))
+    reducer(history),
+    composeWithDevTools(
+      applyMiddleware(routerMiddleware(history), sagaMiddleware)
+    )
   );
 
   sagaMiddleware.run(rootSaga);

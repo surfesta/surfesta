@@ -3,9 +3,9 @@ const URL = '/api/v1/users';
 
 export default class UserService {
   static async authenticate() {
-    const res = await axios.post(`${URL}/auth`);
-    console.log(`User authentication done: ${res.data.isAuth}`);
-    return res.data.isAuth;
+    const { data } = await axios.post(`${URL}/auth`);
+    console.log(`User authentication done: ${data.isAuth}`);
+    return data;
   }
 
   static async checkEmail({ email }) {
@@ -16,7 +16,7 @@ export default class UserService {
         email,
       },
     });
-    return { result: data.emailCheck, email };
+    return { data, email };
   }
   static async login({ email, password }) {
     const { data } = await axios({

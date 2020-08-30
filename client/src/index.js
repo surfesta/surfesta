@@ -5,9 +5,12 @@ import './style/common.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
-import configStore from './redux/configStore';
 
-const store = configStore();
+import configStore from './redux/configStore';
+import { createBrowserHistory } from 'history';
+
+export const history = createBrowserHistory();
+const store = configStore(history);
 
 ReactDOM.render(
   <Provider store={store}>

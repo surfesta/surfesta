@@ -3,7 +3,7 @@ import Avatar from '@material-ui/core/Avatar';
 export default function UserAvatar() {
   return (
     <div>
-      <Avatar />
+      <Avatar sizes="small" />
     </div>
   );
 }

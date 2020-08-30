@@ -1,0 +1,88 @@
+@import '../../style/mediaQuery';
+@import '../../style/variables';
+
+@mixin font-title {
+  font-size: 4rem;
+  color: $font-primary-color;
+}
+
+// 로그아웃, 회원탈퇴 영역
+.logout-section {
+  @include font-title;
+  border-top: 2px solid #b4b4b5;
+  display: flex;
+  justify-content: center;
+  width: 1380px;
+  height: 100%;
+
+  .logout-div,
+  .deact-div {
+    border: 2px solid skyblue;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .logout-title-div,
+  .deact-title-div {
+    border: 2px solid red;
+    padding-top: 2rem;
+
+    span {
+      display: block;
+      margin-top: 2rem;
+    }
+  }
+
+  .profile-btn {
+    position: relative;
+    transform: translateY(calc(100%));
+    right: 20px;
+  }
+}
+
+@include mobile {
+  .logout-section {
+    width: 100%;
+    display: grid;
+    flex-wrap: wrap;
+  }
+}
+
+@include tablet {
+  .logout-section {
+    // width: 660px;
+    border: 2px solid blue;
+    margin: 0 auto;
+  }
+
+  .logout-title-div,
+  .deact-title-div {
+    border: 2px solid red;
+    margin-left: 2rem;
+  }
+
+  .btn-div,
+  .deact-btn-div {
+    position: relative;
+    // right: 64px;
+    // transform: translate(0, 100px - 35px);
+    display: block;
+    border: 2px solid orange;
+  }
+}
+
+@include desktop {
+  .logout-section {
+    width: 1024px;
+    border: 2px solid red;
+    margin: 0 auto;
+
+    .profile-btn {
+      position: relative;
+      transform: translateY(calc(100%));
+      right: 20px;
+    }
+  }
+}

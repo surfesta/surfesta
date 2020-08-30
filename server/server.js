@@ -1,12 +1,16 @@
 const express = require('express');
 const cors = require('cors');
+const fileUpload = require('express-fileupload');
 const morgan = require('morgan');
-const path = require('path');
 const port = process.env.MONGO_URI || 5000;
 const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
 
 const app = express();
+const config = require('./config');
+
+app.get('/', (req, res) => {
+  res.send(`<h1>Hello World test</h1>`);
+});
 const config = require('./config');
 const userRouter = require('./routes/users');
 const eventRouter = require('./routes/events');
@@ -26,8 +30,30 @@ mongoose.connect(config.MONGO_URI, {
 });
 
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(express.json());
+app.use(fileUpload());
+
+app.post('/upload', (req, res) => {
+  if (req.files === null) {
+    return res.status(400).json({ msg: 'No file uploaded' });
+  }
+
+  const file = req.files.file;
+
+  file.mv(`${__dirname}/uploads/${file.md5}`, (err) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).send(err);
+    }
+
+    res.json({
+      fileName: file.name,
+      filePath: `/uploads/${file.md5}`,
+    });
+  });
+});
+
+app.use(express.json());
 app.use(cookieParser());
 app.use(morgan('dev'));
 

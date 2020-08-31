@@ -3,6 +3,7 @@ const OFF = `${prefix}OFF`;
 const WELCOME_IN = `${prefix}WELCOME_IN`;
 const SIGN_IN = `${prefix}SIGN_IN`;
 const SIGN_UP = `${prefix}SIGN_UP`;
+const SUCCESS_SIGN_UP = `${prefix}SUCCESS_SIGN_UP`;
 
 export const offModal = () => ({
   type: OFF,
@@ -11,7 +12,7 @@ export const offModal = () => ({
 const contentTypes = {
   preLogin: '🏄 시작하기',
   login: '로그인',
-  signup: '가입하기',
+  signup: 'Surfesta와 함께하기',
 };
 
 export const welcomeModal = () => ({

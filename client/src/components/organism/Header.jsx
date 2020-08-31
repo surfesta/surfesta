@@ -1,18 +1,23 @@
 import React, { useCallback } from 'react';
-import './Header.css';
 import HeaderRight from '../molecule/header/HeaderRight';
 import Logo from '../atom/header/Logo';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { welcomeModal } from '../../redux/modules/modal';
 import PostEventButton from '../atom/header/PostEventButton';
 import { push } from 'connected-react-router';
+import './Header.scss';
 
-export default function Header() {
+function Header() {
   const dispatch = useDispatch();
-  const handleClick = useCallback(() => {
-    // if(로그인되었다면) /postEvent로 이동
-    dispatch(welcomeModal('📝로그인 후 시작하기😉'));
-  }, [dispatch]);
+  const user = useSelector((state) => state.auth.user);
+
+  const handlePostEvent = useCallback(() => {
+    if (user === null) {
+      dispatch(welcomeModal('📝로그인 후 시작하기😉'));
+      return;
+    }
+    dispatch(push('/createEvent'));
+  }, [dispatch, user]);
 
   const handleLogoClick = useCallback(() => {
     dispatch(push('/'));
@@ -20,9 +25,10 @@ export default function Header() {
 
   return (
     <header>
-      <PostEventButton handleClick={handleClick} />
+      <PostEventButton handleClick={handlePostEvent} />
       <Logo onClick={handleLogoClick} />
       <HeaderRight />
     </header>
   );
 }
+export default Header;

@@ -8,12 +8,17 @@ import './HeaderRight.css';
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { welcomeModal } from '../../../redux/modules/modal';
+import { push } from 'connected-react-router';
 
 export default function HeaderRight() {
-  const token = useSelector((state) => state.auth.token);
+  const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
   const handleLogin = useCallback(() => {
     dispatch(welcomeModal());
+  }, [dispatch]);
+
+  const goProfile = useCallback(() => {
+    dispatch(push('/profile'));
   }, [dispatch]);
 
   return (
@@ -21,7 +26,11 @@ export default function HeaderRight() {
       <DayButton />
       <NightButton />
       <FavButton />
-      {token ? <UserAvatar /> : <LoginButton handleclick={handleLogin} />}
+      {user ? (
+        <UserAvatar goProfile={goProfile} />
+      ) : (
+        <LoginButton handleclick={handleLogin} />
+      )}
     </section>
   );
 }

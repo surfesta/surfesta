@@ -1,12 +1,12 @@
 import React from 'react';
 import PreLoginForm from '../molecule/login/PreLoginForm';
 import LoginForm from '../molecule/login/LoginForm';
+import RegisterForm from '../molecule/login/RegisterForm';
 import Portal from '../../utils/Portal';
 import { useDispatch, useSelector } from 'react-redux';
 import { offModal } from '../../redux/modules/modal';
-import './Modal.css';
 import { useCallback } from 'react';
-import { useEffect } from 'react';
+import './Modal.scss';
 
 export default function Modal() {
   const modal = useSelector((state) => state.modal);
@@ -32,9 +32,10 @@ export default function Modal() {
     <Portal>
       <section id="modal-container" onClick={dismissModal} style={{}}>
         <div id="modal">
-          <h1>{modal.content}</h1>
+          <h1 className="modal-headline">{modal.content}</h1>
           {modal.preLogin && <PreLoginForm />}
           {modal.forLogin && <LoginForm />}
+          {modal.forSignUp && <RegisterForm />}
           {modal.forConfirm && (
             <>
               <button>확인</button>

@@ -1,3 +1,6 @@
+@import '../../style/variables';
+@import '../../style/mixin';
+
 header {
   display: flex;
   align-items: center;
@@ -11,4 +14,9 @@ button {
   color: #b4b4b5;
   background-color: transparent;
   border: none;
+}
+
+.event-button {
+  line-height: 20px;
+  padding: 5px 20px;
 }

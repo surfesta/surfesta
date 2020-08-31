@@ -1,0 +1,62 @@
+@import '../../style/mediaQuery';
+@import '../../style/variables';
+
+* {
+  box-sizing: border-box;
+}
+
+// profile template(profile-section, logout-section) 내 공통 적용 요소
+.profile,
+.profile-section,
+.logout-section {
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+span {
+  font-size: 1.5rem;
+}
+
+.profile-btn {
+  font-size: 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid $point-color;
+  outline: 0;
+  color: $point-color;
+  border-radius: 25px;
+  width: 180px;
+  height: 65px;
+  outline: none;
+}
+
+@include mobile {
+  .profile,
+  .profile-section,
+  .logout-section {
+    width: 335px;
+    border: 2px solid orchid;
+    margin: 0 auto;
+  }
+}
+@include tablet {
+  .profile-section,
+  .logout-section {
+    width: 660px;
+    border: 2px solid blue;
+    // margin: 0 auto;
+  }
+}
+
+@include desktop {
+  .profile-section,
+  .logout-section {
+    width: 1024px;
+    border: 2px solid red;
+    margin: 0 auto;
+  }
+}

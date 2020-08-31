@@ -1,6 +1,7 @@
 import React from 'react';
 import PreLoginForm from '../molecule/login/PreLoginForm';
 import LoginForm from '../molecule/login/LoginForm';
+import RegisterForm from '../molecule/login/RegisterForm';
 import Portal from '../../utils/Portal';
 import { useDispatch, useSelector } from 'react-redux';
 import { offModal } from '../../redux/modules/modal';
@@ -34,6 +35,7 @@ export default function Modal() {
           <h1 className="modal-headline">{modal.content}</h1>
           {modal.preLogin && <PreLoginForm />}
           {modal.forLogin && <LoginForm />}
+          {modal.forSignUp && <RegisterForm />}
           {modal.forConfirm && (
             <>
               <button>확인</button>

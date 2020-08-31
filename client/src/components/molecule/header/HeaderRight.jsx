@@ -11,7 +11,7 @@ import { welcomeModal } from '../../../redux/modules/modal';
 import { push } from 'connected-react-router';
 
 export default function HeaderRight() {
-  const token = useSelector((state) => state.auth.token);
+  const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
   const handleLogin = useCallback(() => {
     dispatch(welcomeModal());
@@ -26,7 +26,7 @@ export default function HeaderRight() {
       <DayButton />
       <NightButton />
       <FavButton />
-      {token ? (
+      {user ? (
         <UserAvatar goProfile={goProfile} />
       ) : (
         <LoginButton handleclick={handleLogin} />

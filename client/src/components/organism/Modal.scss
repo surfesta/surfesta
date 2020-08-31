@@ -17,8 +17,8 @@
   background: $secondary-color;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
-  width: 55vw;
-  height: 50vh;
+  min-width: 45vw;
+  min-height: 40vh;
   padding: 40px;
 
   text-align: center;
@@ -34,7 +34,7 @@
   padding: 20px;
   background-color: darkslateblue;
   border-radius: 40px;
-  margin: 5px 15px 20px;
+  margin: 1rem;
 }
 
 #modal-divider {
@@ -47,21 +47,33 @@
 }
 
 .login-input {
-  margin: 1rem;
-  box-sizing: border-box;
+  margin: 1rem auto;
   font-size: 2rem;
   border-radius: 50px;
   outline: 0;
-  padding: 2rem 3rem;
-  width: 70%;
+  padding: 3.5rem 3rem;
+  width: 60%;
 }
+
+.signup-input {
+  margin: 3rem auto;
+  font-size: 2rem;
+  border-radius: 50px;
+  outline: 0;
+  padding: 3rem 3rem;
+  width: 60%;
+}
+
 .basic-privacy-confirm {
   color: white;
 }
-.login-button {
+
+.login-button,
+.signup-button {
   @include text-button;
   width: 40%;
-  padding: 15px;
+  padding: 1.5rem;
+  margin: 2rem;
   border: 3px white solid;
   background-color: transparent;
   color: white;

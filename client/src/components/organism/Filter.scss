@@ -42,6 +42,7 @@
       transform: translateY(70%);
       overflow: hidden;
       opacity: 0;
+      visibility: hidden;
       transition: 0.5s;
     }
     .show {

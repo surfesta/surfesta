@@ -1,18 +1,16 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
-import SignupSchema from '../../../utils/inputValidScheme';
 import StyledErrorMessage from '../../atom/StyledErrorMessage';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import UserService from '../../../services/UserService';
 import { setSignInModal } from '../../../redux/modules/modal';
 
-export default function PreLoginForm() {
+export default function RegisterForm() {
   const dispatch = useDispatch();
-  const emial = '전달받은 값';
   return (
     <Formik
-      initialValues={{ email: emial, password: '' }}
-      validationSchema={SignupSchema}
+      initialValues={{ email: '', password: '' }}
+      // validationSchema={SignupSchema}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
           const checked = UserService.checkEmail(values.email);

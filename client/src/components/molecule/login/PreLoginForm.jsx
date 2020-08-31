@@ -1,14 +1,13 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Formik, Form, Field } from 'formik';
-import { useDispatch, useSelector } from 'react-redux';
-import { setSignInModal } from '../../../redux/modules/modal';
+import { useDispatch } from 'react-redux';
+import { setSignInModal, setSignUpModal } from '../../../redux/modules/modal';
 import { checkSagaActionCreator } from '../../../redux/modules/mailCheck';
-import inputValidScheme from '../../../utils/inputValidScheme';
+import mailCheckSchema from '../../../utils/mailCheckSchema';
 import { useCallback } from 'react';
 
 export default function PreLoginForm() {
   const dispatch = useDispatch();
-  const { email } = useSelector((state) => state.mailCheck);
 
   const handleSubmit = useCallback(
     (values) => {
@@ -22,7 +21,7 @@ export default function PreLoginForm() {
       initialValues={{
         email: '',
       }}
-      validationSchema={inputValidScheme}
+      validationSchema={mailCheckSchema}
       onSubmit={(values, setSubmitting) => {
         handleSubmit(values);
         setSubmitting(false);

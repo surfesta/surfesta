@@ -10,13 +10,16 @@ import './Header.scss';
 function Header() {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
-  const handleClick = useCallback(() => {
-    if (!token) {
+
+  const handlePostEvent = useCallback(() => {
+    console.log(token);
+    if (token === null) {
+      console.log(token);
       dispatch(welcomeModal('📝로그인 후 시작하기😉'));
       return;
     }
     dispatch(push('/createEvent'));
-  }, [dispatch]);
+  }, [dispatch, token]);
 
   const handleLogoClick = useCallback(() => {
     dispatch(push('/'));
@@ -24,7 +27,7 @@ function Header() {
 
   return (
     <header>
-      <PostEventButton handleClick={handleClick} />
+      <PostEventButton handleClick={handlePostEvent} />
       <Logo onClick={handleLogoClick} />
       <HeaderRight />
     </header>

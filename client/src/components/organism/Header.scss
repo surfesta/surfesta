@@ -20,18 +20,3 @@ button {
   line-height: 20px;
   padding: 5px 20px;
 }
-.user-avatar {
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 20px;
-  text-align: center;
-  color: white;
-  background-color: orange;
-
-  display: flex;
-  place-content: center;
-
-  div {
-    font-size: 1rem;
-  }
-}

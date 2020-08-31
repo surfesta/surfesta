@@ -57,7 +57,7 @@ router.patch('/:user_id', (req, res) => {
 // Authentificate User
 router.post('/auth', auth, (req, res) => {
   res.status(200).json({
-    ...req.user._doc,
+    user: req.user._doc,
     isAdmin: req.user.role === 0 ? false : true,
     isAuth: true,
   });

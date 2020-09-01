@@ -1,3 +1,6 @@
+import { put, delay, call, takeEvery } from 'redux-saga/effects';
+import EventService from '../../services/EventService';
+
 const prefix = 'surfesta-events';
 
 // action type
@@ -6,16 +9,16 @@ const SUCCESS = `${prefix}/SUCCESS`;
 const FAIL = `${prefix}/FAIL`;
 
 // action creator
-const start = () => ({
+export const start = () => ({
   type: START,
 });
 
-const success = (events) => ({
+export const success = (events) => ({
   type: SUCCESS,
   events,
 });
 
-const fail = (error) => ({
+export const fail = (error) => ({
   type: FAIL,
   error,
 });
@@ -38,7 +41,7 @@ export default function reducer(state = initialState, action) {
       };
     case SUCCESS:
       return {
-        events: ['이벤트리스트들', '담길예정'],
+        events: action.events,
         loading: false,
         error: null,
       };
@@ -55,5 +58,24 @@ export default function reducer(state = initialState, action) {
 }
 
 //saga-action
+const START_GET_EVENTS = `${prefix}/START_GET_EVENTS`;
+
+export const startGetEvents = () => ({
+  type: START_GET_EVENTS,
+});
 
 //saga-reducer
+function* startGetEventsSaga() {
+  try {
+    yield put(start());
+    yield delay(2000);
+    const events = yield call(EventService.getBooks);
+    yield put(success(events));
+  } catch (error) {
+    yield put(fail(error));
+  }
+}
+
+export function* eventsSaga() {
+  yield takeEvery(START_GET_EVENTS, startGetEventsSaga);
+}

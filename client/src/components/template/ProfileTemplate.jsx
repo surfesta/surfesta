@@ -3,7 +3,7 @@ import ProfileSection from '../organism/Profile';
 import LogoutSection from '../organism/Logout';
 import './ProfileTemplate.scss';
 
-function ProfileTemplate(btnContext) {
+function ProfileTemplate() {
   return (
     <div className="profile">
       <ProfileSection />

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Tabs, Tab, AppBar } from "@material-ui/core";
+import React, { useState } from 'react';
+import { Tabs, Tab, AppBar } from '@material-ui/core';
 
 function NavTemplate() {
   const [selectedTab, setSelectedTab] = useState(0);

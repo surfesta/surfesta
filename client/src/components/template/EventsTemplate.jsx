@@ -6,7 +6,7 @@ import Filter from '../organism/Filter';
 
 // Presentational Component
 export default function EventsTemplate({ events, loading, error, getEvents }) {
-  console.log('이벤트리스트 : ', events, loading, error);
+  // console.log('이벤트리스트 : ', events, loading, error);
   React.useEffect(() => {
     getEvents();
   }, [getEvents]);

@@ -34,16 +34,9 @@
   }
 
   .profile-btn {
-    font-size: 1.5rem;
-    font-weight: 600;
-    cursor: pointer;
-    border: 1px solid $point-color;
-    outline: 0;
-    color: $point-color;
-    border-radius: 25px;
+    @include text-button;
+    padding: 2rem;
     width: 180px;
-    height: 65px;
-    outline: none;
   }
 }
 
@@ -76,16 +69,23 @@
   }
   .profile-btn {
     @include text-button;
+    padding: 2rem;
+    width: 180px;
   }
 }
 
 @include mobile {
+  .profile {
+    .profile-section,
+    .logout-section {
+      padding: 0 30px;
+    }
+  }
   .profile,
   .profile-section,
   .logout-section {
-    width: 335px;
+    width: 100%;
     border: 2px solid orchid;
-    margin: 0 auto;
   }
 
   .profile-btn {
@@ -94,11 +94,16 @@
 }
 
 @include tablet {
+  .profile {
+    .profile-section,
+    .logout-section {
+      padding: 0 30px;
+    }
+  }
   .profile-section,
   .logout-section {
-    width: 660px;
+    width: 100%;
     border: 2px solid blue;
-    margin: 0 auto;
   }
 }
 

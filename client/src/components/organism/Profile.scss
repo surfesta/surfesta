@@ -57,17 +57,23 @@
 // 미디어쿼리
 @include mobile {
   .profile-section {
-    width: 333px;
+    width: 100%;
     display: grid;
 
     .profile-info {
-      width: 333px;
+      width: 100%;
     }
 
     .profile-form {
       border: 2px solid pink;
       margin-top: 37px;
-      width: 333px;
+      width: 100%;
+      .form-btn {
+        div {
+          text-align: right;
+          margin-right: 2rem;
+        }
+      }
     }
   }
 }
@@ -78,13 +84,18 @@
     display: grid;
 
     .profile-info {
-      width: 658px;
+      width: 100%;
     }
 
     .profile-form {
       border: 2px solid pink;
       margin-top: 37px;
-      width: 658px;
+      width: 100%;
+      .form-btn {
+        div {
+          text-align: center;
+        }
+      }
 
       .profile-btn {
         margin-right: 2rem;

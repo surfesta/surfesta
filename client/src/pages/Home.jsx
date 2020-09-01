@@ -1,12 +1,12 @@
 import React from 'react';
 import HeaderTemplate from '../components/template/HeaderTemplate';
-import MainTemplate from '../components/template/MainTemplate';
+import EventsTemplate from '../components/template/EventsTemplate';
 
 export default function Home() {
   return (
     <>
       <HeaderTemplate />
-      <MainTemplate />
+      <EventsTemplate />
     </>
   );
 }

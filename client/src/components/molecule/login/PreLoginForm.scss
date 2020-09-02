@@ -1,0 +1,88 @@
+@import '../../../style/variables';
+@import '../../../style/mixin';
+
+.social-login-button {
+  @include font-normal;
+  font-weight: 400;
+  font-family: 'noto sans kr';
+
+  padding: 2rem 2rem;
+  border-radius: 40px;
+  width: 40%;
+  margin: 1rem;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    transform: translate3d(0, -3%, 0);
+  }
+
+  &.google {
+    background-color: white;
+    color: #646568;
+  }
+  &.facebook {
+    background-color: #4a6aaa;
+    color: white;
+  }
+
+  div {
+    text-align: center;
+    flex-grow: 1;
+  }
+}
+
+#modal-divider {
+  position: relative;
+  div {
+    height: 20px;
+    &:first-child {
+      @include font-normal;
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      color: white;
+
+      width: 30%;
+      background: $secondary-color;
+      z-index: 1;
+      transform: translate3d(-50%, 0, 0);
+    }
+    &:last-child {
+      border-top: $font-primary-color 1px solid;
+      transform: scaleX(3);
+    }
+  }
+}
+
+.login-input {
+  @include font-normal;
+  margin: 1rem auto;
+  border-radius: 50px;
+  outline: 0;
+  padding: 2rem 3rem;
+  width: 80%;
+  color: $font-primary-color;
+}
+
+.basic-privacy-confirm {
+  color: $font-tertiary-color;
+  font-weight: 200;
+}
+
+.login-button {
+  @include text-button;
+  width: 45%;
+  padding: 1.5rem;
+  margin: 2rem;
+  border: 3px white solid;
+  background-color: transparent;
+  color: white;
+  &:hover {
+    background-color: white;
+    color: $secondary-color;
+  }
+
+  z-index: 3;
+}

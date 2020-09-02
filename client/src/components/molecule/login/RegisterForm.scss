@@ -1,0 +1,27 @@
+@import '../../../style/variables';
+@import '../../../style/mixin';
+
+.signup-input {
+  margin: 1rem auto;
+  font-size: 2rem;
+  border-radius: 50px;
+  outline: 0;
+  padding: 2rem;
+  width: 80%;
+}
+
+.signup-button {
+  @include text-button;
+  width: 45%;
+  padding: 1.5rem;
+  margin: 2rem;
+  border: 3px white solid;
+  background-color: transparent;
+  color: white;
+  &:hover {
+    background-color: white;
+    color: $secondary-color;
+  }
+
+  z-index: 3;
+}

@@ -10,14 +10,14 @@ export const offModal = () => ({
 });
 
 const contentTypes = {
-  preLogin: '🏄 시작하기',
+  preLogin: '시작하기',
   login: '로그인',
   signup: 'Surfesta와 함께하기',
 };
 
-export const welcomeModal = () => ({
+export const welcomeModal = (content = contentTypes.preLogin) => ({
   type: WELCOME_IN,
-  content: contentTypes.preLogin,
+  content,
   preLogin: true,
 });
 

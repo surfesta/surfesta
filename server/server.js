@@ -2,18 +2,12 @@ const express = require('express');
 const cors = require('cors');
 const fileUpload = require('express-fileupload');
 const morgan = require('morgan');
-const port = process.env.MONGO_URI || 5000;
+const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
+const port = process.env.MONGO_URI || 5000;
 
-const app = express();
+// database config
 const config = require('./config');
-
-app.get('/', (req, res) => {
-  res.send(`<h1>Hello World test</h1>`);
-});
-const userRouter = require('./routes/users');
-const eventRouter = require('./routes/events');
-
 const mongoose = require('mongoose');
 const db = mongoose.connection;
 
@@ -26,11 +20,20 @@ mongoose.connect(config.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
+  useUnifiedTopology: true,
 });
 
+const api = require('./api');
+const app = express();
+
 app.use(cors());
+app.use(helmet());
+app.use(morgan('tiny'));
+app.use(cookieParser());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(fileUpload());
+app.use('/api/v1', api);
 
 app.post('/upload', (req, res) => {
   if (req.files === null) {
@@ -51,16 +54,6 @@ app.post('/upload', (req, res) => {
     });
   });
 });
-
-app.use(express.json());
-app.use(cookieParser());
-app.use(morgan('dev'));
-
-app.get('/', (req, res) => {
-  res.send(`<h1>Hello World test</h1>`);
-});
-app.use('/api/v1/users', userRouter);
-app.use('/api/v1/events', eventRouter);
 
 app.listen(port, () => {
   console.log(`Server Listening on ${port}`);

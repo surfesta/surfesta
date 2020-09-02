@@ -1,9 +1,8 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import LoginSchema from '../../../utils/LoginSchema';
-import StyledErrorMessage from '../../atom/StyledErrorMessage';
+import StyledErrorMessage from '../../atom/header/StyledErrorMessage';
 import { useDispatch, useSelector } from 'react-redux';
-import { offModal } from '../../../redux/modules/modal';
 import { loginSagaActionCreator } from '../../../redux/modules/auth';
 
 export default function LoginForm() {
@@ -21,14 +20,14 @@ export default function LoginForm() {
       {({ isSubmitting }) => (
         <Form>
           <Field name="email" type="email" className="login-input" />
-          <StyledErrorMessage />
+          <StyledErrorMessage name="email" />
           <Field
             name="password"
             type="password"
             placeholder="비밀번호"
             className="login-input"
           />
-          <StyledErrorMessage />
+          <StyledErrorMessage name="password" />
           <button
             type="submit"
             disabled={isSubmitting}

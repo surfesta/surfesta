@@ -1,21 +1,12 @@
-import React, { useRef } from 'react';
-import { Formik, Form, Field } from 'formik';
-import { useDispatch } from 'react-redux';
-import { setSignInModal, setSignUpModal } from '../../../redux/modules/modal';
-import { checkSagaActionCreator } from '../../../redux/modules/mailCheck';
+import React from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import mailCheckSchema from '../../../utils/mailCheckSchema';
-import { useCallback } from 'react';
+import FacebookAppLogo from '../../atom/header/FacebookAppLogo';
+import GoogleLogo from '../../atom/header/GoogleLogo';
+import StyledErrorMessage from '../../atom/header/StyledErrorMessage';
+import './PreLoginForm.scss';
 
-export default function PreLoginForm() {
-  const dispatch = useDispatch();
-
-  const handleSubmit = useCallback(
-    (values) => {
-      dispatch(checkSagaActionCreator(values));
-    },
-    [dispatch]
-  );
-
+export default function PreLoginForm({ handleEmailCheck }) {
   return (
     <Formik
       initialValues={{
@@ -23,24 +14,35 @@ export default function PreLoginForm() {
       }}
       validationSchema={mailCheckSchema}
       onSubmit={(values, setSubmitting) => {
-        handleSubmit(values);
+        handleEmailCheck(values);
         setSubmitting(false);
       }}
     >
       <Form>
-        <button className="social-login-button">구글로 로그인</button>
-        <button className="social-login-button">카카오로 로그인</button>
+        <button className="social-login-button google">
+          <GoogleLogo className="social-icon" />
+          <div>Google</div>
+        </button>
+        <button className="social-login-button facebook">
+          <FacebookAppLogo className="social-icon" />
+          <div>Facebook</div>
+        </button>
         <div id="modal-divider">
+          <div>또는</div>
           <div></div>
           <div></div>
         </div>
         <Field
           id="email"
           name="email"
-          placeholder="jane@acme.com"
+          placeholder="이메일 주소를 입력해주세요:)"
           type="email"
           className="login-input"
         />
+        <StyledErrorMessage name="email" />
+        <p className="basic-privacy-confirm">
+          Surfesta에 가입함으로써 개인정보 이용약관에 동의합니다.
+        </p>
         <button type="submit" className="login-button">
           로그인 / 회원가입
         </button>

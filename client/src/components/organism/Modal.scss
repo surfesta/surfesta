@@ -1,8 +1,9 @@
 @import '../../style/variables';
 @import '../../style/mixin';
+@import '../../style/mediaQuery';
 
 #modal-container {
-  background-color: 'rgba(3,3,3,.6)';
+  background-color: rgba(37, 39, 43, 0.8);
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -17,68 +18,39 @@
   background: $secondary-color;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
-  min-width: 45vw;
+  min-width: 550px;
+  width: 33vw;
   min-height: 40vh;
   padding: 40px;
 
+  @include tablet {
+    width: 55vw;
+  }
+  @include mobile {
+    width: 96vw;
+  }
   text-align: center;
+  animation: fadeIn 0.2s ease;
+
+  overflow: hidden;
+  position: relative;
+}
+
+@keyframes fadeIn {
+  0% {
+    transform: scale(0.96);
+    opacity: 0;
+  }
+  100% {
+    transform: none;
+    opacity: 1;
+  }
 }
 
 .modal-headline {
+  @include font-normal;
   padding: 15px;
   font-size: 3rem;
   color: white;
-}
-
-.social-login-button {
-  padding: 20px;
-  background-color: darkslateblue;
-  border-radius: 40px;
-  margin: 1rem;
-}
-
-#modal-divider {
-  div {
-    height: 20px;
-    &:first-child {
-      border-bottom: white 1px solid;
-    }
-  }
-}
-
-.login-input {
-  margin: 1rem auto;
-  font-size: 2rem;
-  border-radius: 50px;
-  outline: 0;
-  padding: 3.5rem 3rem;
-  width: 60%;
-}
-
-.signup-input {
-  margin: 3rem auto;
-  font-size: 2rem;
-  border-radius: 50px;
-  outline: 0;
-  padding: 3rem 3rem;
-  width: 60%;
-}
-
-.basic-privacy-confirm {
-  color: white;
-}
-
-.login-button,
-.signup-button {
-  @include text-button;
-  width: 40%;
-  padding: 1.5rem;
-  margin: 2rem;
-  border: 3px white solid;
-  background-color: transparent;
-  color: white;
-  &:hover {
-    background-color: white;
-    color: $secondary-color;
-  }
+  font-weight: 600;
 }

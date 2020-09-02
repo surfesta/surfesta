@@ -18,7 +18,7 @@ export default function HeaderRight() {
   }, [dispatch]);
 
   const goProfile = useCallback(() => {
-    dispatch(push('/profile'));
+    dispatch(push('/my/profile'));
   }, [dispatch]);
 
   return (

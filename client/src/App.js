@@ -15,7 +15,7 @@ function App() {
         <Route path="/createEvent" component={CreateEvent} />
         <Route path="/event/:event_id" component={EventDetail} />
         <Route path="/my/profile" component={MyProfile} />
-        <Route path="/" component={Home} />
+        <Route exact path="/" component={Home} />
       </Switch>
     </ConnectedRouter>
   );

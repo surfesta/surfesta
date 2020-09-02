@@ -27,6 +27,16 @@ export default class UserService {
         password,
       },
     });
+    console.log(data);
+    return data;
+  }
+
+  static async register(user) {
+    const { data } = await axios({
+      method: 'POST',
+      url: `${URL}/`,
+      data: user,
+    });
     return data;
   }
 

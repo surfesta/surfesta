@@ -1,6 +1,6 @@
 import UserService from '../../services/UserService';
 import { put, delay, call, takeEvery } from 'redux-saga/effects';
-import { setSignInModal } from './modal';
+import { setSignInModal, setSignUpModal } from './modal';
 
 const prefix = 'surfesta-mailCheck';
 
@@ -25,7 +25,7 @@ const checkFail = (error) => ({
 // initial state
 const initialState = {
   loading: false,
-  email: null,
+  email: '',
   error: null,
 };
 
@@ -36,17 +36,18 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         loading: true,
+        email: '',
       };
     case SUCCESS:
       return {
         loading: false,
         email: action.email,
-        error: null,
+        error: '',
       };
     case FAIL:
       return {
         loading: false,
-        email: null,
+        email: '',
         error: action.email,
       };
     default:
@@ -75,6 +76,7 @@ function* checkSaga(action) {
     yield put(setSignInModal());
   } catch (error) {
     yield put(checkFail(error));
+    yield put(setSignUpModal());
   }
 }
 

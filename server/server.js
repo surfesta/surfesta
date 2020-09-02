@@ -11,7 +11,6 @@ const config = require('./config');
 app.get('/', (req, res) => {
   res.send(`<h1>Hello World test</h1>`);
 });
-const config = require('./config');
 const userRouter = require('./routes/users');
 const eventRouter = require('./routes/events');
 

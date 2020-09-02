@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import './Filter.scss';
 
 export default function Filter() {
@@ -16,7 +15,10 @@ export default function Filter() {
           setSelected(!selected);
         }}
       >
-        <span ref={selectRef}>Our Events </span> <i>🎉</i>
+        <span ref={selectRef}>Our Events </span>{' '}
+        <i role="img" aria-label="아이콘">
+          🎉
+        </i>
         <span className="more">
           <ExpandMoreIcon className={selected ? 'arrow rotataion' : 'arrow'} />
         </span>

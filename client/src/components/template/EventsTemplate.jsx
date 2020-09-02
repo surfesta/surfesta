@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from '../organism/Card';
+import Card from '../organism/main/Card';
 import './EventsTemplate.scss';
 import Search from '../organism/Search';
 import Filter from '../organism/Filter';
@@ -21,7 +21,12 @@ export default function EventsTemplate({ events, loading, error, getEvents }) {
 
         {loading && <span className="loading-text">로딩 중!!!!!</span>}
         {error && <span className="error-text">에러닷!!!!!!!!</span>}
-        <div className="cards">{error === null && <Card eventId={1} />}</div>
+        <div className="cards">
+          {/* {error === null && <Card eventId={1} />} */}
+          {events.map((event) => (
+            <Card event={event} key={event._id} />
+          ))}
+        </div>
       </section>
     </main>
   );

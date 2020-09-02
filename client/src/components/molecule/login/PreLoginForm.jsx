@@ -1,14 +1,12 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { useDispatch } from 'react-redux';
-import { checkSagaActionCreator } from '../../../redux/modules/mailCheck';
 import mailCheckSchema from '../../../utils/mailCheckSchema';
-import { useCallback } from 'react';
 import FacebookAppLogo from '../../atom/header/FacebookAppLogo';
-import './PreLoginForm.scss';
 import GoogleLogo from '../../atom/header/GoogleLogo';
+import StyledErrorMessage from '../../atom/header/StyledErrorMessage';
+import './PreLoginForm.scss';
 
-export default function PreLoginForm({ handleSubmit, handleSocialLogin }) {
+export default function PreLoginForm({ handleEmailCheck }) {
   return (
     <Formik
       initialValues={{
@@ -16,22 +14,16 @@ export default function PreLoginForm({ handleSubmit, handleSocialLogin }) {
       }}
       validationSchema={mailCheckSchema}
       onSubmit={(values, setSubmitting) => {
-        handleSubmit(values);
+        handleEmailCheck(values);
         setSubmitting(false);
       }}
     >
       <Form>
-        <button
-          className="social-login-button google"
-          onClick={handleSocialLogin.handleGoogleLogin}
-        >
+        <button className="social-login-button google">
           <GoogleLogo className="social-icon" />
           <div>Google</div>
         </button>
-        <button
-          className="social-login-button facebook"
-          onClick={handleSocialLogin.handleFacebookLogin}
-        >
+        <button className="social-login-button facebook">
           <FacebookAppLogo className="social-icon" />
           <div>Facebook</div>
         </button>
@@ -47,6 +39,7 @@ export default function PreLoginForm({ handleSubmit, handleSocialLogin }) {
           type="email"
           className="login-input"
         />
+        <StyledErrorMessage name="email" />
         <p className="basic-privacy-confirm">
           Surfesta에 가입함으로써 개인정보 이용약관에 동의합니다.
         </p>

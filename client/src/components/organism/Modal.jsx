@@ -7,7 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { offModal } from '../../redux/modules/modal';
 import { useCallback } from 'react';
 import WaveSurf from '../molecule/modal/WaveSurf';
-import { useMemo } from 'react';
+import { checkSagaActionCreator } from '../../redux/modules/mailCheck';
+import { SignupSagaActionCreator } from '../../redux/modules/auth';
 import './Modal.scss';
 
 export default function Modal() {
@@ -39,20 +40,15 @@ export default function Modal() {
   );
   // 모달은 redux-store에 저장된 상태에 따라 다른 UI가 됩니다(다른 자식컴포넌트를 보여줍니다)
 
-  const handleEmailSubmit = useCallback(
+  const handleEmailCheck = useCallback(
     (values) => {
       dispatch(checkSagaActionCreator(values));
     },
     [dispatch]
   );
-  const handleSocialLogin = useMemo(
-    {
-      handleGoogleLogin(e) {
-        e.preventDefault();
-      },
-      handleFacebookLogin(e) {
-        e.preventDefault();
-      },
+  const handleRegister = useCallback(
+    (values) => {
+      dispatch(SignupSagaActionCreator(values));
     },
     [dispatch]
   );
@@ -63,13 +59,10 @@ export default function Modal() {
         <div id="modal">
           <h1 className="modal-headline">{modal.content}</h1>
           {modal.preLogin && (
-            <PreLoginForm
-              handleSubmit={handleEmailSubmit}
-              handleSocialLogin={handleSocialLogin}
-            />
+            <PreLoginForm handleEmailCheck={handleEmailCheck} />
           )}
           {modal.forLogin && <LoginForm />}
-          {modal.forSignUp && <RegisterForm />}
+          {modal.forSignUp && <RegisterForm handleRegister={handleRegister} />}
           {modal.forConfirm && (
             <>
               <button>확인</button>

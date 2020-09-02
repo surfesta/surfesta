@@ -1,0 +1,12 @@
+@import '../../../style/variables';
+@import '../../../style/mixin';
+
+.modal-error-message {
+  font-size: 0.6rem;
+  font-weight: 200;
+  color: $alert-color;
+
+  position: absolute;
+  right: 50%;
+  transform: translate3d(50%, -30%, 0);
+}

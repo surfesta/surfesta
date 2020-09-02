@@ -1,10 +1,11 @@
 import React from 'react';
 import { ErrorMessage } from 'formik';
+import './StyledErrorMessage.scss';
 
-export default function StyledErrorMessage() {
+export default function StyledErrorMessage(props) {
   return (
-    <div style={{ color: '#E41818', fontSize: '.7rem' }}>
-      <ErrorMessage name="email" />
+    <div className="modal-error-message">
+      <ErrorMessage {...props} />
     </div>
   );
 }

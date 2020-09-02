@@ -1,6 +1,10 @@
 import React, { useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
 
 function ProfileThumb() {
+  ///---------동욱의 테스트용 코드---------------
+  const user = useSelector((state) => state.auth.user);
+  ///----------------------------------------
   const titleRef = useRef(null);
   useEffect(() => {
     document.title = '내 정보 | Surfesta';
@@ -22,13 +26,18 @@ function ProfileThumb() {
   };
 
   return (
-    <div>
-      <div id="profile-edit">
-        <h2 ref={titleRef} className="title">
-          기본 정보
-        </h2>
+    <div id="profile-edit">
+      <h2 ref={titleRef} className="title">
+        기본 정보
+      </h2>
+      <div style={divStyle}>
+        {/*---------동욱의 테스트용 코드---------------*/}
+        <img
+          src={user && user.profile_img}
+          alt="이 이미지는 이메일이 해쉬된 값입니다"
+        />
+        {/*----------------------------------------*/}
       </div>
-      <div style={divStyle}>Thumbnail</div>
     </div>
   );
 }

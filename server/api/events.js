@@ -18,8 +18,7 @@ router.get('/', (req, res) => {
 router.get('/:event_id', (req, res) => {
   Event.findOne({ _id: req.params.event_id }, (err, event) => {
     if (err) return res.status(500).json({ error: err });
-    if (!event)
-      return res.status(404).json({ error: 'event not found' });
+    if (!event) return res.status(404).json({ error: 'event not found' });
     res.json(event);
   });
 });
@@ -37,9 +36,10 @@ router.get('/:host_id', (req, res) => {
 // CREATE Event
 router.post('/', (req, res) => {
   const event = new Event(req.body);
-
+  console.log(event);
   event.save((err, doc) => {
     if (err) {
+      console.log(err);
       res.json({ success: false });
       return;
     }
@@ -55,8 +55,7 @@ router.patch('/:event_id', (req, res) => {
     (err, output) => {
       if (err) res.status(500).json({ error: 'db failure' });
       console.log(output);
-      if (!output.n)
-        return res.status(404).json({ error: 'Event not found' });
+      if (!output.n) return res.status(404).json({ error: 'Event not found' });
       res.json({ success: true });
     }
   );

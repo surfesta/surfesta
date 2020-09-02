@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const EVENT_URL = 'http://localhost:3000/api/v1/events';
+const EVENT_URL = '/api/v1/events';
 
 export default class EventService {
   static async getBooks() {

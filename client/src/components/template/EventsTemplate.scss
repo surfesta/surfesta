@@ -9,17 +9,28 @@
   /* position이 absolute일때만 동작, 구형 browser에서 사용 */
   clip-path: polygon(0 0, 0 0, 0 0, 0 0);
 }
-.cards {
-  display: flex;
-  flex-flow: row wrap;
-  padding: 0 30px;
+.cards-wrap {
+  display: block;
   max-width: 1440px;
   margin: 0 auto;
+  .loading-text,
+  .error-text {
+    display: block;
+    font-size: 3rem;
+    text-align: center;
+  }
+  .cards {
+    display: flex;
+    flex-flow: row wrap;
+    padding: 0 30px;
+  }
 }
 
 @include tablet {
-  .cards {
-    width: 660px;
-    margin: 0 auto;
+  .cards-wrap {
+    .cards {
+      width: 660px;
+      margin: 0 auto;
+    }
   }
 }

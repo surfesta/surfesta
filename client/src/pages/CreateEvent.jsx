@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './createevent.scss';
 import EventForm from '../components/template/createEvent/EventForm';
 

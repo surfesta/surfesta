@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './maps.scss';
 
-export default function Maps() {
+export default function Maps({ Ref }) {
   useEffect(() => {
     const map = new window.google.maps.Map(document.getElementById('map'), {
       center: { lat: 37.5452619, lng: 127.0569794 },
@@ -81,6 +81,7 @@ export default function Maps() {
         id="pac-input"
         type="text"
         placeholder="대한민국 서울특별시 성동구 성수2가3동 289-10"
+        ref={Ref}
       />
       <div id="map"></div>
       <div id="infowindow-content">

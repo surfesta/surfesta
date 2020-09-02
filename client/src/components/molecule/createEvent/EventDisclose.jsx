@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function EventDislose({ toggle }) {
+export default function EventDislose({ toggle, Ref }) {
   return (
     <>
       <h2 className="eventform-title">공개 여부</h2>
@@ -14,7 +14,7 @@ export default function EventDislose({ toggle }) {
         </div>
         <div className="input-box label-box">
           <input
-            required
+            ref={Ref}
             onChange={toggle}
             type="checkbox"
             defaultChecked={false}

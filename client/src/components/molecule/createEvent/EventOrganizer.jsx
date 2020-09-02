@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function EventOrganizer() {
+export default function EventOrganizer({ telRef, mailRef }) {
   return (
     <>
       <h2 className="eventform-title">주최자 연락처</h2>
@@ -14,11 +14,15 @@ export default function EventOrganizer() {
         </div>
         <div className="input-box">
           <input
-            required
             type="text"
             placeholder="이메일 주소를 입력해주세요"
+            ref={telRef}
           />
-          <input required type="text" placeholder="전화번호를 입력해주세요" />
+          <input
+            type="text"
+            placeholder="전화번호를 입력해주세요"
+            ref={mailRef}
+          />
         </div>
       </div>
     </>

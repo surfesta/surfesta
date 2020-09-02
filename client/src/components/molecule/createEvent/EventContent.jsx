@@ -1,7 +1,7 @@
 import React from 'react';
 import ToastEditor from './ToastEditor';
 
-export default function EventContent() {
+export default function EventContent({ Ref }) {
   return (
     <>
       <h2 className="eventform-title">내용</h2>
@@ -11,7 +11,7 @@ export default function EventContent() {
         </div>
         <div className="input-box" id="editor"></div>
       </div>
-      <ToastEditor />
+      <ToastEditor Ref={Ref} />
     </>
   );
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function EventTitle() {
+export default function EventTitle({ Ref }) {
   return (
     <>
       <h2 className="eventform-title">이벤트 제목</h2>
@@ -12,7 +12,11 @@ export default function EventTitle() {
           </p>
         </div>
         <div className="input-box">
-          <input required type="text" placeholder="멋진 제목을 입력해주세요." />
+          <input
+            type="text"
+            placeholder="멋진 제목을 입력해주세요."
+            ref={Ref}
+          />
         </div>
       </div>
     </>

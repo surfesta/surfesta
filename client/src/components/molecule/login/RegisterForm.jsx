@@ -1,16 +1,15 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
-import StyledErrorMessage from '../../atom/StyledErrorMessage';
+import StyledErrorMessage from '../../atom/header/StyledErrorMessage';
 import { useDispatch, useSelector } from 'react-redux';
-import UserService from '../../../services/UserService';
-import { setSignInModal, offModal } from '../../../redux/modules/modal';
 import { SignupSagaActionCreator } from '../../../redux/modules/auth';
+import './RegisterForm.scss';
 
 export default function RegisterForm() {
   const dispatch = useDispatch();
   return (
     <Formik
-      initialValues={{ email: '', password: '' }}
+      initialValues={{ email: '', username: '', password: '' }}
       // validationSchema={SignupSchema}
       onSubmit={(values, { setSubmitting }) => {
         dispatch(SignupSagaActionCreator(values));

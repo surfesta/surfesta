@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 
 function ThumbGuidance() {
   const spanStyle = {
-    border: "2px solid greenyellow",
-    display: "block",
-    "text-align": "center",
-    padding: "5px",
+    border: '2px solid greenyellow',
+    display: 'block',
+    textAlign: 'center',
+    padding: '5px',
   };
 
   return (

@@ -3,8 +3,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import './Filter.scss';
 
-const options = ['Our Events🎉', 'Online Events', 'Offline Events'];
-
 export default function Filter() {
   const [selected, setSelected] = React.useState(false);
   const selectRef = useRef();
@@ -20,9 +18,7 @@ export default function Filter() {
       >
         <span ref={selectRef}>Our Events </span> <i>🎉</i>
         <span className="more">
-          <ExpandMoreIcon
-            className={selected ? 'arrow rotataion' : 'arrow'}
-          />
+          <ExpandMoreIcon className={selected ? 'arrow rotataion' : 'arrow'} />
         </span>
       </button>
       <div className="selectList-wrap">

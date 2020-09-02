@@ -26,10 +26,10 @@ function ProfileThumb() {
   };
 
   return (
-    <div>
-      <span id="profile-edit" ref={titleRef} className="title">
+    <div id="profile-edit">
+      <h2 ref={titleRef} className="title">
         기본 정보
-      </span>
+      </h2>
       <div style={divStyle}>
         {/*---------동욱의 테스트용 코드---------------*/}
         <img

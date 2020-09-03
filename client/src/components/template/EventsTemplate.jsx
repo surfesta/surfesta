@@ -19,10 +19,8 @@ export default function EventsTemplate({ events, loading, error, getEvents }) {
       <section className="cards-wrap">
         <h2 className="a11y-hidden">이벤트 리스트</h2>
 
-        {loading && <span className="loading-text">로딩 중!!!!!</span>}
         {error && <span className="error-text">에러닷!!!!!!!!</span>}
         <div className="cards">
-          {/* {error === null && <Card eventId={1} />} */}
           {events.map((event) => {
             return event.isOpen && <Card event={event} key={event._id} />;
           })}

@@ -68,7 +68,7 @@ export const startGetEvents = () => ({
 function* startGetEventsSaga() {
   try {
     yield put(start());
-    yield delay(2000);
+    yield delay(1000);
     const events = yield call(EventService.getBooks);
     yield put(success(events));
   } catch (error) {

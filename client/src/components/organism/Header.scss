@@ -1,22 +1,16 @@
 @import '../../style/variables';
 @import '../../style/mixin';
 
-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.main-header {
+  background-color: $primary-color;
+  color: $tertiary-color;
 
-  background-color: #25272b;
-  color: #b4b4b5;
-}
-
-button {
-  color: #b4b4b5;
-  background-color: transparent;
-  border: none;
-}
-
-.event-button {
-  line-height: 20px;
-  padding: 5px 20px;
+  .header-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 30px;
+  }
 }

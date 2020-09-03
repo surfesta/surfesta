@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useSelector } from 'react';
+import { Redirect } from 'react-router-dom';
 import ProfileSection from '../organism/Profile';
 import LogoutSection from '../organism/Logout';
 import './ProfileTemplate.scss';

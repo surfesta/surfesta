@@ -31,6 +31,15 @@
   .search-wrap {
     .center {
       width: 100%;
+      input {
+        font-size: 2.4rem;
+      }
+      .search-btn {
+        padding: 24px;
+        button svg {
+          font-size: 2rem;
+        }
+      }
     }
   }
 }
@@ -46,7 +55,7 @@
 @include desktop {
   .search-wrap {
     .center {
-      width: calc(100% - 50px);
+      width: 100%;
     }
   }
 }

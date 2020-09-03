@@ -1,19 +1,17 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
-import StyledErrorMessage from '../../atom/StyledErrorMessage';
-import { useDispatch, useSelector } from 'react-redux';
-import UserService from '../../../services/UserService';
-import { setSignInModal, offModal } from '../../../redux/modules/modal';
-import { SignupSagaActionCreator } from '../../../redux/modules/auth';
+import registerSchema from '../../../utils/RegisterSchema';
+import StyledErrorMessage from '../../atom/header/StyledErrorMessage';
+import './RegisterForm.scss';
 
-export default function RegisterForm() {
-  const dispatch = useDispatch();
+export default function RegisterForm({ handleRegister }) {
+  console.log(handleRegister);
   return (
     <Formik
-      initialValues={{ email: '', password: '' }}
-      // validationSchema={SignupSchema}
+      initialValues={{ email: '', username: '', password: '' }}
+      validationSchema={registerSchema}
       onSubmit={(values, { setSubmitting }) => {
-        dispatch(SignupSagaActionCreator(values));
+        handleRegister(values);
         setSubmitting(false);
       }}
     >
@@ -25,28 +23,28 @@ export default function RegisterForm() {
             className="signup-input"
             placeholder="이메일"
           />
-          <StyledErrorMessage />
+          <StyledErrorMessage name="email" />
           <Field
             name="username"
             type="username"
             placeholder="이름"
             className="signup-input"
           />
-          <StyledErrorMessage />
+          <StyledErrorMessage name="username" />
           <Field
             name="phone_number"
             type="phone_number"
             placeholder="전화번호 (선택)"
             className="signup-input"
           />
-          <StyledErrorMessage />
+          <StyledErrorMessage name="phone_number" />
           <Field
             name="password"
             type="password"
             placeholder="비밀번호"
             className="signup-input"
           />
-          <StyledErrorMessage />
+          <StyledErrorMessage name="password" />
           <button
             type="submit"
             className="signup-button"

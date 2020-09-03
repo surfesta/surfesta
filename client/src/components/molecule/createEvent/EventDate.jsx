@@ -37,7 +37,7 @@ export default function EventDate({ startDateRef, endDateRef }) {
               <KeyboardDatePicker
                 disableToolbar
                 variant="inline"
-                format="MM/dd/yyyy"
+                format="yyyy년MM월dd일"
                 margin="normal"
                 id="date-picker-inline"
                 label="행사 시작일"
@@ -51,6 +51,7 @@ export default function EventDate({ startDateRef, endDateRef }) {
                 margin="normal"
                 id="time-picker"
                 label="행사 시작 시간"
+                format="a hh:mm"
                 value={startTime}
                 onChange={handleStartTime}
                 KeyboardButtonProps={{
@@ -64,7 +65,7 @@ export default function EventDate({ startDateRef, endDateRef }) {
               <KeyboardDatePicker
                 disableToolbar
                 variant="inline"
-                format="MM/dd/yyyy"
+                format="yyyy년MM월dd일"
                 margin="normal"
                 id="date-picker-inline"
                 label="행사 종료일"
@@ -78,6 +79,7 @@ export default function EventDate({ startDateRef, endDateRef }) {
                 margin="normal"
                 id="time-picker"
                 label="행사 종료 시간"
+                format="a hh:mm"
                 value={endTime}
                 onChange={handleEndTime}
                 KeyboardButtonProps={{

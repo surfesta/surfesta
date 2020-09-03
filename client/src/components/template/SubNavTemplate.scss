@@ -4,7 +4,8 @@
 @import '../../style/common.scss';
 
 .sub-nav-section {
-  width: 700px;
+  width: 500px;
+  display: flex;
   margin: 0 auto;
   div {
     @include font-normal;

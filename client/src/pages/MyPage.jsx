@@ -1,5 +1,5 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
+import React, { useSelector } from 'react';
+import { Route, Redirect } from 'react-router-dom';
 import HeaderTemplate from '../components/template/HeaderTemplate';
 import ProfileTemplate from '../components/template/ProfileTemplate';
 import SubNavTemplate from '../components/template/SubNavTemplate';

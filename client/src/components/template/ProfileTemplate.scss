@@ -14,6 +14,11 @@
 
 // profile template(profile-section, logout-section) 내 공통 적용 요소
 .profile {
+  section {
+    display: flex;
+    justify-content: center;
+  }
+
   margin: 0 auto;
 
   .title {

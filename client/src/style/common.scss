@@ -3,6 +3,8 @@
 
 /* 노토산스 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+/* 담미온 */
+@import url('https://fonts.googleapis.com/css2?family=Damion&display=swap');
 
 /* 숨긴콘텐츠 */
 .a11y-hidden {
@@ -22,7 +24,7 @@ html {
 /* 스타일 초기화*/
 body {
   margin: 0;
-  font-family: 'Noto Sans', sans-serif;
+  font-family: 'Noto Sans kr', sans-serif;
 }
 h1,
 h2,
@@ -47,6 +49,9 @@ ul {
 button {
   padding: 0;
   cursor: pointer;
+  border: none;
+}
+input {
   border: none;
 }
 /* table 초기화 */

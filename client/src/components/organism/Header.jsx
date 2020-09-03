@@ -13,7 +13,7 @@ function Header() {
 
   const handlePostEvent = useCallback(() => {
     if (user === null) {
-      dispatch(welcomeModal('📝로그인 후 시작하기😉'));
+      dispatch(welcomeModal('로그인 후 시작하기😉'));
       return;
     }
     dispatch(push('/createEvent'));
@@ -24,10 +24,12 @@ function Header() {
   }, [dispatch]);
 
   return (
-    <header>
-      <PostEventButton handleClick={handlePostEvent} />
-      <Logo onClick={handleLogoClick} />
-      <HeaderRight />
+    <header className="main-header">
+      <div className="header-wrapper">
+        <PostEventButton handleClick={handlePostEvent} />
+        <Logo onClick={handleLogoClick} />
+        <HeaderRight />
+      </div>
     </header>
   );
 }

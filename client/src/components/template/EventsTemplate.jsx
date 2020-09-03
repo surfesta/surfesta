@@ -23,9 +23,9 @@ export default function EventsTemplate({ events, loading, error, getEvents }) {
         {error && <span className="error-text">에러닷!!!!!!!!</span>}
         <div className="cards">
           {/* {error === null && <Card eventId={1} />} */}
-          {events.map((event) => (
-            <Card event={event} key={event._id} />
-          ))}
+          {events.map((event) => {
+            return event.isOpen && <Card event={event} key={event._id} />;
+          })}
         </div>
       </section>
     </main>

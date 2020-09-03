@@ -8,13 +8,11 @@ export default function Card(props) {
   const { event } = props;
   const eventId = props.event.host._id;
   return (
-    event.isOpen && (
-      <div className="card-wrap">
-        <Link to={`event/${eventId}`}>
-          <CardContent event={event} />
-        </Link>
-        <CardButtons event={event} />
-      </div>
-    )
+    <div className="card-wrap">
+      <Link to={`event/${eventId}`}>
+        <CardContent event={event} />
+      </Link>
+      <CardButtons event={event} />
+    </div>
   );
 }

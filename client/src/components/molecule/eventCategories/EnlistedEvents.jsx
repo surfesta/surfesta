@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from '../../organism/Card';
+import Card from '../../organism/main/Card';
 
 function EnlistedEvents(props) {
   return (

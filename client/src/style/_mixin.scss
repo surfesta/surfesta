@@ -23,9 +23,10 @@
 // $LivingCoral: #ff6f61;
 // $ClassicBlue: #0f4c81;
 
-@mixin font($size, $color) {
+@mixin font($size, $color: $font-primary-color, $weight: 600) {
   font-size: $size;
   color: $color;
+  font-weight: $weight;
 }
 @mixin font-normal {
   font-size: 1.5rem;
@@ -117,6 +118,9 @@ $labelColor: #454b58;
     @content;
   }
 
+  @keyframes #{$name} {
+    @content;
+  }
   animation-name: $name;
   animation-duration: $duration;
   animation-timing-function: $timing;

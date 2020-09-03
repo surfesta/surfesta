@@ -1,14 +1,14 @@
 import React from 'react';
 import FavoriteButton from '../../atom/main/FavoriteButton';
-import SettingButton from '../../atom/main/SettingButton';
-import DeleteButton from '../../atom/main/DeleteButton';
+// import SettingButton from '../../atom/main/SettingButton';
+// import DeleteButton from '../../atom/main/DeleteButton';
 
-export default function CardButtons() {
+export default function CardButtons(props) {
   return (
-    <div>
+    <div className="cardButtons-wrap">
       <FavoriteButton />
-      <SettingButton />
-      <DeleteButton />
+      {/* <SettingButton />
+      <DeleteButton /> */}
     </div>
   );
 }

@@ -1,10 +1,18 @@
+@import '../../style/mixin';
+@import '../../style/variables';
+@import '../../style/mediaQuery';
+
 .filter-wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 1440px;
+  margin: 50px auto 0;
+  padding-left: 30px;
   button {
     background: 0;
     border: 0;
     outline: transparent;
-    font-size: 3rem;
-    font-weight: 700;
+    @include font(3rem, $weight: 700);
     cursor: pointer;
     i {
       font-size: 2.5rem;
@@ -49,6 +57,18 @@
       transform: translateY(0%);
       opacity: 1;
       transition: 0.3s;
+    }
+  }
+}
+
+@include mobile {
+  .filter-wrap {
+    margin-top: 20px;
+    button {
+      font-size: 2.4rem;
+      .more {
+        padding-top: 2px;
+      }
     }
   }
 }

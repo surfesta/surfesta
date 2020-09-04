@@ -8,7 +8,6 @@ export default function Card({ event }) {
   const eventId = event.host._id;
   const cardRef = useRef(null);
   const [isLoad, setIsLoad] = useState(null);
-  const [count, setCount] = useState(false);
 
   useEffect(() => {
     function loadCard() {

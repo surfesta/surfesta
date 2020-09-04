@@ -1,22 +1,3 @@
-// import React, { useRef, useState, useEffect } from 'react';
-// import { Link } from 'react-router-dom';
-// import './Card.scss';
-// import CardContent from '../../molecule/main/CardContent';
-// import CardButtons from '../../molecule/main/CardButtons';
-
-// export default function Card({ event }) {
-//   const eventId = event.host._id;
-
-//   return (
-//     <div className="card-wrap">
-//       <Link to={`event/${eventId}`}>
-//         <CardContent event={event} />
-//       </Link>
-//       <CardButtons event={event} />
-//     </div>
-//   );
-// }
-
 import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Card.scss';
@@ -35,7 +16,6 @@ export default function Card({ event }) {
     }
 
     const card = cardRef.current;
-
     card && card.addEventListener(LOAD_TYPE, loadCard);
 
     return () => {
@@ -57,6 +37,7 @@ export default function Card({ event }) {
           <span></span>
         </div>
       )}
+
       {isLoad && (
         <>
           <Link to={`event/${eventId}`}>
@@ -76,7 +57,6 @@ function onIntersection(entries, io) {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
       io.unobserve(entry.target);
-      console.log(entry.target);
       entry.target.dispatchEvent(new CustomEvent(LOAD_TYPE));
     }
   });

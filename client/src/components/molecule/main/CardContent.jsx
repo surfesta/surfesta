@@ -7,7 +7,6 @@ export default function CardContent(props) {
   const date = event.event_date;
   const title = event.title;
   const price = event.price.toLocaleString();
-  // console.log(toLocaleString());
   const isOnline = event.isOnline;
   const hostProfileImg = event.host.profile_img;
   const hostName = event.host.username;

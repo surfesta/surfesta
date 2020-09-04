@@ -1,9 +1,8 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { GoogleApiWrapper } from 'google-maps-react';
 import { useDispatch, useSelector } from 'react-redux';
 import EventDislose from '../../molecule/createEvent/EventDisclose';
 import EventTitle from '../../molecule/createEvent/EventTitle';
-import EventOrganizer from '../../molecule/createEvent/EventOrganizer';
 import EventOnlineCheck from '../../molecule/createEvent/EventOnlineCheck';
 import EventAddress from '../../molecule/createEvent/EventAddress';
 import EventAddressDetail from '../../molecule/createEvent/EventAddressDetail';
@@ -14,10 +13,14 @@ import EventMaxPerson from '../../molecule/createEvent/EventMaxPerson';
 import EventThumbnail from '../../molecule/createEvent/EventThumbnail';
 import EventContent from '../../molecule/createEvent/EventContent';
 import EventDate from '../../molecule/createEvent/EventDate';
-
 import axios from 'axios';
 
 const EventForm = () => {
+  const _preventDefault = useCallback((e) => {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+    }
+  });
   const [placeState, setPlaceState] = useState({
     icon: '',
     name: '',
@@ -31,9 +34,9 @@ const EventForm = () => {
       zoom: 17,
     });
     const card = document.getElementById('pac-card');
-    const input = document.getElementById('pac-input');
+    const pacInput = document.getElementById('pac-input');
     map.controls[window.google.maps.ControlPosition.TOP_RIGHT].push(card);
-    const autocomplete = new window.google.maps.places.Autocomplete(input);
+    const autocomplete = new window.google.maps.places.Autocomplete(pacInput);
     autocomplete.bindTo('bounds', map);
     autocomplete.setFields(['address_components', 'geometry', 'icon', 'name']);
     const infowindow = new window.google.maps.InfoWindow();
@@ -59,7 +62,7 @@ const EventForm = () => {
       const place = autocomplete.getPlace();
 
       if (!place.geometry) {
-        window.alert("No details available for input: '" + place.name + "'");
+        window.alert('아래 자동완성 기능을 이용해주세요.');
         return;
       }
 
@@ -86,13 +89,13 @@ const EventForm = () => {
             '',
         ].join(' ');
       }
-      console.dir(place);
       const placeAddress = {
         icon: place.icon,
         name: place.name,
         address: address,
         lat: place.geometry.location.lat(),
         lng: place.geometry.location.lng(),
+        fullname: pacInput.value,
       };
       setPlaceState(placeAddress);
       infowindowContent.children['place-icon'].src = place.icon;
@@ -107,8 +110,6 @@ const EventForm = () => {
   const $form = useRef(null);
   const $isOpen = useRef(null);
   const $eventTitle = useRef(null);
-  const $phone = useRef(null);
-  const $mail = useRef(null);
   const $startDate = useRef(null);
   const $endDate = useRef(null);
   const $isOnline = useRef(null);
@@ -120,14 +121,25 @@ const EventForm = () => {
   const $maxPerson = useRef(null);
   const $thumbnail = useRef(null);
   const $toast = useRef(null);
-
-  function submit(e) {
-    e.preventDefault();
+  const inputErr = useCallback((Ref) => {
+    Ref.current.focus();
+    Ref.current.classList.add('err');
+    if (!Ref.current.parentNode.querySelector('.err-text')) {
+      const $span = document.createElement('span');
+      $span.className = 'err-text';
+      $span.textContent = '필수 입력 사항입니다.';
+      Ref.current.parentNode.appendChild($span);
+    }
+  });
+  const inputComplete = useCallback((Ref) => {
+    Ref.current.classList.remove('err');
+    const $err = Ref.current.parentNode.querySelector('.err-text');
+    Ref.current.parentNode.removeChild($err);
+  });
+  function createData(e) {
     const publicRef = {
       curIsOpen: $isOpen.current.checked,
       curEventTitle: $eventTitle.current.value,
-      curTel: $phone.current.value,
-      curMail: $mail.current.value,
       curStartDate: $startDate.current,
       curEndDate: $endDate.current,
       curIsOnline: $isOnline.current.checked,
@@ -164,11 +176,7 @@ const EventForm = () => {
     const payload = {
       isOpen: publicRef.curIsOpen,
       title: publicRef.curEventTitle,
-      host: {
-        id: user._id,
-        email: publicRef.curMail,
-        phone_number: publicRef.curTel,
-      },
+      host: user._id,
       event_date: {
         start: {
           date: startDateValue,
@@ -179,7 +187,7 @@ const EventForm = () => {
           time: endTimeValue,
         },
       },
-      thumbnail: 'testimg',
+      thumbnail: '',
       content: publicRef.curToast,
       isOnline: publicRef.curIsOnline,
       online_platform: onlineRef.curPlatform,
@@ -188,14 +196,59 @@ const EventForm = () => {
         details: placeState,
         info: offlineRef.curAddressDetailPlus,
       },
-      price: publicRef.curPrice, // 입장료
-      max_count: publicRef.curMaxPerson, // 참석 가능 인원수
+      price: publicRef.curPrice.trim() === '' ? 0 : publicRef.curPrice, // 입장료
+      max_count:
+        publicRef.curMaxPerson.trim() === '' ? 100 : publicRef.curMaxPerson, // 참석 가능 인원수
       cur_count: 0, // 참석 인원
 
       enlisted_users_id: [], // 해당 이벤트 참여신청을 한 유저들의 배열
     };
-    console.log(payload);
+    if (publicRef.curIsOnline && payload.online_platform.trim() === '') {
+      inputErr($onlinePlatform);
+    } else if (publicRef.curIsOnline) {
+      if ($onlinePlatform.current.classList.contains('err'))
+        inputComplete($onlinePlatform);
+    }
+    if (!publicRef.curIsOnline && payload.location.info.trim() === '') {
+      inputErr($addressDetailPlus);
+    } else if (!publicRef.curIsOnline) {
+      if ($addressDetailPlus.current.classList.contains('err'))
+        inputComplete($addressDetailPlus);
+    }
 
+    if (!publicRef.curIsOnline && payload.location.details.name.trim() === '') {
+      inputErr($addressDetail);
+    } else if (!publicRef.curIsOnline) {
+      if ($addressDetail.current.classList.contains('err'))
+        inputComplete($addressDetail);
+    }
+    if (!publicRef.curIsOnline && payload.location.name.trim() === '') {
+      inputErr($address);
+    } else if (!publicRef.curIsOnline) {
+      if ($address.current.classList.contains('err')) inputComplete($address);
+    }
+
+    if (payload.title.trim() === '') {
+      inputErr($eventTitle);
+    } else {
+      if ($eventTitle.current.classList.contains('err'))
+        inputComplete($eventTitle);
+    }
+    // if (!payload.thumbnail.trim() === '') {
+    //   inputErr($thumbnail);
+    // } else {
+    //   $thumbnail.current.classList.remove('err');
+    // }
+
+    if (
+      (publicRef.curIsOnline && payload.online_platform.trim() === '') ||
+      (!publicRef.curIsOnline && payload.location.name.trim() === '') ||
+      (!publicRef.curIsOnline && payload.location.details.name.trim() === '') ||
+      (!publicRef.curIsOnline && payload.location.info.trim() === '')
+    ) {
+      return;
+    }
+    console.log(payload);
     // axios.post('/api/v1/events', payload);
   }
   function openToggle(e) {
@@ -209,23 +262,43 @@ const EventForm = () => {
     <div className="create-event-form">
       <h1>이벤트 주최하기</h1>
       <form
-        onSubmit={submit}
         encType="multipart/form-data"
         action="/upload_page"
         ref={$form}
+        onSubmit={(e) => {
+          e.preventDefault();
+          return false;
+        }}
       >
-        <EventDislose toggle={openToggle} Ref={$isOpen} />
-        <EventTitle Ref={$eventTitle} />
-        <EventOrganizer telRef={$phone} mailRef={$mail} />
-        <EventDate startDateRef={$startDate} endDateRef={$endDate} />
-        <EventOnlineCheck toggle={onlineToggle} Ref={$isOnline} />
+        <EventDislose
+          toggle={openToggle}
+          Ref={$isOpen}
+          preventDefault={_preventDefault}
+        />
+        <EventTitle Ref={$eventTitle} preventDefault={_preventDefault} />
+        <EventDate
+          startDateRef={$startDate}
+          endDateRef={$endDate}
+          preventDefault={_preventDefault}
+        />
+        <EventOnlineCheck
+          toggle={onlineToggle}
+          Ref={$isOnline}
+          preventDefault={_preventDefault}
+        />
 
         {/* 온라인 OFF */}
         {!onlineCheck && (
           <>
-            <EventAddress Ref={$address} />
-            <EventAddressDetail Ref={$addressDetail} />
-            <EventAddressDetailPlus Ref={$addressDetailPlus} />
+            <EventAddress Ref={$address} preventDefault={_preventDefault} />
+            <EventAddressDetail
+              Ref={$addressDetail}
+              preventDefault={_preventDefault}
+            />
+            <EventAddressDetailPlus
+              Ref={$addressDetailPlus}
+              preventDefault={_preventDefault}
+            />
           </>
         )}
         {/* 온라인 OFF */}
@@ -233,16 +306,21 @@ const EventForm = () => {
         {/* 온라인 ON */}
         {onlineCheck && (
           <>
-            <EventPlatform Ref={$onlinePlatform} />
+            <EventPlatform
+              Ref={$onlinePlatform}
+              preventDefault={_preventDefault}
+            />
           </>
         )}
         {/* 온라인 ON */}
-        <EventPrice Ref={$price} />
-        <EventMaxPerson Ref={$maxPerson} />
-        <EventThumbnail Ref={$thumbnail} />
-        <EventContent Ref={$toast} />
+        <EventPrice Ref={$price} preventDefault={_preventDefault} />
+        <EventMaxPerson Ref={$maxPerson} preventDefault={_preventDefault} />
+        <EventThumbnail Ref={$thumbnail} preventDefault={_preventDefault} />
+        <EventContent Ref={$toast} preventDefault={_preventDefault} />
         <div className="create-event-submit">
-          <button type="submit">이벤트 생성하기</button>
+          <button type="submit" onClick={createData}>
+            이벤트 생성하기
+          </button>
         </div>
       </form>
     </div>

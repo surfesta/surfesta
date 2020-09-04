@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function EventPlatform({ Ref }) {
+export default function EventPlatform({ Ref, preventDefault }) {
   return (
     <>
       <h2 className="eventform-title" id="on-online">
@@ -15,6 +15,7 @@ export default function EventPlatform({ Ref }) {
             type="text"
             placeholder="Zoom 혹은 Youtube live 등"
             ref={Ref}
+            onKeyDown={preventDefault}
           />
         </div>
       </div>

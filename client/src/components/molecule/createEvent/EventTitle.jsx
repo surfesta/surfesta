@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function EventTitle({ Ref }) {
+export default function EventTitle({ Ref, preventDefault }) {
   return (
     <>
       <h2 className="eventform-title">이벤트 제목</h2>
@@ -16,6 +16,7 @@ export default function EventTitle({ Ref }) {
             type="text"
             placeholder="멋진 제목을 입력해주세요."
             ref={Ref}
+            onKeyDown={preventDefault}
           />
         </div>
       </div>

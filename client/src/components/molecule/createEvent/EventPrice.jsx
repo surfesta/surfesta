@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function EventPrice({ Ref }) {
+export default function EventPrice({ Ref, preventDefault }) {
   return (
     <>
       <h2 className="eventform-title">이벤트 참가 비용</h2>
@@ -13,6 +13,7 @@ export default function EventPrice({ Ref }) {
             type="text"
             placeholder="참가자들의 참가 비용을 입력하세요."
             ref={Ref}
+            onKeyDown={preventDefault}
           />
         </div>
       </div>

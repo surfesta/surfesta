@@ -92,7 +92,15 @@
           @include contentFontSet;
         }
         .input-box {
+          position: relative;
           width: 68rem;
+          .err-text {
+            position: absolute;
+            top: -24px;
+            left: 4px;
+            color: #e41818;
+            font-size: 1.3rem;
+          }
           .yes {
             display: none;
           }
@@ -175,6 +183,7 @@
           input[type='text'],
           input[type='date'],
           input[type='time'] {
+            outline: none;
             border: 0;
             width: 100%;
             height: 6.5rem;
@@ -184,6 +193,9 @@
             padding: 2.2rem 2.1rem 2.3rem 3.5rem;
             &::placeholder {
               @include placeholderSet;
+            }
+            &.err {
+              border: 2px solid #e41818;
             }
           }
           input[type='text'] {

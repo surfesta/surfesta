@@ -1,16 +1,41 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './createevent.scss';
 import EventForm from '../components/template/createEvent/EventForm';
 import useAuth from '../utils/useAuth';
+import HeaderTemplate from '../components/template/HeaderTemplate';
+import { Prompt } from 'react-router-dom';
+import RouteLeavingGuard from '../components/atom/createEvent/RouteLeavingGuard';
 
-export default function CreateEvent() {
-  useAuth();
+export default function CreateEvent({ history }) {
+  // useAuth();
   //쿠키 읽어들이는 로직
+  const [whenState, updateWhenState] = useState(true);
   return (
-    <div className="create-event-wrap">
-      <div className="w1440-container">
-        <EventForm />
+    <>
+      <RouteLeavingGuard
+        when={whenState}
+        navigate={(path) => {
+          history.push(path);
+        }}
+        shouldBlockNavigation={(location) => {
+          if (whenState) {
+            // if (location.pathname === 'signup') {
+            //     return true
+            //   }
+            return true;
+          }
+          return false;
+        }}
+        yes="확인"
+        no="취소"
+        content={'이 페이지를 벗어나면 \n 정성스럽게 작성한 글이 날아가요.'}
+      />
+      <HeaderTemplate />
+      <div className="create-event-wrap">
+        <div className="w1440-container">
+          <EventForm />
+        </div>
       </div>
-    </div>
+    </>
   );
 }

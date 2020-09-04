@@ -107,6 +107,11 @@
       font-size: 2rem;
       color: $font-tertiary-color;
     }
+    .favoriteButton-wrap {
+      &.act svg {
+        color: $point-color;
+      }
+    }
   }
 }
 

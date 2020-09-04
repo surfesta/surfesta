@@ -4,8 +4,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
-export default function CardButtons(event) {
-  // console.log(event);
+export default function CardButtons({ event }) {
   const [select, setSelect] = useState(false);
   const buttonRef = useRef();
 
@@ -29,8 +28,8 @@ export default function CardButtons(event) {
     </div>
   );
 
-  function click({ target }) {
+  function click() {
     setSelect(!select);
-    console.log(select);
+    console.log(event, event._id);
   }
 }

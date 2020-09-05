@@ -1,6 +1,5 @@
 import React from 'react';
 import './maps.scss';
-import MapsView from './MapsView';
 const Maps = ({ Ref, preventDefault }) => {
   return (
     <>
@@ -11,7 +10,13 @@ const Maps = ({ Ref, preventDefault }) => {
         ref={Ref}
         onKeyDown={preventDefault}
       />
-      <MapsView />
+      <div id="map"></div>
+      <div id="infowindow-content">
+        <img src="" width="16" height="16" id="place-icon" />
+        <span id="place-name" className="title"></span>
+        <br />
+        <span id="place-address"></span>
+      </div>
     </>
   );
 };

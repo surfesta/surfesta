@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Prompt } from 'react-router-dom';
-import ConfirmBox from './ConfirmBox';
+import ConfirmBox from '../../molecule/createEvent/ConfirmBox';
 
 export const RouteLeavingGuard = ({
   navigate,

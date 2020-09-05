@@ -1,5 +1,5 @@
 import React from 'react';
-import FileUpload from './FileUpload';
+import FileUpload from '../../molecule/createEvent/FileUpload';
 
 export default function EventThumbnail({ Ref }) {
   return (

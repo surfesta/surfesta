@@ -1,16 +1,16 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react';
+import React, { useRef, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { GoogleApiWrapper } from 'google-maps-react';
-import { useDispatch, useSelector } from 'react-redux';
 import EventDislose from '../../molecule/createEvent/EventDisclose';
 import EventTitle from '../../molecule/createEvent/EventTitle';
 import EventOnlineCheck from '../../molecule/createEvent/EventOnlineCheck';
 import EventAddress from '../../molecule/createEvent/EventAddress';
-import EventAddressDetail from '../../molecule/createEvent/EventAddressDetail';
+import EventAddressDetail from '../../organism/createEvent/EventAddressDetail';
 import EventAddressDetailPlus from '../../molecule/createEvent/EventAddressDetailPlus';
 import EventPlatform from '../../molecule/createEvent/EventPlatform';
 import EventPrice from '../../molecule/createEvent/EventPrice';
 import EventMaxPerson from '../../molecule/createEvent/EventMaxPerson';
-import EventThumbnail from '../../molecule/createEvent/EventThumbnail';
+import EventThumbnail from '../../organism/createEvent/EventThumbnail';
 import EventContent from '../../molecule/createEvent/EventContent';
 import EventDate from '../../molecule/createEvent/EventDate';
 import axios from 'axios';
@@ -28,85 +28,11 @@ const EventForm = () => {
     lat: 0,
     lng: 0,
   });
-  useEffect(() => {
-    const map = new window.google.maps.Map(document.getElementById('map'), {
-      center: { lat: 37.5452446, lng: 127.0570452 },
-      zoom: 17,
-    });
-    const card = document.getElementById('pac-card');
-    const pacInput = document.getElementById('pac-input');
-    map.controls[window.google.maps.ControlPosition.TOP_RIGHT].push(card);
-    const autocomplete = new window.google.maps.places.Autocomplete(pacInput);
-    autocomplete.bindTo('bounds', map);
-    autocomplete.setFields(['address_components', 'geometry', 'icon', 'name']);
-    const infowindow = new window.google.maps.InfoWindow();
-    const infowindowContent = document.getElementById('infowindow-content');
-    infowindow.setContent(infowindowContent);
-    const marker = new window.google.maps.Marker({
-      map,
-      anchorPoint: new window.google.maps.Point(0, -29),
-      position: map.center,
-      zoom: 13,
-    });
-
-    infowindowContent.children['place-icon'].src =
-      'https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png';
-    infowindowContent.children['place-name'].textContent = '제강빌딩';
-    infowindowContent.children['place-address'].textContent =
-      '２８９−１０ 성수2가3동 성동구';
-    infowindow.open(map, marker);
-    autocomplete.addListener();
-    autocomplete.addListener('place_changed', () => {
-      infowindow.close();
-      marker.setVisible(false);
-      const place = autocomplete.getPlace();
-
-      if (!place.geometry) {
-        window.alert('아래 자동완성 기능을 이용해주세요.');
-        return;
-      }
-
-      if (place.geometry.viewport) {
-        map.fitBounds(place.geometry.viewport);
-      } else {
-        map.setCenter(place.geometry.location);
-        map.setZoom(17);
-      }
-      marker.setPosition(place.geometry.location);
-      marker.setVisible(true);
-      let address = '';
-
-      if (place.address_components) {
-        address = [
-          (place.address_components[0] &&
-            place.address_components[0].short_name) ||
-            '',
-          (place.address_components[1] &&
-            place.address_components[1].short_name) ||
-            '',
-          (place.address_components[2] &&
-            place.address_components[2].short_name) ||
-            '',
-        ].join(' ');
-      }
-      const placeAddress = {
-        icon: place.icon,
-        name: place.name,
-        address: address,
-        lat: place.geometry.location.lat(),
-        lng: place.geometry.location.lng(),
-        fullname: pacInput.value,
-      };
-      setPlaceState(placeAddress);
-      infowindowContent.children['place-icon'].src = place.icon;
-      infowindowContent.children['place-name'].textContent = place.name;
-      infowindowContent.children['place-address'].textContent = address;
-      infowindow.open(map, marker);
-    });
-  }, []);
   const user = useSelector((state) => state.auth.user);
   const [onlineCheck, setOnlineCheck] = useState(false);
-
+  const [modalCheck, setModalCheck] = useState(false);
+  const [eventPayload, setEventPayload] = useState();
+  const [clearPost, setClearPost] = useState(false);
   const $form = useRef(null);
   const $isOpen = useRef(null);
   const $eventTitle = useRef(null);
@@ -121,13 +47,14 @@ const EventForm = () => {
   const $maxPerson = useRef(null);
   const $thumbnail = useRef(null);
   const $toast = useRef(null);
-  const inputErr = useCallback((Ref) => {
+
+  const inputErr = useCallback((Ref, msg = '필수 입력 사항입니다.') => {
     Ref.current.focus();
     Ref.current.classList.add('err');
     if (!Ref.current.parentNode.querySelector('.err-text')) {
       const $span = document.createElement('span');
       $span.className = 'err-text';
-      $span.textContent = '필수 입력 사항입니다.';
+      $span.textContent = msg;
       Ref.current.parentNode.appendChild($span);
     }
   });
@@ -136,6 +63,10 @@ const EventForm = () => {
     const $err = Ref.current.parentNode.querySelector('.err-text');
     Ref.current.parentNode.removeChild($err);
   });
+  function modalPop(payload) {
+    setModalCheck(true);
+    setEventPayload(payload);
+  }
   function createData(e) {
     const publicRef = {
       curIsOpen: $isOpen.current.checked,
@@ -196,13 +127,24 @@ const EventForm = () => {
         details: placeState,
         info: offlineRef.curAddressDetailPlus,
       },
-      price: publicRef.curPrice.trim() === '' ? 0 : publicRef.curPrice, // 입장료
-      max_count:
-        publicRef.curMaxPerson.trim() === '' ? 100 : publicRef.curMaxPerson, // 참석 가능 인원수
+      price: publicRef.curPrice.trim() === '' ? 0 : +publicRef.curPrice, // 입장료
+      max_count: +publicRef.curMaxPerson, // 참석 가능 인원수
       cur_count: 0, // 참석 인원
 
       enlisted_users_id: [], // 해당 이벤트 참여신청을 한 유저들의 배열
     };
+
+    if (isNaN(payload.max_count) || payload.max_count === 0) {
+      inputErr($maxPerson, '필수 입력 사항입니다, 숫자로 입력해주세요.');
+    } else {
+      if ($maxPerson.current.classList.contains('err'))
+        inputComplete($maxPerson);
+    }
+    if (isNaN(payload.price)) {
+      inputErr($price, '숫자로 입력해주세요.');
+    } else {
+      if ($price.current.classList.contains('err')) inputComplete($price);
+    }
     if (publicRef.curIsOnline && payload.online_platform.trim() === '') {
       inputErr($onlinePlatform);
     } else if (publicRef.curIsOnline) {
@@ -244,12 +186,16 @@ const EventForm = () => {
       (publicRef.curIsOnline && payload.online_platform.trim() === '') ||
       (!publicRef.curIsOnline && payload.location.name.trim() === '') ||
       (!publicRef.curIsOnline && payload.location.details.name.trim() === '') ||
-      (!publicRef.curIsOnline && payload.location.info.trim() === '')
+      (!publicRef.curIsOnline && payload.location.info.trim() === '') ||
+      payload.title.trim() === '' ||
+      publicRef.curMaxPerson.trim() === '' ||
+      isNaN(payload.max_count) ||
+      payload.max_count === 0 ||
+      isNaN(payload.price)
     ) {
       return;
     }
-    console.log(payload);
-    // axios.post('/api/v1/events', payload);
+    modalPop(payload);
   }
   function openToggle(e) {
     e.target.parentNode.classList.toggle('active');
@@ -258,17 +204,61 @@ const EventForm = () => {
     e.target.parentNode.classList.toggle('active');
     setOnlineCheck(!onlineCheck ? true : false);
   }
+  function submit(e) {
+    e.preventDefault();
+  }
+  function PostPayload() {
+    setModalCheck(false);
+    console.log(eventPayload);
+    // axios.post('/api/v1/events', payload);
+    setClearPost(true);
+  }
+  function goHome() {
+    window.location.href = '/';
+  }
   return (
     <div className="create-event-form">
+      {modalCheck && (
+        <div className="goback-modal-container">
+          <div className="inner-modal">
+            <div className="modal-body">
+              <pre>
+                해당 내용으로
+                <br />
+                이벤트를 주최할까요?
+              </pre>
+            </div>
+            <div className="modal-foot">
+              <button onClick={() => setModalCheck(false)} type="button">
+                취소
+              </button>
+              <button onClick={PostPayload} type="button">
+                확인
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {clearPost && (
+        <div className="goback-modal-container">
+          <div className="inner-modal">
+            <div className="modal-body">
+              <pre>이벤트가 게시되었어요!</pre>
+            </div>
+            <div className="modal-foot">
+              <button onClick={goHome} type="button" className="one-btn">
+                확인
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       <h1>이벤트 주최하기</h1>
       <form
         encType="multipart/form-data"
         action="/upload_page"
         ref={$form}
-        onSubmit={(e) => {
-          e.preventDefault();
-          return false;
-        }}
+        onSubmit={submit}
       >
         <EventDislose
           toggle={openToggle}
@@ -294,6 +284,7 @@ const EventForm = () => {
             <EventAddressDetail
               Ref={$addressDetail}
               preventDefault={_preventDefault}
+              setPlaceState={setPlaceState}
             />
             <EventAddressDetailPlus
               Ref={$addressDetailPlus}

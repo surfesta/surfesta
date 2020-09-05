@@ -1,4 +1,5 @@
 @import '../style/mixin';
+@import '../style/mediaQuery';
 
 .create-event-wrap {
   box-sizing: border-box;
@@ -25,6 +26,7 @@
       margin-bottom: 4rem;
     }
     form {
+      overflow: hidden;
       .custom-file-label {
         display: block;
         width: 68rem;
@@ -65,7 +67,6 @@
           margin-top: 10rem;
           width: 18rem;
           height: 6.5rem;
-          padding: 20px;
           font-size: 1.5rem;
           background: rgba(255, 255, 255, 0.05);
           border: 2px solid #3465ef;
@@ -209,6 +210,47 @@
           input[type='time'] {
             flex: 1;
             margin-left: 30px;
+          }
+        }
+      }
+    }
+  }
+}
+@include mobile {
+  .create-event-wrap {
+    .w1440-container {
+      width: 100%;
+    }
+    .create-event-form {
+      padding: 0;
+      h1 {
+        margin-bottom: 0;
+      }
+      form {
+        .create-event-submit {
+          margin-top: -50px;
+          margin-bottom: 25px;
+        }
+        .event-sec {
+          flex-wrap: wrap;
+          .event-content {
+            width: 100%;
+            margin-bottom: 3rem;
+          }
+          .input-box {
+            width: 100%;
+            .custom-file-label {
+              width: 100%;
+            }
+            .time-check {
+              flex-wrap: wrap;
+              .MuiFormControl-root {
+                width: 100%;
+                &:nth-child(2) {
+                  margin-left: 0;
+                }
+              }
+            }
           }
         }
       }

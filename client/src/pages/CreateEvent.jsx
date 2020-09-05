@@ -4,7 +4,7 @@ import EventForm from '../components/template/createEvent/EventForm';
 import useAuth from '../utils/useAuth';
 import HeaderTemplate from '../components/template/HeaderTemplate';
 import { Prompt } from 'react-router-dom';
-import RouteLeavingGuard from '../components/atom/createEvent/RouteLeavingGuard';
+import RouteLeavingGuard from '../components/organism/createEvent/RouteLeavingGuard';
 
 export default function CreateEvent({ history }) {
   // useAuth();

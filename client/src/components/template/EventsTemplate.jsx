@@ -3,6 +3,7 @@ import Card from '../organism/main/Card';
 import './EventsTemplate.scss';
 import Search from '../organism/Search';
 import Filter from '../organism/Filter';
+import errorImg from '../../img/error.png';
 
 // Presentational Component
 export default function EventsTemplate({ events, loading, error, getEvents }) {
@@ -19,7 +20,11 @@ export default function EventsTemplate({ events, loading, error, getEvents }) {
       <section className="cards-wrap">
         <h2 className="a11y-hidden">이벤트 리스트</h2>
 
-        {error && <span className="error-text">에러닷!!!!!!!!</span>}
+        {error && (
+          <div className="error-img">
+            <img src={errorImg} alt="에러" />
+          </div>
+        )}
         <div className="cards">
           {events.map((event) => {
             return event.isOpen && <Card event={event} key={event._id} />;

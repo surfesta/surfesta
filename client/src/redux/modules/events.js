@@ -83,7 +83,7 @@ function* startGetEventsSaga() {
     yield put(fail(error));
   }
 }
-function* startToggleFavInEventSaga(action) {
+function* startToggleFavoriteSaga(action) {
   try {
     yield put(start());
     yield delay(100);
@@ -95,5 +95,5 @@ function* startToggleFavInEventSaga(action) {
 
 export function* eventsSaga() {
   yield takeEvery(START_GET_EVENTS, startGetEventsSaga);
-  yield takeEvery(START_START_TOGGLE_FAVORITE, startToggleFavInEventSaga);
+  yield takeEvery(START_START_TOGGLE_FAVORITE, startToggleFavoriteSaga);
 }

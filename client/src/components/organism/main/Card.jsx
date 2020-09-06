@@ -5,9 +5,9 @@ import CardContent from '../../molecule/main/CardContent';
 import CardButtons from '../../molecule/main/CardButtons';
 
 export default function Card({ event }) {
-  const eventId = event.host._id;
+  const eventId = event._id;
   const cardRef = useRef(null);
-  const [isLoad, setIsLoad] = useState(null);
+  const [isLoad, setIsLoad] = useState(false);
 
   useEffect(() => {
     function loadCard() {

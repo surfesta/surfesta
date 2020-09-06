@@ -1,27 +1,35 @@
 @import '../../style/mediaQuery';
 
-.a11y-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  /* position이 absolute일때만 동작, 구형 browser에서 사용 */
-  clip-path: polygon(0 0, 0 0, 0 0, 0 0);
-}
 .cards-wrap {
   display: block;
   max-width: 1440px;
   margin: 0 auto;
-  .loading-text,
-  .error-text {
-    display: block;
-    font-size: 3rem;
-    text-align: center;
+  .error-img {
+    max-width: 500px;
+    margin: 0 auto;
+    // text-align: center;
+    img {
+      width: 100%;
+    }
   }
   .cards {
     display: flex;
     flex-flow: row wrap;
     padding: 20px 0px 30px 30px;
+  }
+}
+
+@include mobile {
+  .cards-wrap {
+    .error-img {
+      max-width: 300px;
+    }
+  }
+}
+@include tablet {
+  .cards-wrap {
+    .error-img {
+      max-width: 400px;
+    }
   }
 }

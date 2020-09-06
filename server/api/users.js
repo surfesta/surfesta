@@ -35,7 +35,7 @@ router.get('/:user_id', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const user = new User(req.body);
-    user.profile_img = user.gravatarImage;
+    if (!user.profile_img) user.profile_img = user.gravatarImage;
     const newUser = await user.save();
     res.json({ success: true, newUser });
   } catch (error) {

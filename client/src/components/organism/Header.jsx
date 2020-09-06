@@ -6,10 +6,15 @@ import { welcomeModal } from '../../redux/modules/modal';
 import PostEventButton from '../atom/header/PostEventButton';
 import { push } from 'connected-react-router';
 import './Header.scss';
+import useWindowWidth from '../../hooks/useWindowWidth';
+import MobileBurger from './MobileBurger';
+import { useState } from 'react';
 
 function Header() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
+  const width = useWindowWidth();
+  const [visible, setVisible] = useState(false);
 
   const handlePostEvent = useCallback(() => {
     if (user === null) {
@@ -23,13 +28,23 @@ function Header() {
     dispatch(push('/'));
   }, [dispatch]);
 
+  const handleDrawerClick = useCallback(() => {
+    setVisible(!visible);
+  }, [visible]);
   return (
     <header className="main-header">
       <div className="header-wrapper">
-        <PostEventButton handleClick={handlePostEvent} />
+        {width > 390 && <PostEventButton handleClick={handlePostEvent} />}
         <Logo onClick={handleLogoClick} />
-        <HeaderRight />
+        {width > 390 && <HeaderRight />}
+        {width < 390 && <MobileBurger handleClick={handleDrawerClick} />}
       </div>
+      {visible && width < 390 && (
+        <div>
+          <HeaderRight />
+          <PostEventButton />
+        </div>
+      )}
     </header>
   );
 }

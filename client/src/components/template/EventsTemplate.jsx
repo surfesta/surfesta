@@ -23,6 +23,10 @@ export default function EventsTemplate({ events, loading, error, getEvents }) {
         {error && (
           <div className="error-img">
             <img src={errorImg} alt="에러" />
+            {/* <span>
+              Illustration by <a href="undefined">Maria Shukshina</a> from{' '}
+              <a href="https://icons8.com/">Icons8</a>
+            </span> */}
           </div>
         )}
         <div className="cards">

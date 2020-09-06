@@ -1,7 +1,6 @@
 import React from 'react';
 
-export default function CardContent(props) {
-  const { event } = props;
+export default function CardContent({ event }) {
   const eventId = event._id;
   const thumbnail = event.thumbnail;
   const date = event.event_date;
@@ -34,10 +33,15 @@ export default function CardContent(props) {
           <span
             className="host-profile"
             style={
-              hostProfileImg && { backgroundImage: `url(${hostProfileImg})` }
+              hostProfileImg
+                ? { backgroundImage: `url(${hostProfileImg})` }
+                : { backgroundColor: '#3562ff' }
             }
           ></span>
-          <span className="host-name">{hostName}</span>
+          <span className="host-name">
+            {hostName}
+            {!hostName && '익명'}
+          </span>
         </p>
       </div>
     </div>

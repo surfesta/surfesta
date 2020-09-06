@@ -17,7 +17,6 @@
     "date-fns": "^2.16.0",
     "formik": "^2.1.5",
     "node-sass": "^4.14.1",
-    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-facebook-login": "^4.1.1",

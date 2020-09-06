@@ -10,7 +10,6 @@ export default function CardContent({ event }) {
   const hostProfileImg = event.host !== null && event.host.profile_img;
   const hostName = event.host !== null && event.host.username;
   const isOpen = event.isOnline;
-  console.log(hostProfileImg);
 
   return (
     <div className="cardContent-wrap">

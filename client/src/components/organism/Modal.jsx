@@ -80,11 +80,9 @@ export default function Modal() {
         imageUrl: profile_img,
       } = profileObj;
       const username = familyName + givenName;
-      console.log({ email, name: username, password, profile_img });
       dispatch(
         startSocialSDKLogin({ email, name: username, password, profile_img })
       );
-      console.log('?????');
     },
     [dispatch]
   );

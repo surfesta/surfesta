@@ -13,7 +13,7 @@ const FAIL = `${prefix}/FAIL`;
 const loginStart = () => ({
   type: START,
 });
-const loginSucess = (user) => ({
+const loginSuccess = (user) => ({
   type: SUCCESS,
   user,
 });
@@ -97,7 +97,7 @@ function* cookieCheckSaga() {
     yield delay(300);
     const { isAuth, user } = yield call(UserService.authenticate);
     if (!isAuth) throw new Error();
-    yield put(loginSucess(user));
+    yield put(loginSuccess(user));
   } catch (error) {
     yield put(loginFail(error));
   }
@@ -108,7 +108,7 @@ function* loginSaga(action) {
     yield delay(300);
     const { user } = yield call(UserService.login, action.payload);
     if (!user) throw new Error();
-    yield put(loginSucess(user));
+    yield put(loginSuccess(user));
     yield put(offModal());
   } catch (error) {
     yield put(loginFail(error));
@@ -129,7 +129,7 @@ function* signupSaga(action) {
       action.payload
     );
     if (!loginSuccess) throw new Error();
-    yield put(loginSucess(user));
+    yield put(loginSuccess(user));
     yield put(offModal());
   } catch (error) {
     yield put(loginFail(error));
@@ -138,20 +138,16 @@ function* signupSaga(action) {
 
 //facebook, google
 function* socialLoginSaga(action) {
-  console.log(action.payload);
   try {
     yield put(checkStart());
-    const { data, email } = yield call(
-      UserService.checkEmail,
-      action.payload.email
-    );
+    const { data, email } = yield call(UserService.checkEmail, action.payload);
     if (!data.emailCheck) throw new Error();
     yield put(checkSuccess(email));
     try {
       yield put(loginStart());
       const { user } = yield call(UserService.login, action.payload);
       if (!user) throw new Error();
-      yield put(loginSucess(user));
+      yield put(loginSuccess(user));
       yield put(offModal());
     } catch (error) {
       yield put(loginFail(error));
@@ -166,7 +162,7 @@ function* socialLoginSaga(action) {
     if (!success) throw new Error();
     const { user } = yield call(UserService.login, action.payload);
     if (!user) throw new Error();
-    yield put(loginSucess(user));
+    yield put(loginSuccess(user));
     yield put(offModal());
   }
 }

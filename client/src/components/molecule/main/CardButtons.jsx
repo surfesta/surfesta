@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { startToggleFavInEvent } from '../../../redux/modules/events';
+import { startToggleFavorite } from '../../../redux/modules/events';
 import { welcomeModal } from '../../../redux/modules/modal';
 import { IconButton } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -31,7 +31,7 @@ export default function CardButtons({ event }) {
     const favUserIds = !select
       ? [...userIds, userId]
       : [...userIds.filter((id) => id !== userId)];
-    dispatch(startToggleFavInEvent(eventId, favUserIds));
+    dispatch(startToggleFavorite(eventId, favUserIds));
   };
 
   const clickFav = () => {

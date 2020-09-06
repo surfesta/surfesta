@@ -1,6 +1,7 @@
-import { takeEvery, put, delay, call } from 'redux-saga/effects';
+import { takeEvery, put, delay, call, takeLatest } from 'redux-saga/effects';
 import UserService from '../../services/UserService';
-import { offModal } from './modal';
+import { offModal, setSignInModal } from './modal';
+import { checkStart, checkSuccess, checkFail } from './mailCheck';
 
 const prefix = 'surfesta-login';
 // action type
@@ -58,7 +59,17 @@ const START_COOKIE_CHECK_SAGA = 'START_COOKIE_CHECK_SAGA';
 const START_LOGIN_SAGA = 'START_LOGIN_SAGA';
 const START_LOGOUT_SAGA = 'START_LOGOUT_SAGA';
 const SIGN_UP_SAGA = 'SIGN_UP_SAGA';
-// const START_AUTHENTICATE_SAGA = 'START_AUTHEN_SAGA';
+const START_SOCIAL_SDK_LOGIN = 'START_SOCIAL_SDK_LOGIN';
+// const START_SOCIAL_SDK_SIGNUP = 'START_SOCIAL_SDK_SIGNUP';
+
+export const startSocialSDKLogin = (user) => ({
+  type: START_SOCIAL_SDK_LOGIN,
+  payload: user,
+});
+// export const startSocialSDKSignup = (platform, user) => ({
+//   type: START_SOCIAL_SDK_SIGNUP,
+//   payload: { user, platform },
+// });
 
 export const cookieCheckSagaActionCreator = () => ({
   type: START_COOKIE_CHECK_SAGA,
@@ -74,13 +85,13 @@ export const logoutSagaActionCreator = () => ({
   type: START_LOGOUT_SAGA,
 });
 
-export const SignupSagaActionCreator = (user) => ({
+export const signupSagaActionCreator = (user) => ({
   type: SIGN_UP_SAGA,
   payload: user,
 });
 
 //saga-reducer
-function* cookieCheckSaga(action) {
+function* cookieCheckSaga() {
   try {
     yield put(loginStart());
     yield delay(300);
@@ -103,18 +114,21 @@ function* loginSaga(action) {
     yield put(loginFail(error));
   }
 }
+
 function* signupSaga(action) {
   try {
     yield put(loginStart());
     yield delay(300);
-    const { success, newu } = yield call(UserService.register, action.payload);
+    const { success, newuser } = yield call(
+      UserService.register,
+      action.payload
+    );
     if (!success) throw new Error();
-    const { loginSuccess, user } = yield call(UserService.login, {
-      email: action.payload.email,
-      password: action.payload.password,
-    });
+    const { loginSuccess, user } = yield call(
+      UserService.login,
+      action.payload
+    );
     if (!loginSuccess) throw new Error();
-    console.log(user, newu);
     yield put(loginSucess(user));
     yield put(offModal());
   } catch (error) {
@@ -122,12 +136,44 @@ function* signupSaga(action) {
   }
 }
 
-// function* logoutSaga() {
-//   UserService.logout();
-// }
+//facebook, google
+function* socialLoginSaga(action) {
+  console.log(action.payload);
+  try {
+    yield put(checkStart());
+    const { data, email } = yield call(
+      UserService.checkEmail,
+      action.payload.email
+    );
+    if (!data.emailCheck) throw new Error();
+    yield put(checkSuccess(email));
+    try {
+      yield put(loginStart());
+      const { user } = yield call(UserService.login, action.payload);
+      if (!user) throw new Error();
+      yield put(loginSucess(user));
+      yield put(offModal());
+    } catch (error) {
+      yield put(loginFail(error));
+      throw new Error();
+    }
+  } catch (error) {
+    yield put(checkFail());
+    const { success, newuser } = yield call(
+      UserService.register,
+      action.payload
+    );
+    if (!success) throw new Error();
+    const { user } = yield call(UserService.login, action.payload);
+    if (!user) throw new Error();
+    yield put(loginSucess(user));
+    yield put(offModal());
+  }
+}
 
 export function* authSaga() {
   yield takeEvery(START_COOKIE_CHECK_SAGA, cookieCheckSaga);
   yield takeEvery(START_LOGIN_SAGA, loginSaga);
+  yield takeLatest(START_SOCIAL_SDK_LOGIN, socialLoginSaga);
   yield takeEvery(SIGN_UP_SAGA, signupSaga);
 }

@@ -4,11 +4,14 @@ import registerSchema from '../../../utils/RegisterSchema';
 import StyledErrorMessage from '../../atom/header/StyledErrorMessage';
 import './RegisterForm.scss';
 
-export default function RegisterForm({ handleRegister }) {
-  console.log(handleRegister);
+export default function RegisterForm({ handleRegister, presetValue }) {
   return (
     <Formik
-      initialValues={{ email: '', username: '', password: '' }}
+      initialValues={{
+        email: presetValue.email || '',
+        username: '',
+        password: '',
+      }}
       validationSchema={registerSchema}
       onSubmit={(values, { setSubmitting }) => {
         handleRegister(values);
@@ -17,12 +20,7 @@ export default function RegisterForm({ handleRegister }) {
     >
       {({ isSubmitting }) => (
         <Form>
-          <Field
-            name="email"
-            type="email"
-            className="signup-input"
-            placeholder="이메일"
-          />
+          <Field name="email" type="email" className="signup-input" disabled />
           <StyledErrorMessage name="email" />
           <Field
             name="username"

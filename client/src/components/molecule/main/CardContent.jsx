@@ -8,8 +8,8 @@ export default function CardContent(props) {
   const title = event.title;
   const price = event.price.toLocaleString();
   const isOnline = event.isOnline;
-  const hostProfileImg = event.host.profile_img;
-  const hostName = event.host.username;
+  const hostProfileImg = event.host && event.host.profile_img;
+  const hostName = event.host && event.host.username;
   const isOpen = event.isOnline;
 
   return (

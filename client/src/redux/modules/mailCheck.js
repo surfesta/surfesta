@@ -10,14 +10,14 @@ const SUCCESS = `${prefix}/SUCCESS`;
 const FAIL = `${prefix}/FAIL`;
 
 // action creator
-const checkStart = () => ({
+export const checkStart = () => ({
   type: START,
 });
-const checkSuccess = (email) => ({
+export const checkSuccess = (email) => ({
   type: SUCCESS,
   email,
 });
-const checkFail = (error) => ({
+export const checkFail = (error) => ({
   type: FAIL,
   error,
 });
@@ -48,7 +48,7 @@ export default function reducer(state = initialState, action) {
       return {
         loading: false,
         email: '',
-        error: action.email,
+        error: action.error,
       };
     default:
       return state;
@@ -72,11 +72,11 @@ function* checkSaga(action) {
     yield delay(300);
     const { data, email } = yield call(UserService.checkEmail, action.payload);
     if (!data.emailCheck) throw new Error();
-    yield put(checkSuccess(email));
-    yield put(setSignInModal());
+    yield put(checkSuccess(action.payload.email));
+    yield put(setSignInModal(action.payload.email));
   } catch (error) {
     yield put(checkFail(error));
-    yield put(setSignUpModal());
+    yield put(setSignUpModal(action.payload.email));
   }
 }
 

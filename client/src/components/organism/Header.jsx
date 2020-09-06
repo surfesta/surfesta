@@ -9,13 +9,15 @@ import './Header.scss';
 import useWindowWidth from '../../hooks/useWindowWidth';
 import MobileBurger from './MobileBurger';
 import { useState } from 'react';
+import { useContext } from 'react';
+import { ThemeContext } from '../../App';
 
 function Header() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
   const width = useWindowWidth();
   const [visible, setVisible] = useState(false);
-
+  const { theme } = useContext(ThemeContext);
   const handlePostEvent = useCallback(() => {
     if (user === null) {
       dispatch(welcomeModal('로그인 후 시작하기😉'));
@@ -32,7 +34,7 @@ function Header() {
     setVisible(!visible);
   }, [visible]);
   return (
-    <header className="main-header">
+    <header className="main-header" id={theme ? 'light' : 'dark'}>
       <div className="header-wrapper">
         {width > 390 && <PostEventButton handleClick={handlePostEvent} />}
         <Logo onClick={handleLogoClick} />

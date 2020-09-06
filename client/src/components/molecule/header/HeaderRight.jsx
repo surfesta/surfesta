@@ -1,14 +1,13 @@
-import React from 'react';
-import NightButton from '../../atom/header/NightButton';
+import React, { useState } from 'react';
 import FavButton from '../../atom/header/FavButton';
 import LoginButton from '../../atom/header/LoginButton';
-import DayButton from '../../atom/header/DayButton';
 import UserAvatar from '../../atom/header/UserAvatar';
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { welcomeModal } from '../../../redux/modules/modal';
 import { push } from 'connected-react-router';
 import './HeaderRight.scss';
+import ThemeIndicator from './ThemeIndicator';
 
 export default function HeaderRight() {
   const user = useSelector((state) => state.auth.user);
@@ -22,11 +21,14 @@ export default function HeaderRight() {
     dispatch(push('/my/profile'));
   }, [dispatch]);
 
+  const goFavorite = useCallback(() => {
+    dispatch(push('/my/event/liked'));
+  }, [dispatch]);
+
   return (
     <section className="header-right">
-      <DayButton />
-      <NightButton />
-      <FavButton />
+      <ThemeIndicator />
+      <FavButton onClick={goFavorite} />
       {user ? (
         <UserAvatar goProfile={goProfile} />
       ) : (

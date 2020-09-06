@@ -21,16 +21,18 @@ export const welcomeModal = (content = contentTypes.preLogin) => ({
   preLogin: true,
 });
 
-export const setSignInModal = () => ({
+export const setSignInModal = (email) => ({
   type: SIGN_IN,
   content: contentTypes.login,
   forLogin: true,
+  presetValue: { email },
 });
 
-export const setSignUpModal = () => ({
+export const setSignUpModal = (email) => ({
   type: SIGN_UP,
   content: contentTypes.signup,
   forSignUp: true,
+  presetValue: { email },
 });
 
 const initialState = {
@@ -41,12 +43,14 @@ const initialState = {
   forConfirm: false,
   forNoti: false,
   forSignUp: false,
+  presetValue: '',
 };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case WELCOME_IN:
       return {
+        ...state,
         isModalOn: true,
         content: action.content,
         preLogin: action.preLogin,
@@ -57,6 +61,7 @@ export default function reducer(state = initialState, action) {
       };
     case SIGN_IN:
       return {
+        ...state,
         isModalOn: true,
         content: action.content,
         forLogin: action.forLogin,
@@ -67,6 +72,7 @@ export default function reducer(state = initialState, action) {
       };
     case SIGN_UP:
       return {
+        presetValue: action.presetValue,
         isModalOn: true,
         content: action.content,
         forSignUp: action.forSignUp,

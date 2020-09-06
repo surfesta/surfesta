@@ -6,12 +6,13 @@
   font-weight: 400;
   font-family: 'noto sans kr';
 
-  padding: 2rem 2rem;
+  padding: 2rem 2rem 2rem 3rem;
   border-radius: 40px;
   width: 40%;
   margin: 1rem;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   transition: all 0.2s ease-in-out;
 
   &:hover {
@@ -26,13 +27,17 @@
     background-color: #4a6aaa;
     color: white;
   }
-
-  div {
-    text-align: center;
-    flex-grow: 1;
-  }
 }
 
+.social-icon {
+  &.fb {
+    transform: translate3d(7.2rem, 0.3rem, 0);
+  }
+  &.gg {
+    transform: translate3d(8rem, 0.3rem, 0);
+    font-size: 1.8rem;
+  }
+}
 #modal-divider {
   position: relative;
   div {

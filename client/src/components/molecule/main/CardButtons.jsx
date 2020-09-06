@@ -21,13 +21,13 @@ export default function CardButtons({ event }) {
     event.liked_users.map((user) => {
       user._id === userId && setSelect(true);
     });
-  }, []);
+  }, [userId]);
 
   const viewModal = useCallback(() => {
     dispatch(welcomeModal('이 기능은 회원만 가능해요 😉'));
   }, [dispatch]);
 
-  const toggleFavInEvent = () => {
+  const toggleFavorite = () => {
     const favUserIds = !select
       ? [...userIds, userId]
       : [...userIds.filter((id) => id !== userId)];
@@ -41,7 +41,7 @@ export default function CardButtons({ event }) {
     }
 
     setSelect(!select);
-    toggleFavInEvent();
+    toggleFavorite();
   };
 
   return (

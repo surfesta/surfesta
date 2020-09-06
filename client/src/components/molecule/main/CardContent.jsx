@@ -3,7 +3,9 @@ import React from 'react';
 export default function CardContent({ event }) {
   const eventId = event._id;
   const thumbnail = event.thumbnail;
-  const date = event.event_date;
+  const { end, start } = event.event_date;
+  const startDate = start.date;
+  const startTime = start.time;
   const title = event.title;
   const price = event.price.toLocaleString();
   const isOnline = event.isOnline;
@@ -20,7 +22,9 @@ export default function CardContent({ event }) {
         ></div>
       </div>
       <div className="content-wrap">
-        <p className="date">{JSON.stringify(date)} 오후 2:00</p>
+        <p className="date">
+          {start.date} {start.time}
+        </p>
         <h3>{title}</h3>
         <p className="price">
           <span>₩ </span>

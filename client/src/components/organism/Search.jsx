@@ -5,10 +5,10 @@ import './Search.scss';
 
 export default function Search() {
   return (
-    <div className='search-wrap'>
-      <div className='center'>
+    <div className="search-wrap">
+      <div className="center">
         <SearchInput />
-        <div className='search-btn'>
+        <div className="search-btn">
           <SearchButton />
         </div>
       </div>

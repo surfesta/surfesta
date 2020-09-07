@@ -35,7 +35,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "serve": "npx serve -s build -l 3000"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -52,10 +53,8 @@
       "last 1 safari version"
     ]
   },
-  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
-  "main": "index.js",
+  "description": "surfesta: event hosting platform",
   "devDependencies": {},
   "author": "",
-  "license": "ISC",
-  "proxy": "http://localhost:5000"
+  "license": "ISC"
 }

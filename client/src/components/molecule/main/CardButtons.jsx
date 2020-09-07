@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { startToggleFavorite } from '../../../redux/modules/events';
+import { startToggleFavInEvent } from '../../../redux/modules/events';
 import { welcomeModal } from '../../../redux/modules/modal';
 import { IconButton } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -27,11 +27,11 @@ export default function CardButtons({ event }) {
     dispatch(welcomeModal('이 기능은 회원만 가능해요 😉'));
   }, [dispatch]);
 
-  const toggleFavorite = () => {
+  const toggleFavInEvent = () => {
     const favUserIds = !select
       ? [...userIds, userId]
       : [...userIds.filter((id) => id !== userId)];
-    dispatch(startToggleFavorite(eventId, favUserIds));
+    dispatch(startToggleFavInEvent(eventId, favUserIds));
   };
 
   const clickFav = () => {
@@ -41,7 +41,7 @@ export default function CardButtons({ event }) {
     }
 
     setSelect(!select);
-    toggleFavorite();
+    toggleFavInEvent();
   };
 
   return (

@@ -257,3 +257,22 @@
     }
   }
 }
+@media (max-width: 1440px) and (min-width: 758px) {
+  .create-event-wrap {
+    .w1440-container {
+      width: 100%;
+    }
+    .create-event-form {
+      form {
+        .event-sec {
+          .event-content {
+            width: 45%;
+          }
+          .input-box {
+            width: 50%;
+          }
+        }
+      }
+    }
+  }
+}

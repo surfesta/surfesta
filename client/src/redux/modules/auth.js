@@ -60,16 +60,6 @@ const START_LOGIN_SAGA = 'START_LOGIN_SAGA';
 const START_LOGOUT_SAGA = 'START_LOGOUT_SAGA';
 const SIGN_UP_SAGA = 'SIGN_UP_SAGA';
 const START_SOCIAL_SDK_LOGIN = 'START_SOCIAL_SDK_LOGIN';
-// const START_SOCIAL_SDK_SIGNUP = 'START_SOCIAL_SDK_SIGNUP';
-
-export const startSocialSDKLogin = (user) => ({
-  type: START_SOCIAL_SDK_LOGIN,
-  payload: user,
-});
-// export const startSocialSDKSignup = (platform, user) => ({
-//   type: START_SOCIAL_SDK_SIGNUP,
-//   payload: { user, platform },
-// });
 
 export const cookieCheckSagaActionCreator = () => ({
   type: START_COOKIE_CHECK_SAGA,
@@ -87,6 +77,11 @@ export const logoutSagaActionCreator = () => ({
 
 export const signupSagaActionCreator = (user) => ({
   type: SIGN_UP_SAGA,
+  payload: user,
+});
+
+export const startSocialSDKLogin = (user) => ({
+  type: START_SOCIAL_SDK_LOGIN,
   payload: user,
 });
 
@@ -170,6 +165,6 @@ function* socialLoginSaga(action) {
 export function* authSaga() {
   yield takeEvery(START_COOKIE_CHECK_SAGA, cookieCheckSaga);
   yield takeEvery(START_LOGIN_SAGA, loginSaga);
-  yield takeLatest(START_SOCIAL_SDK_LOGIN, socialLoginSaga);
+  yield takeEvery(START_SOCIAL_SDK_LOGIN, socialLoginSaga);
   yield takeEvery(SIGN_UP_SAGA, signupSaga);
 }

@@ -6,6 +6,11 @@ const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const port = process.env.MONGO_URI || 5000;
 
+process.env.NODE_ENV =
+  process.env.NODE_ENV && process.env.NODE_ENV == 'production'
+    ? 'production'
+    : 'development';
+
 // database config
 const config = require('./config');
 const mongoose = require('mongoose');
@@ -34,6 +39,17 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(fileUpload());
 app.use('/api/v1', api);
+
+if (process.env.NODE_ENV == 'production') {
+  console.log('Production Mode');
+  app.use(express.static('../client/build'));
+} else if (process.env.NODE_ENV == 'development') {
+  console.log('Development Mode');
+}
+
+app.get('/', function (req, res) {
+  res.sendFile(path.join('../client/build'));
+});
 
 app.post('/upload', (req, res) => {
   if (req.files === null) {

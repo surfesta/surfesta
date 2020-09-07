@@ -7,17 +7,26 @@ import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { history } from './index';
 import CreateEvent from './pages/CreateEvent';
+import useThemeWithLocalStorage from './hooks/useThemeWithLocalStorage';
+
+export const ThemeContext = React.createContext();
 
 function App() {
+  const [theme, toggleTheme] = useThemeWithLocalStorage();
+
   return (
-    <ConnectedRouter history={history}>
-      <Switch>
-        <Route path="/createEvent" component={CreateEvent} />
-        <Route path="/event/:event_id" component={EventDetail} />
-        <Route path="/my" component={MyPage} />
-        <Route exact path="/" component={Home} />
-      </Switch>
-    </ConnectedRouter>
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      <>
+        <ConnectedRouter history={history}>
+          <Switch>
+            <Route path="/createEvent" component={CreateEvent} />
+            <Route path="/event/:event_id" component={EventDetail} />
+            <Route path="/my" component={MyPage} />
+            <Route exact path="/" component={Home} />
+          </Switch>
+        </ConnectedRouter>
+      </>
+    </ThemeContext.Provider>
   );
 }
 

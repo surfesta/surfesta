@@ -6,6 +6,7 @@ const prefix = 'surfesta-events';
 // action type
 const START = `${prefix}/START`;
 const SUCCESS = `${prefix}/SUCCESS`;
+const SUCCESSTOGGLE = `${prefix}/SUCCESSTOGGLE`;
 const FAIL = `${prefix}/FAIL`;
 
 // action creator
@@ -18,6 +19,11 @@ export const success = (events) => ({
   events,
 });
 
+export const successToggle = (message) => ({
+  type: SUCCESSTOGGLE,
+  message,
+});
+
 export const fail = (error) => ({
   type: FAIL,
   error,
@@ -28,6 +34,7 @@ const initialState = {
   events: [],
   loading: false,
   error: null,
+  message: null,
 };
 
 // reducer
@@ -44,6 +51,11 @@ export default function reducer(state = initialState, action) {
         events: action.events,
         loading: false,
         error: null,
+      };
+    case SUCCESSTOGGLE:
+      return {
+        ...state,
+        message: action.message,
       };
     case FAIL:
       return {
@@ -83,11 +95,10 @@ function* startGetEventsSaga() {
     yield put(fail(error));
   }
 }
-function* startToggleFavInEventSaga(action) {
+function* startToggleFavoriteSaga(action) {
   try {
-    yield put(start());
-    yield delay(100);
-    yield call(EventService.toggleFavorite, action.payload);
+    const message = yield call(EventService.toggleFavorite, action.payload);
+    yield put(successToggle(message));
   } catch (error) {
     yield put(fail(error));
   }
@@ -95,5 +106,5 @@ function* startToggleFavInEventSaga(action) {
 
 export function* eventsSaga() {
   yield takeEvery(START_GET_EVENTS, startGetEventsSaga);
-  yield takeEvery(START_START_TOGGLE_FAVORITE, startToggleFavInEventSaga);
+  yield takeEvery(START_START_TOGGLE_FAVORITE, startToggleFavoriteSaga);
 }

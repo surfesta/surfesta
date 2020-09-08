@@ -42,7 +42,33 @@ body.dark {
       }
     }
   }
-  // create Events page
-
-  //
+  .create-event-wrap {
+    background: #2c3035;
+    .create-event-form {
+      h1 {
+        color: #ccc;
+      }
+      form {
+        .eventform-title {
+          color: #bebebe;
+        }
+        .event-sec {
+          color: #fff;
+          .event-content {
+            color: #fff;
+          }
+        }
+        .upload-type {
+          color: #fff;
+        }
+        .time-check {
+          label,
+          input,
+          button {
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
 }

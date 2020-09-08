@@ -1,73 +1,7 @@
-#map {
-  height: 400px;
-  margin-top: 30px;
-}
-#description {
-  font-family: Roboto;
-  font-size: 15px;
-  font-weight: 300;
-}
-.gmnoprint {
-  display: none;
-}
-#infowindow-content .title {
-  font-weight: bold;
-}
-
-#infowindow-content {
-  display: none;
-}
-
-#map #infowindow-content {
-  display: inline;
-}
-.gm-fullscreen-control {
-  top: 10px !important;
-}
-.gm-iv-address,
-.gm-iv-container.gm-iv-small-container {
-  height: 80px;
-}
-.pac-card {
-  margin: 10px 10px 0 0;
-  border-radius: 2px 0 0 2px;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  outline: none;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-  background-color: #fff;
-  font-family: Roboto;
-}
-
-#pac-container {
-  padding: 12px 0;
-  margin-right: 12px;
-}
-
-.pac-controls label {
-  font-family: Roboto;
-  font-size: 13px;
-  font-weight: 300;
-}
-
-#pac-input {
-  background-color: #fff;
-  font-family: Roboto;
-  font-size: 15px;
-  font-weight: 300;
-  padding: 0 11px 0 13px;
-  text-overflow: ellipsis;
-  padding: 2.2rem 2.1rem 2.3rem 3.5rem;
-}
-
-#pac-input:focus {
-  border-color: #4d90fe;
-}
-
-#title {
-  color: #fff;
-  background-color: #4d90fe;
-  font-size: 25px;
-  font-weight: 500;
-  padding: 6px 12px;
+.create-event-form {
+  iframe {
+    width: 100%;
+    height: 400px;
+    margin-top: 30px;
+  }
 }

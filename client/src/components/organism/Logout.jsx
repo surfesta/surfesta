@@ -6,7 +6,6 @@ import UserService from '../../services/UserService';
 import { push } from 'connected-react-router';
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
 
 function LogoutSection() {
   const dispatch = useDispatch();

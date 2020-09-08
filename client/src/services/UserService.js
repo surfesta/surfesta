@@ -1,5 +1,5 @@
 import axios from 'axios';
-const URL = '/api/v1/users';
+const URL = 'http://localhost:5000/api/v1/users';
 
 export default class UserService {
   static async authenticate() {

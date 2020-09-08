@@ -1,0 +1,45 @@
+body.dark {
+  // backgrounds
+  .main {
+    background-color: #1b1d21;
+  }
+  .center input {
+    background-color: #1b1d21;
+  }
+  .search-wrap {
+    background-color: #1b1d21;
+  }
+  .cards {
+    background-color: #1b1d21;
+    .card-wrap {
+      background-color: #2c3035 !important;
+      & * :not(h3, .cardButtons-wrap) {
+        color: #949494 !important;
+      }
+
+      &:hover {
+        h3 {
+          color: #cccccc !important;
+        }
+      }
+      // card
+      .content-wrap {
+        border-bottom: 1px #4b4b4b solid;
+        h3 {
+          color: #bebebe;
+          transition: color 0.2s ease-in-out;
+        }
+      }
+
+      // modals
+      .selectList-wrap ul {
+        background-color: #2c3035;
+      }
+
+      //btn & icons
+      .search-btn {
+        color: dimgray;
+      }
+    }
+  }
+}

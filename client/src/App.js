@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import './App.css';
+import './style/theme.scss';
 import Home from './pages/Home';
 import EventDetail from './pages/EventDetail';
 import MyPage from './pages/MyPage';
@@ -13,6 +14,10 @@ export const ThemeContext = React.createContext();
 
 function App() {
   const [theme, toggleTheme] = useThemeWithLocalStorage();
+
+  useEffect(() => {
+    document.body.classList.toggle('dark');
+  }, [theme]);
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>

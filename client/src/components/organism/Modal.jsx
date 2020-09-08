@@ -61,7 +61,7 @@ export default function Modal() {
       dispatch(
         startSocialSDKLogin({
           email,
-          name: username,
+          username,
           password,
           profile_img: picture.data.url,
         })
@@ -80,9 +80,7 @@ export default function Modal() {
         imageUrl: profile_img,
       } = profileObj;
       const username = familyName + givenName;
-      dispatch(
-        startSocialSDKLogin({ email, name: username, password, profile_img })
-      );
+      dispatch(startSocialSDKLogin({ email, username, password, profile_img }));
     },
     [dispatch]
   );

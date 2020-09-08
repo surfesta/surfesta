@@ -37,10 +37,10 @@ export default function CardButtons({ event }) {
     const favUserIds = !select
       ? [...userIds, userId]
       : [...userIds.filter((id) => id !== userId)];
-    console.log(favUserIds);
+    // console.log('함수실행', select);
     dispatch(startToggleFavInEvent(eventId, favUserIds));
   };
-
+  console.log('렌더');
   const toggleFavInUser = useCallback(() => {
     const favEventIds = !select
       ? [...eventIds, eventId]
@@ -49,6 +49,8 @@ export default function CardButtons({ event }) {
     dispatch(startToggleFavInUser(userId, favEventIds));
   }, [user]);
 
+  // console.log('렌더', select);
+
   const clickFav = () => {
     if (user === null) {
       viewModal();
@@ -56,7 +58,7 @@ export default function CardButtons({ event }) {
     }
 
     setSelect(!select);
-
+    // console.log('클릭', select);
     toggleFavInEvent();
     toggleFavInUser();
   };

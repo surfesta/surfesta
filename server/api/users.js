@@ -46,18 +46,18 @@ router.post('/', async (req, res, next) => {
 
 // UPDATE THE User
 router.patch('/:user_id', async (req, res, next) => {
-  try {
-    const result = await User.update(
-      { _id: req.params.user_id },
-      { $set: req.body }
-    );
-    if (!result.n) return res.status(404).json({ error: 'User not found' });
-    res.json({ success: true });
-  } catch (error) {
-    res.status(500).json({ error: 'db failure' });
-    next();
-  }
-  ``;
+  User.update(
+    { _id: req.params.user_id },
+    { $set: req.body },
+    async (err, output) => {
+      if (err) res.status(500).json({ error: 'db failure' });
+      const user = await User.findOne({ _id: req.params.user_id });
+      if (!output.n) return res.status(404).json({ error: 'User not found' });
+      res.json({
+        user,
+      });
+    }
+  );
 });
 
 // Authentificate User

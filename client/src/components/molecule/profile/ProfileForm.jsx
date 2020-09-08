@@ -8,15 +8,26 @@ import PhoneNumber from '../../atom/profile/PhoneNumber';
 
 function ProfileDetails() {
   const user = useSelector((state) => state.auth.user);
-  console.log(user);
+  const userEmail = user && user.email;
+  const userName = user && user.username;
+  const userPhoneNumber = user && user.phone_number;
+  const userPassword = user && user.password;
 
   const [values, setValues] = useState({
-    email: user && user.email,
-    username: user && user.username,
-    phone_number: user && user.phone_number,
-    password: user && user.password,
+    email: userEmail,
+    username: userName,
+    phone_number: userPhoneNumber,
+    password: userPassword,
   });
+  console.log(userName);
 
+  const handleChange = (e) => {
+    const { email, username, phone_number, password } = e.target;
+    setValues({
+      ...values,
+    });
+  };
+  // console.log();
   // const [inputText, setInputText] = useState(values.username);
 
   // const handleChange = (e) => {
@@ -26,11 +37,10 @@ function ProfileDetails() {
   //   });
   // };
 
-  const handleChange = ({ target }) => {
-    console.log(target);
-    // value.current[target.name].value = target.value;
-    // value.current[target.name].isChange = !value.current[target.name].isChange;
-  };
+  // const { value } = e.target.current.value;
+  // console.log(value);
+  // value.current[target.name].value = target.value;
+  // value.current[target.name].isChange = !value.current[target.name].isChange;
 
   return (
     <div>

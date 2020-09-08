@@ -4,7 +4,7 @@ export default function useThemeWithLocalStorage() {
   const [theme, setTheme] = useState(true);
 
   useEffect(() => {
-    const storedTheme = localStorage.getItem('user-preferred-theme');
+    const storedTheme = localStorage.getItem('user-preferred-theme') || 'light';
     setTheme(storedTheme);
   }, []);
 

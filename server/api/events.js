@@ -3,14 +3,21 @@ const router = express.Router();
 
 const Event = require('../models/Event');
 
+// GET ALL Event
 router.get('/', (req, res) => {
+  // req.params.type ? "online" / "offline" 기준으로 일부만 전달하는 로직
   Event.find()
+    .sort({ createdAt: 'desc' })
     .populate('host')
     .populate('enlisted_users')
     .populate('liked_users')
-    .exec((err, event) => {
+    .exec((err, events) => {
       if (err) return res.status(500).send({ error: 'db failure' });
-      res.json(event);
+      if (req.query.type === 'online')
+        events = events.filter((event) => event.isOnline);
+      else if (req.query.type === 'offline')
+        events = events.filter((event) => !event.isOnline);
+      res.json(events);
     });
 });
 
@@ -52,11 +59,14 @@ router.patch('/:event_id', (req, res) => {
   Event.update(
     { _id: req.params.event_id },
     { $set: req.body },
-    (err, output) => {
+    async (err, output) => {
       if (err) res.status(500).json({ error: 'db failure' });
-      console.log(output);
+      const event = await Event.findOne({ _id: req.params.event_id });
       if (!output.n) return res.status(404).json({ error: 'Event not found' });
-      res.json({ success: true });
+      res.json({
+        success: true,
+        event,
+      });
     }
   );
 });

@@ -17,7 +17,7 @@ function Header() {
   const user = useSelector((state) => state.auth.user);
   const width = useWindowWidth();
   const [visible, setVisible] = useState(false);
-  const { theme } = useContext(ThemeContext);
+
   const handlePostEvent = useCallback(() => {
     if (user === null) {
       dispatch(welcomeModal('로그인 후 시작하기😉'));
@@ -33,8 +33,9 @@ function Header() {
   const handleDrawerClick = useCallback(() => {
     setVisible(!visible);
   }, [visible]);
+
   return (
-    <header className="main-header" id={theme ? 'light' : 'dark'}>
+    <header className="main-header">
       <div className="header-wrapper">
         {width > 390 && <PostEventButton handleClick={handlePostEvent} />}
         <Logo onClick={handleLogoClick} />

@@ -19,4 +19,16 @@ export default class EventService {
     });
     return data;
   }
+
+  static async toggleFavInUser({ userId, liked_events }) {
+    // console.log('추가하는 좋아하는 이벤트 ', liked_events);
+    const { data } = await axios({
+      method: 'PATCH',
+      url: `${USER_URL}/${userId}`,
+      data: {
+        liked_events,
+      },
+    });
+    return data;
+  }
 }

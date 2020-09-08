@@ -72,6 +72,7 @@ export default function reducer(state = initialState, action) {
 //saga-action
 const START_GET_EVENTS = `${prefix}/START_GET_EVENTS`;
 const START_START_TOGGLE_FAV_IN_EVENT = `${prefix}/START_TOGGLE_FAV_IN_EVENT`;
+const START_START_TOGGLE_FAV_IN_USER = `${prefix}/START_TOGGLE_FAV_IN_USER`;
 
 export const startGetEvents = () => ({
   type: START_GET_EVENTS,
@@ -81,6 +82,13 @@ export const startToggleFavInEvent = (eventId, favUserIds) => ({
   payload: {
     eventId,
     liked_users: favUserIds,
+  },
+});
+export const startToggleFavInUser = (userId, favEventIds) => ({
+  type: START_START_TOGGLE_FAV_IN_USER,
+  payload: {
+    userId,
+    liked_events: favEventIds,
   },
 });
 
@@ -103,8 +111,17 @@ function* startToggleFavInEventSaga(action) {
     yield put(fail(error));
   }
 }
+function* startToggleFavInUserSaga(action) {
+  try {
+    const message = yield call(EventService.toggleFavInUser, action.payload);
+    yield put(successToggle(message));
+  } catch (error) {
+    yield put(fail(error));
+  }
+}
 
 export function* eventsSaga() {
   yield takeEvery(START_GET_EVENTS, startGetEventsSaga);
   yield takeEvery(START_START_TOGGLE_FAV_IN_EVENT, startToggleFavInEventSaga);
+  yield takeEvery(START_START_TOGGLE_FAV_IN_USER, startToggleFavInUserSaga);
 }

@@ -20,7 +20,7 @@ mongoose.connect(config.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
-  useUnifiedTopology: true,
+  useFindAndModify: false,
 });
 
 const api = require('./api');

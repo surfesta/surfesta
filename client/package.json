@@ -56,5 +56,6 @@
   "description": "surfesta: event hosting platform",
   "devDependencies": {},
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "proxy": "http://localhost:5000"
 }

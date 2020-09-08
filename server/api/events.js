@@ -59,11 +59,14 @@ router.patch('/:event_id', (req, res) => {
   Event.update(
     { _id: req.params.event_id },
     { $set: req.body },
-    (err, output) => {
+    async (err, output) => {
       if (err) res.status(500).json({ error: 'db failure' });
-      console.log(output);
+      const event = await Event.findOne({ _id: req.params.event_id });
       if (!output.n) return res.status(404).json({ error: 'Event not found' });
-      res.json({ success: true });
+      res.json({
+        success: true,
+        event,
+      });
     }
   );
 });

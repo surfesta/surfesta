@@ -114,17 +114,16 @@ function* signupSaga(action) {
   try {
     yield put(loginStart());
     yield delay(300);
-    const { success, newuser } = yield call(
+    const { success, newUser } = yield call(
       UserService.register,
       action.payload
     );
-    if (!success) throw new Error();
     const { loginSuccess, user } = yield call(
       UserService.login,
       action.payload
     );
-    if (!loginSuccess) throw new Error();
     yield put(loginSuccess(user));
+    console.log(user);
     yield put(offModal());
   } catch (error) {
     yield put(loginFail(error));

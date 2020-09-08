@@ -13,8 +13,8 @@ import { useContext } from 'react';
 import { ThemeContext } from '../../App';
 
 function Header() {
-  const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
   const width = useWindowWidth();
   const [visible, setVisible] = useState(false);
 

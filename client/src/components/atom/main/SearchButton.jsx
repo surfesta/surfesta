@@ -4,8 +4,8 @@ import SearchIcon from '@material-ui/icons/Search';
 
 export default function SearchButton() {
   return (
-    <IconButton aria-label='search'>
-      <SearchIcon />
+    <IconButton aria-label="search">
+      <SearchIcon htmlColor="dimgrey" />
     </IconButton>
   );
 }

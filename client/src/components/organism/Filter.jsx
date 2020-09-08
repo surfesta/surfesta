@@ -15,10 +15,10 @@ export default function Filter() {
           setSelected(!selected);
         }}
       >
-        <span ref={selectRef}>Our Events </span>{' '}
-        <i role="img" aria-label="아이콘">
+        <span ref={selectRef}>Our Events </span>
+        <span role="img" aria-label="아이콘">
           🎉
-        </i>
+        </span>
         <span className="more">
           <ExpandMoreIcon className={selected ? 'arrow rotataion' : 'arrow'} />
         </span>

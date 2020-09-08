@@ -4,7 +4,10 @@ export default Yup.object().shape({
   email: Yup.string()
     .email('이메일형식이 아닙니다')
     .required('필수 입력 사항입니다'),
-  username: Yup.string().min(2).max(20).required(`필수 입력 사항입니다`),
+  username: Yup.string()
+    .min(2)
+    .max(20)
+    .required(`최소 2자 이상 필수 입력 사항입니다`),
   phone_number: Yup.number()
     .integer()
     .positive()

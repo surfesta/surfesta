@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function EventOnlineCheck({ toggle }) {
+export default function EventOnlineCheck({ toggle, Ref }) {
   return (
     <>
       <h2 className="eventform-title">온라인 여부</h2>
@@ -13,7 +13,7 @@ export default function EventOnlineCheck({ toggle }) {
         </div>
         <div className="input-box label-box">
           <input
-            required
+            ref={Ref}
             onChange={toggle}
             type="checkbox"
             defaultChecked={false}

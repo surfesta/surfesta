@@ -16,6 +16,7 @@
     "connected-react-router": "^6.8.0",
     "date-fns": "^2.16.0",
     "formik": "^2.1.5",
+    "google-maps-react": "^2.0.6",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -57,5 +58,5 @@
   "devDependencies": {},
   "author": "",
   "license": "ISC",
-  "proxy": "http://ec2-15-164-210-226.ap-northeast-2.compute.amazonaws.com:5000"
+  "proxy": "http://localhost:5000"
 }

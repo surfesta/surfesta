@@ -3,7 +3,9 @@ import React from 'react';
 function ProfileBtn(props) {
   return (
     <div>
-      <button className="profile-btn">{props.name}</button>
+      <button className="profile-btn" onClick={props.handleClick}>
+        {props.name}
+      </button>
     </div>
   );
 }

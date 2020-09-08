@@ -1,5 +1,5 @@
 import axios from 'axios';
-const URL = 'http://localhost:5000/api/v1/users';
+const URL = '/api/v1/users';
 
 export default class UserService {
   static async authenticate() {
@@ -27,7 +27,7 @@ export default class UserService {
         password,
       },
     });
-    console.log(data);
+    console.log('login service return', data);
     return data;
   }
 
@@ -37,8 +37,23 @@ export default class UserService {
       url: `${URL}/`,
       data: user,
     });
+    console.log(data);
     return data;
   }
 
-  static async logout() {}
+  static async logout() {
+    const { data } = await axios({
+      method: 'POST',
+      url: `${URL}/logout`,
+    });
+    return data;
+  }
+
+  static async deactivate(user) {
+    const result = await axios({
+      method: 'DELETE',
+      url: `${URL}/${user._id}`,
+    });
+    return result.status;
+  }
 }

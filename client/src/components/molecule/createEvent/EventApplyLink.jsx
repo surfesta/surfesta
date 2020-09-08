@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function EventApplyLink() {
+export default function EventApplyLink({ Ref, preventDefault }) {
   return (
     <>
       <h2 className="eventform-title">이벤트 신청 링크</h2>
@@ -10,9 +10,10 @@ export default function EventApplyLink() {
         </div>
         <div className="input-box">
           <input
-            required
+            ref={Ref}
             type="text"
             placeholder="https://myawesomeevent.com/buytickets"
+            onKeyDown={preventDefault}
           />
         </div>
       </div>

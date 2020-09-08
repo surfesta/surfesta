@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function EventMaxPerson() {
+export default function EventMaxPerson({ Ref, preventDefault }) {
   return (
     <>
       <h2 className="eventform-title">참석 가능 인원수</h2>
@@ -10,9 +10,10 @@ export default function EventMaxPerson() {
         </div>
         <div className="input-box">
           <input
-            required
+            ref={Ref}
             type="text"
             placeholder="최대 참석 가능 인원수를 입력하세요."
+            onKeyDown={preventDefault}
           />
         </div>
       </div>

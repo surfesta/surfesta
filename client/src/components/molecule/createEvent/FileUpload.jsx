@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 // import Message from "./Message";
 import axios from 'axios';
+import { useEffect } from 'react';
 
-export default function FileUpload() {
+export default function FileUpload({ Ref }) {
   const [file, setFile] = useState('');
   const [filename, setFilename] = useState('Choose File');
   const [uploadedFile, setUploadedFile] = useState({});
@@ -57,7 +58,6 @@ export default function FileUpload() {
       }
     }
   };
-
   return (
     <>
       <input
@@ -66,6 +66,7 @@ export default function FileUpload() {
         id="customFile"
         onChange={onChange}
         accept="image/jpeg, image/png, image/jpg"
+        ref={Ref}
       />
       <label className="custom-file-label" htmlFor="customFile">
         {uploadedFile ? (

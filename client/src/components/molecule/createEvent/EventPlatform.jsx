@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function EventPlatform() {
+export default function EventPlatform({ Ref, preventDefault }) {
   return (
     <>
       <h2 className="eventform-title" id="on-online">
@@ -11,7 +11,12 @@ export default function EventPlatform() {
           <p>참가자들이 이용할 플랫폼을 입력해주세요.</p>
         </div>
         <div className="input-box">
-          <input required type="text" placeholder="Zoom 혹은 Youtube live 등" />
+          <input
+            type="text"
+            placeholder="Zoom 혹은 Youtube live 등"
+            ref={Ref}
+            onKeyDown={preventDefault}
+          />
         </div>
       </div>
     </>

@@ -34,7 +34,7 @@ const initialState = {
   events: [],
   loading: false,
   error: null,
-  message: null,
+  user: [],
 };
 
 // reducer
@@ -55,7 +55,7 @@ export default function reducer(state = initialState, action) {
     case SUCCESSTOGGLE:
       return {
         ...state,
-        message: action.message,
+        user: action.user,
       };
     case FAIL:
       return {
@@ -105,16 +105,16 @@ function* startGetEventsSaga() {
 }
 function* startToggleFavInEventSaga(action) {
   try {
-    const message = yield call(EventService.toggleFavInEvent, action.payload);
-    yield put(successToggle(message));
+    const user = yield call(EventService.toggleFavInEvent, action.payload);
+    yield put(successToggle(user));
   } catch (error) {
     yield put(fail(error));
   }
 }
 function* startToggleFavInUserSaga(action) {
   try {
-    const message = yield call(EventService.toggleFavInUser, action.payload);
-    yield put(successToggle(message));
+    const user = yield call(EventService.toggleFavInUser, action.payload);
+    yield put(successToggle(user));
   } catch (error) {
     yield put(fail(error));
   }

@@ -17,9 +17,9 @@ export default function CardButtons({ event }) {
   const buttonRef = useRef();
   const user = useSelector((state) => state.auth.user);
   const eventId = event._id;
-  const userIds = event.liked_users.map((user) => user._id);
+  const likedUserIds = event.liked_users.map((user) => user._id);
   const userId = user && user._id;
-  const eventIds = user && user.liked_events;
+  let likedEventIds = user === null ? [] : user.liked_events;
 
   const dispatch = useDispatch();
 
@@ -33,21 +33,33 @@ export default function CardButtons({ event }) {
     dispatch(welcomeModal('이 기능은 회원만 가능해요 😉'));
   }, [dispatch]);
 
-  const toggleFavInEvent = () => {
-    const favUserIds = !select
-      ? [...userIds, userId]
-      : [...userIds.filter((id) => id !== userId)];
-    // console.log('함수실행', select);
-    dispatch(startToggleFavInEvent(eventId, favUserIds));
-  };
-  console.log('렌더');
-  const toggleFavInUser = useCallback(() => {
-    const favEventIds = !select
-      ? [...eventIds, eventId]
-      : [...eventIds.filter((id) => id !== eventId)];
+  console.log('렌더링 유저아이디: ', userId);
+  const toggleFavInEvent = useCallback(() => {
+    let favUserIds = [];
+    if (!select) {
+      favUserIds = [...likedUserIds, userId];
+    } else {
+      favUserIds = [...likedUserIds.filter((id) => id !== userId)];
+    }
 
-    dispatch(startToggleFavInUser(userId, favEventIds));
-  }, [user]);
+    // console.log('toggleFavInEvent', favUserIds);
+    // dispatch(startToggleFavInEvent(eventId, favUserIds));
+  }, [select, userId]);
+
+  // let favEventIds = [];
+  const toggleFavInUser = useCallback(() => {
+    if (!select) {
+      likedEventIds = [...likedEventIds, eventId];
+    } else {
+      likedEventIds = [...likedEventIds.filter((id) => id !== eventId)];
+    }
+    console.log('toggleFavInUser', likedEventIds, 'userId', userId);
+    // const favEventIds = !select
+    //   ? [...likedEventIds, eventId]
+    //   : [...likedEventIds.filter((id) => id !== eventId)];
+    // console.log('toggleFavInUser', favEventIds);
+    dispatch(startToggleFavInUser(userId, likedEventIds));
+  }, [select]);
 
   // console.log('렌더', select);
 

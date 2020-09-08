@@ -12,7 +12,7 @@ const rootReducer = (history) =>
     auth,
     mailCheck,
     events,
-    users,
+    // users,
     router: connectRouter(history),
   });
 export default rootReducer;

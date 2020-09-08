@@ -40,10 +40,10 @@ export default class UserService {
     return data;
   }
 
-  static async getUsers() {
-    const { data } = await axios.get(URL);
-    return data;
-  }
+  // static async getUsers() {
+  //   const { data } = await axios.get(URL);
+  //   return data;
+  // }
 
   static async logout() {}
 }

@@ -8,17 +8,18 @@ import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
 import './PreLoginForm.scss';
 import { checkSagaActionCreator } from '../../../redux/modules/mailCheck';
-import {
-  signupSagaActionCreator,
-  loginSagaActionCreator,
-} from '../../../redux/modules/auth';
-import { useDispatch, useSelector } from 'react-redux';
 
 export default function PreLoginForm({
   handleEmailCheck,
   handleFBLogin,
   handleGGLogin,
 }) {
+  React.useEffect(() => {
+    document.querySelector('.gg-button').style = {};
+    document.querySelector('.gg-button div').style = {};
+    document.querySelector('.gg-button span').style = {};
+  }, []);
+
   return (
     <Formik
       initialValues={{
@@ -31,24 +32,28 @@ export default function PreLoginForm({
       }}
     >
       <Form>
-        <GoogleLogin
-          clientId="184465750767-gu3d86rn56bsj87dnsj7m3mpakma0f1a.apps.googleusercontent.com"
-          buttonText="Login"
-          onSuccess={handleGGLogin}
-          onFailure={console.log}
-          cookiePolicy={'single_host_origin'}
-          className="social-login-button google"
-        />
-        <FacebookAppLogo className="social-icon fb" />
-        <FacebookLogin
-          appId="3347258178701289"
-          autoLoad={false}
-          scope="public_profile,email"
-          fields="name,email,picture"
-          callback={handleFBLogin}
-          textButton="facebook"
-          cssClass="social-login-button facebook"
-        />
+        <div className="social-login-button google">
+          <GoogleLogin
+            clientId="184465750767-gu3d86rn56bsj87dnsj7m3mpakma0f1a.apps.googleusercontent.com"
+            buttonText="Google"
+            onSuccess={handleGGLogin}
+            onFailure={console.log}
+            cookiePolicy={'single_host_origin'}
+            className="gg-button"
+          />
+        </div>
+        <div className="social-login-button facebook">
+          <FacebookAppLogo className="social-icon fb" />
+          <FacebookLogin
+            appId="3347258178701289"
+            autoLoad={false}
+            scope="public_profile,email"
+            fields="name,email,picture"
+            callback={handleFBLogin}
+            textButton="facebook"
+            cssClass="fb-button"
+          />
+        </div>
         <div id="modal-divider">
           <div>또는</div>
           <div></div>

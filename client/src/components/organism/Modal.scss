@@ -3,13 +3,16 @@
 @import '../../style/mediaQuery';
 
 #modal-container {
-  background-color: rgba(37, 39, 43, 0.8);
+  background-color: rgba(37, 39, 43, 0.5);
   width: 100vw;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  transition: background-color 3s ease-in-out;
 }
+
 #modal-container * {
   box-sizing: border-box;
 }

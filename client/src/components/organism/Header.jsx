@@ -12,19 +12,19 @@ import { useState } from 'react';
 
 function Header() {
   const user = useSelector((state) => state.auth.user);
-  const curHistory = useSelector((state) => state.router.location.pathname);
-  const dispatch = useDispatch();
+  const location = useSelector((state) => state.router.location.pathname);
   const width = useWindowWidth();
   const [visible, setVisible] = useState(false);
+  const dispatch = useDispatch();
 
   const handlePostEvent = useCallback(() => {
-    if (curHistory === '/createEvent') return;
+    if (location === '/createEvent') return;
     if (user === null) {
       dispatch(welcomeModal('로그인 후 시작하기😉'));
       return;
     }
     dispatch(push('/createEvent'));
-  }, [dispatch, user, curHistory]);
+  }, [dispatch, user, location]);
 
   const handleLogoClick = useCallback(() => {
     dispatch(push('/'));

@@ -20,18 +20,11 @@ export default function Modal() {
 
   useEffect(() => {
     if (modal.isModalOn) {
-      document.querySelector('body').style.overflow = 'hidden';
+      window.scrollTo(0, 0);
+      document.body.style.overflow = 'hidden';
     }
-    return () => {
-      document.querySelector('body').style.overflow = 'inherit';
-    };
+    return () => (document.body.style.overflow = 'inherit');
   }, [modal.isModalOn]);
-  // 모달 상태가 Notification알림 이라면, 알아서 꺼짐
-  if (modal.forNoti) {
-    setTimeout(() => {
-      dispatch(offModal());
-    }, 150);
-  }
 
   // 모달 밖을 클릭하면 모달이 꺼집니다
   const dismissModal = useCallback(
@@ -44,15 +37,12 @@ export default function Modal() {
   // 모달은 redux-store에 저장된 상태에 따라 다른 UI가 됩니다(다른 자식컴포넌트를 보여줍니다)
 
   const handleEmailCheck = useCallback(
-    (values) => {
-      dispatch(checkSagaActionCreator(values));
-    },
+    (values) => dispatch(checkSagaActionCreator(values)),
+
     [dispatch]
   );
   const handleRegister = useCallback(
-    (values) => {
-      dispatch(signupSagaActionCreator(values));
-    },
+    (values) => dispatch(signupSagaActionCreator(values)),
     [dispatch]
   );
 
@@ -103,12 +93,6 @@ export default function Modal() {
               handleRegister={handleRegister}
               presetValue={modal.presetValue}
             />
-          )}
-          {modal.forConfirm && (
-            <>
-              <button>확인</button>
-              <button>취소</button>
-            </>
           )}
           {(modal.preLogin || modal.forLogin || modal.forSignUp) && (
             <WaveSurf />

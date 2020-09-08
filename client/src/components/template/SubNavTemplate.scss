@@ -1,17 +1,18 @@
 @import '../../style/mixin';
-@import '../../style/mediaQuery';
 @import '../../style/variables';
-@import '../../style/common.scss';
 
 .sub-nav-section {
-  width: 500px;
+  width: 700px;
   display: flex;
+  text-align: center;
   margin: 0 auto;
+
   div {
-    @include font-normal;
-    border: 1px solid orangered;
+    @include font(2rem, $font-primary-color, $weight: 700);
+    border: 0.5px solid #aaaaaa;
     width: 100%;
     height: 100px;
-    // margin-right: 10px;
+    padding-top: 30px;
+    cursor: pointer;
   }
 }

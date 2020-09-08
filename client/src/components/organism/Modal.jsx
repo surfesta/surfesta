@@ -8,7 +8,10 @@ import { offModal } from '../../redux/modules/modal';
 import { useCallback } from 'react';
 import WaveSurf from '../molecule/modal/WaveSurf';
 import { checkSagaActionCreator } from '../../redux/modules/mailCheck';
-import { SignupSagaActionCreator } from '../../redux/modules/auth';
+import {
+  signupSagaActionCreator,
+  startSocialSDKLogin,
+} from '../../redux/modules/auth';
 import './Modal.scss';
 
 export default function Modal() {
@@ -48,7 +51,36 @@ export default function Modal() {
   );
   const handleRegister = useCallback(
     (values) => {
-      dispatch(SignupSagaActionCreator(values));
+      dispatch(signupSagaActionCreator(values));
+    },
+    [dispatch]
+  );
+
+  const handleFBLogin = useCallback(
+    ({ email, name: username, id: password, picture }) => {
+      dispatch(
+        startSocialSDKLogin({
+          email,
+          username,
+          password,
+          profile_img: picture.data.url,
+        })
+      );
+    },
+    [dispatch]
+  );
+
+  const handleGGLogin = useCallback(
+    ({ profileObj }) => {
+      const {
+        email,
+        familyName,
+        givenName,
+        googleId: password,
+        imageUrl: profile_img,
+      } = profileObj;
+      const username = familyName + givenName;
+      dispatch(startSocialSDKLogin({ email, username, password, profile_img }));
     },
     [dispatch]
   );
@@ -59,10 +91,19 @@ export default function Modal() {
         <div id="modal">
           <h1 className="modal-headline">{modal.content}</h1>
           {modal.preLogin && (
-            <PreLoginForm handleEmailCheck={handleEmailCheck} />
+            <PreLoginForm
+              handleEmailCheck={handleEmailCheck}
+              handleFBLogin={handleFBLogin}
+              handleGGLogin={handleGGLogin}
+            />
           )}
           {modal.forLogin && <LoginForm />}
-          {modal.forSignUp && <RegisterForm handleRegister={handleRegister} />}
+          {modal.forSignUp && (
+            <RegisterForm
+              handleRegister={handleRegister}
+              presetValue={modal.presetValue}
+            />
+          )}
           {modal.forConfirm && (
             <>
               <button>확인</button>

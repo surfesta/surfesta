@@ -10,13 +10,51 @@
   border-radius: $radius;
   background: #fff;
   overflow: hidden;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  transition: all 0.3s;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 5px 8px #00000010;
+  }
+  .loading-wrap {
+    background-color: #f2f3f6;
+    padding-top: 50px;
+    padding-bottom: 300px;
+    text-align: center;
+    span {
+      display: inline-block;
+      width: 5rem;
+      height: 5rem;
+      border: 0.3rem solid rgba(0, 0, 0, 0.1);
+      border-radius: 50%;
+      border-top-color: $point-color;
+      animation: spin 1s ease-in-out infinite;
+      -webkit-animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+      }
+    }
+    @-webkit-keyframes spin {
+      to {
+        transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+      }
+    }
+  }
   .cardContent-wrap {
     .thumbnail-wrap {
       .thumbnail {
         width: 100%;
         padding-bottom: 66.66%;
         background: {
-          color: $point-color;
           size: cover;
         }
       }
@@ -62,7 +100,7 @@
       }
       .host-name {
         @include font(1.3rem);
-        padding: 3px 0 0 8px;
+        padding-left: 8px;
       }
     }
   }
@@ -73,6 +111,11 @@
     svg {
       font-size: 2rem;
       color: $font-tertiary-color;
+    }
+    .favoriteButton-wrap {
+      &.act svg {
+        color: $point-color;
+      }
     }
   }
 }

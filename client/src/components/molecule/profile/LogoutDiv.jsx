@@ -9,7 +9,7 @@ function LogoutDiv(props) {
         <span>곧 다시 돌아오실 거죠?</span>
       </div>
       <div className="logout-btn-div">
-        <ProfileBtn name="로그아웃 하기" />
+        <ProfileBtn name="로그아웃 하기" handleClick={props.handleClick} />
       </div>
     </div>
   );

@@ -9,22 +9,22 @@ import './Header.scss';
 import useWindowWidth from '../../hooks/useWindowWidth';
 import MobileBurger from './MobileBurger';
 import { useState } from 'react';
-import { useContext } from 'react';
-import { ThemeContext } from '../../App';
 
 function Header() {
-  const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
+  const location = useSelector((state) => state.router.location.pathname);
   const width = useWindowWidth();
   const [visible, setVisible] = useState(false);
+  const dispatch = useDispatch();
 
   const handlePostEvent = useCallback(() => {
+    if (location === '/createEvent') return;
     if (user === null) {
       dispatch(welcomeModal('로그인 후 시작하기😉'));
       return;
     }
     dispatch(push('/createEvent'));
-  }, [dispatch, user]);
+  }, [dispatch, user, location]);
 
   const handleLogoClick = useCallback(() => {
     dispatch(push('/'));

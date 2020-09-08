@@ -20,13 +20,18 @@ mongoose.connect(config.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
-  useUnifiedTopology: true,
+  useFindAndModify: false,
 });
 
 const api = require('./api');
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: '*',
+    credentials: true,
+  })
+);
 app.use(helmet());
 app.use(morgan('tiny'));
 app.use(cookieParser());

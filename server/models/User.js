@@ -5,7 +5,7 @@ const moment = require('moment');
 const md5 = require('crypto-js/md5');
 
 const saltRounds = 10;
-const TOKEN_EXP_HOUR = 1;
+const TOKEN_EXP_HOUR = 3;
 
 const userSchema = mongoose.Schema(
   {

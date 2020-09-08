@@ -7,8 +7,9 @@
   font-family: 'noto sans kr';
 
   padding: 2rem 2rem 2rem 3rem;
-  border-radius: 40px;
+  border-radius: 40px !important;
   width: 40%;
+  height: 30%;
   margin: 1rem;
   display: inline-flex;
   align-items: center;
@@ -22,22 +23,47 @@
   &.google {
     background-color: white;
     color: #646568;
+    .gg-button {
+      width: 100%;
+      background-color: transparent;
+      display: flex;
+      align-items: center;
+      span {
+        flex-grow: 1;
+        text-align: center;
+      }
+    }
   }
   &.facebook {
     background-color: #4a6aaa;
     color: white;
+    .fb-button {
+      @include font-normal;
+      font-weight: 400;
+      font-family: 'noto sans kr';
+
+      color: white;
+      background-color: inherit;
+    }
   }
 }
 
 .social-icon {
   &.fb {
-    transform: translate3d(7.2rem, 0.3rem, 0);
+    transform: translate3d(-2rem, 0, 0);
   }
   &.gg {
     transform: translate3d(8rem, 0.3rem, 0);
     font-size: 1.8rem;
+    margin-left: 4rem;
   }
 }
+
+.signup-input[name='email'] {
+  color: rgb(37, 37, 37);
+  background-color: rgb(158, 158, 158);
+}
+
 #modal-divider {
   position: relative;
   div {

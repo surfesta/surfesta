@@ -3,6 +3,7 @@ const router = express.Router();
 
 const User = require('../models/User');
 const auth = require('../middlewares/auth');
+const mongoose = require('mongoose');
 
 router.get('/', async (req, res, next) => {
   try {
@@ -26,7 +27,7 @@ router.get('/:user_id', async (req, res, next) => {
     if (!user) return res.status(404).json({ error: 'User not found' });
     res.json(user);
   } catch (error) {
-    if (err) return res.status(500).json({ error: err });
+    res.status(500).json({ error });
     next(error);
   }
 });
@@ -54,6 +55,7 @@ router.patch('/:user_id', async (req, res, next) => {
       const user = await User.findOne({ _id: req.params.user_id });
       if (!output.n) return res.status(404).json({ error: 'User not found' });
       res.json({
+        success: true,
         user,
       });
     }
@@ -64,6 +66,7 @@ router.patch('/:user_id', async (req, res, next) => {
 router.post('/auth', auth, (req, res) => {
   res.status(200).json({
     user: req.user._doc,
+    _id: req.user._id,
     isAdmin: req.user.role === 0 ? false : true,
     isAuth: true,
   });
@@ -107,8 +110,17 @@ router.post('/login/password', async (req, res, next) => {
 
       user.generateToken((err, user) => {
         if (err) return res.status(400).send(err);
-        res.cookie('surf_authExp', user.tokenExp);
-        res.cookie('surf_auth', user.token);
+        const oneDayToSeconds = 24 * 60 * 60;
+        res.cookie('surf_authExp', user.tokenExp, {
+          maxAge: oneDayToSeconds,
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'production' ? true : false,
+        });
+        res.cookie('surf_auth', user.token, {
+          maxAge: oneDayToSeconds,
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'production' ? true : false,
+        });
         res.status(200).json({
           loginSuccess: true,
           user,
@@ -120,7 +132,8 @@ router.post('/login/password', async (req, res, next) => {
   }
 });
 
-router.get('/logout', (req, res) => {
+router.post('/logout', auth, (req, res) => {
+  console.log(req.user._id);
   User.findOneAndUpdate(
     { _id: req.user._id },
     { token: '', tokenExp: '' },
@@ -132,6 +145,7 @@ router.get('/logout', (req, res) => {
     }
   );
 });
+
 // DELETE User
 router.delete('/:user_id', (req, res) => {
   User.remove({ _id: req.params.user_id }, (err) => {

@@ -1,126 +1,6 @@
-//PANTONE
-// $Cerulean: #9bb7d4;
-// $FuchsiaRose: #c74375;
-// $TrueRed: #bf1932;
-// $AquaSkyl: #7bc4c4;
-// $Tigerlily: #e2583e;
-// $BlueTurquoise: #53b0ae;
-// $SandDollar: #decdbe;
-// $ChiliPepper: #9b1b30;
-// $BlueIris: #5a5b9f;
-// $Mimosa: #f0c05a;
-// $Turquoise: #45b5aa;
-// $Honeysuckle: #d94f70;
-// $TangerineTango: #dd4124;
-// $Emeraldl: #009473;
-// $RadiantOrchid: #b163a3;
-// $Marsala: #955251;
-// $RoseQuartz: #f7cac9;
-// $Serenity: #92a8d1;
-// $Greenery: #88b04b;
-// $UltraViolet: #5f4b8b;
-// $LivingCoral: #ff6f61;
-// $ClassicBlue: #0f4c81;
+@import '../style/mixin';
+@import '../style/mediaQuery';
 
-$checkboxColor: #b4b4b5;
-$labelColor: #454b58;
-
-@mixin wrapSet {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: #f2f3f6;
-  margin-top: 60px;
-}
-
-@mixin titleFontSet($size: 2.4rem, $weight: normal) {
-  color: $labelColor;
-  font-size: $size;
-  font-weight: $weight;
-}
-@mixin contentFontSet {
-  color: #717174;
-}
-@mixin placeholderSet {
-  color: #a0a0a2;
-}
-
-.a11y-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  clip-path: polygon(0 0, 0 0, 0 0);
-}
-@mixin BgSet($path, $size, $pos: center) {
-  background: url($path);
-  background-size: $size;
-  background-position: $pos;
-  background-repeat: no-repeat;
-}
-@mixin Flex($justify: center, $align: center) {
-  display: flex;
-  justify-content: $justify;
-  align-items: $align;
-}
-@mixin Grid($gap, $auto, $columns, $rows, $aria) {
-  display: grid;
-  grid-gap: $gap;
-  grid-auto-flow: $auto;
-  grid-template-columns: $columns;
-  grid-template-rows: $rows;
-  grid-area: $aria;
-}
-@mixin GridChild($column, $row) {
-  grid-column: $column;
-  grid-row: $row;
-}
-@mixin VirtualFill($pos: absolute) {
-  content: '';
-  position: $pos;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-@mixin Virtual($pos: absolute) {
-  content: '';
-  position: $pos;
-}
-@mixin Size($width: 100%, $height: 100%) {
-  width: $width;
-  height: $height;
-}
-@mixin Anim($duration, $timing, $delay: 0) {
-  $name: anim-#{unique-id()};
-
-  @keyframes #{$name} {
-    @content;
-  }
-
-  animation-name: $name;
-  animation-duration: $duration;
-  animation-timing-function: $timing;
-  animation-delay: $delay;
-}
-
-@mixin LinearGradient($deg, $color...) {
-  background: linear-gradient($deg, $color);
-}
-// @include Anim(1s, linear) {
-//   0% {
-//     left: -100%;
-//   }
-//   100% {
-//     left: 100%;
-//   }
-// } 키프레임 사용법
-
-html::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-}
 .create-event-wrap {
   box-sizing: border-box;
   @include wrapSet;
@@ -131,7 +11,7 @@ html::-webkit-scrollbar {
     padding: 0;
     box-sizing: border-box;
   }
-  .w1300-container {
+  .w1440-container {
     width: 1440px;
     margin: 0 auto;
     padding: 0 30px;
@@ -146,19 +26,39 @@ html::-webkit-scrollbar {
       margin-bottom: 4rem;
     }
     form {
+      overflow: hidden;
       .custom-file-label {
-        display: block;
+        position: relative;
         width: 68rem;
         height: 45.53rem;
         background: #c4c4c4;
         border-radius: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        @include Flex();
         overflow: hidden;
+        &::before {
+          content: '';
+          position: absolute;
+          width: 3.2rem;
+          height: 3.2rem;
+          margin: auto;
+          background: url('../img/camera.svg') no-repeat;
+          background-size: cover;
+          background-position: center;
+          z-index: 3;
+        }
+        &::after {
+          content: '';
+          position: absolute;
+          width: 6.5rem;
+          height: 6.5rem;
+          background: #fff;
+          border-radius: 50%;
+          z-index: 2;
+        }
       }
       .custom-file-input {
-        display: none;
+        position: absolute;
+        visibility: hidden;
       }
       .custom-thumbnail {
         width: 100%;
@@ -186,7 +86,6 @@ html::-webkit-scrollbar {
           margin-top: 10rem;
           width: 18rem;
           height: 6.5rem;
-          padding: 20px;
           font-size: 1.5rem;
           background: rgba(255, 255, 255, 0.05);
           border: 2px solid #3465ef;
@@ -213,7 +112,15 @@ html::-webkit-scrollbar {
           @include contentFontSet;
         }
         .input-box {
+          position: relative;
           width: 68rem;
+          .err-text {
+            position: absolute;
+            top: -24px;
+            left: 4px;
+            color: #e41818;
+            font-size: 1.3rem;
+          }
           .yes {
             display: none;
           }
@@ -264,7 +171,7 @@ html::-webkit-scrollbar {
             span {
               margin-left: 1.6rem;
               font-size: 1.5rem;
-              line-height: 3.2rem;
+              line-height: 2.6rem;
               user-select: none;
             }
           }
@@ -296,6 +203,7 @@ html::-webkit-scrollbar {
           input[type='text'],
           input[type='date'],
           input[type='time'] {
+            outline: none;
             border: 0;
             width: 100%;
             height: 6.5rem;
@@ -305,6 +213,9 @@ html::-webkit-scrollbar {
             padding: 2.2rem 2.1rem 2.3rem 3.5rem;
             &::placeholder {
               @include placeholderSet;
+            }
+            &.err {
+              border: 2px solid #e41818;
             }
           }
           input[type='text'] {
@@ -318,6 +229,72 @@ html::-webkit-scrollbar {
           input[type='time'] {
             flex: 1;
             margin-left: 30px;
+          }
+        }
+      }
+    }
+  }
+}
+@include mobile {
+  .create-event-wrap {
+    .w1440-container {
+      width: 100%;
+    }
+    .create-event-form {
+      padding: 0;
+      h1 {
+        margin-bottom: 0;
+      }
+      form {
+        .custom-file-label {
+          width: 100%;
+        }
+        .create-event-submit {
+          margin-top: -50px;
+          margin-bottom: 25px;
+        }
+        .event-sec {
+          flex-wrap: wrap;
+          .event-content {
+            width: 100%;
+            margin-bottom: 3rem;
+          }
+          .input-box {
+            width: 100%;
+            .custom-file-label {
+              width: 100%;
+            }
+            .time-check {
+              flex-wrap: wrap;
+              .MuiFormControl-root {
+                width: 100%;
+                &:nth-child(2) {
+                  margin-left: 0;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 1440px) and (min-width: 758px) {
+  .create-event-wrap {
+    .w1440-container {
+      width: 100%;
+    }
+    .create-event-form {
+      form {
+        .custom-file-label {
+          width: 100%;
+        }
+        .event-sec {
+          .event-content {
+            width: 45%;
+          }
+          .input-box {
+            width: 50%;
           }
         }
       }

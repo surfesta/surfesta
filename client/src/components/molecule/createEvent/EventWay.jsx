@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function EventWay() {
+export default function EventWay({ Ref }) {
   return (
     <>
       <h2 className="eventform-title" id="on-online">
@@ -12,7 +12,7 @@ export default function EventWay() {
         </div>
         <div className="input-box">
           <input
-            required
+            ref={Ref}
             type="text"
             placeholder="시작 당일 2시간 전에 개별 이메일로 Zoom 링크를 발송할 예정입니다."
           />

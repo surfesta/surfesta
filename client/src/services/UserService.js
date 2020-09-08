@@ -1,5 +1,5 @@
 import axios from 'axios';
-const URL = 'http://localhost:5000/api/v1/users';
+const URL = '/api/v1/users';
 
 export default class UserService {
   static async authenticate() {
@@ -27,7 +27,7 @@ export default class UserService {
         password,
       },
     });
-    console.log(data);
+    console.log('login service return', data);
     return data;
   }
 
@@ -37,68 +37,23 @@ export default class UserService {
       url: `${URL}/`,
       data: user,
     });
+    console.log(data);
     return data;
   }
 
-  static async getUsers() {
+  static async logout() {
     const { data } = await axios({
-      method: 'GET',
-      url: `${URL}/`,
+      method: 'POST',
+      url: `${URL}/logout`,
     });
     return data;
   }
 
-  static async getUser({ userId }) {
-    const { data } = await axios({
-      method: 'GET',
-      url: `${URL}/${userId}`,
+  static async deactivate(user) {
+    const result = await axios({
+      method: 'DELETE',
+      url: `${URL}/${user._id}`,
     });
-    return data;
+    return result.status;
   }
-
-  static async logout() {}
 }
-// import axios from 'axios';
-// const URL = '/api/v1/users';
-
-// export default class UserService {
-//   static async authenticate() {
-//     const { data } = await axios.post(`${URL}/auth`);
-//     console.log(`User authentication done: ${data.isAuth}`);
-//     return data;
-//   }
-
-//   static async checkEmail({ email }) {
-//     const { data } = await axios({
-//       method: 'POST',
-//       url: `${URL}/login`,
-//       data: {
-//         email,
-//       },
-//     });
-//     return { data, email };
-//   }
-//   static async login({ email, password }) {
-//     const { data } = await axios({
-//       method: 'POST',
-//       url: `${URL}/login/password`,
-//       data: {
-//         email,
-//         password,
-//       },
-//     });
-//     console.log(data);
-//     return data;
-//   }
-
-//   static async register(user) {
-//     const { data } = await axios({
-//       method: 'POST',
-//       url: `${URL}/`,
-//       data: user,
-//     });
-//     return data;
-//   }
-
-//   static async logout() {}
-// }

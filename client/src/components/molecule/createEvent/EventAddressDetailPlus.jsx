@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function EventAddressDetailPlus() {
+export default function EventAddressDetailPlus({ Ref, preventDefault }) {
   return (
     <>
       <h2 className="eventform-title" id="off-online">
@@ -12,9 +12,10 @@ export default function EventAddressDetailPlus() {
         </div>
         <div className="input-box">
           <input
-            required
             type="text"
             placeholder="주차는 인근 주차장에서 가능합니다."
+            ref={Ref}
+            onKeyDown={preventDefault}
           />
         </div>
       </div>

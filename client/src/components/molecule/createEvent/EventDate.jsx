@@ -5,19 +5,25 @@ import {
   KeyboardTimePicker,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
-import { useEffect } from 'react';
-import { useRef } from 'react';
+export default function EventDate({ startDateRef, endDateRef }) {
+  const [startDate, setStartDate] = React.useState(new Date());
+  const [startTime, setStartTime] = React.useState(new Date());
+  const [endDate, setEndDate] = React.useState(new Date());
+  const [endTime, setEndTime] = React.useState(new Date());
 
-export default function EventDate() {
-  const $startDate = useRef(null);
-  const $endDate = useRef(null);
+  function handleStartDate(date) {
+    setStartDate(date);
+  }
+  function handleStartTime(date) {
+    setStartTime(date);
+  }
+  function handleEndDate(date) {
+    setEndDate(date);
+  }
+  function handleEndTime(date) {
+    setEndTime(date);
+  }
 
-  const [selectedDate, setSelectedDate] = React.useState(new Date());
-
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-  };
-  useEffect(() => {}, []);
   return (
     <>
       <h2 className="eventform-title">이벤트 날짜 및 시간</h2>
@@ -26,18 +32,17 @@ export default function EventDate() {
           <p>이벤트가 진행되는 날짜와 시간을 입력해주세요.</p>
         </div>
         <div className="input-box">
-          <div className="time-check" ref={$startDate}>
-            {/* <input required type="date" /> */}
+          <div className="time-check" ref={startDateRef}>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardDatePicker
                 disableToolbar
                 variant="inline"
-                format="MM/dd/yyyy"
+                format="yyyy년MM월dd일"
                 margin="normal"
                 id="date-picker-inline"
                 label="행사 시작일"
-                value={selectedDate}
-                onChange={handleDateChange}
+                value={startDate}
+                onChange={handleStartDate}
                 KeyboardButtonProps={{
                   'aria-label': 'change date',
                 }}
@@ -46,26 +51,26 @@ export default function EventDate() {
                 margin="normal"
                 id="time-picker"
                 label="행사 시작 시간"
-                value={selectedDate}
-                onChange={handleDateChange}
+                format="a hh:mm"
+                value={startTime}
+                onChange={handleStartTime}
                 KeyboardButtonProps={{
                   'aria-label': 'change time',
                 }}
               />
             </MuiPickersUtilsProvider>
-            {/* <input required type="time" /> */}
           </div>
-          <div className="time-check" ref={$endDate}>
+          <div className="time-check" ref={endDateRef}>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardDatePicker
                 disableToolbar
                 variant="inline"
-                format="MM/dd/yyyy"
+                format="yyyy년MM월dd일"
                 margin="normal"
                 id="date-picker-inline"
                 label="행사 종료일"
-                value={selectedDate}
-                onChange={handleDateChange}
+                value={endDate}
+                onChange={handleEndDate}
                 KeyboardButtonProps={{
                   'aria-label': 'change date',
                 }}
@@ -74,8 +79,9 @@ export default function EventDate() {
                 margin="normal"
                 id="time-picker"
                 label="행사 종료 시간"
-                value={selectedDate}
-                onChange={handleDateChange}
+                format="a hh:mm"
+                value={endTime}
+                onChange={handleEndTime}
                 KeyboardButtonProps={{
                   'aria-label': 'change time',
                 }}

@@ -1,6 +1,5 @@
 import React, { useRef, useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { GoogleApiWrapper } from 'google-maps-react';
 import EventDislose from '../../molecule/createEvent/EventDisclose';
 import EventTitle from '../../molecule/createEvent/EventTitle';
 import EventOnlineCheck from '../../molecule/createEvent/EventOnlineCheck';
@@ -112,8 +111,8 @@ const EventForm = () => {
           time: endTimeValue,
         },
       },
-      // thumbnail:
-      //   'https://cdn.pixabay.com/photo/2020/09/01/06/00/sky-5534319_960_720.jpg',
+      thumbnail:
+        'https://content.surfit.io/thumbs/image/KYVg3/3A11j/21452631605f55bf06f0c00.png/cover-center-1x.webp',
       content: publicRef.curToast,
       isOnline: publicRef.curIsOnline,
       online_platform: onlineRef.curPlatform,
@@ -314,7 +313,4 @@ const EventForm = () => {
   );
 };
 
-export default GoogleApiWrapper({
-  apiKey: 'AIzaSyB_BJhQ4nBvi7cPxi8DRGJepYp4MbdtRcQ',
-  language: 'Korean',
-})(EventForm);
+export default EventForm;

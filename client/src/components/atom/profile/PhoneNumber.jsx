@@ -1,10 +1,14 @@
-import React from "react";
+import React from 'react';
 
-export default function PhoneNumber() {
+export default function PhoneNumber({ user }) {
   return (
     <div className="form-div">
       <label>전화번호</label>
-      <input />
+      <input
+        type="text"
+        name="phone-number"
+        value={user && user.phone_number}
+      />
     </div>
   );
 }

@@ -15,10 +15,14 @@ import { ThemeContext } from '../../App';
 function Header() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
+  const curHistory = useSelector((state) => state.router.location.pathname);
   const width = useWindowWidth();
   const [visible, setVisible] = useState(false);
 
   const handlePostEvent = useCallback(() => {
+    if (curHistory === '/createEvent') {
+      return;
+    }
     if (user === null) {
       dispatch(welcomeModal('로그인 후 시작하기😉'));
       return;

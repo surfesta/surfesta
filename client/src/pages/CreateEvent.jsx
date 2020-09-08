@@ -3,12 +3,10 @@ import './createevent.scss';
 import EventForm from '../components/template/createEvent/EventForm';
 import useAuth from '../utils/useAuth';
 import HeaderTemplate from '../components/template/HeaderTemplate';
-import { Prompt } from 'react-router-dom';
 import RouteLeavingGuard from '../components/organism/createEvent/RouteLeavingGuard';
 
 export default function CreateEvent({ history }) {
   // useAuth();
-  //쿠키 읽어들이는 로직
   const [whenState, updateWhenState] = useState(true);
   return (
     <>
@@ -19,9 +17,6 @@ export default function CreateEvent({ history }) {
         }}
         shouldBlockNavigation={(location) => {
           if (whenState) {
-            // if (location.pathname === 'signup') {
-            //     return true
-            //   }
             return true;
           }
           return false;

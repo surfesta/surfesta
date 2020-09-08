@@ -21,13 +21,7 @@ const EventForm = () => {
       e.preventDefault();
     }
   });
-  const [placeState, setPlaceState] = useState({
-    icon: '',
-    name: '',
-    address: '',
-    lat: 0,
-    lng: 0,
-  });
+  const [placeState, setPlaceState] = useState('');
   const user = useSelector((state) => state.auth.user);
   const [onlineCheck, setOnlineCheck] = useState(false);
   const [modalCheck, setModalCheck] = useState(false);
@@ -118,7 +112,8 @@ const EventForm = () => {
           time: endTimeValue,
         },
       },
-      thumbnail: '',
+      // thumbnail:
+      //   'https://cdn.pixabay.com/photo/2020/09/01/06/00/sky-5534319_960_720.jpg',
       content: publicRef.curToast,
       isOnline: publicRef.curIsOnline,
       online_platform: onlineRef.curPlatform,
@@ -132,6 +127,7 @@ const EventForm = () => {
       cur_count: 0, // 참석 인원
 
       enlisted_users_id: [], // 해당 이벤트 참여신청을 한 유저들의 배열
+      liked_users: [], // 해당 이벤트 찜한 유저들의 배열
     };
 
     if (isNaN(payload.max_count) || payload.max_count === 0) {
@@ -158,7 +154,7 @@ const EventForm = () => {
         inputComplete($addressDetailPlus);
     }
 
-    if (!publicRef.curIsOnline && payload.location.details.name.trim() === '') {
+    if (!publicRef.curIsOnline && payload.location.details.trim() === '') {
       inputErr($addressDetail);
     } else if (!publicRef.curIsOnline) {
       if ($addressDetail.current.classList.contains('err'))
@@ -185,7 +181,7 @@ const EventForm = () => {
     if (
       (publicRef.curIsOnline && payload.online_platform.trim() === '') ||
       (!publicRef.curIsOnline && payload.location.name.trim() === '') ||
-      (!publicRef.curIsOnline && payload.location.details.name.trim() === '') ||
+      (!publicRef.curIsOnline && payload.location.details.trim() === '') ||
       (!publicRef.curIsOnline && payload.location.info.trim() === '') ||
       payload.title.trim() === '' ||
       publicRef.curMaxPerson.trim() === '' ||
@@ -210,7 +206,7 @@ const EventForm = () => {
   function PostPayload() {
     setModalCheck(false);
     console.log(eventPayload);
-    // axios.post('/api/v1/events', payload);
+    axios.post('/api/v1/events', eventPayload);
     setClearPost(true);
   }
   function goHome() {

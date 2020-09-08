@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 // import Message from "./Message";
 import axios from 'axios';
+import { useEffect } from 'react';
 
 export default function FileUpload({ Ref }) {
   const [file, setFile] = useState('');
@@ -57,7 +58,6 @@ export default function FileUpload({ Ref }) {
       }
     }
   };
-
   return (
     <>
       <input

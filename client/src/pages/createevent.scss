@@ -28,18 +28,37 @@
     form {
       overflow: hidden;
       .custom-file-label {
-        display: block;
+        position: relative;
         width: 68rem;
         height: 45.53rem;
         background: #c4c4c4;
         border-radius: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        @include Flex();
         overflow: hidden;
+        &::before {
+          content: '';
+          position: absolute;
+          width: 3.2rem;
+          height: 3.2rem;
+          margin: auto;
+          background: url('../img/camera.svg') no-repeat;
+          background-size: cover;
+          background-position: center;
+          z-index: 3;
+        }
+        &::after {
+          content: '';
+          position: absolute;
+          width: 6.5rem;
+          height: 6.5rem;
+          background: #fff;
+          border-radius: 50%;
+          z-index: 2;
+        }
       }
       .custom-file-input {
-        display: none;
+        position: absolute;
+        visibility: hidden;
       }
       .custom-thumbnail {
         width: 100%;
@@ -227,6 +246,9 @@
         margin-bottom: 0;
       }
       form {
+        .custom-file-label {
+          width: 100%;
+        }
         .create-event-submit {
           margin-top: -50px;
           margin-bottom: 25px;
@@ -264,6 +286,9 @@
     }
     .create-event-form {
       form {
+        .custom-file-label {
+          width: 100%;
+        }
         .event-sec {
           .event-content {
             width: 45%;

@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   startToggleFavInEvent,
-  startToggleFavInUser,
   startGetEvents,
 } from '../../../redux/modules/events';
 import { welcomeModal } from '../../../redux/modules/modal';
@@ -10,16 +9,21 @@ import { IconButton } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { startGetUsers } from '../../../redux/modules/users';
+import { startToggleFavInUser } from '../../../redux/modules/user';
 
 export default function CardButtons({ event }) {
   const [select, setSelect] = useState(false);
   const buttonRef = useRef();
-  const user = useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state.user.user);
+  // console.log('유저정보', user);
+  // console.log('liked_events', user, user === [] ? '빈배열' : user.liked_events);
+
   const eventId = event._id;
   const likedUserIds = event.liked_users.map((user) => user._id);
   const userId = user && user._id;
   let likedEventIds = user === null ? [] : user.liked_events;
+  // let likedEventIds =
+  //   user === null ? [] : user.liked_events.map((event) => event._id);
 
   const dispatch = useDispatch();
 
@@ -33,7 +37,6 @@ export default function CardButtons({ event }) {
     dispatch(welcomeModal('이 기능은 회원만 가능해요 😉'));
   }, [dispatch]);
 
-  console.log('렌더링 유저아이디: ', userId);
   const toggleFavInEvent = useCallback(() => {
     let favUserIds = [];
     if (!select) {
@@ -46,22 +49,18 @@ export default function CardButtons({ event }) {
     // dispatch(startToggleFavInEvent(eventId, favUserIds));
   }, [select, userId]);
 
-  // let favEventIds = [];
+  console.log('좋아요한이벤트', likedEventIds);
   const toggleFavInUser = useCallback(() => {
-    if (!select) {
-      likedEventIds = [...likedEventIds, eventId];
-    } else {
-      likedEventIds = [...likedEventIds.filter((id) => id !== eventId)];
-    }
+    // if (!select) {
+    //   likedEventIds = [...likedEventIds, eventId];
+    // } else {
+    //   likedEventIds = [...likedEventIds.filter((id) => id !== eventId)];
+    // }
+    likedEventIds = [...likedEventIds, eventId];
     console.log('toggleFavInUser', likedEventIds, 'userId', userId);
-    // const favEventIds = !select
-    //   ? [...likedEventIds, eventId]
-    //   : [...likedEventIds.filter((id) => id !== eventId)];
-    // console.log('toggleFavInUser', favEventIds);
-    dispatch(startToggleFavInUser(userId, likedEventIds));
-  }, [select]);
 
-  // console.log('렌더', select);
+    dispatch(startToggleFavInUser(userId, likedEventIds));
+  }, [select, userId]);
 
   const clickFav = () => {
     if (user === null) {
@@ -70,7 +69,6 @@ export default function CardButtons({ event }) {
     }
 
     setSelect(!select);
-    // console.log('클릭', select);
     toggleFavInEvent();
     toggleFavInUser();
   };

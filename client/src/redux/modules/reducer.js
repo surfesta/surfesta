@@ -3,7 +3,7 @@ import modal from './modal';
 import auth from './auth';
 import mailCheck from './mailCheck';
 import events from './events';
-import users from './users';
+import user from './user';
 import { connectRouter } from 'connected-react-router';
 
 const rootReducer = (history) =>
@@ -12,7 +12,7 @@ const rootReducer = (history) =>
     auth,
     mailCheck,
     events,
-    // users,
+    user,
     router: connectRouter(history),
   });
 export default rootReducer;

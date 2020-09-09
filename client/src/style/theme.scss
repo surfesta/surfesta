@@ -1,3 +1,5 @@
+@import './variables';
+
 body.dark {
   // backgrounds
   .main {
@@ -69,6 +71,33 @@ body.dark {
           }
         }
       }
+    }
+  }
+  .eventInfo-wrap {
+    h2 {
+      color: $dark-font-primary-color;
+    }
+    .flex-wrap {
+      .right {
+        p {
+          color: $dark-font-primary-color;
+        }
+        table {
+          tr {
+            th {
+              color: $dark-font-secondary-color;
+            }
+            td {
+              color: $dark-font-primary-color;
+            }
+          }
+        }
+      }
+    }
+  }
+  .eventContents-wrap {
+    table {
+      color: $dark-font-primary-color;
     }
   }
 }

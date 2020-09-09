@@ -36,7 +36,6 @@ export default class UserService {
       url: `${URL}/`,
       data: user,
     });
-    console.log(data);
     return data;
   }
 

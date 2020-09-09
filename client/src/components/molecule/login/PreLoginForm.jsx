@@ -32,7 +32,7 @@ export default function PreLoginForm({
       }}
     >
       <Form>
-        <button className="social-login-button google">
+        <button type="button" className="social-login-button google">
           <GoogleLogin
             clientId="184465750767-gu3d86rn56bsj87dnsj7m3mpakma0f1a.apps.googleusercontent.com"
             buttonText="Google"
@@ -42,7 +42,7 @@ export default function PreLoginForm({
             className="gg-button"
           />
         </button>
-        <button className="social-login-button facebook">
+        <button type="button" className="social-login-button facebook">
           <FacebookAppLogo className="social-icon fb" />
           <FacebookLogin
             appId="3347258178701289"

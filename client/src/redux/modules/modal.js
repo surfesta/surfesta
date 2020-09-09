@@ -15,7 +15,7 @@ const CONTENT_TYPES = {
   SIGNUP: 'Surfesta와 함께하기',
 };
 
-export const welcomeModal = (content = CONTENT_TYPES.preLogin) => ({
+export const welcomeModal = (content = CONTENT_TYPES.PRE_LOGIN) => ({
   type: WELCOME_IN,
   content,
   preLogin: true,
@@ -23,14 +23,14 @@ export const welcomeModal = (content = CONTENT_TYPES.preLogin) => ({
 
 export const setSignInModal = (email) => ({
   type: SIGN_IN,
-  content: CONTENT_TYPES.login,
+  content: CONTENT_TYPES.LOGIN,
   forLogin: true,
   presetValue: { email },
 });
 
 export const setSignUpModal = (email) => ({
   type: SIGN_UP,
-  content: CONTENT_TYPES.signup,
+  content: CONTENT_TYPES.SIGNUP,
   forSignUp: true,
   presetValue: { email },
 });

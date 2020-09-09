@@ -4,11 +4,11 @@ const fileUpload = require('express-fileupload');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
-const port = process.env.MONGO_URI || 5000;
+const mongoose = require('mongoose');
 
 // database config
 const config = require('./config');
-const mongoose = require('mongoose');
+const port = config.PORT || 5000;
 const db = mongoose.connection;
 
 db.on('error', console.error);

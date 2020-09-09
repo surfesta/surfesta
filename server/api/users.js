@@ -97,14 +97,14 @@ router.post('/login/password', async (req, res, next) => {
 
     if (!user)
       return res.json({
-        loginSuccess: false,
+        loginResult: false,
         message: 'Auth failed, no user not found',
       });
 
     user.comparePassword(req.body.password, (err, isMatch) => {
       if (!isMatch)
         return res.json({
-          loginSuccess: false,
+          loginResult: false,
           message: 'Wrong password',
         });
 
@@ -122,7 +122,7 @@ router.post('/login/password', async (req, res, next) => {
           secure: process.env.NODE_ENV === 'production' ? true : false,
         });
         res.status(200).json({
-          loginSuccess: true,
+          loginResult: true,
           user,
         });
       });
@@ -133,7 +133,6 @@ router.post('/login/password', async (req, res, next) => {
 });
 
 router.post('/logout', auth, (req, res) => {
-  console.log(req.user._id);
   User.findOneAndUpdate(
     { _id: req.user._id },
     { token: '', tokenExp: '' },
@@ -147,8 +146,8 @@ router.post('/logout', auth, (req, res) => {
 });
 
 // DELETE User
-router.delete('/:user_id', (req, res) => {
-  User.remove({ _id: req.params.user_id }, (err) => {
+router.delete('/', auth, (req, res) => {
+  User.remove({ _id: req.user._id }, (err) => {
     if (err) return res.status(500).json({ error: 'db failure' });
     res.status(204).end();
   });

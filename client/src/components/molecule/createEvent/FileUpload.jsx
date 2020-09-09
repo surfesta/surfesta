@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 // import Message from "./Message";
 import axios from 'axios';
-import { useEffect } from 'react';
 
 export default function FileUpload({ Ref }) {
   const [file, setFile] = useState('');
   const [filename, setFilename] = useState('Choose File');
   const [uploadedFile, setUploadedFile] = useState({});
-  const [message, setMessage] = useState('');
 
   const onChange = async (e) => {
     const _file = e.target.files[0];
@@ -37,25 +35,18 @@ export default function FileUpload({ Ref }) {
     formData.append('file', _file);
 
     try {
-      const res = await axios.post('http://localhost:5000/upload', formData, {
+      const res = await axios.post('/upload_img', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-
+      console.log(res);
       const { fileName, filePath } = res.data;
-
       setUploadedFile({ fileName, filePath });
       setFile(_file);
       setFilename(_filename);
-
-      setMessage('File Uploaded');
     } catch (err) {
-      if (err.response.status === 500) {
-        setMessage('There was a problem with the server');
-      } else {
-        setMessage(err.response.data.msg);
-      }
+      console.log(err);
     }
   };
   return (

@@ -57,6 +57,9 @@
           border-radius: 50%;
           z-index: 2;
         }
+        img {
+          z-index: 4;
+        }
       }
       .custom-file-input {
         position: absolute;

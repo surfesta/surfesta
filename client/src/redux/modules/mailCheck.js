@@ -69,7 +69,6 @@ export const checkSagaActionCreator = ({ email }) => ({
 function* checkSaga(action) {
   try {
     yield put(checkStart());
-    yield delay(300);
     const { data, email } = yield call(UserService.checkEmail, action.payload);
     if (!data.emailCheck) throw new Error();
     yield put(checkSuccess(action.payload.email));

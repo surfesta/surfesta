@@ -27,7 +27,6 @@ export default class UserService {
         password,
       },
     });
-    console.log('login service return', data);
     return data;
   }
 
@@ -52,7 +51,7 @@ export default class UserService {
   static async deactivate(user) {
     const result = await axios({
       method: 'DELETE',
-      url: `${URL}/${user._id}`,
+      url: `${URL}/`,
     });
     return result.status;
   }

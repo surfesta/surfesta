@@ -13,14 +13,16 @@ export default function CardButtons({ event }) {
   const buttonRef = useRef();
   const eventId = event._id;
   const userId = user && user._id;
-  const userIds = event.liked_users.map((user) => user._id);
+  const userIds =
+    event.liked_users && event.liked_users.map((user) => user._id);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    event.liked_users.map((user) => {
-      user._id === userId && setSelect(true);
-    });
+    event.liked_users &&
+      event.liked_users.map((user) => {
+        user._id === userId && setSelect(true);
+      });
   }, [userId]);
 
   const viewModal = useCallback(() => {

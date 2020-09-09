@@ -32,7 +32,7 @@ export default function PreLoginForm({
       }}
     >
       <Form>
-        <div className="social-login-button google">
+        <button className="social-login-button google">
           <GoogleLogin
             clientId="184465750767-gu3d86rn56bsj87dnsj7m3mpakma0f1a.apps.googleusercontent.com"
             buttonText="Google"
@@ -41,8 +41,8 @@ export default function PreLoginForm({
             cookiePolicy={'single_host_origin'}
             className="gg-button"
           />
-        </div>
-        <div className="social-login-button facebook">
+        </button>
+        <button className="social-login-button facebook">
           <FacebookAppLogo className="social-icon fb" />
           <FacebookLogin
             appId="3347258178701289"
@@ -53,7 +53,7 @@ export default function PreLoginForm({
             textButton="facebook"
             cssClass="fb-button"
           />
-        </div>
+        </button>
         <div id="modal-divider">
           <div>또는</div>
           <div></div>

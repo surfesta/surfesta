@@ -7,17 +7,23 @@ import MyPage from './pages/MyPage';
 import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { history } from './index';
+import { cookieCheckSagaActionCreator } from './redux/modules/auth';
 import CreateEvent from './pages/CreateEvent';
 import useThemeWithLocalStorage from './hooks/useThemeWithLocalStorage';
+import { useDispatch } from 'react-redux';
 
 export const ThemeContext = React.createContext();
 
 function App() {
+  const dispatch = useDispatch();
   const [theme, toggleTheme] = useThemeWithLocalStorage();
 
   useEffect(() => {
     document.body.classList.toggle('dark');
   }, [theme]);
+  useEffect(() => {
+    dispatch(cookieCheckSagaActionCreator());
+  }, [dispatch]);
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>

@@ -19,13 +19,18 @@
 /* 본문 기본설정 */
 html {
   font-size: 10px;
-  background-color: #f2f3f6;
 }
 /* 스타일 초기화*/
 body {
   margin: 0;
   font-family: 'Noto Sans kr', sans-serif;
+  background-color: #f2f3f6;
 }
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
 h1,
 h2,
 h3,

@@ -8,10 +8,20 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 export default function CardButtons({ event }) {
   const [select, setSelect] = useState(false);
-  const buttonRef = useRef();
   const user = useSelector((state) => state.auth.user);
-
   const dispatch = useDispatch();
+  const buttonRef = useRef();
+  const eventId = event._id;
+  const userId = user && user._id;
+  const userIds =
+    event.liked_users && event.liked_users.map((user) => user._id);
+
+  useEffect(() => {
+    event.liked_users &&
+      event.liked_users.map((user) => {
+        user._id === userId && setSelect(true);
+      });
+  }, [userId]);
 
   const viewModal = useCallback(() => {
     dispatch(welcomeModal('이 기능은 회원만 가능해요 😉'));

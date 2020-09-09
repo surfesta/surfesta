@@ -11,7 +11,7 @@ export default class UserService {
   static async checkEmail({ email }) {
     const { data } = await axios({
       method: 'POST',
-      url: `${URL}/login`,
+      url: `${URL}/emails`,
       data: {
         email,
       },
@@ -21,7 +21,7 @@ export default class UserService {
   static async login({ email, password }) {
     const { data } = await axios({
       method: 'POST',
-      url: `${URL}/login/password`,
+      url: `${URL}/login`,
       data: {
         email,
         password,

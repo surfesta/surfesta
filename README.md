@@ -6,6 +6,10 @@
 
 ---
 
+## 배포 url
+
+[https://surfesta.site](https:surfesta.site)
+
 ## 주제 선정 이유
 
 ## Use Cases
@@ -14,9 +18,40 @@
 
 ## MVP
 
-## Dependencies
+## STACK
+
+- 프론트엔드 : React
+- 백엔드 : Express
+- 데이터베이스 : MongoDB
+- 웹서버 : Nginx
 
 ## API docs
+
+### Endpoints
+
+- Users
+
+  > GET
+
+  > POST
+
+  > PATCH
+
+  > DELETE
+
+  > AUTH
+
+  > LOGIN
+
+- Events
+
+  > GET
+
+  > POST
+
+  > PATCH
+
+  > DELETE
 
 ## Schedule
 

@@ -5,7 +5,7 @@ const moment = require('moment');
 const md5 = require('crypto-js/md5');
 
 const saltRounds = 10;
-const TOKEN_EXP_HOUR = 3;
+const TOKEN_EXP_HOUR = 24;
 
 const userSchema = mongoose.Schema(
   {
@@ -17,7 +17,6 @@ const userSchema = mongoose.Schema(
     password: { type: String, required: true },
     username: String,
     profile_img: String,
-    cover_img: Buffer,
     phone_number: Number,
     enlisted_events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }],
     hosting_events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }],
@@ -41,7 +40,7 @@ class UserClass {
   // virtual
   get gravatarImage() {
     const hash = md5(this.email.toLowerCase());
-    return `https://www.gravatar.com/avatar/${hash}?d=identicon`;
+    return `https://www.gravatar.com/avatar/${hash}?d=identicon&size=100`;
   }
 
   // document method

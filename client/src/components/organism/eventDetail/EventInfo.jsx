@@ -3,7 +3,6 @@ import './Eventinfo.scss';
 import FavoriteButton from '../../atom/main/FavoriteButton';
 
 export default function EventInfo({ event }) {
-  console.log(event);
   const thumbnail = event && event.thumbnail;
   const startDate = event && event.event_date.start.date;
   const startTime = event && event.event_date.start.time;

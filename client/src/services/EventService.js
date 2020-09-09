@@ -8,15 +8,4 @@ export default class EventService {
     const { data } = await axios.get(EVENT_URL);
     return data;
   }
-
-  static async toggleFavorite({ eventId, liked_users }) {
-    const { data } = await axios({
-      method: 'PATCH',
-      url: `${EVENT_URL}/${eventId}`,
-      data: {
-        liked_users,
-      },
-    });
-    return data;
-  }
 }

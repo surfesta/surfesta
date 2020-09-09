@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import EventsTemplate from '../components/template/EventsTemplate';
 import { useSelector, useDispatch } from 'react-redux';
 import { startGetEvents } from '../redux/modules/events';

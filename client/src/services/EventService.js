@@ -8,4 +8,8 @@ export default class EventService {
     const { data } = await axios.get(EVENT_URL);
     return data;
   }
+  static async getEventDetail(eventId) {
+    const { data } = await axios.get(`EVENT_URL/${eventId}`);
+    return data;
+  }
 }

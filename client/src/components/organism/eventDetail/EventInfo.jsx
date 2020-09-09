@@ -1,18 +1,32 @@
 import React from 'react';
-
 import './Eventinfo.scss';
-import OfflineInfo from '../../molecule/eventDetail/OfflineInfo';
-import OnlineInfo from '../../molecule/eventDetail/OnlineInfo';
 import FavoriteButton from '../../atom/main/FavoriteButton';
 
-export default function EventInfo() {
+export default function EventInfo({ event }) {
+  console.log(event);
+  const thumbnail = event && event.thumbnail;
+  const startDate = event && event.event_date.start.date;
+  const startTime = event && event.event_date.start.time;
+  const endDate = event && event.event_date.end.date;
+  const endTime = event && event.event_date.end.time;
+  const title = event && event.title;
+  const price = event && event.price.toLocaleString();
+  const isOnline = event && event.isOnline;
+  const onlinePlatform = event && event.online_platform;
+  const loactionName = event && event.location.name;
+  const loactionDetails = event && event.location.details;
+  const hostProfileImg = event && event.host.profile_img;
+  const hostName = event && event.host.username;
+  const hostEmail = event && event.host.email;
+  const maxCount = event && event.max_count;
+  const curCount = event && event.cur_count;
   return (
-    <div className="offlineInfo-wrap">
+    <div className="eventInfo-wrap">
       <div className="top-fix">
         <div className="left">
-          <h2>당근마켓 서버 개발 / SRE 채용 오픈세션</h2>
+          <h2>{title}</h2>
           <p>
-            <span className="price">10,000</span>
+            <span className="price">{price}</span>
             <span> 원</span>
           </p>
         </div>
@@ -25,53 +39,75 @@ export default function EventInfo() {
       </div>
       <div className="flex-wrap">
         <div className="left">
-          <div className="thumbnail"></div>
+          <div
+            className="thumbnail"
+            style={{ backgroundImage: `url(${thumbnail})` }}
+          ></div>
         </div>
         <div className="right">
-          <h2>당근마켓 서버 개발 / SRE 채용 오픈세션</h2>
+          <h2>{title}</h2>
           <p>
-            <span className="price">10,000</span>
+            <span className="price">{price}</span>
             <span> 원</span>
           </p>
           <table>
             <tbody>
-              <OnlineInfo />
-              <OfflineInfo />
+              {isOnline ? (
+                <tr className="top-line">
+                  <th>온라인 플랫폼</th>
+                  <td>{onlinePlatform}</td>
+                </tr>
+              ) : (
+                <tr className="top-line">
+                  <th>위치</th>
+                  <td>
+                    {loactionName}
+                    <br />
+                    {loactionDetails}
+                  </td>
+                </tr>
+              )}
               <tr>
                 <th>일시</th>
                 <td>
-                  <span className="date">2020년 08월 26일 (수)</span>
-                  <span className="time">
-                    오후 06:30 - 오후 09:00
+                  <span className="start">
+                    {startDate} {startTime}
+                  </span>
+                  <span>~ </span>
+                  <span className="end">
+                    {endDate} {endTime}
                   </span>
                 </td>
               </tr>
               <tr className="top-line">
                 <th>주최자</th>
                 <td>
-                  <span className="host-thumbnail"></span>
-                  <span>당근마켓</span>
+                  <span
+                    className="host-thumbnail"
+                    style={{ backgroundImage: `url(${hostProfileImg})` }}
+                  ></span>
+                  <span>{hostName}</span>
                 </td>
               </tr>
               <tr>
                 <th>주최자 이메일</th>
-                <td>hhjj105@gmail.com</td>
+                <td>{hostEmail}</td>
               </tr>
               <tr>
                 <th>주최자 연락처</th>
-                <td>01024335715</td>
+                <td>010</td>
               </tr>
               <tr>
                 <th>현재 참가자</th>
                 <td>
-                  <span>171</span>
+                  <span>{curCount}</span>
                   <span>명</span>
                 </td>
               </tr>
               <tr>
                 <th>참석 가능 자리</th>
                 <td>
-                  <span>29</span>
+                  <span>{maxCount}</span>
                   <span>명</span>
                 </td>
               </tr>

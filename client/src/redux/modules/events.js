@@ -41,6 +41,7 @@ export default function reducer(state = initialState, action) {
       };
     case SUCCESS:
       return {
+        ...state,
         events: action.events,
         loading: false,
         error: null,
@@ -68,7 +69,6 @@ export const startGetEvents = () => ({
 function* startGetEventsSaga() {
   try {
     yield put(start());
-    yield delay(100);
     const events = yield call(EventService.getEvents);
     yield put(success(events));
   } catch (error) {

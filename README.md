@@ -8,15 +8,16 @@
 
 ## 배포 url
 
-[https://surfesta.site](https:surfesta.site)
+> [https://surfesta.site](https://surfesta.site)
 
 ## 주제 선정 이유
 
+- React, Redux 에 관해 학습한 내용을 바탕으로 반응형 뷰를 구성하는 경험하고자 함.
+- 프로젝트매니징에 직/간접적으로 참여하면서, 서버/데이터베이스 구축, 배포까지의 경험하면서 성장하고자 함.
+
 ## Use Cases
 
-## Flow Chart
-
-## MVP
+TBD
 
 ## STACK
 
@@ -27,32 +28,20 @@
 
 ## API docs
 
+Node.js서버에서 MongoDB를 위한 ODM(Object Data Mapping) 몽구스를 통해 콜렉션/도큐먼트를 관리합니다.
+
 ### Endpoints
 
-- Users
+> [https://bit.ly/2R7dQ4N](https://bit.ly/2R7dQ4N)
 
-  > GET
+## MISC
 
-  > POST
-
-  > PATCH
-
-  > DELETE
-
-  > AUTH
-
-  > LOGIN
-
-- Events
-
-  > GET
-
-  > POST
-
-  > PATCH
-
-  > DELETE
-
-## Schedule
+- DESIGN PROTO-TYPE
+- FLOW CHART
 
 ## Team
+
+- 김가현
+- 김동욱 PM
+- 김미연
+- 윤유비

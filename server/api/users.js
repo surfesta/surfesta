@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 const User = require('../models/User');
 const auth = require('../middlewares/auth');
-const mongoose = require('mongoose');
 
 router.get('/', async (req, res, next) => {
   try {
@@ -40,7 +41,12 @@ router.post('/', async (req, res, next) => {
     const newUser = await user.save();
     res.json({ success: true, newUser });
   } catch (error) {
-    res.json({ success: false });
+    res.json({
+      success: false,
+      error,
+      msg:
+        error.code === 11000 ? 'duplicated user property' : 'unhandled error',
+    });
     next(error);
   }
 });
@@ -62,6 +68,53 @@ router.patch('/:user_id', async (req, res, next) => {
   );
 });
 
+// UPDATE a user's enlisted_events
+router.patch('/:user_id/enlisted', (req, res) => {
+  const type = req.query.type !== 'false' ? true : false;
+  const event_id = req.body.event_id;
+  User.update(
+    { _id: req.params.user_id },
+    type
+      ? { $push: { enlisted_events: event_id } }
+      : { $pull: { enlisted_events: event_id } },
+    async (err, output) => {
+      if (err) {
+        res.status(500).json({ error: 'db failure' });
+        return;
+      }
+      const user = await User.findOne({ _id: req.params.user_id });
+      if (!output.n) return res.status(404).json({ error: 'User not found' });
+      res.json({
+        success: true,
+        user,
+      });
+    }
+  );
+});
+// UPDATE a user's liked_events
+router.patch('/:user_id/liked', (req, res) => {
+  const type = req.query.type !== 'false' ? true : false;
+  const event_id = req.body.event_id;
+  User.update(
+    { _id: req.params.user_id },
+    type
+      ? { $push: { liked_events: event_id } }
+      : { $pull: { liked_events: event_id } },
+    async (err, output) => {
+      if (err) {
+        res.status(500).json({ error: 'db failure' });
+        return;
+      }
+      const user = await User.findOne({ _id: req.params.user_id });
+      if (!output.n) return res.status(404).json({ error: 'User not found' });
+      res.json({
+        success: true,
+        user,
+      });
+    }
+  );
+});
+
 // Authentificate User
 router.post('/auth', auth, (req, res) => {
   res.status(200).json({
@@ -73,7 +126,7 @@ router.post('/auth', auth, (req, res) => {
 });
 
 // Authorize User step1
-router.post('/login', async (req, res, next) => {
+router.post('/emails', async (req, res, next) => {
   try {
     const user = await User.findOne({ email: req.body.email });
     if (!user)
@@ -91,7 +144,7 @@ router.post('/login', async (req, res, next) => {
 });
 
 // Authorize User step2 or done at once by this
-router.post('/login/password', async (req, res, next) => {
+router.post('/login', async (req, res, next) => {
   try {
     const user = await User.findOne({ email: req.body.email });
 

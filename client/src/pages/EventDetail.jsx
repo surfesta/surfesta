@@ -1,14 +1,15 @@
-import React from 'react';
-import EventTemplate from '../components/template/EventDetailTemplate';
+import React, { useEffect, useCallback } from 'react';
+
 import HeaderTemplate from '../components/template/HeaderTemplate';
+import EventDetailTemplateContainer from '../containers/EventDetailTemplateContainer';
 
 export default function EventDetail(props) {
-  const { event_id } = props.match.params;
+  const eventId = props.match.params.event_id;
+
   return (
     <div>
       <HeaderTemplate />
-      <h2>Event ID : {event_id}</h2>
-      <EventTemplate />
+      <EventDetailTemplateContainer eventId={eventId} />
     </div>
   );
 }

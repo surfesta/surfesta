@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 // import Message from "./Message";
 import axios from 'axios';
 
-export default function FileUpload({ Ref }) {
+export default function FileUpload({ inputRef, imgRef }) {
   const [file, setFile] = useState('');
   const [filename, setFilename] = useState('Choose File');
   const [uploadedFile, setUploadedFile] = useState({});
@@ -31,18 +31,22 @@ export default function FileUpload({ Ref }) {
       alert(`지원하지 않는 형식의 타입입니다. ${_filetype}`);
       return;
     }
+    imgRef.current.parentNode.classList.add('active');
     const formData = new FormData();
     formData.append('file', _file);
-
     try {
-      const res = await axios.post('/upload_img', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      const res = await axios.post(
+        'http://localhost:5000/api/v1/uploads',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
       console.log(res);
-      const { fileName, filePath } = res.data;
-      setUploadedFile({ fileName, filePath });
+      const { filePath } = res.data;
+      setUploadedFile({ filePath });
       setFile(_file);
       setFilename(_filename);
     } catch (err) {
@@ -57,13 +61,14 @@ export default function FileUpload({ Ref }) {
         id="customFile"
         onChange={onChange}
         accept="image/jpeg, image/png, image/jpg"
-        ref={Ref}
+        ref={inputRef}
       />
       <label className="custom-file-label" htmlFor="customFile">
         {uploadedFile ? (
           <img
             className="custom-thumbnail"
             src={uploadedFile.filePath}
+            ref={imgRef}
             alt=""
           />
         ) : null}

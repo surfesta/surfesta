@@ -38,7 +38,8 @@ const EventForm = () => {
   const $onlinePlatform = useRef(null);
   const $price = useRef(null);
   const $maxPerson = useRef(null);
-  const $thumbnail = useRef(null);
+  const $thumbnailInput = useRef(null);
+  const $thumbnailImage = useRef(null);
   const $toast = useRef(null);
 
   const inputErr = useCallback((Ref, msg = '필수 입력 사항입니다.') => {
@@ -70,7 +71,8 @@ const EventForm = () => {
 
       curPrice: $price.current.value,
       curMaxPerson: $maxPerson.current.value,
-      curThumbnail: $thumbnail.current,
+      curThumbnailInput: $thumbnailInput.current,
+      curThumbnailImage: $thumbnailImage.current,
       curToast: $toast.current.getInstance().getHtml(),
     };
     const offlineRef = {
@@ -111,8 +113,7 @@ const EventForm = () => {
           time: endTimeValue,
         },
       },
-      thumbnail:
-        'https://content.surfit.io/thumbs/image/KYVg3/3A11j/21452631605f55bf06f0c00.png/cover-center-1x.webp',
+      thumbnail: publicRef.curThumbnailImage.src,
       content: publicRef.curToast,
       isOnline: publicRef.curIsOnline,
       online_platform: onlineRef.curPlatform,
@@ -129,6 +130,12 @@ const EventForm = () => {
       liked_users: [], // 해당 이벤트 찜한 유저들의 배열
     };
 
+    if (payload.thumbnail.trim() === '') {
+      inputErr($thumbnailInput);
+    } else {
+      if ($thumbnailInput.current.classList.contains('err'))
+        inputComplete($thumbnailInput);
+    }
     if (isNaN(payload.max_count) || payload.max_count === 0) {
       inputErr($maxPerson, '필수 입력 사항입니다, 숫자로 입력해주세요.');
     } else {
@@ -171,11 +178,6 @@ const EventForm = () => {
       if ($eventTitle.current.classList.contains('err'))
         inputComplete($eventTitle);
     }
-    // if (!payload.thumbnail.trim() === '') {
-    //   inputErr($thumbnail);
-    // } else {
-    //   $thumbnail.current.classList.remove('err');
-    // }
 
     if (
       (publicRef.curIsOnline && payload.online_platform.trim() === '') ||
@@ -186,7 +188,8 @@ const EventForm = () => {
       publicRef.curMaxPerson.trim() === '' ||
       isNaN(payload.max_count) ||
       payload.max_count === 0 ||
-      isNaN(payload.price)
+      isNaN(payload.price) ||
+      payload.thumbnail.trim() === ''
     ) {
       return;
     }
@@ -301,7 +304,11 @@ const EventForm = () => {
         {/* 온라인 ON */}
         <EventPrice Ref={$price} preventDefault={_preventDefault} />
         <EventMaxPerson Ref={$maxPerson} preventDefault={_preventDefault} />
-        <EventThumbnail Ref={$thumbnail} preventDefault={_preventDefault} />
+        <EventThumbnail
+          inputRef={$thumbnailInput}
+          imgRef={$thumbnailImage}
+          preventDefault={_preventDefault}
+        />
         <EventContent Ref={$toast} preventDefault={_preventDefault} />
         <div className="create-event-submit">
           <button type="submit" onClick={createData}>

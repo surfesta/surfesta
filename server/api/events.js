@@ -20,7 +20,16 @@ router.get('/', (req, res) => {
       else if (req.query.type === 'offline')
         events = events.filter((event) => !event.isOnline);
 
-      res.json(events);
+      const current_user_id = req.body.user_id || '';
+      const likeCheckedEvents = events.map((event) => {
+        return {
+          ...event._doc,
+          isLiked: event._doc.liked_users.some(
+            (user) => user._id == current_user_id
+          ),
+        };
+      });
+      res.json(likeCheckedEvents);
     });
 });
 
@@ -46,11 +55,13 @@ router.get('/host/:host_id', (req, res) => {
 // CREATE Event
 router.post('/', (req, res) => {
   const event = new Event(req.body);
-  console.log(event);
   event.save((err, doc) => {
     if (err) {
-      console.log(err);
-      res.json({ success: false });
+      res.json({
+        success: false,
+        err,
+        msg: err.code === 11000 && 'duplicated key',
+      });
       return;
     }
     res.json({ success: true, doc });
@@ -64,8 +75,9 @@ router.patch('/:event_id', (req, res) => {
     { $set: req.body },
     async (err, output) => {
       if (err) res.status(500).json({ error: 'db failure' });
-      const event = await Event.findOne({ _id: req.params.event_id });
       if (!output.n) return res.status(404).json({ error: 'Event not found' });
+      const event = await Event.findOne({ _id: req.params.event_id });
+
       res.json({
         success: true,
         event,
@@ -74,14 +86,13 @@ router.patch('/:event_id', (req, res) => {
   );
 });
 // UPDATE a event's enlisted_users
-router.patch('/:event_id/enlisted', (req, res) => {
+router.patch('/:event_id/enlisted', async (req, res) => {
   const type = req.query.type !== 'false' ? true : false;
-  const user_id = req.body.user_id;
   Event.update(
     { _id: req.params.event_id },
     type
-      ? { $push: { enlisted_users: user_id } }
-      : { $pull: { enlisted_users: user_id } },
+      ? { $push: { enlisted_users: req.body.user_id } }
+      : { $pull: { enlisted_users: req.body.user_id } },
     async (err, output) => {
       if (err) {
         res.status(500).json({ error: 'db failure' });
@@ -89,6 +100,8 @@ router.patch('/:event_id/enlisted', (req, res) => {
       }
       const event = await Event.findOne({ _id: req.params.event_id });
       if (!output.n) return res.status(404).json({ error: 'Event not found' });
+      event.cur_count = new Set(event.enlisted_users).size;
+      event.save();
       res.json({
         success: true,
         event,
@@ -97,14 +110,14 @@ router.patch('/:event_id/enlisted', (req, res) => {
   );
 });
 // UPDATE a event's liked_users
-router.patch('/:event_id/liked', (req, res) => {
+router.patch('/:event_id/liked', async (req, res) => {
   const type = req.query.type !== 'false' ? true : false;
-  const user_id = req.body.user_id;
+
   Event.update(
     { _id: req.params.event_id },
     type
-      ? { $push: { liked_users: user_id } }
-      : { $pull: { liked_users: user_id } },
+      ? { $push: { liked_users: req.body.user_id } }
+      : { $pull: { liked_users: req.body.user_id } },
     async (err, output) => {
       if (err) {
         res.status(500).json({ error: 'db failure' });
@@ -112,6 +125,8 @@ router.patch('/:event_id/liked', (req, res) => {
       }
       const event = await Event.findOne({ _id: req.params.event_id });
       if (!output.n) return res.status(404).json({ error: 'Event not found' });
+      event.like_count = new Set(event.liked_users).size;
+      event.save();
       res.json({
         success: true,
         event,

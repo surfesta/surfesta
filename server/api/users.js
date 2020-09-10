@@ -170,6 +170,7 @@ router.post('/login', async (req, res, next) => {
           httpOnly: true,
           secure: process.env.NODE_ENV === 'production' ? true : false,
           sameSite: 'strict',
+          domain: 'surfesta.site',
         });
         res.status(200).json({
           loginResult: true,

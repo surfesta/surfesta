@@ -1,6 +1,6 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
-import LoginSchema from '../../../utils/LoginSchema';
+import loginSchema from '../../../utils/loginSchema';
 import StyledErrorMessage from '../../atom/header/StyledErrorMessage';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginSagaActionCreator } from '../../../redux/modules/auth';
@@ -11,7 +11,7 @@ export default function LoginForm() {
   return (
     <Formik
       initialValues={{ email, password: '123123' }}
-      validationSchema={LoginSchema}
+      validationSchema={loginSchema}
       onSubmit={(values, { setSubmitting }) => {
         dispatch(loginSagaActionCreator(values));
         setSubmitting(false);

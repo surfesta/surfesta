@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 const User = require('../models/User');
+const Event = require('../models/Event');
 const auth = require('../middlewares/auth');
 
 router.get('/', async (req, res, next) => {
@@ -75,7 +76,7 @@ router.patch('/:user_id/enlisted', (req, res) => {
   User.update(
     { _id: req.params.user_id },
     type
-      ? { $push: { enlisted_events: event_id } }
+      ? { $addToSet: { enlisted_events: event_id } }
       : { $pull: { enlisted_events: event_id } },
     async (err, output) => {
       if (err) {
@@ -98,7 +99,7 @@ router.patch('/:user_id/liked', (req, res) => {
   User.update(
     { _id: req.params.user_id },
     type
-      ? { $push: { liked_events: event_id } }
+      ? { $addToSet: { liked_events: event_id } }
       : { $pull: { liked_events: event_id } },
     async (err, output) => {
       if (err) {
@@ -210,13 +211,39 @@ router.delete('/', auth, (req, res) => {
 });
 // DELETE User by user_id
 router.delete('/:user_id', (req, res) => {
-  console.log(req.params.user_id);
   User.remove({ _id: req.params.user_id }, (err) => {
-    if (err) return res.status(500).json({ error: 'db failure' });
-    res.status(204).end();
+    if (err)
+      return res
+        .status(500)
+        .json({ error: 'db failure as removing related user' });
   });
-  // 유저만 지우는게 아니라 그가 주최한 이벤트들도 삭제하라
-  // 해당 이벤트들의 등록유저들에게도 이메일을 보내라.
+
+  Event.deleteMany({ host: req.params.user_id }, (err) => {
+    if (err)
+      return res
+        .status(500)
+        .json({ error: 'db failure as removing hosting event' });
+  });
+
+  Event.updateMany(
+    {},
+    {
+      $pull: {
+        enlisted_users: { $in: [req.params.user_id] },
+        liked_users: { $in: [req.params.user_id] },
+      },
+    },
+    (err, output) => {
+      if (err) {
+        res.status(500).json({ error: 'db failure as removing related event' });
+        return;
+      }
+      res.json({
+        success: true,
+        output,
+      });
+    }
+  );
 });
 
 module.exports = router;

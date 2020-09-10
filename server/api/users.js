@@ -198,12 +198,25 @@ router.post('/logout', auth, (req, res) => {
   );
 });
 
-// DELETE User
+// DELETE authenticated User
 router.delete('/', auth, (req, res) => {
+  console.log(req.user._id);
   User.remove({ _id: req.user._id }, (err) => {
     if (err) return res.status(500).json({ error: 'db failure' });
     res.status(204).end();
   });
+  // 유저만 지우는게 아니라 그가 주최한 이벤트들도 삭제하라
+  // 해당 이벤트들의 등록유저들에게도 이메일을 보내라.
+});
+// DELETE User by user_id
+router.delete('/:user_id', (req, res) => {
+  console.log(req.params.user_id);
+  User.remove({ _id: req.params.user_id }, (err) => {
+    if (err) return res.status(500).json({ error: 'db failure' });
+    res.status(204).end();
+  });
+  // 유저만 지우는게 아니라 그가 주최한 이벤트들도 삭제하라
+  // 해당 이벤트들의 등록유저들에게도 이메일을 보내라.
 });
 
 module.exports = router;

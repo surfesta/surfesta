@@ -19,7 +19,7 @@ const eventSchema = mongoose.Schema(
     price: Number, // 입장료
     max_count: Number, // 참석 가능 인원수
     cur_count: Number, // 참석 인원
-
+    like_count: Number,
     enlisted_users: [
       {
         type: mongoose.Schema.Types.ObjectId,

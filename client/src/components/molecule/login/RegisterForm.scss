@@ -2,19 +2,29 @@
 @import '../../../style/mixin';
 
 .signup-input {
-  margin: 1rem auto;
+  margin: auto;
   font-size: 2rem;
   border-radius: 50px;
   outline: 0;
-  padding: 2rem;
+  padding: 2rem 3rem;
   width: 80%;
+
+  &.email-input {
+    color: rgb(32, 32, 32);
+    background-color: rgb(199, 199, 199);
+  }
+}
+
+.register-form {
+  margin: 0 auto;
+  width: 85%;
 }
 
 .signup-button {
   @include text-button;
   width: 45%;
   padding: 1.5rem;
-  margin: 2rem;
+  margin: 2rem auto 4rem;
   border: 3px white solid;
   background-color: transparent;
   color: white;

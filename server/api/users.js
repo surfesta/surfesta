@@ -164,16 +164,12 @@ router.post('/login', async (req, res, next) => {
 
       user.generateToken((err, user) => {
         if (err) return res.status(400).send(err);
-        const oneDayToSeconds = 24 * 60 * 60;
-        res.cookie('surf_authExp', user.tokenExp, {
-          maxAge: oneDayToSeconds,
-          httpOnly: true,
-          secure: process.env.NODE_ENV === 'production' ? true : false,
-        });
+        console.log(process.env.NODE_ENV);
         res.cookie('surf_auth', user.token, {
-          maxAge: oneDayToSeconds,
+          maxAge: user.tokenMaxAge,
           httpOnly: true,
           secure: process.env.NODE_ENV === 'production' ? true : false,
+          sameSite: 'strict',
         });
         res.status(200).json({
           loginResult: true,

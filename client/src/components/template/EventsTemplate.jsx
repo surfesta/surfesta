@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Card from '../organism/main/Card';
 import './EventsTemplate.scss';
 import Search from '../organism/Search';
@@ -7,6 +7,10 @@ import errorImg from '../../img/error.png';
 
 // Presentational Component
 export default function EventsTemplate({ events, loading, error }) {
+  useEffect(() => {
+    document.title = '🏄‍♀️ Surfesta';
+  }, []);
+
   return (
     <main className="main">
       <h2 className="a11y-hidden">이벤트 검색</h2>

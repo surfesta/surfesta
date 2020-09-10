@@ -40,7 +40,7 @@ export default function EventInfo({ event }) {
         <div className="left">
           <div
             className="thumbnail"
-            style={{ backgroundImage: `url(${thumbnail})` }}
+            style={thumbnail && { backgroundImage: `url(${thumbnail})` }}
           ></div>
         </div>
         <div className="right">
@@ -83,7 +83,11 @@ export default function EventInfo({ event }) {
                 <td>
                   <span
                     className="host-thumbnail"
-                    style={{ backgroundImage: `url(${hostProfileImg})` }}
+                    style={
+                      hostProfileImg && {
+                        backgroundImage: `url(${hostProfileImg})`,
+                      }
+                    }
                   ></span>
                   <span>{hostName}</span>
                 </td>
@@ -91,10 +95,6 @@ export default function EventInfo({ event }) {
               <tr>
                 <th>주최자 이메일</th>
                 <td>{hostEmail}</td>
-              </tr>
-              <tr>
-                <th>주최자 연락처</th>
-                <td>010</td>
               </tr>
               <tr>
                 <th>현재 참가자</th>

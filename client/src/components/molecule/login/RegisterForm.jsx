@@ -15,7 +15,6 @@ export default function RegisterForm({ handleRegister, presetValue }) {
       }}
       validationSchema={registerSchema}
       onSubmit={(values, { setSubmitting }) => {
-        console.log(values);
         handleRegister(values);
         setSubmitting(false);
       }}

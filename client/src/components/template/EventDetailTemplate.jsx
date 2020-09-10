@@ -5,6 +5,10 @@ import EventInfo from '../organism/eventDetail/EventInfo';
 import EventContents from '../organism/eventDetail/EventContents';
 
 export default function EventDetailTemplate({ event }) {
+  useEffect(() => {
+    document.title = event && event.title;
+    window.scrollTo(0, 0);
+  }, [event]);
   return (
     <main className="main">
       <div className="eventDetail">

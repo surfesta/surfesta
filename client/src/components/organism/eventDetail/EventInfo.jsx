@@ -93,10 +93,6 @@ export default function EventInfo({ event }) {
                 <td>{hostEmail}</td>
               </tr>
               <tr>
-                <th>주최자 연락처</th>
-                <td>010</td>
-              </tr>
-              <tr>
                 <th>현재 참가자</th>
                 <td>
                   <span>{curCount}</span>

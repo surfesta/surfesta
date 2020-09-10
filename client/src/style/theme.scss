@@ -4,6 +4,7 @@ body.dark {
   // backgrounds
   .main {
     background-color: #1b1d21;
+    transition: all 0.2s ease-in-out;
   }
   .center input {
     background-color: #1b1d21;
@@ -96,6 +97,22 @@ body.dark {
     }
   }
   .eventContents-wrap {
+    .content {
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p,
+      ul,
+      ol,
+      li,
+      table,
+      a {
+        color: $dark-font-primary-color;
+      }
+    }
     table {
       color: $dark-font-primary-color;
     }

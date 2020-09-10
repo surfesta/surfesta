@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import './EventDetailTemplate.scss';
 import EventInfo from '../organism/eventDetail/EventInfo';
 import EventContents from '../organism/eventDetail/EventContents';
 
 export default function EventDetailTemplate({ event }) {
   useEffect(() => {
-    document.title = event && event.title;
+    document.title = event ? event.title : 'Surfesta';
     window.scrollTo(0, 0);
   }, [event]);
   return (

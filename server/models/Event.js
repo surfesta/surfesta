@@ -16,9 +16,9 @@ const eventSchema = mongoose.Schema(
     location: {
       type: Object,
     },
-    price: Number, // 입장료
-    max_count: Number, // 참석 가능 인원수
-    cur_count: Number, // 참석 인원
+    price: { type: Number, default: 0 }, // 입장료
+    max_count: { type: Number, default: 0 }, // 참석 가능 인원수
+    cur_count: { type: Number, default: 0 }, // 참석 인원
     like_count: Number,
     enlisted_users: [
       {

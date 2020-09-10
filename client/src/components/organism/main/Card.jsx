@@ -32,7 +32,7 @@ export default function Card({ event }) {
     cardRef.current && observer.observe(cardRef.current);
   }, []);
 
-  const goToEventDetail = () => {
+  const goToEventDetail = (e) => {
     dispatch(push(`/event/${eventId}`));
   };
 
@@ -45,10 +45,12 @@ export default function Card({ event }) {
       )}
 
       {isLoad && (
-        <div onClick={goToEventDetail}>
-          <CardContent event={event} />
+        <>
+          <div onClick={goToEventDetail}>
+            <CardContent event={event} />
+          </div>
           <CardButtons event={event} />
-        </div>
+        </>
       )}
     </div>
   );

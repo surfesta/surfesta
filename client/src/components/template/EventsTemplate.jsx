@@ -6,12 +6,7 @@ import Filter from '../organism/Filter';
 import errorImg from '../../img/error.png';
 
 // Presentational Component
-export default function EventsTemplate({ events, loading, error, getEvents }) {
-  // console.log('이벤트리스트 : ', events, loading, error);
-  React.useEffect(() => {
-    getEvents();
-  }, [getEvents]);
-
+export default function EventsTemplate({ events, loading, error }) {
   return (
     <main className="main">
       <h2 className="a11y-hidden">이벤트 검색</h2>

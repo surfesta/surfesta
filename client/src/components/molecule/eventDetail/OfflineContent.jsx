@@ -16,7 +16,7 @@ export default function OfflineContent({ event }) {
       <table>
         <tbody>
           <tr>
-            <th>주소</th>
+            <th>장소</th>
             <td>{loactionName}</td>
           </tr>
           <tr>

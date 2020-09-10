@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Eventinfo.scss';
 import FavoriteButton from '../../atom/main/FavoriteButton';
+import { useDispatch, useSelector } from 'react-redux';
+import { addEnlistedUser } from '../../../redux/modules/events';
 
 export default function EventInfo({ event }) {
+  const dispatch = useDispatch();
+  const [isEnlisted, setIsEnlisted] = useState(false);
+
+  const eventId = event && event._id;
   const thumbnail = event && event.thumbnail;
   const startDate = event && event.event_date.start.date;
   const startTime = event && event.event_date.start.time;
@@ -19,6 +25,24 @@ export default function EventInfo({ event }) {
   const hostEmail = event && event.host.email;
   const maxCount = event && event.max_count;
   const curCount = event && event.cur_count;
+
+  const user = useSelector((state) => state.auth.user);
+  const userId = user && user._id;
+
+  useEffect(() => {
+    event &&
+      event.enlisted_users.map((user) =>
+        user === userId
+          ? console.log('setIsEnlisted(true)')
+          : console.log('setIsEnlisted(false)', user, userId)
+      );
+  }, [event, user, userId]);
+
+  const addEnlisted = () => {
+    dispatch(addEnlistedUser(eventId, userId));
+    setIsEnlisted(!isEnlisted);
+  };
+
   return (
     <div className="eventInfo-wrap">
       <div className="top-fix">
@@ -114,7 +138,16 @@ export default function EventInfo({ event }) {
           </table>
 
           <div className="button-wrap">
-            <button className="enlist-button">이벤트 참석하기</button>
+            {!isEnlisted && (
+              <button className="enlist-button" onClick={addEnlisted}>
+                이벤트 참석하기
+              </button>
+            )}
+            {isEnlisted && (
+              <button className="disable-button" disabled>
+                이벤트 참석완료
+              </button>
+            )}
             <div className="fav-button">
               <FavoriteButton />
             </div>

@@ -27,27 +27,55 @@ router.get('/', (req, res) => {
           isLiked: event._doc.liked_users.some(
             (user) => user._id == current_user_id
           ),
+          like_count: new Set(event.liked_users).size,
+          cur_count: new Set(event.enlisted_users).size,
         };
       });
       res.json(likeCheckedEvents);
     });
 });
 
+router.get('/search', (req, res) => {
+  Event.find({ title: { $regex: req.query.q } })
+    .sort({ createdAt: 'desc' })
+    .populate('host')
+    .populate('enlisted_users')
+    .populate('liked_users')
+    .exec((error, events) => {
+      if (error) {
+        res.json({ error });
+        return;
+      }
+      res.json(events);
+    });
+});
 // GET SINGLE Event
 router.get('/:event_id', (req, res) => {
-  Event.findOne({ _id: req.params.event_id }, (err, event) => {
-    if (err) return res.status(500).json({ error: err });
-    if (!event) return res.status(404).json({ error: 'event not found' });
-    res.json(event);
-  });
+  console.log('?');
+  Event.findOne({ _id: req.params.event_id })
+    .sort({ createdAt: 'desc' })
+    .populate('host')
+    .populate('enlisted_users')
+    .populate('liked_users')
+    .exec((err, event) => {
+      if (err) return res.status(500).json({ error: err });
+      if (!event || event.length === 0)
+        return res.status(404).json({ error: 'event not found' });
+
+      event.like_count = new Set(event.liked_users).size;
+      event.cur_count = new Set(event.enlisted_users).size;
+      res.json(event);
+    });
 });
 
 // GET Event BY email
 router.get('/host/:host_id', (req, res) => {
   Event.find({ host: req.params.host_id }, (err, event) => {
     if (err) return res.status(500).json({ error: err });
-    if (event.length === 0)
+    if (!event || event.length === 0)
       return res.status(404).json({ error: 'Event not found by the host_id' });
+    event.like_count = new Set(event.liked_users).size;
+    event.cur_count = new Set(event.enlisted_users).size;
     res.json(event);
   });
 });
@@ -91,7 +119,7 @@ router.patch('/:event_id/enlisted', async (req, res) => {
   Event.update(
     { _id: req.params.event_id },
     type
-      ? { $push: { enlisted_users: req.body.user_id } }
+      ? { $addToSet: { enlisted_users: req.body.user_id } }
       : { $pull: { enlisted_users: req.body.user_id } },
     async (err, output) => {
       if (err) {
@@ -116,7 +144,7 @@ router.patch('/:event_id/liked', async (req, res) => {
   Event.update(
     { _id: req.params.event_id },
     type
-      ? { $push: { liked_users: req.body.user_id } }
+      ? { $addToSet: { liked_users: req.body.user_id } }
       : { $pull: { liked_users: req.body.user_id } },
     async (err, output) => {
       if (err) {
@@ -141,6 +169,27 @@ router.delete('/:event_id', (req, res) => {
     if (err) return res.status(500).json({ error: 'db failure' });
     res.status(204).end();
   });
+
+  User.update(
+    {},
+    {
+      $pull: {
+        enlisted_events: { $in: [req.params.event_id] },
+        liked_events: { $in: [req.params.event_id] },
+        hosting_events: { $in: [req.params.event_id] },
+      },
+    },
+    (err, output) => {
+      if (err) {
+        res.status(500).json({ error: 'db failure' });
+        return;
+      }
+      res.json({
+        success: true,
+        output,
+      });
+    }
+  );
 });
 
 module.exports = router;

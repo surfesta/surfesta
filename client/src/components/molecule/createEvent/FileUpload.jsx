@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 // import Message from "./Message";
 import axios from 'axios';
-import { useEffect } from 'react';
 
-export default function FileUpload({ Ref }) {
+export default function FileUpload({ inputRef, imgRef }) {
   const [file, setFile] = useState('');
   const [filename, setFilename] = useState('Choose File');
   const [uploadedFile, setUploadedFile] = useState({});
-  const [message, setMessage] = useState('');
 
   const onChange = async (e) => {
     const _file = e.target.files[0];
@@ -33,29 +31,26 @@ export default function FileUpload({ Ref }) {
       alert(`지원하지 않는 형식의 타입입니다. ${_filetype}`);
       return;
     }
+    imgRef.current.parentNode.classList.add('active');
     const formData = new FormData();
     formData.append('file', _file);
-
     try {
-      const res = await axios.post('http://localhost:5000/upload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-
-      const { fileName, filePath } = res.data;
-
-      setUploadedFile({ fileName, filePath });
+      const res = await axios.post(
+        'http://localhost:5000/api/v1/uploads',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
+      console.log(res);
+      const { filePath } = res.data;
+      setUploadedFile({ filePath });
       setFile(_file);
       setFilename(_filename);
-
-      setMessage('File Uploaded');
     } catch (err) {
-      if (err.response.status === 500) {
-        setMessage('There was a problem with the server');
-      } else {
-        setMessage(err.response.data.msg);
-      }
+      console.log(err);
     }
   };
   return (
@@ -66,13 +61,14 @@ export default function FileUpload({ Ref }) {
         id="customFile"
         onChange={onChange}
         accept="image/jpeg, image/png, image/jpg"
-        ref={Ref}
+        ref={inputRef}
       />
       <label className="custom-file-label" htmlFor="customFile">
         {uploadedFile ? (
           <img
             className="custom-thumbnail"
             src={uploadedFile.filePath}
+            ref={imgRef}
             alt=""
           />
         ) : null}

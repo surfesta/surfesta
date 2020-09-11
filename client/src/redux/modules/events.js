@@ -6,7 +6,7 @@ const prefix = 'surfesta-events';
 // action type
 const START = `${prefix}/START`;
 const SUCCESS = `${prefix}/SUCCESS`;
-const ADD_EVENT_SUCCESS = `${prefix}/ADD_EVENT_SUCCESS`;
+const TOGGLE_ENLISTED_USER_SUCCESS = `${prefix} TOGGLE_ENLISTED_USER_SUCCESS`;
 const TOGGLE_LIKED_USER_SUCCESS = `${prefix}/TOGGLE_LIKED_USER_SUCCESS`;
 const FAIL = `${prefix}/FAIL`;
 
@@ -20,8 +20,8 @@ export const success = (events) => ({
   events,
 });
 
-export const addEventSuccess = (event) => ({
-  type: ADD_EVENT_SUCCESS,
+const toggleEnlistedUserSuccess = (event) => ({
+  type: TOGGLE_ENLISTED_USER_SUCCESS,
   event,
 });
 
@@ -65,7 +65,7 @@ export default function reducer(state = initialState, action) {
         loading: false,
         error: null,
       };
-    case ADD_EVENT_SUCCESS:
+    case TOGGLE_ENLISTED_USER_SUCCESS:
       return {
         ...state,
         events,
@@ -89,15 +89,15 @@ export default function reducer(state = initialState, action) {
 
 //saga-action
 const START_GET_EVENTS = `${prefix}/START_GET_EVENTS`;
-const ADD_ENLISTED_USER = `${prefix}/ADD_ENLISTED_USER`;
+const TOGGLE_ENLISTED_USER = `${prefix}/TOGGLE_ENLISTED_USER`;
 const TOGGLE_LIKED_USER = `${prefix}/TOGGLE_LIKED_USER`;
 
 export const startGetEvents = () => ({
   type: START_GET_EVENTS,
 });
 
-export const addEnlistedUser = (eventId, userId, type) => ({
-  type: ADD_ENLISTED_USER,
+export const toggleEnlistedUser = (eventId, userId, type) => ({
+  type: TOGGLE_ENLISTED_USER,
   payload: {
     eventId,
     userId,
@@ -125,10 +125,13 @@ function* startGetEventsSaga() {
   }
 }
 
-function* addEnlistedUserSaga(action) {
+function* toggleEnlistedUserSaga(action) {
   try {
-    const { event } = yield call(EventService.addEnlistedUser, action.payload);
-    yield put(addEventSuccess(event));
+    const { event } = yield call(
+      EventService.toggleEnlistedUser,
+      action.payload
+    );
+    yield put(toggleEnlistedUserSuccess(event));
   } catch (error) {
     yield put(fail(error));
   }
@@ -145,6 +148,6 @@ function* toggleLikedUserSaga(action) {
 
 export function* eventsSaga() {
   yield takeEvery(START_GET_EVENTS, startGetEventsSaga);
-  yield takeEvery(ADD_ENLISTED_USER, addEnlistedUserSaga);
+  yield takeEvery(TOGGLE_ENLISTED_USER, toggleEnlistedUserSaga);
   yield takeEvery(TOGGLE_LIKED_USER, toggleLikedUserSaga);
 }

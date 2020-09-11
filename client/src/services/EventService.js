@@ -14,7 +14,7 @@ export default class EventService {
     return data;
   }
 
-  static async addEnlistedUser({ eventId, userId, type }) {
+  static async toggleEnlistedUser({ eventId, userId, type }) {
     const { data } = await axios({
       method: 'PATCH',
       url: `${EVENT_URL}/${eventId}/enlisted?type=${type}`,

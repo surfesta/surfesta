@@ -25,18 +25,18 @@ export default function FavoriteButton({ event }) {
     dispatch(welcomeModal('이 기능은 회원만 가능해요 😉'));
   }, [dispatch]);
 
-  const clickLiked = (type) => {
+  const toggleLiked = (type) => {
     dispatch(toggleLikedUser(eventId, userId, type));
     dispatch(toggleLikedEvent(eventId, userId, type));
-    console.log('clickLiked', type);
+    console.log('toggleLiked', type);
   };
 
   const checkAuth = () => {
     !userId && viewModal();
     userId && setSelect(!select);
 
-    !select && clickLiked(true);
-    select && clickLiked(false);
+    !select && toggleLiked(true);
+    select && toggleLiked(false);
   };
 
   return (

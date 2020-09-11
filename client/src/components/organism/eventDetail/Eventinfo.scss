@@ -109,9 +109,10 @@
           }
           &.act {
             border-color: $point-color;
+            background-color: $point-color;
           }
           &.act svg {
-            color: $point-color;
+            color: #fff;
           }
         }
       }

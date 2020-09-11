@@ -7,10 +7,6 @@ import errorImg from '../../img/error.png';
 
 // Presentational Component
 export default function EventsTemplate({ events, loading, error }) {
-  useEffect(() => {
-    document.title = '🏄‍♀️ Surfesta';
-  }, []);
-
   return (
     <main className="main">
       <h2 className="a11y-hidden">이벤트 검색</h2>

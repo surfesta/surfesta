@@ -216,7 +216,7 @@ const EventForm = () => {
     console.log(eventPayload);
     try {
       const res = await axios.post('/api/v1/events', eventPayload);
-      const { _id } = res.data;
+      const { _id } = res.data.doc;
       const _hosting_events = await axios.get(`/api/v1/users/${user._id}`);
       const { hosting_events } = _hosting_events.data;
       const hosting_payload = {

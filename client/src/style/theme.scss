@@ -70,6 +70,17 @@ body.dark {
             color: #fff;
           }
         }
+        .create-event-submit {
+          button {
+            color: #fff;
+            border-color: #fff;
+            background: transparent;
+            &:hover {
+              color: #000;
+              background: #fff;
+            }
+          }
+        }
       }
     }
   }

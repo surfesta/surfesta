@@ -1,10 +1,5 @@
 import React from 'react';
-import { Route, Link } from 'react-router-dom';
-import ProfileTemplate from '../template/ProfileTemplate';
-import MyPage from '../../pages/MyPage';
-import EnlistedEvents from '../molecule/eventCategories/EnlistedEvents';
-import HostingEvents from '../molecule/eventCategories/HostingEvents';
-import LikedEvents from '../molecule/eventCategories/LikedEvents';
+import { Link } from 'react-router-dom';
 
 function SubNav(props) {
   return (

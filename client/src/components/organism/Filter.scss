@@ -34,20 +34,27 @@
   }
   .selectList-wrap {
     position: absolute;
-    overflow: hidden;
     ul {
       list-style: none;
       padding-left: 0;
-      background-color: #fff;
-      padding: 20px;
+      background-color: #2c3035;
+      padding: 30px;
+      width: 335px;
+      margin-top: 20px;
+      box-shadow: 0 2px 5px 3px #00000030;
+      color: $dark-font-primary-color;
       li {
         cursor: pointer;
-        font-size: 2rem;
-        line-height: 3rem;
+        font-size: 2.4rem;
+        line-height: 6rem;
+        transition: all 0.3s;
+        &:hover {
+          color: $point-color;
+        }
       }
     }
     .hide {
-      transform: translateY(70%);
+      transform: translateY(30%);
       overflow: hidden;
       opacity: 0;
       visibility: hidden;
@@ -68,6 +75,12 @@
       font-size: 2.4rem;
       .more {
         padding-top: 2px;
+      }
+    }
+    .selectList-wrap {
+      width: calc(100% - 60px);
+      ul {
+        width: 100%;
       }
     }
   }

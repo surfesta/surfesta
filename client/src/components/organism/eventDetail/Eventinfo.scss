@@ -4,6 +4,7 @@
 
 .eventInfo-wrap {
   position: relative;
+  word-break: keep-all;
   .top-fix {
     display: none;
     position: fixed;
@@ -39,9 +40,9 @@
     .right {
       width: calc(50% - 50px);
       margin-left: 50px;
-      font-size: 2.4rem;
+      font-size: 2rem;
       .price {
-        font-size: 3rem;
+        font-size: 2.8rem;
         font-weight: 600;
       }
       table {
@@ -95,16 +96,23 @@
           @include disable-button;
           cursor: default;
         }
-        .fav-button {
+        .favoriteButton-wrap {
           display: inline-block;
           border: 2px solid $tertiary-color;
           border-radius: 50%;
           button {
+            padding: 17px;
             svg {
-              padding: 4px;
-              font-size: 3rem;
+              font-size: 2.6rem;
               color: $tertiary-color;
             }
+          }
+          &.act {
+            border-color: $point-color;
+            background-color: $point-color;
+          }
+          &.act svg {
+            color: #fff;
           }
         }
       }

@@ -7,6 +7,7 @@ const prefix = 'surfesta-login';
 // action type
 const START = `${prefix}/START`;
 const SUCCESS = `${prefix}/SUCCESS`;
+const ADD_USER_SUCCESS = `${prefix}/ADD_USER_SUCCESS`;
 const FAIL = `${prefix}/FAIL`;
 
 // action creator
@@ -17,7 +18,15 @@ const loginSuccess = (user) => ({
   type: SUCCESS,
   user,
 });
+export const addUserSuccess = (user) => ({
+  type: ADD_USER_SUCCESS,
+  user,
+});
 const loginFail = (error) => ({
+  type: FAIL,
+  error,
+});
+const addFail = (error) => ({
   type: FAIL,
   error,
 });
@@ -43,6 +52,11 @@ export default function reducer(state = initialState, action) {
         user: action.user,
         error: null,
       };
+    case ADD_USER_SUCCESS:
+      return {
+        ...state,
+        user: action.user,
+      };
     case FAIL:
       return {
         loading: false,
@@ -60,6 +74,7 @@ const START_LOGIN_SAGA = 'START_LOGIN_SAGA';
 const START_LOGOUT_SAGA = 'START_LOGOUT_SAGA';
 const SIGN_UP_SAGA = 'SIGN_UP_SAGA';
 const START_SOCIAL_SDK_LOGIN = 'START_SOCIAL_SDK_LOGIN';
+const ADD_ENLISTED_EVENT = `${prefix}/ADD_ENLISTED_EVENT`;
 
 export const cookieCheckSagaActionCreator = () => ({
   type: START_COOKIE_CHECK_SAGA,
@@ -83,6 +98,15 @@ export const signupSagaActionCreator = (user) => ({
 export const startSocialSDKLogin = (user) => ({
   type: START_SOCIAL_SDK_LOGIN,
   payload: user,
+});
+
+export const addEnlistedEvent = (eventId, userId, type) => ({
+  type: ADD_ENLISTED_EVENT,
+  payload: {
+    eventId,
+    userId,
+    type,
+  },
 });
 
 //saga-reducer
@@ -159,9 +183,20 @@ function* socialLoginSaga(action) {
   }
 }
 
+// add enlistedEvent in user
+function* addEnlistedEventSaga(action) {
+  try {
+    const { user } = yield call(UserService.addEnlistedEvent, action.payload);
+    yield put(addUserSuccess(user));
+  } catch (error) {
+    yield put(addFail(error));
+  }
+}
+
 export function* authSaga() {
   yield takeEvery(START_COOKIE_CHECK_SAGA, cookieCheckSaga);
   yield takeEvery(START_LOGIN_SAGA, loginSaga);
   yield takeEvery(START_SOCIAL_SDK_LOGIN, socialLoginSaga);
   yield takeEvery(SIGN_UP_SAGA, signupSaga);
+  yield takeEvery(ADD_ENLISTED_EVENT, addEnlistedEventSaga);
 }

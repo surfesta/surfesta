@@ -82,11 +82,18 @@
       }
       .button-wrap {
         padding-top: 23px;
-        .enlist-button {
-          @include text-button;
+        .enlist-button,
+        .disable-button {
           width: calc(100% - 100px);
           margin-right: 25px;
           padding: 21px;
+        }
+        .enlist-button {
+          @include text-button;
+        }
+        .disable-button {
+          @include disable-button;
+          cursor: default;
         }
         .fav-button {
           display: inline-block;

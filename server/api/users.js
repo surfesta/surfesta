@@ -71,6 +71,25 @@ router.patch('/:user_id', async (req, res, next) => {
     }
   );
 });
+// UPDATE THE User
+router.patch('/', auth, async (req, res, next) => {
+  User.update(
+    { _id: req.user._id },
+    { $set: req.body },
+    async (err, output) => {
+      if (err) res.status(500).json({ error: 'db failure' });
+      const user = await User.findOne({ _id: req.user._id })
+        .populate('enlisted_events')
+        .populate('hosting_events')
+        .populate('liked_events');
+      if (!output.n) return res.status(404).json({ error: 'User not found' });
+      res.json({
+        success: true,
+        user,
+      });
+    }
+  );
+});
 
 // UPDATE a user's enlisted_events
 router.patch('/:user_id/enlisted', (req, res) => {

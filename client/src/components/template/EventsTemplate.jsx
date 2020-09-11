@@ -25,9 +25,10 @@ export default function EventsTemplate({ events, loading, error }) {
           </div>
         )}
         <div className="cards">
-          {events.map((event) => {
-            return event.isOpen && <Card event={event} key={event._id} />;
-          })}
+          {events &&
+            events.map((event) => {
+              return event.isOpen && <Card event={event} key={event._id} />;
+            })}
         </div>
       </section>
     </main>

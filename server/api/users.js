@@ -164,16 +164,13 @@ router.post('/login', async (req, res, next) => {
 
       user.generateToken((err, user) => {
         if (err) return res.status(400).send(err);
-        const oneDayToSeconds = 24 * 60 * 60;
-        res.cookie('surf_authExp', user.tokenExp, {
-          maxAge: oneDayToSeconds,
-          httpOnly: true,
-          secure: process.env.NODE_ENV === 'production' ? true : false,
-        });
+        console.log(process.env.NODE_ENV);
         res.cookie('surf_auth', user.token, {
-          maxAge: oneDayToSeconds,
+          maxAge: user.tokenMaxAge,
           httpOnly: true,
           secure: process.env.NODE_ENV === 'production' ? true : false,
+          sameSite: 'strict',
+          domain: 'surfesta.site',
         });
         res.status(200).json({
           loginResult: true,
@@ -201,13 +198,36 @@ router.post('/logout', auth, (req, res) => {
 
 // DELETE authenticated User
 router.delete('/', auth, (req, res) => {
-  console.log(req.user._id);
   User.remove({ _id: req.user._id }, (err) => {
     if (err) return res.status(500).json({ error: 'db failure' });
     res.status(204).end();
   });
-  // 유저만 지우는게 아니라 그가 주최한 이벤트들도 삭제하라
-  // 해당 이벤트들의 등록유저들에게도 이메일을 보내라.
+  Event.deleteMany({ host: req.user._id }, (err) => {
+    if (err)
+      return res
+        .status(500)
+        .json({ error: 'db failure as removing hosting event' });
+  });
+
+  Event.updateMany(
+    {},
+    {
+      $pull: {
+        enlisted_users: { $in: [req.user._id] },
+        liked_users: { $in: [req.user._id] },
+      },
+    },
+    (err, output) => {
+      if (err) {
+        res.status(500).json({ error: 'db failure as removing related event' });
+        return;
+      }
+      res.json({
+        success: true,
+        output,
+      });
+    }
+  );
 });
 // DELETE User by user_id
 router.delete('/:user_id', (req, res) => {

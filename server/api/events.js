@@ -131,7 +131,6 @@ router.patch('/:event_id/enlisted', async (req, res) => {
       event.cur_count = new Set(event.enlisted_users).size;
       event.save();
       res.json({
-        success: true,
         event,
       });
     }

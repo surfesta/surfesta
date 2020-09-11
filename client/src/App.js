@@ -19,9 +19,6 @@ function App() {
   const [theme, toggleTheme] = useThemeWithLocalStorage();
 
   useEffect(() => {
-    document.body.classList.toggle('dark');
-  }, [theme]);
-  useEffect(() => {
     dispatch(cookieCheckSagaActionCreator());
   }, [dispatch]);
 

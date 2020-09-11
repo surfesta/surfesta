@@ -4,7 +4,7 @@ import FavoriteRoundedIcon from '@material-ui/icons/FavoriteRounded';
 
 const FavButton = ({ onClick }) => (
   <IconButton onClick={onClick}>
-    <FavoriteRoundedIcon htmlColor="dimgrey" />
+    <FavoriteRoundedIcon className="header-fav-btn" />
   </IconButton>
 );
 

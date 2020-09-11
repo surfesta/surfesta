@@ -35,15 +35,11 @@ export default function FileUpload({ inputRef, imgRef }) {
     const formData = new FormData();
     formData.append('file', _file);
     try {
-      const res = await axios.post(
-        'http://localhost:5000/api/v1/uploads',
-        formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        }
-      );
+      const res = await axios.post('/api/v1/uploads', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       console.log(res);
       const { filePath } = res.data;
       setUploadedFile({ filePath });

@@ -59,7 +59,10 @@ router.patch('/:user_id', async (req, res, next) => {
     { $set: req.body },
     async (err, output) => {
       if (err) res.status(500).json({ error: 'db failure' });
-      const user = await User.findOne({ _id: req.params.user_id });
+      const user = await User.findOne({ _id: req.params.user_id })
+        .populate('enlisted_events')
+        .populate('hosting_events')
+        .populate('liked_events');
       if (!output.n) return res.status(404).json({ error: 'User not found' });
       res.json({
         success: true,
@@ -83,7 +86,11 @@ router.patch('/:user_id/enlisted', (req, res) => {
         res.status(500).json({ error: 'db failure' });
         return;
       }
-      const user = await User.findOne({ _id: req.params.user_id });
+      const user = await User.findOne({ _id: req.params.user_id })
+        .populate('enlisted_events')
+        .populate('hosting_events')
+        .populate('liked_events');
+
       if (!output.n) return res.status(404).json({ error: 'User not found' });
       res.json({
         success: true,
@@ -130,6 +137,7 @@ router.post('/auth', auth, (req, res) => {
 router.post('/emails', async (req, res, next) => {
   try {
     const user = await User.findOne({ email: req.body.email });
+
     if (!user)
       return res.json({
         emailCheck: false,
@@ -147,7 +155,10 @@ router.post('/emails', async (req, res, next) => {
 // Authorize User step2 or done at once by this
 router.post('/login', async (req, res, next) => {
   try {
-    const user = await User.findOne({ email: req.body.email });
+    const user = await User.findOne({ email: req.body.email })
+      .populate('enlisted_events')
+      .populate('hosting_events')
+      .populate('liked_events');
 
     if (!user)
       return res.json({
@@ -168,9 +179,10 @@ router.post('/login', async (req, res, next) => {
         res.cookie('surf_auth', user.token, {
           maxAge: user.tokenMaxAge,
           httpOnly: true,
-          secure: process.env.NODE_ENV === 'production' ? true : false,
-          sameSite: 'strict',
-          domain: 'surfesta.site',
+          sameSite: process.env.NODE_ENV === 'production' ? 'lax' : undefined,
+          domain:
+            process.env.NODE_ENV === 'production' ? 'surfesta.site' : undefined,
+          secure: process.env.NODE_ENV === 'production' ? true : undefined,
         });
         res.status(200).json({
           loginResult: true,

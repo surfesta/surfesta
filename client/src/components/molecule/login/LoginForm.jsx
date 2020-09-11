@@ -1,6 +1,6 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
-import LoginSchema from '../../../utils/LoginSchema';
+import loginSchema from '../../../utils/LoginSchema';
 import StyledErrorMessage from '../../atom/header/StyledErrorMessage';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginSagaActionCreator } from '../../../redux/modules/auth';

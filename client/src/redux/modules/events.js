@@ -6,6 +6,7 @@ const prefix = 'surfesta-events';
 // action type
 const START = `${prefix}/START`;
 const SUCCESS = `${prefix}/SUCCESS`;
+const ADD_EVENT_SUCCESS = `${prefix}/ADD_EVENT_SUCCESS`;
 const FAIL = `${prefix}/FAIL`;
 
 // action creator
@@ -16,6 +17,11 @@ export const start = () => ({
 export const success = (events) => ({
   type: SUCCESS,
   events,
+});
+
+export const addEventSuccess = (event) => ({
+  type: ADD_EVENT_SUCCESS,
+  event,
 });
 
 export const fail = (error) => ({
@@ -32,6 +38,13 @@ const initialState = {
 
 // reducer
 export default function reducer(state = initialState, action) {
+  const enlistedUsers = action.event && action.event.enlisted_users;
+  const eventId = action.event && action.event._id;
+
+  const events = [...state.events].map((event) =>
+    event._id === eventId ? action.event : event
+  );
+
   switch (action.type) {
     case START:
       return {
@@ -45,6 +58,11 @@ export default function reducer(state = initialState, action) {
         events: action.events,
         loading: false,
         error: null,
+      };
+    case ADD_EVENT_SUCCESS:
+      return {
+        ...state,
+        events,
       };
     case FAIL:
       return {
@@ -60,9 +78,19 @@ export default function reducer(state = initialState, action) {
 
 //saga-action
 const START_GET_EVENTS = `${prefix}/START_GET_EVENTS`;
+const ADD_ENLISTED_USER = `${prefix}/ADD_ENLISTED_USER`;
 
 export const startGetEvents = () => ({
   type: START_GET_EVENTS,
+});
+
+export const addEnlistedUser = (eventId, userId, type) => ({
+  type: ADD_ENLISTED_USER,
+  payload: {
+    eventId,
+    userId,
+    type,
+  },
 });
 
 //saga-reducer
@@ -75,7 +103,16 @@ function* startGetEventsSaga() {
     yield put(fail(error));
   }
 }
+function* addEnlistedUserSaga(action) {
+  try {
+    const { event } = yield call(EventService.addEnlistedUser, action.payload);
+    yield put(addEventSuccess(event));
+  } catch (error) {
+    yield put(fail(error));
+  }
+}
 
 export function* eventsSaga() {
   yield takeEvery(START_GET_EVENTS, startGetEventsSaga);
+  yield takeEvery(ADD_ENLISTED_USER, addEnlistedUserSaga);
 }

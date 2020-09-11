@@ -11,16 +11,6 @@ export default function EventsContainer() {
 
   // mapDispatchToProps
   const dispatch = useDispatch();
-  const getEvents = React.useCallback(() => {
-    dispatch(startGetEvents());
-  }, [dispatch]);
 
-  return (
-    <EventsTemplate
-      events={events}
-      loading={loading}
-      error={error}
-      getEvents={getEvents}
-    />
-  );
+  return <EventsTemplate events={events} loading={loading} error={error} />;
 }

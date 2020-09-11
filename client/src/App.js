@@ -11,6 +11,7 @@ import { cookieCheckSagaActionCreator } from './redux/modules/auth';
 import CreateEvent from './pages/CreateEvent';
 import useThemeWithLocalStorage from './hooks/useThemeWithLocalStorage';
 import { useDispatch } from 'react-redux';
+import { startGetEvents } from './redux/modules/events';
 
 export const ThemeContext = React.createContext();
 
@@ -20,6 +21,7 @@ function App() {
 
   useEffect(() => {
     dispatch(cookieCheckSagaActionCreator());
+    dispatch(startGetEvents());
   }, [dispatch]);
 
   return (

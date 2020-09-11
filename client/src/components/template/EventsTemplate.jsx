@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Card from '../organism/main/Card';
 import './EventsTemplate.scss';
 import Search from '../organism/Search';
@@ -6,11 +6,10 @@ import Filter from '../organism/Filter';
 import errorImg from '../../img/error.png';
 
 // Presentational Component
-export default function EventsTemplate({ events, loading, error, getEvents }) {
-  // console.log('이벤트리스트 : ', events, loading, error);
-  React.useEffect(() => {
-    getEvents();
-  }, [getEvents]);
+export default function EventsTemplate({ events, loading, error }) {
+  useEffect(() => {
+    document.title = '🏄‍♀️ Surfesta';
+  }, []);
 
   return (
     <main className="main">

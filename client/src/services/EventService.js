@@ -12,4 +12,14 @@ export default class EventService {
     const { data } = await axios.get(`EVENT_URL/${eventId}`);
     return data;
   }
+  static async addEnlistedUser({ eventId, userId, type }) {
+    const { data } = await axios({
+      method: 'PATCH',
+      url: `${EVENT_URL}/${eventId}/enlisted?type=${type}`,
+      data: {
+        user_id: userId,
+      },
+    });
+    return data;
+  }
 }

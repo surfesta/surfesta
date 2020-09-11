@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './Eventinfo.scss';
 import FavoriteButton from '../../atom/main/FavoriteButton';
+import { useDispatch, useSelector } from 'react-redux';
+import { addEnlistedUser } from '../../../redux/modules/events';
+import { addEnlistedEvent } from '../../../redux/modules/auth';
+import { welcomeModal } from '../../../redux/modules/modal';
 
 export default function EventInfo({ event }) {
+  const dispatch = useDispatch();
+  const [isEnlisted, setIsEnlisted] = useState(false);
+
+  const eventId = event && event._id;
   const thumbnail = event && event.thumbnail;
   const startDate = event && event.event_date.start.date;
   const startTime = event && event.event_date.start.time;
@@ -19,6 +27,32 @@ export default function EventInfo({ event }) {
   const hostEmail = event && event.host.email;
   const maxCount = event && event.max_count;
   const curCount = event && event.cur_count;
+
+  const user = useSelector((state) => state.auth.user);
+  const userId = user && user._id;
+
+  useEffect(() => {
+    event &&
+      event.enlisted_users.map(
+        (user) => user._id === userId && setIsEnlisted(true)
+      );
+  }, [userId]);
+
+  const viewModal = useCallback(() => {
+    dispatch(welcomeModal('이 기능은 회원만 가능해요 😉'));
+  }, [dispatch]);
+
+  const addEnlisted = () => {
+    dispatch(addEnlistedUser(eventId, userId));
+    dispatch(addEnlistedEvent(eventId, userId));
+    setIsEnlisted(!isEnlisted);
+  };
+
+  const checkAuth = () => {
+    userId && addEnlisted();
+    !userId && viewModal();
+  };
+
   return (
     <div className="eventInfo-wrap">
       <div className="top-fix">
@@ -40,7 +74,7 @@ export default function EventInfo({ event }) {
         <div className="left">
           <div
             className="thumbnail"
-            style={{ backgroundImage: `url(${thumbnail})` }}
+            style={thumbnail && { backgroundImage: `url(${thumbnail})` }}
           ></div>
         </div>
         <div className="right">
@@ -83,7 +117,11 @@ export default function EventInfo({ event }) {
                 <td>
                   <span
                     className="host-thumbnail"
-                    style={{ backgroundImage: `url(${hostProfileImg})` }}
+                    style={
+                      hostProfileImg && {
+                        backgroundImage: `url(${hostProfileImg})`,
+                      }
+                    }
                   ></span>
                   <span>{hostName}</span>
                 </td>
@@ -93,10 +131,6 @@ export default function EventInfo({ event }) {
                 <td>{hostEmail}</td>
               </tr>
               <tr>
-                <th>주최자 연락처</th>
-                <td>010</td>
-              </tr>
-              <tr>
                 <th>현재 참가자</th>
                 <td>
                   <span>{curCount}</span>
@@ -104,7 +138,7 @@ export default function EventInfo({ event }) {
                 </td>
               </tr>
               <tr>
-                <th>참석 가능 자리</th>
+                <th>참석 가능 인원</th>
                 <td>
                   <span>{maxCount}</span>
                   <span>명</span>
@@ -114,7 +148,16 @@ export default function EventInfo({ event }) {
           </table>
 
           <div className="button-wrap">
-            <button className="enlist-button">이벤트 참석하기</button>
+            {!isEnlisted && (
+              <button className="enlist-button" onClick={checkAuth}>
+                이벤트 참석하기
+              </button>
+            )}
+            {isEnlisted && (
+              <button className="disable-button" disabled>
+                이벤트 참석완료
+              </button>
+            )}
             <div className="fav-button">
               <FavoriteButton />
             </div>

@@ -11,10 +11,10 @@ export default function EventContents({ event }) {
   return (
     <div className="eventContents-wrap">
       <div
-        className="content"
+        className="content tui-editor-contents"
         dangerouslySetInnerHTML={innerHtml(content)}
       ></div>
-      {isOnline && <OfflineContent event={event} />}
+      {!isOnline && <OfflineContent event={event} />}
     </div>
   );
 }

@@ -12,6 +12,9 @@ import CreateEvent from './pages/CreateEvent';
 import useThemeWithLocalStorage from './hooks/useThemeWithLocalStorage';
 import { useDispatch } from 'react-redux';
 import { startGetEvents } from './redux/modules/events';
+import { Helmet } from 'react-helmet';
+import HeaderTemplate from './components/template/HeaderTemplate';
+import Meta from './Meta';
 
 export const ThemeContext = React.createContext();
 
@@ -20,9 +23,6 @@ function App() {
   const [theme, toggleTheme] = useThemeWithLocalStorage();
 
   useEffect(() => {
-    document.body.classList.toggle('dark');
-  }, [theme]);
-  useEffect(() => {
     dispatch(cookieCheckSagaActionCreator());
     dispatch(startGetEvents());
   }, [dispatch]);
@@ -30,7 +30,9 @@ function App() {
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       <>
+        <Meta />
         <ConnectedRouter history={history}>
+          <HeaderTemplate />
           <Switch>
             <Route path="/createEvent" component={CreateEvent} />
             <Route path="/event/:event_id" component={EventDetail} />

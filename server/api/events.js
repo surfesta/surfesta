@@ -129,11 +129,11 @@ router.patch('/:event_id/enlisted', async (req, res) => {
         res.status(500).json({ error: 'db failure' });
         return;
       }
+      if (!output.n) return res.status(404).json({ error: 'Event not found' });
       const event = await Event.findOne({ _id: req.params.event_id })
         .populate('host')
         .populate('enlisted_users')
         .populate('liked_users');
-      if (!output.n) return res.status(404).json({ error: 'Event not found' });
       event.cur_count = new Set(event.enlisted_users).size;
       event.save();
       res.json({
@@ -156,8 +156,11 @@ router.patch('/:event_id/liked', async (req, res) => {
         res.status(500).json({ error: 'db failure' });
         return;
       }
-      const event = await Event.findOne({ _id: req.params.event_id });
       if (!output.n) return res.status(404).json({ error: 'Event not found' });
+      const event = await Event.findOne({ _id: req.params.event_id })
+        .populate('host')
+        .populate('enlisted_users')
+        .populate('liked_users');
       event.like_count = new Set(event.liked_users).size;
       event.save();
       res.json({
@@ -170,10 +173,7 @@ router.patch('/:event_id/liked', async (req, res) => {
 
 // DELETE Event
 router.delete('/:event_id', (req, res) => {
-  Event.remove({ _id: req.params.event_id }, (err) => {
-    if (err) return res.status(500).json({ error: 'db failure' });
-    res.status(204).end();
-  });
+  Event.deleteOne({ _id: req.params.event_id }, () => res.status(204).end());
 
   User.update(
     {},

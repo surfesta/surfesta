@@ -104,7 +104,10 @@ router.patch('/:event_id', (req, res) => {
     async (err, output) => {
       if (err) res.status(500).json({ error: 'db failure' });
       if (!output.n) return res.status(404).json({ error: 'Event not found' });
-      const event = await Event.findOne({ _id: req.params.event_id });
+      const event = await Event.findOne({ _id: req.params.event_id })
+        .populate('host')
+        .populate('enlisted_users')
+        .populate('liked_users');
 
       res.json({
         success: true,
@@ -126,7 +129,10 @@ router.patch('/:event_id/enlisted', async (req, res) => {
         res.status(500).json({ error: 'db failure' });
         return;
       }
-      const event = await Event.findOne({ _id: req.params.event_id });
+      const event = await Event.findOne({ _id: req.params.event_id })
+        .populate('host')
+        .populate('enlisted_users')
+        .populate('liked_users');
       if (!output.n) return res.status(404).json({ error: 'Event not found' });
       event.cur_count = new Set(event.enlisted_users).size;
       event.save();

@@ -6,7 +6,7 @@ const prefix = 'surfesta-events';
 // action type
 const START = `${prefix}/START`;
 const SUCCESS = `${prefix}/SUCCESS`;
-const ADDSUCCESS = `${prefix}/ADDSUCCESS`;
+const ADD_EVENT_SUCCESS = `${prefix}/ADD_EVENT_SUCCESS`;
 const FAIL = `${prefix}/FAIL`;
 
 // action creator
@@ -19,8 +19,8 @@ export const success = (events) => ({
   events,
 });
 
-export const addSuccess = (event) => ({
-  type: ADDSUCCESS,
+export const addEventSuccess = (event) => ({
+  type: ADD_EVENT_SUCCESS,
   event,
 });
 
@@ -41,12 +41,8 @@ export default function reducer(state = initialState, action) {
   const enlistedUsers = action.event && action.event.enlisted_users;
   const eventId = action.event && action.event._id;
 
-  const [event] = [...state.events].filter((event) => event._id === eventId);
-  const addedEnlistedUsers = event && [...event.enlisted_users, enlistedUsers];
   const events = [...state.events].map((event) =>
-    event._id === eventId
-      ? { ...event, enlisted_users: addedEnlistedUsers }
-      : event
+    event._id === eventId ? action.event : event
   );
 
   switch (action.type) {
@@ -63,7 +59,7 @@ export default function reducer(state = initialState, action) {
         loading: false,
         error: null,
       };
-    case ADDSUCCESS:
+    case ADD_EVENT_SUCCESS:
       return {
         ...state,
         events,
@@ -110,7 +106,7 @@ function* startGetEventsSaga() {
 function* addEnlistedUserSaga(action) {
   try {
     const { event } = yield call(EventService.addEnlistedUser, action.payload);
-    yield put(addSuccess(event));
+    yield put(addEventSuccess(event));
   } catch (error) {
     yield put(fail(error));
   }

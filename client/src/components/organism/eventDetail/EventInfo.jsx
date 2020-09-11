@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './Eventinfo.scss';
 import FavoriteButton from '../../atom/main/FavoriteButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { addEnlistedUser } from '../../../redux/modules/events';
+import { addEnlistedEvent } from '../../../redux/modules/auth';
+import { welcomeModal } from '../../../redux/modules/modal';
 
 export default function EventInfo({ event }) {
   const dispatch = useDispatch();
@@ -31,16 +33,24 @@ export default function EventInfo({ event }) {
 
   useEffect(() => {
     event &&
-      event.enlisted_users.map((user) =>
-        user === userId
-          ? console.log('setIsEnlisted(true)')
-          : console.log('setIsEnlisted(false)', user, userId)
+      event.enlisted_users.map(
+        (user) => user._id === userId && setIsEnlisted(true)
       );
-  }, [event, user, userId]);
+  }, [userId]);
+
+  const viewModal = useCallback(() => {
+    dispatch(welcomeModal('이 기능은 회원만 가능해요 😉'));
+  }, [dispatch]);
 
   const addEnlisted = () => {
     dispatch(addEnlistedUser(eventId, userId));
+    dispatch(addEnlistedEvent(eventId, userId));
     setIsEnlisted(!isEnlisted);
+  };
+
+  const checkAuth = () => {
+    userId && addEnlisted();
+    !userId && viewModal();
   };
 
   return (
@@ -128,7 +138,7 @@ export default function EventInfo({ event }) {
                 </td>
               </tr>
               <tr>
-                <th>참석 가능 자리</th>
+                <th>참석 가능 인원</th>
                 <td>
                   <span>{maxCount}</span>
                   <span>명</span>
@@ -139,7 +149,7 @@ export default function EventInfo({ event }) {
 
           <div className="button-wrap">
             {!isEnlisted && (
-              <button className="enlist-button" onClick={addEnlisted}>
+              <button className="enlist-button" onClick={checkAuth}>
                 이벤트 참석하기
               </button>
             )}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import StyledErrorMessage from '../../atom/header/StyledErrorMessage';
-import registerSchema from '../../../utils/registerSchema';
+import RegisterSchema from '../../../utils/RegisterSchema';
 import './RegisterForm.scss';
 
 export default function RegisterForm({ handleRegister, presetValue }) {
@@ -13,7 +13,7 @@ export default function RegisterForm({ handleRegister, presetValue }) {
         phone_number: '',
         password: '',
       }}
-      validationSchema={registerSchema}
+      validationSchema={RegisterSchema}
       onSubmit={(values, { setSubmitting }) => {
         handleRegister(values);
         setSubmitting(false);

@@ -7,6 +7,7 @@ const prefix = 'surfesta-events';
 const START = `${prefix}/START`;
 const SUCCESS = `${prefix}/SUCCESS`;
 const ADD_EVENT_SUCCESS = `${prefix}/ADD_EVENT_SUCCESS`;
+const TOGGLE_LIKED_USER_SUCCESS = `${prefix}/TOGGLE_LIKED_USER_SUCCESS`;
 const FAIL = `${prefix}/FAIL`;
 
 // action creator
@@ -24,6 +25,11 @@ export const addEventSuccess = (event) => ({
   event,
 });
 
+const toggleLikedUserSuccess = (event) => ({
+  type: TOGGLE_LIKED_USER_SUCCESS,
+  event,
+});
+
 export const fail = (error) => ({
   type: FAIL,
   error,
@@ -38,9 +44,9 @@ const initialState = {
 
 // reducer
 export default function reducer(state = initialState, action) {
-  const enlistedUsers = action.event && action.event.enlisted_users;
-  const eventId = action.event && action.event._id;
+  // console.log(action.event);
 
+  const eventId = action.event && action.event._id;
   const events = [...state.events].map((event) =>
     event._id === eventId ? action.event : event
   );
@@ -64,6 +70,11 @@ export default function reducer(state = initialState, action) {
         ...state,
         events,
       };
+    case TOGGLE_LIKED_USER_SUCCESS:
+      return {
+        ...state,
+        events,
+      };
     case FAIL:
       return {
         events: [],
@@ -79,6 +90,7 @@ export default function reducer(state = initialState, action) {
 //saga-action
 const START_GET_EVENTS = `${prefix}/START_GET_EVENTS`;
 const ADD_ENLISTED_USER = `${prefix}/ADD_ENLISTED_USER`;
+const TOGGLE_LIKED_USER = `${prefix}/TOGGLE_LIKED_USER`;
 
 export const startGetEvents = () => ({
   type: START_GET_EVENTS,
@@ -86,6 +98,15 @@ export const startGetEvents = () => ({
 
 export const addEnlistedUser = (eventId, userId, type) => ({
   type: ADD_ENLISTED_USER,
+  payload: {
+    eventId,
+    userId,
+    type,
+  },
+});
+
+export const toggleLikedUser = (eventId, userId, type) => ({
+  type: TOGGLE_LIKED_USER,
   payload: {
     eventId,
     userId,
@@ -103,6 +124,7 @@ function* startGetEventsSaga() {
     yield put(fail(error));
   }
 }
+
 function* addEnlistedUserSaga(action) {
   try {
     const { event } = yield call(EventService.addEnlistedUser, action.payload);
@@ -112,7 +134,17 @@ function* addEnlistedUserSaga(action) {
   }
 }
 
+function* toggleLikedUserSaga(action) {
+  try {
+    const { event } = yield call(EventService.toggleLikedUser, action.payload);
+    yield put(toggleLikedUserSuccess(event));
+  } catch (error) {
+    yield put(fail(error));
+  }
+}
+
 export function* eventsSaga() {
   yield takeEvery(START_GET_EVENTS, startGetEventsSaga);
   yield takeEvery(ADD_ENLISTED_USER, addEnlistedUserSaga);
+  yield takeEvery(TOGGLE_LIKED_USER, toggleLikedUserSaga);
 }

@@ -4,10 +4,13 @@ import { offModal, setSignInModal } from './modal';
 import { checkStart, checkSuccess, checkFail } from './mailCheck';
 
 const prefix = 'surfesta-login';
+const userPrefix = 'surfesta-user';
 // action type
 const START = `${prefix}/START`;
 const SUCCESS = `${prefix}/SUCCESS`;
-const ADD_USER_SUCCESS = `${prefix}/ADD_USER_SUCCESS`;
+const ADD_USER_SUCCESS = `${userPrefix}/ADD_USER_SUCCESS`;
+const TOGGLE_LIKED_EVENT_SUCCESS = `${userPrefix}/TOGGLE_LIKED_EVENT_SUCCESS`;
+
 const FAIL = `${prefix}/FAIL`;
 
 // action creator
@@ -20,6 +23,10 @@ const loginSuccess = (user) => ({
 });
 export const addUserSuccess = (user) => ({
   type: ADD_USER_SUCCESS,
+  user,
+});
+export const toggleLikedEventSuccess = (user) => ({
+  type: TOGGLE_LIKED_EVENT_SUCCESS,
   user,
 });
 const loginFail = (error) => ({
@@ -57,6 +64,11 @@ export default function reducer(state = initialState, action) {
         ...state,
         user: action.user,
       };
+    case TOGGLE_LIKED_EVENT_SUCCESS:
+      return {
+        ...state,
+        user: action.user,
+      };
     case FAIL:
       return {
         loading: false,
@@ -74,7 +86,8 @@ const START_LOGIN_SAGA = 'START_LOGIN_SAGA';
 const START_LOGOUT_SAGA = 'START_LOGOUT_SAGA';
 const SIGN_UP_SAGA = 'SIGN_UP_SAGA';
 const START_SOCIAL_SDK_LOGIN = 'START_SOCIAL_SDK_LOGIN';
-const ADD_ENLISTED_EVENT = `${prefix}/ADD_ENLISTED_EVENT`;
+const ADD_ENLISTED_EVENT = `${userPrefix}/ADD_ENLISTED_EVENT`;
+const TOGGLE_LIKED_EVENT = `${userPrefix}/TOGGLE_LIKED_EVENT`;
 
 export const cookieCheckSagaActionCreator = () => ({
   type: START_COOKIE_CHECK_SAGA,
@@ -102,6 +115,15 @@ export const startSocialSDKLogin = (user) => ({
 
 export const addEnlistedEvent = (eventId, userId, type) => ({
   type: ADD_ENLISTED_EVENT,
+  payload: {
+    eventId,
+    userId,
+    type,
+  },
+});
+
+export const toggleLikedEvent = (eventId, userId, type) => ({
+  type: TOGGLE_LIKED_EVENT,
   payload: {
     eventId,
     userId,
@@ -183,11 +205,21 @@ function* socialLoginSaga(action) {
   }
 }
 
-// add enlistedEvent in user
+// add enlisted event in user
 function* addEnlistedEventSaga(action) {
   try {
     const { user } = yield call(UserService.addEnlistedEvent, action.payload);
     yield put(addUserSuccess(user));
+  } catch (error) {
+    yield put(addFail(error));
+  }
+}
+
+// toggle liked event in user
+function* toggleLikedEventSaga(action) {
+  try {
+    const { user } = yield call(UserService.toggleLikedEvent, action.payload);
+    yield put(toggleLikedEventSuccess(user));
   } catch (error) {
     yield put(addFail(error));
   }
@@ -199,4 +231,5 @@ export function* authSaga() {
   yield takeEvery(START_SOCIAL_SDK_LOGIN, socialLoginSaga);
   yield takeEvery(SIGN_UP_SAGA, signupSaga);
   yield takeEvery(ADD_ENLISTED_EVENT, addEnlistedEventSaga);
+  yield takeEvery(TOGGLE_LIKED_EVENT, toggleLikedEventSaga);
 }

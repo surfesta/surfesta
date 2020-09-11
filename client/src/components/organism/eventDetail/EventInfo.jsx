@@ -158,9 +158,7 @@ export default function EventInfo({ event }) {
                 이벤트 참석완료
               </button>
             )}
-            <div className="fav-button">
-              <FavoriteButton />
-            </div>
+            <FavoriteButton event={event} />
           </div>
         </div>
       </div>

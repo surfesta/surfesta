@@ -13,7 +13,7 @@ export default function RegisterForm({ handleRegister, presetValue }) {
         phone_number: '',
         password: '',
       }}
-      validationSchema={RegisterSchema}
+      validationSchema={registerSchema}
       onSubmit={(values, { setSubmitting }) => {
         handleRegister(values);
         setSubmitting(false);

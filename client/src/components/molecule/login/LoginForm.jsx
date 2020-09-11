@@ -11,7 +11,7 @@ export default function LoginForm() {
   return (
     <Formik
       initialValues={{ email, password: '123123' }}
-      validationSchema={LoginSchema}
+      validationSchema={loginSchema}
       onSubmit={(values, { setSubmitting }) => {
         dispatch(loginSagaActionCreator(values));
         setSubmitting(false);

@@ -1,11 +1,28 @@
+@import '../../../style/variables';
+@import '../../../style/mixin';
+
 .header-right {
   display: flex;
   align-items: center;
+  button.MuiButtonBase-root {
+    margin: 0 0.3rem !important;
+  }
+  .MuiSvgIcon-root {
+    width: 1.4em !important;
+    height: 1.4em !important;
+    transition: color 0.2s ease-in-out;
+    fill: dimgrey;
+
+    &:hover,
+    &:active {
+      fill: #b4b4b5;
+      transform: scale3d(1.03, 1.03, 1);
+    }
+    &.header-fav-btn:hover {
+      fill: #3562ff;
+    }
+  }
 }
-button.MuiButtonBase-root {
-  margin: 0 0.3rem !important;
-}
-.MuiSvgIcon-root {
-  width: 1.4em !important;
-  height: 1.4em !important;
+.MuiAvatar-root {
+  margin: 0 1rem !important;
 }

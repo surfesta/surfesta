@@ -15,16 +15,14 @@ export default function UserAvatar({ goProfile }) {
   const user = useSelector((state) => state.auth.user);
 
   return (
-    <div>
-      <div onClick={goProfile}>
-        <Avatar
-          className={classes.size}
-          alt={user.username}
-          src={user.profile_img}
-        >
-          U
-        </Avatar>
-      </div>
+    <div onClick={goProfile}>
+      <Avatar
+        className={classes.size}
+        alt={user.username}
+        src={user.profile_img}
+      >
+        U
+      </Avatar>
     </div>
   );
 }

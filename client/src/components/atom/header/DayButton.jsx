@@ -4,7 +4,7 @@ import WbSunnyOutlinedIcon from '@material-ui/icons/WbSunnyOutlined';
 
 const DayButton = ({ onChange }) => (
   <IconButton onClick={onChange}>
-    <WbSunnyOutlinedIcon htmlColor="dimgrey" />
+    <WbSunnyOutlinedIcon />
   </IconButton>
 );
 

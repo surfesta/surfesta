@@ -5,7 +5,6 @@ import EventsContainer from '../containers/EventsContainer';
 export default function Home() {
   return (
     <>
-      <HeaderTemplate />
       <EventsContainer />
     </>
   );

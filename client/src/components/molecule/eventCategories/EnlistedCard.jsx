@@ -7,9 +7,10 @@ export default function EnlistedCard({ events, loading, error, getEvents }) {
 
   return (
     <>
-      {events.map((event) => {
-        return event.isOpen && <Card event={event} key={event._id} />;
-      })}
+      {events &&
+        events.map((event) => {
+          return event.isOpen && <Card event={event} key={event._id} />;
+        })}
     </>
   );
 }

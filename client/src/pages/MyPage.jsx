@@ -10,8 +10,7 @@ import { useSelector } from 'react-redux';
 
 function MyPage() {
   return (
-    <div>
-      <HeaderTemplate />
+    <>
       <SubNavTemplate />
       <section>
         <Route path="/my/profile" component={ProfileTemplate} />
@@ -19,7 +18,7 @@ function MyPage() {
         <Route path="/my/event/hosting" component={HostingEvents} />
         <Route path="/my/event/liked" component={LikedEvents} />
       </section>
-    </div>
+    </>
   );
 }
 

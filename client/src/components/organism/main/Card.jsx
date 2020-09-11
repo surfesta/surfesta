@@ -8,7 +8,7 @@ import { push } from 'connected-react-router';
 
 export default function Card({ event }) {
   const dispatch = useDispatch();
-  const eventId = event._id;
+  const eventId = event && event._id;
   const cardRef = useRef(null);
   const [isLoad, setIsLoad] = useState(false);
 

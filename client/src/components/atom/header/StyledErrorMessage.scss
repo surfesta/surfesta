@@ -1,0 +1,11 @@
+@import '../../../style/variables';
+@import '../../../style/mixin';
+
+.modal-error-message {
+  @include Flex();
+  font-size: 1.4rem;
+  color: #ee4b4b;
+
+  text-align: center;
+  height: 1.8rem;
+}

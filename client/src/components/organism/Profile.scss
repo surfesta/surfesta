@@ -1,0 +1,115 @@
+@import '../../style/mediaQuery';
+@import '../../style/variables';
+@import '../../style/mixin';
+
+@mixin font-title {
+  font-size: 4rem;
+  color: $font-primary-color;
+}
+
+// 기본정보, form영역
+.profile-section {
+  @include font-title;
+  border: 2px solid greenyellow;
+  // width: 1380px;
+  // height: 1228px;
+
+  .form-div {
+    margin-top: 20px;
+  }
+
+  .profile-info {
+    border: 1px solid blue;
+    width: 690px;
+  }
+
+  .profile-form {
+    border: 2px solid pink;
+    margin-top: 37px;
+    width: 690px;
+
+    .profile-btn {
+      @include text-button;
+      margin-bottom: 5rem;
+    }
+  }
+
+  label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 2.4rem;
+    font-weight: bold;
+  }
+
+  input {
+    display: block;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: none;
+    outline-color: $point-color;
+    width: 100%;
+    padding: 2rem;
+    text-indent: 1.5rem;
+  }
+}
+
+// 미디어쿼리
+@include mobile {
+  .profile-section {
+    width: 100%;
+    display: grid;
+
+    .profile-info {
+      width: 100%;
+    }
+
+    .profile-form {
+      border: 2px solid pink;
+      margin-top: 37px;
+      width: 100%;
+      .form-btn {
+        div {
+          text-align: right;
+          margin-right: 2rem;
+        }
+      }
+    }
+  }
+}
+
+@include tablet {
+  .profile-section {
+    width: 100%;
+    display: grid;
+
+    .profile-info {
+      width: 100%;
+    }
+
+    .profile-form {
+      border: 2px solid pink;
+      margin-top: 37px;
+      width: 100%;
+      .form-btn {
+        div {
+          text-align: center;
+        }
+      }
+
+      .profile-btn {
+        margin-right: 2rem;
+      }
+    }
+  }
+}
+
+@include desktop {
+  .profile-section {
+    .profile-info {
+      width: 510px;
+    }
+    .profile-form {
+      width: 510px;
+    }
+  }
+}

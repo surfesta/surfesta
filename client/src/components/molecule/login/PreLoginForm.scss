@@ -1,0 +1,122 @@
+@import '../../../style/variables';
+@import '../../../style/mixin';
+
+.social-login-button {
+  @include font-normal;
+  font-weight: 400;
+  font-family: 'noto sans kr';
+
+  padding: 2rem 2rem 2rem 3rem;
+  border-radius: 40px !important;
+  width: 40%;
+  height: 30%;
+  margin: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    transform: translate3d(0, -3%, 0);
+  }
+
+  &.google {
+    background-color: white;
+    color: #646568;
+    .gg-button {
+      width: 100%;
+      background-color: transparent;
+      display: flex;
+      align-items: center;
+      span {
+        flex-grow: 1;
+        text-align: center;
+      }
+    }
+  }
+  &.facebook {
+    background-color: #4a6aaa;
+    color: white;
+    .fb-button {
+      @include font-normal;
+      font-weight: 400;
+      font-family: 'noto sans kr';
+
+      color: white;
+      background-color: inherit;
+    }
+  }
+}
+
+.social-icon {
+  &.fb {
+    transform: translate3d(-2rem, 0, 0);
+  }
+  &.gg {
+    transform: translate3d(8rem, 0.3rem, 0);
+    font-size: 1.8rem;
+    margin-left: 4rem;
+  }
+}
+
+.signup-input[name='email'] {
+  color: rgb(37, 37, 37);
+  background-color: rgb(158, 158, 158);
+}
+
+#modal-divider {
+  position: relative;
+  div {
+    height: 20px;
+    &:first-child {
+      @include font-normal;
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      color: white;
+
+      width: 30%;
+      background: $secondary-color;
+      z-index: 1;
+      transform: translate3d(-50%, 0, 0);
+    }
+    &:last-child {
+      border-top: $font-primary-color 1px solid;
+      transform: scaleX(3);
+    }
+  }
+}
+
+.login-input {
+  @include font-normal;
+  margin: 1rem auto;
+  border-radius: 50px;
+  outline: 0;
+  padding: 2rem 3rem;
+  width: 80%;
+  color: $font-primary-color;
+}
+
+#error-input-border {
+  border: 1.4px $alert-color solid;
+}
+
+.basic-privacy-confirm {
+  color: $font-tertiary-color;
+  font-weight: 200;
+}
+
+.login-button {
+  @include text-button;
+  width: 45%;
+  padding: 1.5rem;
+  margin: 1rem 0 4rem 0;
+  border: 2px white solid;
+  background-color: transparent;
+  color: white;
+
+  &:hover {
+    background-color: white;
+    color: $secondary-color;
+  }
+}

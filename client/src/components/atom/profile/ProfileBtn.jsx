@@ -2,7 +2,7 @@ import React from 'react';
 
 function ProfileBtn(props) {
   return (
-    <button type="button" className="profile-btn" onClick={props.onClick}>
+    <button type="button" className="profile-btn" onClick={props.handleClick}>
       {props.name}
     </button>
   );

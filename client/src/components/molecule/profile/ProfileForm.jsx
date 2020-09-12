@@ -49,7 +49,7 @@ function ProfileDetails() {
         />
         <Password />
         <div className="form-btn">
-          <ProfileBtn name="제출 하기" onClick={handleSubmit} />
+          <ProfileBtn name="제출 하기" handleClick={handleSubmit} />
         </div>
       </form>
     </div>

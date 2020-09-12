@@ -6,13 +6,14 @@ import Name from '../../atom/profile/Name';
 import Password from '../../atom/profile/Password';
 import PhoneNumber from '../../atom/profile/PhoneNumber';
 import { startPatchUser } from '../../../redux/modules/profile';
+import useAuth from '../../../hooks/useAuth';
 
 function ProfileDetails() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
-  const userName = user && user.username;
-  const userPhoneNumber = user && user.phone_number;
-  const userPassword = user && user.password;
+  const userName = (user && user.username) || '';
+  const userPhoneNumber = (user && user.phone_number) || '';
+  const userPassword = (user && user.password) || '';
 
   const [name, setName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');

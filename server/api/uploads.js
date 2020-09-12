@@ -28,7 +28,7 @@ const upload = multer({
 });
 
 router.post('/', upload.any(), (req, res, next) => {
-  // console.log(req.files[0].location);
+  // console.log(req.files[0]);
   const upload = new Upload(req.body);
   console.log(upload);
   upload.save((err, doc) => {

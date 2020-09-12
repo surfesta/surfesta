@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PreLoginForm from '../molecule/login/PreLoginForm';
 import LoginForm from '../molecule/login/LoginForm';
 import RegisterForm from '../molecule/login/RegisterForm';
-import Portal from '../../utils/Portal';
+import Portal from '../Portal';
 import { useDispatch, useSelector } from 'react-redux';
 import { offModal } from '../../redux/modules/modal';
 import { useCallback } from 'react';

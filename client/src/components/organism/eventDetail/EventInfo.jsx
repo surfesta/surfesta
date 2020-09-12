@@ -2,8 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import './Eventinfo.scss';
 import FavoriteButton from '../../atom/main/FavoriteButton';
 import { useDispatch, useSelector } from 'react-redux';
-import { addEnlistedUser } from '../../../redux/modules/events';
-import { addEnlistedEvent } from '../../../redux/modules/auth';
+import { toggleEnlistedUser } from '../../../redux/modules/events';
+import { toggleEnlistedEvent } from '../../../redux/modules/auth';
 import { welcomeModal } from '../../../redux/modules/modal';
 
 export default function EventInfo({ event }) {
@@ -42,14 +42,14 @@ export default function EventInfo({ event }) {
     dispatch(welcomeModal('이 기능은 회원만 가능해요 😉'));
   }, [dispatch]);
 
-  const addEnlisted = () => {
-    dispatch(addEnlistedUser(eventId, userId));
-    dispatch(addEnlistedEvent(eventId, userId));
+  const toggleEnlisted = () => {
+    dispatch(toggleEnlistedUser(eventId, userId));
+    dispatch(toggleEnlistedEvent(eventId, userId));
     setIsEnlisted(!isEnlisted);
   };
 
   const checkAuth = () => {
-    userId && addEnlisted();
+    userId && toggleEnlisted();
     !userId && viewModal();
   };
 
@@ -158,9 +158,7 @@ export default function EventInfo({ event }) {
                 이벤트 참석완료
               </button>
             )}
-            <div className="fav-button">
-              <FavoriteButton />
-            </div>
+            <FavoriteButton event={event} />
           </div>
         </div>
       </div>

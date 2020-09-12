@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './createevent.scss';
 import EventForm from '../components/template/createEvent/EventForm';
-import useAuth from '../utils/useAuth';
+import useAuth from '../hooks/useAuth';
 import HeaderTemplate from '../components/template/HeaderTemplate';
 import RouteLeavingGuard from '../components/organism/createEvent/RouteLeavingGuard';
 
@@ -25,7 +25,6 @@ export default function CreateEvent({ history }) {
         no="취소"
         content={'이 페이지를 벗어나면 \n 정성스럽게 작성한 글이 날아가요.'}
       />
-      <HeaderTemplate />
       <div className="create-event-wrap">
         <div className="w1440-container">
           <EventForm />

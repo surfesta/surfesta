@@ -13,7 +13,7 @@ export default function EventAddress({ Ref, preventDefault }) {
         <div className="input-box">
           <input
             type="text"
-            placeholder="페스타 컨퍼런스 룸"
+            placeholder="서페스타 컨퍼런스 룸"
             ref={Ref}
             onKeyDown={preventDefault}
           />

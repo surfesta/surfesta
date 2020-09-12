@@ -13,6 +13,7 @@ import EventThumbnail from '../../organism/createEvent/EventThumbnail';
 import EventContent from '../../molecule/createEvent/EventContent';
 import EventDate from '../../molecule/createEvent/EventDate';
 import axios from 'axios';
+import TermsCheck from '../../molecule/createEvent/TermsCheck';
 
 const EventForm = () => {
   const _preventDefault = useCallback((e) => {
@@ -20,12 +21,13 @@ const EventForm = () => {
       e.preventDefault();
     }
   });
-  const [placeState, setPlaceState] = useState('');
   const user = useSelector((state) => state.auth.user);
+  const [placeState, setPlaceState] = useState('');
   const [onlineCheck, setOnlineCheck] = useState(false);
   const [modalCheck, setModalCheck] = useState(false);
   const [eventPayload, setEventPayload] = useState();
   const [clearPost, setClearPost] = useState(false);
+  const [termsCheck, setTerms] = useState(false);
   const $form = useRef(null);
   const $isOpen = useRef(null);
   const $eventTitle = useRef(null);
@@ -61,7 +63,7 @@ const EventForm = () => {
     setModalCheck(true);
     setEventPayload(payload);
   }
-  function createData(e) {
+  async function createData(e) {
     const publicRef = {
       curIsOpen: $isOpen.current.checked,
       curEventTitle: $eventTitle.current.value,
@@ -195,20 +197,35 @@ const EventForm = () => {
     }
     modalPop(payload);
   }
+  function termsToggle(e) {
+    openToggle(e);
+    setTerms(!termsCheck ? true : false);
+  }
   function openToggle(e) {
     e.target.parentNode.classList.toggle('active');
   }
   function onlineToggle(e) {
-    e.target.parentNode.classList.toggle('active');
+    openToggle(e);
     setOnlineCheck(!onlineCheck ? true : false);
   }
   function submit(e) {
     e.preventDefault();
   }
-  function PostPayload() {
+  async function PostPayload() {
     setModalCheck(false);
     console.log(eventPayload);
-    axios.post('/api/v1/events', eventPayload);
+    try {
+      const res = await axios.post('/api/v1/events', eventPayload);
+      const { _id } = res.data.doc;
+      const _hosting_events = await axios.get(`/api/v1/users/${user._id}`);
+      const { hosting_events } = _hosting_events.data;
+      const hosting_payload = {
+        hosting_events: [...hosting_events, _id],
+      };
+      axios.patch(`/api/v1/users/${user._id}`, hosting_payload);
+    } catch (err) {
+      console.log(err);
+    }
     setClearPost(true);
   }
   function goHome() {
@@ -251,70 +268,75 @@ const EventForm = () => {
           </div>
         </div>
       )}
-      <h1>이벤트 주최하기</h1>
+      <h1 className="main-title">이벤트 주최하기</h1>
       <form
         encType="multipart/form-data"
         action="/upload_page"
         ref={$form}
         onSubmit={submit}
       >
-        <EventDislose
-          toggle={openToggle}
-          Ref={$isOpen}
-          preventDefault={_preventDefault}
-        />
-        <EventTitle Ref={$eventTitle} preventDefault={_preventDefault} />
-        <EventDate
-          startDateRef={$startDate}
-          endDateRef={$endDate}
-          preventDefault={_preventDefault}
-        />
-        <EventOnlineCheck
-          toggle={onlineToggle}
-          Ref={$isOnline}
-          preventDefault={_preventDefault}
-        />
-
-        {/* 온라인 OFF */}
-        {!onlineCheck && (
+        <TermsCheck termsToggle={termsToggle} />
+        {termsCheck && (
           <>
-            <EventAddress Ref={$address} preventDefault={_preventDefault} />
-            <EventAddressDetail
-              Ref={$addressDetail}
-              preventDefault={_preventDefault}
-              setPlaceState={setPlaceState}
-            />
-            <EventAddressDetailPlus
-              Ref={$addressDetailPlus}
+            <EventDislose
+              toggle={openToggle}
+              Ref={$isOpen}
               preventDefault={_preventDefault}
             />
+            <EventTitle Ref={$eventTitle} preventDefault={_preventDefault} />
+            <EventDate
+              startDateRef={$startDate}
+              endDateRef={$endDate}
+              preventDefault={_preventDefault}
+            />
+            <EventOnlineCheck
+              toggle={onlineToggle}
+              Ref={$isOnline}
+              preventDefault={_preventDefault}
+            />
+
+            {/* 온라인 OFF */}
+            {!onlineCheck && (
+              <>
+                <EventAddress Ref={$address} preventDefault={_preventDefault} />
+                <EventAddressDetail
+                  Ref={$addressDetail}
+                  preventDefault={_preventDefault}
+                  setPlaceState={setPlaceState}
+                />
+                <EventAddressDetailPlus
+                  Ref={$addressDetailPlus}
+                  preventDefault={_preventDefault}
+                />
+              </>
+            )}
+            {/* 온라인 OFF */}
+
+            {/* 온라인 ON */}
+            {onlineCheck && (
+              <>
+                <EventPlatform
+                  Ref={$onlinePlatform}
+                  preventDefault={_preventDefault}
+                />
+              </>
+            )}
+            {/* 온라인 ON */}
+            <EventPrice Ref={$price} preventDefault={_preventDefault} />
+            <EventMaxPerson Ref={$maxPerson} preventDefault={_preventDefault} />
+            <EventThumbnail
+              inputRef={$thumbnailInput}
+              imgRef={$thumbnailImage}
+              preventDefault={_preventDefault}
+            />
+            <EventContent Ref={$toast} preventDefault={_preventDefault} />
+            <div className="create-event-submit">
+              <button type="submit" onClick={createData}>
+                이벤트 생성하기
+              </button>
+            </div>
           </>
         )}
-        {/* 온라인 OFF */}
-
-        {/* 온라인 ON */}
-        {onlineCheck && (
-          <>
-            <EventPlatform
-              Ref={$onlinePlatform}
-              preventDefault={_preventDefault}
-            />
-          </>
-        )}
-        {/* 온라인 ON */}
-        <EventPrice Ref={$price} preventDefault={_preventDefault} />
-        <EventMaxPerson Ref={$maxPerson} preventDefault={_preventDefault} />
-        <EventThumbnail
-          inputRef={$thumbnailInput}
-          imgRef={$thumbnailImage}
-          preventDefault={_preventDefault}
-        />
-        <EventContent Ref={$toast} preventDefault={_preventDefault} />
-        <div className="create-event-submit">
-          <button type="submit" onClick={createData}>
-            이벤트 생성하기
-          </button>
-        </div>
       </form>
     </div>
   );

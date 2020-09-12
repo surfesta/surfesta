@@ -332,7 +332,7 @@ router.delete('/', auth, (req, res) => {
         res.status(500).json({ error: 'db failure as removing related event' });
         return;
       }
-      res.json({
+      res.status(200).json({
         success: true,
         output,
       });

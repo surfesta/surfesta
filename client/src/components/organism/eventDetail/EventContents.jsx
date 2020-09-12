@@ -14,7 +14,7 @@ export default function EventContents({ event }) {
         className="content tui-editor-contents"
         dangerouslySetInnerHTML={innerHtml(content)}
       ></div>
-      {isOnline && <OfflineContent event={event} />}
+      {!isOnline && <OfflineContent event={event} />}
     </div>
   );
 }

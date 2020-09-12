@@ -4,6 +4,7 @@ body.dark {
   // backgrounds
   .main {
     background-color: #1b1d21;
+    transition: all 0.2s ease-in-out;
   }
   .center input {
     background-color: #1b1d21;
@@ -11,25 +12,27 @@ body.dark {
   .search-wrap {
     background-color: #1b1d21;
   }
-  .cards {
-    background-color: #1b1d21;
-    .card-wrap {
-      background-color: #2c3035 !important;
-      & * :not(h3, .cardButtons-wrap) {
-        color: #949494 !important;
-      }
-
-      &:hover {
-        h3 {
-          color: #cccccc !important;
-        }
-      }
-      // card
-      .content-wrap {
-        border-bottom: 1px #4b4b4b solid;
-        h3 {
-          color: #bebebe;
-          transition: color 0.2s ease-in-out;
+  .cards-wrap {
+    .cards {
+      .card-wrap {
+        background-color: #2c3035;
+        .cardContent-wrap {
+          .content-wrap {
+            border-bottom: 1px #4b4b4b solid;
+            .date {
+              color: $dark-font-secondary-color;
+            }
+            h3,
+            p,
+            span {
+              font-weight: 500;
+              color: $dark-font-primary-color;
+            }
+          }
+          .host-wrap .host-name {
+            color: $dark-font-primary-color;
+            font-weight: 500;
+          }
         }
       }
 
@@ -41,6 +44,19 @@ body.dark {
       //btn & icons
       .search-btn {
         color: dimgray;
+      }
+    }
+  }
+  .search-wrap {
+    input {
+      color: $dark-font-primary-color;
+    }
+  }
+  .filter-wrap {
+    button {
+      color: $dark-font-primary-color;
+      .more {
+        background-color: #2c3035;
       }
     }
   }
@@ -84,6 +100,7 @@ body.dark {
       }
     }
   }
+
   .eventInfo-wrap {
     h2 {
       color: $dark-font-primary-color;
@@ -103,10 +120,33 @@ body.dark {
             }
           }
         }
+        .button-wrap {
+          .favoriteButton-wrap {
+            &.act svg {
+            }
+          }
+        }
       }
     }
   }
   .eventContents-wrap {
+    .content {
+      color: $dark-font-primary-color;
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p,
+      ul,
+      ol,
+      li,
+      table,
+      a {
+        color: $dark-font-primary-color;
+      }
+    }
     table {
       color: $dark-font-primary-color;
     }

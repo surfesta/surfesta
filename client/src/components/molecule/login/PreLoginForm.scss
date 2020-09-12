@@ -97,6 +97,10 @@
   color: $font-primary-color;
 }
 
+#error-input-border {
+  border: 1.4px $alert-color solid;
+}
+
 .basic-privacy-confirm {
   color: $font-tertiary-color;
   font-weight: 200;
@@ -106,14 +110,13 @@
   @include text-button;
   width: 45%;
   padding: 1.5rem;
-  margin: 2rem;
-  border: 3px white solid;
+  margin: 1rem 0 4rem 0;
+  border: 2px white solid;
   background-color: transparent;
   color: white;
+
   &:hover {
     background-color: white;
     color: $secondary-color;
   }
-
-  z-index: 3;
 }

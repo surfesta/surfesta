@@ -49,6 +49,18 @@
     color: #fff;
   }
 }
+@mixin disable-button {
+  box-sizing: border-box;
+  border: 2px solid $tertiary-color;
+  background-color: $tertiary-color;
+  font-weight: 700;
+  color: $font-primary-color;
+  text-align: center;
+  font-size: 1.5rem;
+  border-radius: 50px;
+  outline: 0;
+  transition: all 0.3s;
+}
 @mixin thumbnail {
   background-color: #ddd;
   background-position: center;

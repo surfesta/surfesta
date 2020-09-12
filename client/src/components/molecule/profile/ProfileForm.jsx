@@ -1,56 +1,55 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import ProfileBtn from '../../atom/profile/ProfileBtn';
 import Email from '../../atom/profile/Email';
 import Name from '../../atom/profile/Name';
 import Password from '../../atom/profile/Password';
 import PhoneNumber from '../../atom/profile/PhoneNumber';
+import { startPatchUser } from '../../../redux/modules/profile';
 
 function ProfileDetails() {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
-  const userEmail = user && user.email;
   const userName = user && user.username;
   const userPhoneNumber = user && user.phone_number;
   const userPassword = user && user.password;
 
-  const [values, setValues] = useState({
-    email: userEmail,
-    username: userName,
-    phone_number: userPhoneNumber,
-    password: userPassword,
-  });
-  console.log(userName);
+  const [name, setName] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [password, setPassword] = useState('');
 
-  const handleChange = (e) => {
-    const { email, username, phone_number, password } = e.target;
-    setValues({
-      ...values,
-    });
+  useEffect(() => {
+    setName(userName);
+    setPhoneNumber(userPhoneNumber);
+  }, [userName, userPhoneNumber]);
+
+  const nameChange = (e) => {
+    setName(e.target.value);
   };
-  // console.log();
-  // const [inputText, setInputText] = useState(values.username);
 
-  // const handleChange = (e) => {
-  //   const { value } = e.target;
-  //   setInput({
-  //     [value]: e.target.current,
-  //   });
-  // };
+  const phoneNumChange = (e) => {
+    setPhoneNumber(e.target.value);
+  };
 
-  // const { value } = e.target.current.value;
-  // console.log(value);
-  // value.current[target.name].value = target.value;
-  // value.current[target.name].isChange = !value.current[target.name].isChange;
+  const handleSubmit = useCallback(
+    (e) => {
+      dispatch(startPatchUser(name, phoneNumber));
+    },
+    [dispatch, name, phoneNumber]
+  );
 
   return (
     <div>
       <form className="profile-form">
-        <Email user={user} handleChange={handleChange} />
-        <Name user={user} handleChange={handleChange} />
-        <PhoneNumber user={user} handleChange={handleChange} />
-        <Password user={user} handleChange={handleChange} />
+        <Email user={user} />
+        <Name name={name} nameChange={nameChange} />
+        <PhoneNumber
+          phoneNumber={phoneNumber}
+          phoneNumChange={phoneNumChange}
+        />
+        <Password />
         <div className="form-btn">
-          <ProfileBtn name="제출 하기" />
+          <ProfileBtn name="제출 하기" onClick={handleSubmit} />
         </div>
       </form>
     </div>

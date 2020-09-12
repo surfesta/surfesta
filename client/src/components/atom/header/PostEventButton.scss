@@ -1,4 +1,13 @@
+@import '../../../style/variables';
+@import '../../../style/mixin';
+
 .event-button {
+  @include font-normal;
+  color: $font-tertiary-color;
   background-color: transparent;
-  color: inherit;
+  padding: 1rem;
+
+  &:hover {
+    color: #c7c7c7;
+  }
 }

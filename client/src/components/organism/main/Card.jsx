@@ -8,7 +8,7 @@ import { push } from 'connected-react-router';
 
 export default function Card({ event }) {
   const dispatch = useDispatch();
-  const eventId = event._id;
+  const eventId = event && event._id;
   const cardRef = useRef(null);
   const [isLoad, setIsLoad] = useState(false);
 
@@ -32,7 +32,7 @@ export default function Card({ event }) {
     cardRef.current && observer.observe(cardRef.current);
   }, []);
 
-  const goToEventDetail = () => {
+  const goToEventDetail = (e) => {
     dispatch(push(`/event/${eventId}`));
   };
 
@@ -45,10 +45,12 @@ export default function Card({ event }) {
       )}
 
       {isLoad && (
-        <div onClick={goToEventDetail}>
-          <CardContent event={event} />
+        <>
+          <div onClick={goToEventDetail}>
+            <CardContent event={event} />
+          </div>
           <CardButtons event={event} />
-        </div>
+        </>
       )}
     </div>
   );

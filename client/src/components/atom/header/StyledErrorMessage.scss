@@ -2,11 +2,10 @@
 @import '../../../style/mixin';
 
 .modal-error-message {
-  font-size: 0.6rem;
-  font-weight: 200;
-  color: $alert-color;
+  @include Flex();
+  font-size: 1.4rem;
+  color: #ee4b4b;
 
-  position: absolute;
-  right: 50%;
-  transform: translate3d(50%, -30%, 0);
+  text-align: center;
+  height: 1.8rem;
 }

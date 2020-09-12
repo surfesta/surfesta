@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 const User = require('../models/User');
+const Event = require('../models/Event');
 const auth = require('../middlewares/auth');
 
 router.get('/', async (req, res, next) => {
@@ -58,7 +59,29 @@ router.patch('/:user_id', async (req, res, next) => {
     { $set: req.body },
     async (err, output) => {
       if (err) res.status(500).json({ error: 'db failure' });
-      const user = await User.findOne({ _id: req.params.user_id });
+      const user = await User.findOne({ _id: req.params.user_id })
+        .populate('enlisted_events')
+        .populate('hosting_events')
+        .populate('liked_events');
+      if (!output.n) return res.status(404).json({ error: 'User not found' });
+      res.json({
+        success: true,
+        user,
+      });
+    }
+  );
+});
+// UPDATE THE User
+router.patch('/', auth, async (req, res, next) => {
+  User.update(
+    { _id: req.user._id },
+    { $set: req.body },
+    async (err, output) => {
+      if (err) res.status(500).json({ error: 'db failure' });
+      const user = await User.findOne({ _id: req.user._id })
+        .populate('enlisted_events')
+        .populate('hosting_events')
+        .populate('liked_events');
       if (!output.n) return res.status(404).json({ error: 'User not found' });
       res.json({
         success: true,
@@ -69,21 +92,44 @@ router.patch('/:user_id', async (req, res, next) => {
 });
 
 // UPDATE a user's enlisted_events
-router.patch('/:user_id/enlisted', (req, res) => {
+router.patch('/:user_id/enlisted', async (req, res) => {
   const type = req.query.type !== 'false' ? true : false;
   const event_id = req.body.event_id;
+  const target = await Event.findOne({ _id: event_id });
+  if (!target) {
+    const user = await User.findOne({ _id: req.params.user_id })
+      .populate('enlisted_events')
+      .populate('hosting_events')
+      .populate('liked_events');
+    if (!user) {
+      res.json({
+        error: 'No user',
+      });
+      return;
+    }
+    res.json({
+      success: true,
+      user,
+    });
+    return;
+  }
   User.update(
     { _id: req.params.user_id },
     type
-      ? { $push: { enlisted_events: event_id } }
+      ? { $addToSet: { enlisted_events: event_id } }
       : { $pull: { enlisted_events: event_id } },
     async (err, output) => {
       if (err) {
         res.status(500).json({ error: 'db failure' });
         return;
       }
-      const user = await User.findOne({ _id: req.params.user_id });
       if (!output.n) return res.status(404).json({ error: 'User not found' });
+
+      const user = await User.findOne({ _id: req.params.user_id })
+        .populate('enlisted_events')
+        .populate('hosting_events')
+        .populate('liked_events');
+
       res.json({
         success: true,
         user,
@@ -92,21 +138,80 @@ router.patch('/:user_id/enlisted', (req, res) => {
   );
 });
 // UPDATE a user's liked_events
-router.patch('/:user_id/liked', (req, res) => {
+router.patch('/:user_id/liked', async (req, res) => {
   const type = req.query.type !== 'false' ? true : false;
   const event_id = req.body.event_id;
+  const target = await Event.findOne({ _id: event_id });
+  if (!target) {
+    const user = await User.findOne({ _id: req.params.user_id })
+      .populate('enlisted_events')
+      .populate('hosting_events')
+      .populate('liked_events');
+    if (!user) {
+      res.json({
+        error: 'No user',
+      });
+      return;
+    }
+    res.json({
+      success: true,
+      user,
+    });
+    return;
+  }
   User.update(
     { _id: req.params.user_id },
     type
-      ? { $push: { liked_events: event_id } }
+      ? { $addToSet: { liked_events: event_id } }
       : { $pull: { liked_events: event_id } },
     async (err, output) => {
       if (err) {
         res.status(500).json({ error: 'db failure' });
         return;
       }
-      const user = await User.findOne({ _id: req.params.user_id });
       if (!output.n) return res.status(404).json({ error: 'User not found' });
+      const user = await User.findOne({ _id: req.params.user_id })
+        .populate('enlisted_events')
+        .populate('hosting_events')
+        .populate('liked_events');
+      res.json({
+        success: true,
+        user,
+      });
+    }
+  );
+});
+// UPDATE a user's hosting_events
+router.patch('/:user_id/hosting', async (req, res) => {
+  const type = req.query.type !== 'false' ? true : false;
+  const event_id = req.body.event_id;
+  const target = await Event.findOne({ _id: event_id });
+  if (!target) {
+    const user = await User.findOne({ _id: req.params.user_id })
+      .populate('enlisted_events')
+      .populate('hosting_events')
+      .populate('liked_events');
+    res.json({
+      success: true,
+      user,
+    });
+    return;
+  }
+  User.update(
+    { _id: req.params.user_id },
+    type
+      ? { $addToSet: { hosting_events: event_id } }
+      : { $pull: { hosting_events: event_id } },
+    async (err, output) => {
+      if (err) {
+        res.status(500).json({ error: 'db failure' });
+        return;
+      }
+      if (!output.n) return res.status(404).json({ error: 'User not found' });
+      const user = await User.findOne({ _id: req.params.user_id })
+        .populate('enlisted_events')
+        .populate('hosting_events')
+        .populate('liked_events');
       res.json({
         success: true,
         user,
@@ -129,6 +234,7 @@ router.post('/auth', auth, (req, res) => {
 router.post('/emails', async (req, res, next) => {
   try {
     const user = await User.findOne({ email: req.body.email });
+
     if (!user)
       return res.json({
         emailCheck: false,
@@ -146,7 +252,10 @@ router.post('/emails', async (req, res, next) => {
 // Authorize User step2 or done at once by this
 router.post('/login', async (req, res, next) => {
   try {
-    const user = await User.findOne({ email: req.body.email });
+    const user = await User.findOne({ email: req.body.email })
+      .populate('enlisted_events')
+      .populate('hosting_events')
+      .populate('liked_events');
 
     if (!user)
       return res.json({
@@ -163,16 +272,14 @@ router.post('/login', async (req, res, next) => {
 
       user.generateToken((err, user) => {
         if (err) return res.status(400).send(err);
-        const oneDayToSeconds = 24 * 60 * 60;
-        res.cookie('surf_authExp', user.tokenExp, {
-          maxAge: oneDayToSeconds,
-          httpOnly: true,
-          secure: process.env.NODE_ENV === 'production' ? true : false,
-        });
+        console.log(process.env.NODE_ENV);
         res.cookie('surf_auth', user.token, {
-          maxAge: oneDayToSeconds,
+          maxAge: user.tokenMaxAge,
           httpOnly: true,
-          secure: process.env.NODE_ENV === 'production' ? true : false,
+          sameSite: process.env.NODE_ENV === 'production' ? 'lax' : undefined,
+          domain:
+            process.env.NODE_ENV === 'production' ? 'surfesta.site' : undefined,
+          secure: process.env.NODE_ENV === 'production' ? true : undefined,
         });
         res.status(200).json({
           loginResult: true,
@@ -198,12 +305,75 @@ router.post('/logout', auth, (req, res) => {
   );
 });
 
-// DELETE User
+// DELETE authenticated User
 router.delete('/', auth, (req, res) => {
   User.remove({ _id: req.user._id }, (err) => {
     if (err) return res.status(500).json({ error: 'db failure' });
     res.status(204).end();
   });
+
+  Event.deleteMany({ host: req.user._id }, (err) => {
+    if (err)
+      return res
+        .status(500)
+        .json({ error: 'db failure as removing hosting event' });
+  });
+
+  Event.updateMany(
+    {},
+    {
+      $pull: {
+        enlisted_users: { $in: [req.user._id] },
+        liked_users: { $in: [req.user._id] },
+      },
+    },
+    (err, output) => {
+      if (err) {
+        res.status(500).json({ error: 'db failure as removing related event' });
+        return;
+      }
+      res.json({
+        success: true,
+        output,
+      });
+    }
+  );
+});
+// DELETE User by user_id
+router.delete('/:user_id', (req, res) => {
+  User.remove({ _id: req.params.user_id }, (err) => {
+    if (err)
+      return res
+        .status(500)
+        .json({ error: 'db failure as removing related user' });
+  });
+
+  Event.deleteMany({ host: req.params.user_id }, (err) => {
+    if (err)
+      return res
+        .status(500)
+        .json({ error: 'db failure as removing hosting event' });
+  });
+
+  Event.updateMany(
+    {},
+    {
+      $pull: {
+        enlisted_users: { $in: [req.params.user_id] },
+        liked_users: { $in: [req.params.user_id] },
+      },
+    },
+    (err, output) => {
+      if (err) {
+        res.status(500).json({ error: 'db failure as removing related event' });
+        return;
+      }
+      res.json({
+        success: true,
+        output,
+      });
+    }
+  );
 });
 
 module.exports = router;

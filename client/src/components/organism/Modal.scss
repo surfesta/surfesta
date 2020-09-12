@@ -2,7 +2,10 @@
 @import '../../style/mixin';
 @import '../../style/mediaQuery';
 
-#modal-container * {
+#modal-container * :not(input) {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 }
 #modal-container {

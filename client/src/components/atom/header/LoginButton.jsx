@@ -1,10 +1,11 @@
 import React from 'react';
+import './LoginButton.scss';
 
 const LoginButton = ({ handleclick }) => {
   return (
-    <div id="login-button" onClick={handleclick}>
-      로그인하기
-    </div>
+    <button className="header-login-button" onClick={handleclick}>
+      로그인
+    </button>
   );
 };
 export default LoginButton;

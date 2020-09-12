@@ -1,11 +1,12 @@
-import React, { useSelector } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import React from 'react';
+import { Route } from 'react-router-dom';
 import HeaderTemplate from '../components/template/HeaderTemplate';
 import ProfileTemplate from '../components/template/ProfileTemplate';
 import SubNavTemplate from '../components/template/SubNavTemplate';
 import EnlistedEvents from '../components/molecule/eventCategories/EnlistedEvents';
 import HostingEvents from '../components/molecule/eventCategories/HostingEvents';
 import LikedEvents from '../components/molecule/eventCategories/LikedEvents';
+import { useSelector } from 'react-redux';
 
 function MyPage() {
   return (

@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const moment = require('moment');
 const md5 = require('crypto-js/md5');
 
 const saltRounds = 10;
-const TOKEN_EXP_HOUR = 3;
+const TOKEN_EXP_DAY = 7;
 
 const userSchema = mongoose.Schema(
   {
@@ -17,7 +16,6 @@ const userSchema = mongoose.Schema(
     password: { type: String, required: true },
     username: String,
     profile_img: String,
-    cover_img: Buffer,
     phone_number: Number,
     enlisted_events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }],
     hosting_events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }],
@@ -26,9 +24,8 @@ const userSchema = mongoose.Schema(
     token: {
       type: String,
     },
-    tokenExp: {
-      type: Number,
-    },
+    liked_count: Number,
+    cur_count: Number,
   },
   {
     timestamps: true,
@@ -41,7 +38,7 @@ class UserClass {
   // virtual
   get gravatarImage() {
     const hash = md5(this.email.toLowerCase());
-    return `https://www.gravatar.com/avatar/${hash}?d=identicon`;
+    return `https://www.gravatar.com/avatar/${hash}?d=identicon&size=250`;
   }
 
   // document method
@@ -62,19 +59,15 @@ class UserClass {
     const user = this;
 
     const token = jwt.sign(user._id.toHexString(), 'surfesta');
-    const tokenExp = moment().add(TOKEN_EXP_HOUR, 'hour').valueOf();
+    const A_DAY_TO_MILLISECONDS = 1000 * 60 * 60 * 24;
+    const tokenMaxAge = A_DAY_TO_MILLISECONDS * TOKEN_EXP_DAY;
 
-    user.tokenExp = tokenExp;
+    user.tokenMaxAge = tokenMaxAge;
     user.token = token;
     user.save((err, user) => {
       if (err) return cb(err);
       cb(null, user);
     });
-  }
-
-  // static
-  static findByEmail(email) {
-    return this.findOne({ email });
   }
 
   static findByToken(token, cb) {

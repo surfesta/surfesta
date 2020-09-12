@@ -1,7 +1,10 @@
+@import './variables';
+
 body.dark {
   // backgrounds
   .main {
     background-color: #1b1d21;
+    transition: all 0.2s ease-in-out;
   }
   .center input {
     background-color: #1b1d21;
@@ -69,6 +72,50 @@ body.dark {
           }
         }
       }
+    }
+  }
+  .eventInfo-wrap {
+    h2 {
+      color: $dark-font-primary-color;
+    }
+    .flex-wrap {
+      .right {
+        p {
+          color: $dark-font-primary-color;
+        }
+        table {
+          tr {
+            th {
+              color: $dark-font-secondary-color;
+            }
+            td {
+              color: $dark-font-primary-color;
+            }
+          }
+        }
+      }
+    }
+  }
+  .eventContents-wrap {
+    .content {
+      color: $dark-font-primary-color;
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p,
+      ul,
+      ol,
+      li,
+      table,
+      a {
+        color: $dark-font-primary-color;
+      }
+    }
+    table {
+      color: $dark-font-primary-color;
     }
   }
 }

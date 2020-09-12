@@ -7,7 +7,7 @@ function ThemeIndicator() {
   const { theme, toggleTheme } = useContext(ThemeContext);
   return (
     <>
-      {theme ? (
+      {theme === 'dark' ? (
         <DayButton onChange={toggleTheme} />
       ) : (
         <NightButton onChange={toggleTheme} />

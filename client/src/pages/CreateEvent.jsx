@@ -6,7 +6,7 @@ import HeaderTemplate from '../components/template/HeaderTemplate';
 import RouteLeavingGuard from '../components/organism/createEvent/RouteLeavingGuard';
 
 export default function CreateEvent({ history }) {
-  // useAuth();
+  useAuth();
   const [whenState, updateWhenState] = useState(true);
   return (
     <>

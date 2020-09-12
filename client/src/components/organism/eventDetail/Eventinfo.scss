@@ -2,7 +2,7 @@
 @import '../../../style/mixin';
 @import '../../../style/mediaQuery';
 
-.offlineInfo-wrap {
+.eventInfo-wrap {
   position: relative;
   .top-fix {
     display: none;
@@ -33,7 +33,7 @@
       .thumbnail {
         width: 100%;
         padding-bottom: 66.66%;
-        background-color: wheat;
+        @include thumbnail;
       }
     }
     .right {
@@ -45,6 +45,7 @@
         font-weight: 600;
       }
       table {
+        width: 100%;
         tr {
           &.top-line {
             th,
@@ -63,17 +64,17 @@
           }
           td {
             padding-bottom: 20px;
-            .date {
+            .start {
               display: block;
             }
             .host-thumbnail {
+              @include thumbnail;
               width: 25px;
               height: 25px;
               display: inline-block;
               margin-right: 8px;
               margin-top: -3px;
               vertical-align: middle;
-              background-color: $point-color;
               border-radius: 50%;
             }
           }
@@ -81,11 +82,18 @@
       }
       .button-wrap {
         padding-top: 23px;
-        .enlist-button {
-          @include text-button;
+        .enlist-button,
+        .disable-button {
           width: calc(100% - 100px);
           margin-right: 25px;
           padding: 21px;
+        }
+        .enlist-button {
+          @include text-button;
+        }
+        .disable-button {
+          @include disable-button;
+          cursor: default;
         }
         .fav-button {
           display: inline-block;
@@ -105,7 +113,7 @@
 }
 
 @include mobile {
-  .offlineInfo-wrap {
+  .eventInfo-wrap {
     .flex-wrap {
       h2 {
         margin-top: 50px;
@@ -127,7 +135,7 @@
 }
 
 @include tablet {
-  .offlineInfo-wrap {
+  .eventInfo-wrap {
     .flex-wrap {
       h2 {
         margin-top: 50px;

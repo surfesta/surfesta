@@ -2,6 +2,7 @@
 @import '../style/mediaQuery';
 
 .create-event-wrap {
+  transition: 0.5s;
   box-sizing: border-box;
   @include wrapSet;
   width: 100%;
@@ -22,6 +23,7 @@
   .create-event-form {
     padding: 7.3rem 0;
     h1 {
+      transition: 0.5s;
       @include titleFontSet(4rem, bold);
       margin-bottom: 4rem;
     }
@@ -35,6 +37,12 @@
         border-radius: 10px;
         @include Flex();
         overflow: hidden;
+        &.active {
+          &::before,
+          &::after {
+            all: unset;
+          }
+        }
         &::before {
           content: '';
           position: absolute;
@@ -64,14 +72,17 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+        z-index: 4;
       }
       .upload-type {
+        transition: 0.5s;
         @include contentFontSet;
         font-size: 1.5rem;
         line-height: 20px;
         margin-top: 1.567rem;
       }
       .eventform-title {
+        transition: 0.5s;
         @include titleFontSet();
         margin-bottom: 2.8rem;
         margin-top: 5.5rem;
@@ -103,13 +114,14 @@
       .event-sec {
         width: 100%;
         @include Flex(space-between, flex-start);
-
+        transition: 0.5s;
         .event-content {
           width: 50rem;
           margin-bottom: 5.5rem;
           font-size: 1.5rem;
           line-height: 2rem;
           @include contentFontSet;
+          transition: 0.5s;
         }
         .input-box {
           position: relative;
@@ -186,18 +198,20 @@
           }
           #date-picker-inline,
           #time-picker {
+            transition: 0.5s;
             padding: 6px 0 7px;
             height: auto;
           }
           .MuiFormControl-root {
             width: 50%;
-
+            transition: 0.5s;
             &:nth-child(2) {
               margin-left: 20px;
             }
           }
           #date-picker-inline-label,
           #time-picker-label {
+            transition: 0.5s;
             font-size: 1.5rem;
           }
           input[type='text'],

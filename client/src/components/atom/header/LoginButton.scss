@@ -1,7 +1,7 @@
 @import '../../../style/variables';
 @import '../../../style/mixin';
 
-.event-button {
+.header-login-button {
   @include font-normal;
   color: $font-tertiary-color;
   background-color: transparent;

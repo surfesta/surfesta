@@ -3,7 +3,6 @@ const OFF = `${prefix}OFF`;
 const WELCOME_IN = `${prefix}WELCOME_IN`;
 const SIGN_IN = `${prefix}SIGN_IN`;
 const SIGN_UP = `${prefix}SIGN_UP`;
-const SUCCESS_SIGN_UP = `${prefix}SUCCESS_SIGN_UP`;
 
 export const offModal = () => ({
   type: OFF,
@@ -21,9 +20,9 @@ export const welcomeModal = (content = CONTENT_TYPES.PRE_LOGIN) => ({
   preLogin: true,
 });
 
-export const setSignInModal = (email) => ({
+export const setSignInModal = (email, content) => ({
   type: SIGN_IN,
-  content: CONTENT_TYPES.LOGIN,
+  content: content || CONTENT_TYPES.LOGIN,
   forLogin: true,
   presetValue: { email },
 });

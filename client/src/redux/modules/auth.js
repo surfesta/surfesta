@@ -237,6 +237,6 @@ export function* authSaga() {
   yield takeEvery(START_LOGIN_SAGA, loginSaga);
   yield takeEvery(START_SOCIAL_SDK_LOGIN, socialLoginSaga);
   yield takeEvery(SIGN_UP_SAGA, signupSaga);
-  yield takeEvery(TOGGLE_ENLISTED_EVENT, toggleEnlistedEventSaga);
-  yield takeEvery(TOGGLE_LIKED_EVENT, toggleLikedEventSaga);
+  yield takeLatest(TOGGLE_ENLISTED_EVENT, toggleEnlistedEventSaga);
+  yield takeLatest(TOGGLE_LIKED_EVENT, toggleLikedEventSaga);
 }

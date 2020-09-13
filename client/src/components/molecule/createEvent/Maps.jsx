@@ -1,5 +1,4 @@
 import React from 'react';
-import './maps.scss';
 import { useState } from 'react';
 const Maps = ({ Ref, setPlaceState }) => {
   const [_placeState, _setPlaceState] = useState('제강빌딩');

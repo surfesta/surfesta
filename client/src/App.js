@@ -13,6 +13,7 @@ import useThemeWithLocalStorage from './hooks/useThemeWithLocalStorage';
 import { useDispatch } from 'react-redux';
 import { startGetEvents } from './redux/modules/events';
 import HeaderTemplate from './components/template/HeaderTemplate';
+import ReviseEvent from './pages/ReviseEvent';
 import Meta from './components/Meta';
 
 export const ThemeContext = React.createContext();
@@ -42,6 +43,7 @@ function App() {
         <ConnectedRouter history={history}>
           <HeaderTemplate />
           <Switch>
+            <Route path="/Revise/:event_id" component={ReviseEvent} />
             <Route path="/createEvent" component={CreateEvent} />
             <Route path="/event/:event_id" component={EventDetail} />
             <Route path="/my" component={MyPage} />

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import './createevent.scss';
 import EventForm from '../components/template/createEvent/EventForm';
-import useAuth from '../utils/useAuth';
+// import useAuth from '../utils/useAuth';
 import RouteLeavingGuard from '../components/organism/createEvent/RouteLeavingGuard';
 
 export default function CreateEvent({ history }) {
-  useAuth();
+  // useAuth();
   const [whenState, updateWhenState] = useState(true);
   return (
     <>

@@ -28,7 +28,6 @@ export default function FavoriteButton({ event }) {
   const toggleLiked = (type) => {
     dispatch(toggleLikedUser(eventId, userId, type));
     dispatch(toggleLikedEvent(eventId, userId, type));
-    console.log('toggleLiked', type);
   };
 
   const checkAuth = () => {

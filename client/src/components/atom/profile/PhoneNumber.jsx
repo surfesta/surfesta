@@ -7,7 +7,7 @@ export default function PhoneNumber({ phoneNumber, phoneNumChange }) {
       <input
         type="tel"
         name="phone_number"
-        value={phoneNumber !== null ? phoneNumber : ''}
+        value={phoneNumber}
         onChange={phoneNumChange}
       />
     </div>

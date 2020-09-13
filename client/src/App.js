@@ -14,8 +14,8 @@ import { useDispatch } from 'react-redux';
 import { startGetEvents } from './redux/modules/events';
 import { Helmet } from 'react-helmet';
 import HeaderTemplate from './components/template/HeaderTemplate';
-import Meta from './Meta';
 import ReviseEvent from './pages/ReviseEvent';
+import Meta from './components/Meta';
 
 export const ThemeContext = React.createContext();
 

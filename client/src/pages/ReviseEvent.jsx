@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import ReviseEventForm from '../components/template/reviseEvent/ReviseEventForm';
-import useAuth from '../utils/useAuth';
+// import useAuth from '../utils/useAuth';
 import RouteLeavingGuard from '../components/organism/createEvent/RouteLeavingGuard';
 
 export default function ReviseEvent({ history, location }) {
-  useAuth();
+  // useAuth();
   if (!location.state) {
     window.location.href = '/';
   }

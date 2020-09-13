@@ -15,6 +15,7 @@ import { startGetEvents } from './redux/modules/events';
 import { Helmet } from 'react-helmet';
 import HeaderTemplate from './components/template/HeaderTemplate';
 import Meta from './Meta';
+import ReviseEvent from './pages/ReviseEvent';
 
 export const ThemeContext = React.createContext();
 
@@ -34,6 +35,7 @@ function App() {
         <ConnectedRouter history={history}>
           <HeaderTemplate />
           <Switch>
+            <Route path="/Revise/:event_id" component={ReviseEvent} />
             <Route path="/createEvent" component={CreateEvent} />
             <Route path="/event/:event_id" component={EventDetail} />
             <Route path="/my" component={MyPage} />

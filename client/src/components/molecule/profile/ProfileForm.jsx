@@ -6,7 +6,6 @@ import Name from '../../atom/profile/Name';
 import Password from '../../atom/profile/Password';
 import PhoneNumber from '../../atom/profile/PhoneNumber';
 import { startPatchUser } from '../../../redux/modules/profile';
-import useAuth from '../../../hooks/useAuth';
 
 function ProfileDetails() {
   const dispatch = useDispatch();

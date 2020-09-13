@@ -12,5 +12,5 @@ export default Yup.object().shape({
   password: Yup.string()
     .required('비밀번호를 입력해주세요')
     .min(3, '패스워드는 3자리 이상입니다.')
-    .matches(/(?=.*[0-9])/, '패스워드는 숫자를 포함해야합니다'),
+    .matches(/^[a-zA-Z0-9]+$/, '영문과 숫자로 입력해주세요'),
 });

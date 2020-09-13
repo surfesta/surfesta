@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function CardContent({ event }) {
   const eventId = event._id;
@@ -46,6 +47,16 @@ export default function CardContent({ event }) {
             {hostName}
             {!hostName && '익명'}
           </span>
+          <Link
+            to={{
+              pathname: `/Revise/${eventId}`,
+              state: {
+                event,
+              },
+            }}
+          >
+            수정하기
+          </Link>
         </p>
       </div>
     </div>

@@ -1,6 +1,12 @@
 import React from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 export default function EventDislose({ toggle, Ref }) {
+  const [active, setActive] = useState();
+  useEffect(() => {
+    Ref.current.checked ? setActive(true) : setActive(false);
+  }, []);
   return (
     <>
       <h2 className="eventform-title">공개 여부</h2>
@@ -12,7 +18,7 @@ export default function EventDislose({ toggle, Ref }) {
             되어 있거나, 메인에 공개 하고 싶지 않으면 체크를 해제 하세요.
           </p>
         </div>
-        <div className="input-box label-box active">
+        <div className={`input-box label-box ${active ? 'active' : ''}`}>
           <input
             ref={Ref}
             onChange={toggle}

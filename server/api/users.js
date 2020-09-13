@@ -243,6 +243,7 @@ router.post('/emails', async (req, res, next) => {
     res.json({
       emailCheck: true,
       message: 'email found',
+      username: user.username,
     });
   } catch (error) {
     next(error);
@@ -272,7 +273,7 @@ router.post('/login', async (req, res, next) => {
 
       user.generateToken((err, user) => {
         if (err) return res.status(400).send(err);
-        console.log(process.env.NODE_ENV);
+
         res.cookie('surf_auth', user.token, {
           maxAge: user.tokenMaxAge,
           httpOnly: true,

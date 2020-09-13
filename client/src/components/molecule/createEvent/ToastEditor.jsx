@@ -13,6 +13,7 @@ export default function ToastEditor({ Ref }) {
       initialEditType="wysiwyg"
       useCommandShortcut={true}
       ref={Ref}
+
       // hooks={{
       //   addImageBlobHook: function (blob, callback) {
       //     const uploadedImageURL = uploadImage(blob);

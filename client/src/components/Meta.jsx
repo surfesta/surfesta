@@ -6,16 +6,7 @@ const locales = {
   ko: 'ko_KR',
 };
 
-const data = {
-  locale: 'ko',
-  title: 'Surfesta! - 이벤트를 찾는 빠른 방법',
-  canonical: 'https://surfesta.site',
-  description: '서페스타입니다',
-  image:
-    'https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/3110e469822527.5b8ed1c3d5977.jpg',
-};
-
-const Meta = () => {
+const Meta = (data) => {
   const lang = locales[data.locale] || locales['en'];
   const title = data.title;
   const description = data.description;

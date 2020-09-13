@@ -1,18 +1,47 @@
 @import '../../style/mixin';
 @import '../../style/variables';
+@import '../../style/mediaQuery';
 
 .sub-nav-section {
-  width: 700px;
   display: flex;
+  justify-content: center;
   text-align: center;
-  margin: 0 auto;
 
-  div {
+  .sub-nav-div {
     @include font(2rem, $font-primary-color, $weight: 700);
-    border: 0.5px solid #aaaaaa;
-    width: 100%;
+    width: 345px;
     height: 100px;
     padding-top: 30px;
+    cursor: pointer;
+  }
+
+  .clicked {
+    border-bottom: 3px solid $point-color;
+  }
+}
+
+@include mobile {
+  .nav-link {
+    margin: 0 20px;
+  }
+  .sub-nav-div {
+    padding: 0 0px;
+    max-width: 90px;
+    word-break: keep-all;
+    cursor: pointer;
+  }
+}
+
+@include tablet {
+  .sub-nav-div {
+    max-width: 200px;
+    cursor: pointer;
+  }
+}
+
+@include desktop {
+  .sub-nav-div {
+    max-width: 260px;
     cursor: pointer;
   }
 }

@@ -1,0 +1,12 @@
+.event-button {
+  font-size: 1.5rem;
+  color: #454b58;
+  color: #a0a0a2;
+  background-color: transparent;
+  padding: 1rem;
+}
+
+.event-button:hover {
+  color: #c7c7c7;
+}
+/*# sourceMappingURL=PostEventButton.css.map */

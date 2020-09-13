@@ -10,11 +10,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { push } from 'connected-react-router';
 
 function MyPage() {
-  const user = useSelector((state) => state.auth.user);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    if (!user) dispatch(push('/'));
-  }, []);
   return (
     <>
       <SubNavTemplate />

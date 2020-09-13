@@ -60,13 +60,19 @@ body.dark {
       }
     }
   }
-  .create-event-wrap {
+  .create-event-wrap,
+  .revise-event-wrap {
     background: #2c3035;
-    .create-event-form {
+    .create-event-form,
+    .revise-event-form {
       h1 {
         color: #ccc;
       }
       form {
+        #date-picker-inline-helper-text,
+        #time-picker-helper-text {
+          color: #fff;
+        }
         .eventform-title {
           color: #bebebe;
         }
@@ -86,7 +92,8 @@ body.dark {
             color: #fff;
           }
         }
-        .create-event-submit {
+        .create-event-submit,
+        .revise-event-submit {
           button {
             color: #fff;
             border-color: #fff;
@@ -94,6 +101,18 @@ body.dark {
             &:hover {
               color: #000;
               background: #fff;
+            }
+          }
+        }
+        .revise-event-submit {
+          button {
+            &:first-child {
+              border: 2px solid #bdbdc4;
+              color: #bdbdc4;
+              &:hover {
+                background: #bdbdc4;
+                color: #2c3035;
+              }
             }
           }
         }

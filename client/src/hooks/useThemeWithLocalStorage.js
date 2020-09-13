@@ -16,7 +16,10 @@ export default function useThemeWithLocalStorage() {
 
   const handleToggleTheme = useCallback(() => {
     setTheme(theme === 'light' ? 'dark' : 'light');
-    localStorage.setItem('user-preferred-theme', theme ? 'light' : 'dark');
+    localStorage.setItem(
+      'user-preferred-theme',
+      theme === 'light' ? 'dark' : 'light' ? 'light' : 'dark'
+    );
   }, [theme]);
 
   return [theme, handleToggleTheme];

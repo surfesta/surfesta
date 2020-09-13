@@ -35,4 +35,9 @@ export default class EventService {
     });
     return data;
   }
+
+  static async searchEvents({ keyword }) {
+    const { data } = await axios.get(`${EVENT_URL}/search?q=${keyword}`);
+    return data;
+  }
 }

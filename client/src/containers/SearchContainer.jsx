@@ -14,7 +14,7 @@ export default function SearchContainer({ searchedKeyword }) {
 
   useEffect(() => {
     dispatch(startSearchEvents(searchedKeyword));
-  }, [dispatch]);
+  }, [dispatch, searchedKeyword]);
 
   return (
     <EventsTemplate

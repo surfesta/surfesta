@@ -10,7 +10,10 @@ const auth = (req, res, next) => {
         error: true,
       });
     req.token = token;
-    req.user = user;
+    req.user = user
+      .populate('enlisted_events')
+      .populate('hosting_events')
+      .populate('liked_events');
     next();
   });
 };

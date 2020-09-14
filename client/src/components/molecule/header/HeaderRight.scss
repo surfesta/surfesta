@@ -4,9 +4,7 @@
 .header-right {
   display: flex;
   align-items: center;
-  button.MuiButtonBase-root {
-    margin: 0 0.3rem !important;
-  }
+
   .MuiSvgIcon-root {
     width: 1.4em !important;
     height: 1.4em !important;
@@ -25,4 +23,8 @@
 }
 .MuiAvatar-root {
   margin: 0 1rem !important;
+}
+
+.auth-indicator {
+  @include Flex();
 }

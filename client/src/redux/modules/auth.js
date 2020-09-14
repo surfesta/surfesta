@@ -93,11 +93,12 @@ const TOGGLE_LIKED_EVENT = `${userPrefix}/TOGGLE_LIKED_EVENT`;
 export const cookieCheckSagaActionCreator = () => ({
   type: START_COOKIE_CHECK_SAGA,
 });
-export const loginSagaActionCreator = ({ email, password }) => ({
+export const loginSagaActionCreator = (values, setHasLoginFailed) => ({
   type: START_LOGIN_SAGA,
   payload: {
-    email,
-    password,
+    email: values.email,
+    password: values.password,
+    setHasLoginFailed,
   },
 });
 export const logoutSagaActionCreator = () => ({
@@ -136,7 +137,6 @@ export const toggleLikedEvent = (eventId, userId, type) => ({
 function* cookieCheckSaga() {
   try {
     yield put(loginStart());
-    yield delay(300);
     const { isAuth, user } = yield call(UserService.authenticate);
     if (!isAuth) throw new Error();
     yield put(loginSuccess(user));
@@ -148,14 +148,15 @@ function* cookieCheckSaga() {
 function* loginSaga(action) {
   try {
     yield put(loginStart());
-    yield delay(300);
-    const { user } = yield call(UserService.login, action.payload);
-    yield (() => {
-      if (!user) throw new Error();
-    })();
+    const { loginResult, user } = yield call(UserService.login, action.payload);
+    if (!loginResult) {
+      action.payload.setHasLoginFailed(true);
+      throw new Error();
+    }
     yield put(loginSuccess(user));
     yield put(offModal());
   } catch (error) {
+    console.log(error);
     yield put(loginFail({ error }));
   }
 }
@@ -163,11 +164,7 @@ function* loginSaga(action) {
 function* signupSaga(action) {
   try {
     yield put(loginStart());
-    yield delay(300);
-    const { success, newUser } = yield call(
-      UserService.register,
-      action.payload
-    );
+    const { success, newUser } = yield call(UserService.register, action.payload);
     if (!success) throw new Error();
     const { loginResult, user } = yield call(UserService.login, action.payload);
     if (!loginResult) throw new Error();
@@ -197,10 +194,7 @@ function* socialLoginSaga(action) {
     }
   } catch (error) {
     yield put(checkFail());
-    const { success, newuser } = yield call(
-      UserService.register,
-      action.payload
-    );
+    const { success, newuser } = yield call(UserService.register, action.payload);
     if (!success) throw new Error();
     const { user } = yield call(UserService.login, action.payload);
     if (!user) throw new Error();
@@ -212,10 +206,7 @@ function* socialLoginSaga(action) {
 // toggle enlisted event in user
 function* toggleEnlistedEventSaga(action) {
   try {
-    const { user } = yield call(
-      UserService.toggleEnlistedEvent,
-      action.payload
-    );
+    const { user } = yield call(UserService.toggleEnlistedEvent, action.payload);
     yield put(toggleEnlistedEventSuccess(user));
   } catch (error) {
     yield put(addFail(error));

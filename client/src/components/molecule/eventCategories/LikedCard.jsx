@@ -6,7 +6,7 @@ function LikedCard({ events }) {
     <>
       {events &&
         events.map((event) => {
-          return <Card event={event} />;
+          return <Card event={event} key={event._id} />;
         })}
     </>
   );

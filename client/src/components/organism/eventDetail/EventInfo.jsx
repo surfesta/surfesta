@@ -56,7 +56,7 @@ export default function EventInfo({ event }) {
 
     setTimeout(() => {
       setVisible(false);
-    }, 1000);
+    }, 2000);
   };
 
   const checkAuth = () => {

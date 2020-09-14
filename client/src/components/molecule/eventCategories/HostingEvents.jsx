@@ -1,11 +1,14 @@
 import React from 'react';
-import Card from '../../organism/main/Card';
+import HostingContainer from '../../../containers/HostingContainer';
 
 function HostingEvents(props) {
   return (
     <div>
-      <h1>주최한 이벤트</h1>
-      <section className="cards"></section>
+      <section className="cards-wrap">
+        <div className="cards">
+          <HostingContainer />
+        </div>
+      </section>
     </div>
   );
 }

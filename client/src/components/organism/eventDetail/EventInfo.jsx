@@ -31,8 +31,6 @@ export default function EventInfo({ event }) {
   const maxCount = event && event.max_count;
   const curCount = event && event.cur_count;
 
-  console.log(maxCount === curCount ? '같음' : '안같음');
-
   const user = useSelector((state) => state.auth.user);
   const userId = user && user._id;
 

@@ -13,8 +13,11 @@ export default function CardButtons({ event }) {
 
   return (
     <div className="cardButtons-wrap">
-      {path === main && <FavoriteButton event={event} />}
-      {path === liked && <FavoriteButton event={event} />}
+      {(path !== enlisted || path !== hosting) && (
+        <FavoriteButton event={event} />
+      )}
+      {/* {path === liked && <FavoriteButton event={event} />} */}
+
       {path === enlisted && <DeleteButton event={event} />}
       {path === hosting && <SettingButtons />}
     </div>

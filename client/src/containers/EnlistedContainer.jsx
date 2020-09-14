@@ -7,6 +7,9 @@ import EnlistedCard from '../components/molecule/eventCategories/EnlistedCard';
 
 export default function EnlistedContainer() {
   // mapStateToProps
+  const user = useSelector((state) => state.auth.user);
+  console.log(user && user.enlisted_events);
+
   const events = useSelector((state) => state.events.events);
   const loading = useSelector((state) => state.events.loading);
   const error = useSelector((state) => state.events.error);

@@ -11,6 +11,7 @@ export default function OfflineContent({ event }) {
         <iframe
           src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyB_BJhQ4nBvi7cPxi8DRGJepYp4MbdtRcQ&q=${loactionDetails}`}
           frameBorder="0"
+          title="구글맵"
         ></iframe>
       </div>
       <table>

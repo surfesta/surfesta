@@ -1,0 +1,156 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.profile {
+  margin: 0 auto;
+}
+
+.profile section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 0 auto;
+}
+
+.profile .title {
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+.profile span {
+  font-size: 1.5rem;
+}
+
+.profile #profile-edit {
+  margin-bottom: 3rem;
+}
+
+.profile .form-div {
+  margin-bottom: 5.5rem;
+}
+
+.profile .profile-btn {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border: 2px solid #3562ff;
+  background-color: transparent;
+  font-weight: 700;
+  color: #3562ff;
+  text-align: center;
+  font-size: 1.5rem;
+  border-radius: 50px;
+  outline: 0;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  padding: 2rem;
+  width: 180px;
+}
+
+.profile .profile-btn:hover {
+  background-color: #3562ff;
+  color: #fff;
+}
+
+.logout-section {
+  font-size: 4rem;
+  color: #454b58;
+  border-top: 2px solid #b4b4b5;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 1380px;
+  height: 100%;
+}
+
+.logout-section .logout-div,
+.logout-section .deact-div {
+  border: 2px solid skyblue;
+  width: 100%;
+  height: 200px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.logout-section .logout-title-div,
+.logout-section .deact-title-div {
+  border: 2px solid red;
+  padding-top: 2rem;
+}
+
+.logout-section .logout-title-div span,
+.logout-section .deact-title-div span {
+  display: block;
+  margin-top: 2rem;
+}
+
+.logout-section .profile-btn {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border: 2px solid #3562ff;
+  background-color: transparent;
+  font-weight: 700;
+  color: #3562ff;
+  text-align: center;
+  font-size: 1.5rem;
+  border-radius: 50px;
+  outline: 0;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  padding: 2rem;
+  width: 180px;
+}
+
+.logout-section .profile-btn:hover {
+  background-color: #3562ff;
+  color: #fff;
+}
+
+@media (min-width: 335px) and (max-width: 757px) {
+  .profile .profile-section,
+  .profile .logout-section {
+    padding: 0 30px;
+  }
+  .profile,
+  .profile-section,
+  .logout-section {
+    width: 100%;
+    border: 2px solid orchid;
+  }
+  .profile-btn {
+    margin-top: 2rem;
+  }
+}
+
+@media (min-width: 758px) and (max-width: 1023px) {
+  .profile .profile-section,
+  .profile .logout-section {
+    padding: 0 30px;
+  }
+  .profile-section,
+  .logout-section {
+    width: 100%;
+    border: 2px solid blue;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .profile-section,
+  .logout-section {
+    width: 1024px;
+    border: 2px solid red;
+    margin: 0 auto;
+  }
+}
+/*# sourceMappingURL=ProfileTemplate.css.map */

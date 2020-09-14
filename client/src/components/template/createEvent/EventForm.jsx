@@ -237,11 +237,11 @@ const EventForm = () => {
         <div className="goback-modal-container">
           <div className="inner-modal">
             <div className="modal-body">
-              <pre>
+              <p>
                 해당 내용으로
                 <br />
                 이벤트를 주최할까요?
-              </pre>
+              </p>
             </div>
             <div className="modal-foot">
               <button onClick={() => setModalCheck(false)} type="button">
@@ -257,8 +257,8 @@ const EventForm = () => {
       {clearPost && (
         <div className="goback-modal-container">
           <div className="inner-modal">
-            <div className="modal-body">
-              <pre>이벤트가 게시되었어요!</pre>
+            <div className="modal-body top-body">
+              <p>이벤트가 게시되었어요!</p>
             </div>
             <div className="modal-foot">
               <button onClick={goHome} type="button" className="one-btn">

@@ -52,6 +52,7 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         loading: true,
+        error: null,
       };
     case SUCCESS:
       return {
@@ -143,16 +144,19 @@ function* cookieCheckSaga() {
     yield put(loginFail(error));
   }
 }
+
 function* loginSaga(action) {
   try {
     yield put(loginStart());
     yield delay(300);
     const { user } = yield call(UserService.login, action.payload);
-    if (!user) throw new Error();
+    yield (() => {
+      if (!user) throw new Error();
+    })();
     yield put(loginSuccess(user));
     yield put(offModal());
   } catch (error) {
-    yield put(loginFail(error));
+    yield put(loginFail({ error }));
   }
 }
 
@@ -233,6 +237,6 @@ export function* authSaga() {
   yield takeEvery(START_LOGIN_SAGA, loginSaga);
   yield takeEvery(START_SOCIAL_SDK_LOGIN, socialLoginSaga);
   yield takeEvery(SIGN_UP_SAGA, signupSaga);
-  yield takeEvery(TOGGLE_ENLISTED_EVENT, toggleEnlistedEventSaga);
-  yield takeEvery(TOGGLE_LIKED_EVENT, toggleLikedEventSaga);
+  yield takeLatest(TOGGLE_ENLISTED_EVENT, toggleEnlistedEventSaga);
+  yield takeLatest(TOGGLE_LIKED_EVENT, toggleLikedEventSaga);
 }

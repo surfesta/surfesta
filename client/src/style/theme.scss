@@ -1,22 +1,27 @@
+@import './mixin';
 @import './variables';
 
 body.dark {
   // backgrounds
-  .main {
+  #root {
     background-color: #1b1d21;
+  }
+  .main {
     transition: all 0.2s ease-in-out;
   }
-  .center input {
-    background-color: #1b1d21;
-  }
   .search-wrap {
-    background-color: #1b1d21;
+    background-color: #2c3035;
   }
   .cards-wrap {
     .cards {
       .card-wrap {
         background-color: #2c3035;
         .cardContent-wrap {
+          .thumbnail-wrap {
+            .thumbnail {
+              background-color: #2c3035;
+            }
+          }
           .content-wrap {
             border-bottom: 1px #4b4b4b solid;
             .date {
@@ -60,13 +65,19 @@ body.dark {
       }
     }
   }
-  .create-event-wrap {
+  .create-event-wrap,
+  .revise-event-wrap {
     background: #2c3035;
-    .create-event-form {
+    .create-event-form,
+    .revise-event-form {
       h1 {
         color: #ccc;
       }
       form {
+        #date-picker-inline-helper-text,
+        #time-picker-helper-text {
+          color: #fff;
+        }
         .eventform-title {
           color: #bebebe;
         }
@@ -86,7 +97,8 @@ body.dark {
             color: #fff;
           }
         }
-        .create-event-submit {
+        .create-event-submit,
+        .revise-event-submit {
           button {
             color: #fff;
             border-color: #fff;
@@ -94,6 +106,18 @@ body.dark {
             &:hover {
               color: #000;
               background: #fff;
+            }
+          }
+        }
+        .revise-event-submit {
+          button {
+            &:first-child {
+              border: 2px solid #bdbdc4;
+              color: #bdbdc4;
+              &:hover {
+                background: #bdbdc4;
+                color: #2c3035;
+              }
             }
           }
         }
@@ -106,6 +130,11 @@ body.dark {
       color: $dark-font-primary-color;
     }
     .flex-wrap {
+      .left {
+        .thumbnail {
+          background-color: #1a1d21;
+        }
+      }
       .right {
         p {
           color: $dark-font-primary-color;
@@ -143,8 +172,9 @@ body.dark {
       ol,
       li,
       table,
-      a {
-        color: $dark-font-primary-color;
+      a,
+      span {
+        color: #dadbde !important;
       }
     }
     table {

@@ -1,5 +1,5 @@
 import UserService from '../../services/UserService';
-import { put, delay, call, takeEvery } from 'redux-saga/effects';
+import { put, call, takeEvery } from 'redux-saga/effects';
 import { setSignInModal, setSignUpModal } from './modal';
 
 const prefix = 'surfesta-mailCheck';
@@ -13,9 +13,10 @@ const FAIL = `${prefix}/FAIL`;
 export const checkStart = () => ({
   type: START,
 });
-export const checkSuccess = (email) => ({
+export const checkSuccess = (email, username) => ({
   type: SUCCESS,
   email,
+  username,
 });
 export const checkFail = (error) => ({
   type: FAIL,
@@ -27,6 +28,7 @@ const initialState = {
   loading: false,
   email: '',
   error: null,
+  usernmae: null,
 };
 
 // reducer
@@ -42,10 +44,12 @@ export default function reducer(state = initialState, action) {
       return {
         loading: false,
         email: action.email,
+        usernmae: action.username,
         error: '',
       };
     case FAIL:
       return {
+        ...state,
         loading: false,
         email: '',
         error: action.error,
@@ -69,10 +73,10 @@ export const checkSagaActionCreator = ({ email }) => ({
 function* checkSaga(action) {
   try {
     yield put(checkStart());
-    const { data, email } = yield call(UserService.checkEmail, action.payload);
+    const { data } = yield call(UserService.checkEmail, action.payload);
     if (!data.emailCheck) throw new Error();
-    yield put(checkSuccess(action.payload.email));
-    yield put(setSignInModal(action.payload.email));
+    yield put(checkSuccess(action.payload.email, data.username));
+    yield put(setSignInModal(action.payload.email, data.username));
   } catch (error) {
     yield put(checkFail(error));
     yield put(setSignUpModal(action.payload.email));

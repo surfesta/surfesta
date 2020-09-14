@@ -5,7 +5,15 @@ import {
   KeyboardTimePicker,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
-export default function EventDate({ startDateRef, endDateRef }) {
+export default function EventDate({
+  startDateRef,
+  endDateRef,
+  SD,
+  ST,
+  ED,
+  ET,
+  revise = false,
+}) {
   const [startDate, setStartDate] = React.useState(new Date());
   const [startTime, setStartTime] = React.useState(new Date());
   const [endDate, setEndDate] = React.useState(new Date());
@@ -35,6 +43,7 @@ export default function EventDate({ startDateRef, endDateRef }) {
           <div className="time-check" ref={startDateRef}>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardDatePicker
+                helperText={revise ? '이전 기록 : ' + SD : ''}
                 disableToolbar
                 variant="inline"
                 format="yyyy년MM월dd일"
@@ -48,6 +57,7 @@ export default function EventDate({ startDateRef, endDateRef }) {
                 }}
               />
               <KeyboardTimePicker
+                helperText={revise ? '이전 기록 : ' + ST : ''}
                 margin="normal"
                 id="time-picker"
                 label="행사 시작 시간"
@@ -63,6 +73,7 @@ export default function EventDate({ startDateRef, endDateRef }) {
           <div className="time-check" ref={endDateRef}>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardDatePicker
+                helperText={revise ? '이전 기록 : ' + ED : ''}
                 disableToolbar
                 variant="inline"
                 format="yyyy년MM월dd일"
@@ -76,6 +87,7 @@ export default function EventDate({ startDateRef, endDateRef }) {
                 }}
               />
               <KeyboardTimePicker
+                helperText={revise ? '이전 기록 : ' + ET : ''}
                 margin="normal"
                 id="time-picker"
                 label="행사 종료 시간"

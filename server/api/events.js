@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
         return {
           ...event._doc,
           isLiked: event._doc.liked_users.some(
-            (user) => user._id == current_user_id
+            (user) => user && user._id == current_user_id
           ),
           like_count: new Set(event.liked_users).size,
           cur_count: new Set(event.enlisted_users).size,

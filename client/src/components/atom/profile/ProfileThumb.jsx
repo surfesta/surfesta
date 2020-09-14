@@ -2,9 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 
 function ProfileThumb() {
-  ///---------동욱의 테스트용 코드---------------
   const user = useSelector((state) => state.auth.user);
-  ///----------------------------------------
+
   const titleRef = useRef(null);
 
   useEffect(() => {
@@ -17,23 +16,20 @@ function ProfileThumb() {
     titleNode.focus();
   }, []);
 
-  const divStyle = {
-    border: '2px solid greenyellow',
-    width: '300px',
-    height: '300px',
-    margin: '0 auto',
-  };
-
   return (
     <div id="profile-edit">
       <h2 ref={titleRef} className="title">
         기본 정보
       </h2>
-      <div style={divStyle}>
+      <div className="thumb-div">
         <img
+          className="profile-thumb"
           src={user && user.profile_img}
           alt="이 이미지는 이메일이 해쉬된 값입니다"
         />
+        <span className="thumb-guide">
+          png, jpg, jpeg 이미지만 업로드 가능해요.
+        </span>
       </div>
     </div>
   );

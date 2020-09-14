@@ -22,7 +22,8 @@ export default function CreateEvent({ history }) {
         }}
         yes="확인"
         no="취소"
-        content={'이 페이지를 벗어나면 \n 정성스럽게 작성한 글이 날아가요.'}
+        contentTop={'이 페이지를 벗어나면'}
+        contentBottom={'정성스럽게 작성한 글이 날아가요.'}
       />
       <div className="create-event-wrap">
         <div className="w1440-container">

@@ -11,7 +11,6 @@ export default function EventDetailTemplate({ event }) {
 
   const title = event && event.title;
   const thumbnail = event && event.thumbnail;
-  console.log(thumbnail);
 
   return (
     <>

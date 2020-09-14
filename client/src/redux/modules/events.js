@@ -1,4 +1,4 @@
-import { put, delay, call, takeEvery } from 'redux-saga/effects';
+import { put, call, takeEvery, takeLatest } from 'redux-saga/effects';
 import EventService from '../../services/EventService';
 
 const prefix = 'surfesta-events';
@@ -8,6 +8,7 @@ const START = `${prefix}/START`;
 const SUCCESS = `${prefix}/SUCCESS`;
 const TOGGLE_ENLISTED_USER_SUCCESS = `${prefix} TOGGLE_ENLISTED_USER_SUCCESS`;
 const TOGGLE_LIKED_USER_SUCCESS = `${prefix}/TOGGLE_LIKED_USER_SUCCESS`;
+const SEARCH_EVENTS_SUCCESS = `${prefix}/SEARCH_EVENTS_SUCCESS`;
 const FAIL = `${prefix}/FAIL`;
 
 // action creator
@@ -30,6 +31,11 @@ const toggleLikedUserSuccess = (event) => ({
   event,
 });
 
+const searchEventsSuccess = (searchedEvents) => ({
+  type: SEARCH_EVENTS_SUCCESS,
+  searchedEvents,
+});
+
 export const fail = (error) => ({
   type: FAIL,
   error,
@@ -40,12 +46,11 @@ const initialState = {
   events: [],
   loading: false,
   error: null,
+  searchedEvents: null,
 };
 
 // reducer
 export default function reducer(state = initialState, action) {
-  // console.log(action.event);
-
   const eventId = action.event && action.event._id;
   const events = [...state.events].map((event) =>
     event._id === eventId ? action.event : event
@@ -75,6 +80,11 @@ export default function reducer(state = initialState, action) {
         ...state,
         events,
       };
+    case SEARCH_EVENTS_SUCCESS:
+      return {
+        ...state,
+        searchedEvents: action.searchedEvents,
+      };
     case FAIL:
       return {
         events: [],
@@ -91,6 +101,7 @@ export default function reducer(state = initialState, action) {
 const START_GET_EVENTS = `${prefix}/START_GET_EVENTS`;
 const TOGGLE_ENLISTED_USER = `${prefix}/TOGGLE_ENLISTED_USER`;
 const TOGGLE_LIKED_USER = `${prefix}/TOGGLE_LIKED_USER`;
+const START_SEARCH_EVENTS = `${prefix}/START_SEARCH_EVENTS`;
 
 export const startGetEvents = () => ({
   type: START_GET_EVENTS,
@@ -111,6 +122,13 @@ export const toggleLikedUser = (eventId, userId, type) => ({
     eventId,
     userId,
     type,
+  },
+});
+
+export const startSearchEvents = (keyword) => ({
+  type: START_SEARCH_EVENTS,
+  payload: {
+    keyword,
   },
 });
 
@@ -146,8 +164,18 @@ function* toggleLikedUserSaga(action) {
   }
 }
 
+function* startSearchEventsSaga(action) {
+  try {
+    const events = yield call(EventService.searchEvents, action.payload);
+    yield put(searchEventsSuccess(events));
+  } catch (error) {
+    yield put(fail(error));
+  }
+}
+
 export function* eventsSaga() {
   yield takeEvery(START_GET_EVENTS, startGetEventsSaga);
-  yield takeEvery(TOGGLE_ENLISTED_USER, toggleEnlistedUserSaga);
-  yield takeEvery(TOGGLE_LIKED_USER, toggleLikedUserSaga);
+  yield takeLatest(TOGGLE_ENLISTED_USER, toggleEnlistedUserSaga);
+  yield takeLatest(TOGGLE_LIKED_USER, toggleLikedUserSaga);
+  yield takeLatest(START_SEARCH_EVENTS, startSearchEventsSaga);
 }

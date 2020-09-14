@@ -79,7 +79,10 @@ export default function Modal() {
     <Portal>
       <section id="modal-container" onClick={dismissModal} style={{}}>
         <div id="modal">
-          <h1 className="modal-headline">{modal.content}</h1>
+          <h1 className="modal-headline">
+            {modal.content}
+            {modal.forLogin && '님 안녕하세요!'}
+          </h1>
           {modal.preLogin && (
             <PreLoginForm
               handleEmailCheck={handleEmailCheck}

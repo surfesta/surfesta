@@ -4,7 +4,7 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const config = require('./config');
-const port = 5000;
+const port = config.PORT || 5000;
 
 const mongoose = require('mongoose');
 const db = mongoose.connection;
@@ -38,5 +38,6 @@ app.use(express.json());
 app.use('/api/v1', api);
 
 app.listen(port, () => {
+  console.log(process.env.NODE_ENV);
   console.log(`Server Listening on ${port}`);
 });

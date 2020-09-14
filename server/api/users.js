@@ -222,9 +222,12 @@ router.patch('/:user_id/hosting', async (req, res) => {
 
 // Authentificate User
 router.post('/auth', auth, (req, res) => {
+  const user = await User.findOne({ _id:  req.user._id })
+  .populate('enlisted_events')
+  .populate('hosting_events')
+  .populate('liked_events');
   res.status(200).json({
-    user: req.user._doc,
-    _id: req.user._id,
+    user,
     isAdmin: req.user.role === 0 ? false : true,
     isAuth: true,
   });

@@ -31,6 +31,8 @@ export default function EventInfo({ event }) {
   const maxCount = event && event.max_count;
   const curCount = event && event.cur_count;
 
+  console.log(maxCount === curCount ? '같음' : '안같음');
+
   const user = useSelector((state) => state.auth.user);
   const userId = user && user._id;
 
@@ -174,7 +176,7 @@ export default function EventInfo({ event }) {
           </table>
 
           <div className="button-wrap">
-            {!isEnlisted && (
+            {!isEnlisted && maxCount !== curCount && (
               <button className="enlist-button" onClick={checkAuth}>
                 이벤트 참석하기
               </button>
@@ -182,6 +184,11 @@ export default function EventInfo({ event }) {
             {isEnlisted && (
               <button className="disable-button" disabled>
                 이벤트 참석완료
+              </button>
+            )}
+            {!isEnlisted && maxCount === curCount && (
+              <button className="disable-button" disabled>
+                현재 이벤트는 만석이예요.
               </button>
             )}
             <FavoriteButton event={event} />

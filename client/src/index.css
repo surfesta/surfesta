@@ -8,4 +8,5 @@
 
 #root {
   scroll-behavior: smooth;
+  height: 100vh;
 }

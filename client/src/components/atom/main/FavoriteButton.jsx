@@ -17,7 +17,7 @@ export default function FavoriteButton({ event }) {
   useEffect(() => {
     event &&
       event.liked_users.map((user) => {
-        user._id === userId && setSelect(true);
+        user && user._id === userId && setSelect(true);
       });
   }, [userId]);
 

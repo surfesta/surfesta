@@ -13,7 +13,7 @@ export default function CardButtons({ event }) {
   return (
     <div className="cardButtons-wrap">
       {path === main && <FavoriteButton event={event} />}
-      {path === enlisted && <DeleteButton />}
+      {path === enlisted && <DeleteButton event={event} />}
       {path === hosting && <SettingButtons />}
     </div>
   );

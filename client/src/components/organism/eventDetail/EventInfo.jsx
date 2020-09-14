@@ -5,10 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toggleEnlistedUser } from '../../../redux/modules/events';
 import { toggleEnlistedEvent } from '../../../redux/modules/auth';
 import { welcomeModal } from '../../../redux/modules/modal';
+import Portal from '../../Portal';
 
 export default function EventInfo({ event }) {
   const dispatch = useDispatch();
   const [isEnlisted, setIsEnlisted] = useState(false);
+  const [visible, setVisible] = useState(false);
   const eventInfoBar = useRef();
 
   const eventId = event && event._id;
@@ -39,7 +41,6 @@ export default function EventInfo({ event }) {
       );
 
     // window.addEventListener('scroll', handleScroll);
-
     // return window.removeEventListener('scroll', handleScroll);
   }, [userId]);
 
@@ -51,6 +52,11 @@ export default function EventInfo({ event }) {
     dispatch(toggleEnlistedUser(eventId, userId));
     dispatch(toggleEnlistedEvent(eventId, userId));
     setIsEnlisted(!isEnlisted);
+    setVisible(true);
+
+    setTimeout(() => {
+      setVisible(false);
+    }, 1000);
   };
 
   const checkAuth = () => {
@@ -182,6 +188,22 @@ export default function EventInfo({ event }) {
           </div>
         </div>
       </div>
+
+      {visible && (
+        <Portal>
+          <div
+            id="modal-container"
+            onClick={(e) => {
+              if (!(e.target === e.currentTarget)) return;
+              setVisible(false);
+            }}
+          >
+            <div id="modal" className="confirm-modal">
+              <h1>이벤트 참가신청이 완료되었습니다.</h1>
+            </div>
+          </div>
+        </Portal>
+      )}
     </div>
   );
 }

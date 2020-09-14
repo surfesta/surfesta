@@ -39,9 +39,12 @@
   min-height: 30vh;
   padding: 6rem 3rem 4rem;
   &.confirm-modal {
+    padding: 6rem 3rem;
+    min-height: 100px;
     h1 {
       font-size: 4rem;
       color: #fff;
+      word-break: break-all;
     }
     button {
       @include modal-button;

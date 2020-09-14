@@ -44,7 +44,7 @@
     h1 {
       font-size: 4rem;
       color: #fff;
-      word-break: break-all;
+      word-break: keep-all;
     }
     button {
       @include modal-button;

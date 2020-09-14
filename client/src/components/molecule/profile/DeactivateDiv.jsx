@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import ProfileBtn from '../../atom/profile/ProfileBtn';
 import Portal from '../../Portal';
+import DeactivateModal from './DeactivateModal';
 
 function DeactivateDiv({ handleClick }) {
   const [visible, setVisible] = useState(false);
@@ -14,32 +15,12 @@ function DeactivateDiv({ handleClick }) {
       <div className="deact-btn-div">
         <ProfileBtn
           handleClick={() => {
-            console.log('??');
             setVisible(true);
           }}
           name="탈퇴 하기"
         />
       </div>
-      {visible && (
-        <Portal>
-          <div
-            id="modal-container"
-            onClick={(e) => {
-              if (!(e.target === e.currentTarget)) return;
-              setVisible(false);
-            }}
-          >
-            <div id="modal">
-              <h1>진짜가누</h1>
-              <button onClick={handleClick}>ㅇㅇ갑니다</button>
-              <hr />
-              <button onClick={() => setVisible(false)}>
-                아뇨 잘 못 눌렷슴
-              </button>
-            </div>
-          </div>
-        </Portal>
-      )}
+      {visible && <DeactivateModal handleClick={handleClick} setVisible={setVisible} />}
     </div>
   );
 }

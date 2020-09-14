@@ -1,12 +1,17 @@
+@import '../../style/mixin';
+@import '../../style/variables';
 @import '../../style/mediaQuery';
 
 .search-wrap {
-  background-color: #fff;
+  background-color: white;
   .center {
     position: relative;
     width: 1440px;
     margin: 0 auto;
     input {
+      @include Flex();
+      height: 12rem;
+      background-color: transparent;
       width: 100%;
       padding: 30px;
       padding-right: 80px;

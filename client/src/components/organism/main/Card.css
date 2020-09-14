@@ -1,0 +1,163 @@
+.card-wrap {
+  position: relative;
+  width: calc(25% - 30px);
+  height: 100%;
+  margin: 0 30px 30px 0px;
+  border-radius: 10px;
+  background: #fff;
+  overflow: hidden;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.card-wrap:hover {
+  -webkit-transform: translateY(-8px);
+          transform: translateY(-8px);
+  -webkit-box-shadow: 0 5px 8px #00000010;
+          box-shadow: 0 5px 8px #00000010;
+}
+
+.card-wrap .loading-wrap {
+  background-color: #f2f3f6;
+  padding-top: 50px;
+  padding-bottom: 300px;
+  text-align: center;
+}
+
+.card-wrap .loading-wrap span {
+  display: inline-block;
+  width: 5rem;
+  height: 5rem;
+  border: 0.3rem solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top-color: #3562ff;
+  animation: spin 1s ease-in-out infinite;
+  -webkit-animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes spin {
+  to {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+.card-wrap .cardContent-wrap {
+  cursor: pointer;
+}
+
+.card-wrap .cardContent-wrap .thumbnail-wrap .thumbnail {
+  width: 100%;
+  padding-bottom: 66.66%;
+  background-size: cover;
+}
+
+.card-wrap .cardContent-wrap .content-wrap {
+  position: relative;
+  padding: 20px 20px 0 20px;
+  border-bottom: 1px solid #f2f3f6;
+}
+
+.card-wrap .cardContent-wrap .content-wrap p {
+  margin: 0;
+}
+
+.card-wrap .cardContent-wrap .content-wrap .date {
+  font-size: 1.5rem;
+  color: #717174;
+  font-weight: 600;
+}
+
+.card-wrap .cardContent-wrap .content-wrap h3 {
+  font-size: 1.8rem;
+  color: #454b58;
+  font-weight: 700;
+  padding: 5px 0 30px 0;
+  min-height: 91px;
+}
+
+.card-wrap .cardContent-wrap .content-wrap .price {
+  font-size: 1.3rem;
+  color: #454b58;
+  font-weight: 600;
+  padding-bottom: 20px;
+}
+
+.card-wrap .cardContent-wrap .content-wrap .online {
+  font-size: 1.3rem;
+  color: #454b58;
+  font-weight: 600;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
+.card-wrap .cardContent-wrap .host-wrap {
+  padding: 0 20px;
+}
+
+.card-wrap .cardContent-wrap .host-wrap span {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.card-wrap .cardContent-wrap .host-wrap .host-profile {
+  display: inline-block;
+  width: 23px;
+  height: 23px;
+  background-color: #3562ff;
+  background-size: cover;
+  border-radius: 50%;
+}
+
+.card-wrap .cardContent-wrap .host-wrap .host-name {
+  font-size: 1.3rem;
+  color: #454b58;
+  font-weight: 600;
+  padding-left: 8px;
+}
+
+.card-wrap .cardButtons-wrap {
+  position: absolute;
+  bottom: 0;
+  right: 8px;
+}
+
+.card-wrap .cardButtons-wrap svg {
+  font-size: 2rem;
+  color: #a0a0a2;
+}
+
+.card-wrap .cardButtons-wrap .favoriteButton-wrap.act svg {
+  color: #3562ff;
+}
+
+@media (min-width: 335px) and (max-width: 757px) {
+  .card-wrap {
+    width: 100%;
+  }
+}
+
+@media (min-width: 758px) and (max-width: 1023px) {
+  .card-wrap {
+    width: calc(50% - 30px);
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .card-wrap {
+    width: calc(33.33% - 30px);
+  }
+}
+/*# sourceMappingURL=Card.css.map */

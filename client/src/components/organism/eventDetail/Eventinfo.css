@@ -1,0 +1,196 @@
+.eventInfo-wrap {
+  position: relative;
+}
+
+.eventInfo-wrap .top-fix {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  width: 100%;
+  padding: 30px;
+  -webkit-box-shadow: 0 3px 10px #3333;
+          box-shadow: 0 3px 10px #3333;
+}
+
+.eventInfo-wrap .show {
+  display: block;
+}
+
+.eventInfo-wrap .flex-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: wrap;
+      flex-flow: wrap;
+  color: #454b58;
+}
+
+.eventInfo-wrap .flex-wrap h2 {
+  font-size: 4rem;
+  font-weight: 700;
+}
+
+.eventInfo-wrap .flex-wrap p {
+  margin: 40px 0 20px 0;
+}
+
+.eventInfo-wrap .flex-wrap .left {
+  width: 50%;
+}
+
+.eventInfo-wrap .flex-wrap .left .thumbnail {
+  width: 100%;
+  padding-bottom: 66.66%;
+  background-color: #ddd;
+  background-position: center;
+  background-size: cover;
+}
+
+.eventInfo-wrap .flex-wrap .right {
+  width: calc(50% - 50px);
+  margin-left: 50px;
+  font-size: 2.4rem;
+}
+
+.eventInfo-wrap .flex-wrap .right .price {
+  font-size: 3rem;
+  font-weight: 600;
+}
+
+.eventInfo-wrap .flex-wrap .right table {
+  width: 100%;
+}
+
+.eventInfo-wrap .flex-wrap .right table tr.top-line th,
+.eventInfo-wrap .flex-wrap .right table tr.top-line td {
+  border-top: 1px solid #b4b4b5;
+  padding-top: 20px;
+}
+
+.eventInfo-wrap .flex-wrap .right table tr th {
+  text-align: left;
+  vertical-align: top;
+  font-weight: 400;
+  color: #717174;
+  width: 35%;
+  padding-bottom: 20px;
+}
+
+.eventInfo-wrap .flex-wrap .right table tr td {
+  padding-bottom: 20px;
+}
+
+.eventInfo-wrap .flex-wrap .right table tr td .start {
+  display: block;
+}
+
+.eventInfo-wrap .flex-wrap .right table tr td .host-thumbnail {
+  background-color: #ddd;
+  background-position: center;
+  background-size: cover;
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  margin-right: 8px;
+  margin-top: -3px;
+  vertical-align: middle;
+  border-radius: 50%;
+}
+
+.eventInfo-wrap .flex-wrap .right .button-wrap {
+  padding-top: 23px;
+}
+
+.eventInfo-wrap .flex-wrap .right .button-wrap .enlist-button,
+.eventInfo-wrap .flex-wrap .right .button-wrap .disable-button {
+  width: calc(100% - 100px);
+  margin-right: 25px;
+  padding: 21px;
+}
+
+.eventInfo-wrap .flex-wrap .right .button-wrap .enlist-button {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border: 2px solid #3562ff;
+  background-color: transparent;
+  font-weight: 700;
+  color: #3562ff;
+  text-align: center;
+  font-size: 1.5rem;
+  border-radius: 50px;
+  outline: 0;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.eventInfo-wrap .flex-wrap .right .button-wrap .enlist-button:hover {
+  background-color: #3562ff;
+  color: #fff;
+}
+
+.eventInfo-wrap .flex-wrap .right .button-wrap .disable-button {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border: 2px solid #b4b4b5;
+  background-color: #b4b4b5;
+  font-weight: 700;
+  color: #454b58;
+  text-align: center;
+  font-size: 1.5rem;
+  border-radius: 50px;
+  outline: 0;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  cursor: default;
+}
+
+.eventInfo-wrap .flex-wrap .right .button-wrap .fav-button {
+  display: inline-block;
+  border: 2px solid #b4b4b5;
+  border-radius: 50%;
+}
+
+.eventInfo-wrap .flex-wrap .right .button-wrap .fav-button button svg {
+  padding: 4px;
+  font-size: 3rem;
+  color: #b4b4b5;
+}
+
+@media (min-width: 335px) and (max-width: 757px) {
+  .eventInfo-wrap .flex-wrap h2 {
+    margin-top: 50px;
+    font-size: 3.2rem;
+  }
+  .eventInfo-wrap .flex-wrap .left {
+    width: 100%;
+  }
+  .eventInfo-wrap .flex-wrap .right {
+    width: 100%;
+    margin-left: 0;
+    font-size: 1.8rem;
+  }
+  .eventInfo-wrap .flex-wrap .right table {
+    width: 100%;
+  }
+}
+
+@media (min-width: 758px) and (max-width: 1023px) {
+  .eventInfo-wrap .flex-wrap h2 {
+    margin-top: 50px;
+    font-size: 3.2rem;
+  }
+  .eventInfo-wrap .flex-wrap .left {
+    width: 100%;
+  }
+  .eventInfo-wrap .flex-wrap .right {
+    width: 100%;
+    margin-left: 0;
+    font-size: 1.8rem;
+  }
+  .eventInfo-wrap .flex-wrap .right table {
+    width: 100%;
+  }
+}
+/*# sourceMappingURL=Eventinfo.css.map */

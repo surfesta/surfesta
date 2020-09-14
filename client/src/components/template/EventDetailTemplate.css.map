@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AAEA,AAAA,YAAY,CAAC;EACX,SAAS,EAAE,MAAM;EACjB,MAAM,EAAE,MAAM;EACd,OAAO,EAAE,SAAS;CACnB",
+    "sources": [
+        "EventDetailTemplate.scss",
+        "../../style/_mediaQuery.scss"
+    ],
+    "names": [],
+    "file": "EventDetailTemplate.css"
+}

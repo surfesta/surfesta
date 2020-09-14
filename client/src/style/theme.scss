@@ -1,16 +1,16 @@
+@import './mixin';
 @import './variables';
 
 body.dark {
   // backgrounds
-  .main {
+  #root {
     background-color: #1b1d21;
+  }
+  .main {
     transition: all 0.2s ease-in-out;
   }
-  .center input {
-    background-color: #1b1d21;
-  }
   .search-wrap {
-    background-color: #1b1d21;
+    background-color: #2c3035;
   }
   .cards-wrap {
     .cards {

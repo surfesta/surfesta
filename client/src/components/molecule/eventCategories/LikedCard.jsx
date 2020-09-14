@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from '../../organism/main/Card';
 
-function HostingCard({ events }) {
+function LikedCard({ events }) {
   return (
     <>
       {events &&
@@ -11,4 +11,4 @@ function HostingCard({ events }) {
     </>
   );
 }
-export default HostingCard;
+export default LikedCard;

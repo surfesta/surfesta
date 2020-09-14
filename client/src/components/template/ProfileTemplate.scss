@@ -49,7 +49,6 @@
 .logout-section {
   .logout-div,
   .deact-div {
-    border: 2px solid skyblue;
     width: 100%;
     height: 200px;
     display: flex;
@@ -65,7 +64,6 @@
 
   .logout-title-div,
   .deact-title-div {
-    border: 2px solid red;
     padding-top: 2rem;
 
     span {
@@ -84,14 +82,15 @@
   .profile {
     .profile-section,
     .logout-section {
+      display: block;
       padding: 0 30px;
     }
   }
+
   .profile,
   .profile-section,
   .logout-section {
     width: 100%;
-    border: 2px solid orchid;
   }
 
   .profile-btn {
@@ -109,7 +108,6 @@
   .profile-section,
   .logout-section {
     width: 100%;
-    border: 2px solid blue;
   }
 }
 
@@ -117,7 +115,6 @@
   .profile-section,
   .logout-section {
     width: 1024px;
-    border: 2px solid red;
     margin: 0 auto;
   }
 }

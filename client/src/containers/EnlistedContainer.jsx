@@ -10,6 +10,10 @@ export default function EnlistedContainer() {
   const events = useSelector((state) => state.events.events);
   const loading = useSelector((state) => state.events.loading);
   const error = useSelector((state) => state.events.error);
+  const user = useSelector(
+    (state) => state.auth.user && state.auth.user.enlisted_events
+  );
+  console.log(user);
 
   // mapDispatchToProps
   const dispatch = useDispatch();

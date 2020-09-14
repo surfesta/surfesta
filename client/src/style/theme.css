@@ -1,0 +1,117 @@
+body.dark .main {
+  background-color: #1b1d21;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+body.dark .center input {
+  background-color: #1b1d21;
+}
+
+body.dark .search-wrap {
+  background-color: #1b1d21;
+}
+
+body.dark .cards {
+  background-color: #1b1d21;
+}
+
+body.dark .cards .card-wrap {
+  background-color: #2c3035 !important;
+}
+
+body.dark .cards .card-wrap * {
+  color: #949494 !important;
+}
+
+body.dark .cards .card-wrap:hover h3 {
+  color: #cccccc !important;
+}
+
+body.dark .cards .card-wrap .content-wrap {
+  border-bottom: 1px #4b4b4b solid;
+}
+
+body.dark .cards .card-wrap .content-wrap h3 {
+  color: #bebebe;
+  -webkit-transition: color 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out;
+}
+
+body.dark .cards .card-wrap .selectList-wrap ul {
+  background-color: #2c3035;
+}
+
+body.dark .cards .card-wrap .search-btn {
+  color: dimgray;
+}
+
+body.dark .create-event-wrap {
+  background: #2c3035;
+}
+
+body.dark .create-event-wrap .create-event-form h1 {
+  color: #ccc;
+}
+
+body.dark .create-event-wrap .create-event-form form .eventform-title {
+  color: #bebebe;
+}
+
+body.dark .create-event-wrap .create-event-form form .event-sec {
+  color: #fff;
+}
+
+body.dark .create-event-wrap .create-event-form form .event-sec .event-content {
+  color: #fff;
+}
+
+body.dark .create-event-wrap .create-event-form form .upload-type {
+  color: #fff;
+}
+
+body.dark .create-event-wrap .create-event-form form .time-check label,
+body.dark .create-event-wrap .create-event-form form .time-check input,
+body.dark .create-event-wrap .create-event-form form .time-check button {
+  color: #fff;
+}
+
+body.dark .eventInfo-wrap h2 {
+  color: #f2f3f6;
+}
+
+body.dark .eventInfo-wrap .flex-wrap .right p {
+  color: #f2f3f6;
+}
+
+body.dark .eventInfo-wrap .flex-wrap .right table tr th {
+  color: #89898b;
+}
+
+body.dark .eventInfo-wrap .flex-wrap .right table tr td {
+  color: #f2f3f6;
+}
+
+body.dark .eventContents-wrap .content {
+  color: #f2f3f6;
+}
+
+body.dark .eventContents-wrap .content h1,
+body.dark .eventContents-wrap .content h2,
+body.dark .eventContents-wrap .content h3,
+body.dark .eventContents-wrap .content h4,
+body.dark .eventContents-wrap .content h5,
+body.dark .eventContents-wrap .content h6,
+body.dark .eventContents-wrap .content p,
+body.dark .eventContents-wrap .content ul,
+body.dark .eventContents-wrap .content ol,
+body.dark .eventContents-wrap .content li,
+body.dark .eventContents-wrap .content table,
+body.dark .eventContents-wrap .content a {
+  color: #f2f3f6;
+}
+
+body.dark .eventContents-wrap table {
+  color: #f2f3f6;
+}
+/*# sourceMappingURL=theme.css.map */

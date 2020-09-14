@@ -18,38 +18,23 @@
     transform: translateY(50% - 20%);
     margin-right: 2rem;
   }
-  // @include font-title;
-  // border-top: 2px solid #b4b4b5;
-  // display: flex;
-  // justify-content: center;
-  // width: 1380px;
-  // height: 100%;
 
-  // .logout-title-div,
-  // .deact-title-div {
-  //   border: 2px solid red;
-  //   padding-top: 2rem;
-
-  //   span {
-  //     display: block;
-  //     margin-top: 2rem;
-  //   }
-  // }
-
-  // .profile-btn {
-  //   @include text-button;
-  // }
+  .logout-div ::after {
+    border-right: 2px solid $tertiary-color;
+  }
 }
 
 // 미디어 쿼리
 @include mobile {
   .logout-section {
     width: 100%;
-    display: grid;
-    flex-wrap: wrap;
+    display: block;
+    // display: grid;
+    // flex-wrap: wrap;
 
     .logout-title-div span,
     .deact-title-div span {
+      font-size: 1.5rem;
       margin-top: 0;
     }
 
@@ -62,13 +47,10 @@
 
 @include tablet {
   .logout-section {
-    // width: 660px;
-    border: 2px solid blue;
     margin: 0 auto;
 
-    .logout-title-div,
     .deact-title-div {
-      border: 2px solid red;
+      margin-left: 5px;
     }
 
     .logout-btn-div,
@@ -81,12 +63,10 @@
 @include desktop {
   .logout-section {
     width: 1024px;
-    border: 2px solid red;
     margin: 0 auto;
 
     .logout-title-div,
     .deact-title-div {
-      border: 2px solid red;
       margin-left: 2rem;
     }
 

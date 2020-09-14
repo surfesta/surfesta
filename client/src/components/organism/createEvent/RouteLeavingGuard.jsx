@@ -8,7 +8,8 @@ export const RouteLeavingGuard = ({
   shouldBlockNavigation,
   yes,
   no,
-  content,
+  contentTop,
+  contentBottom,
 }) => {
   const [modalVisible, updateModalVisible] = useState(false);
   const [lastLocation, updateLastLocation] = useState();
@@ -59,7 +60,11 @@ export const RouteLeavingGuard = ({
         onConfirm={handleConfirmNavigationClick}
         className="prompt-guide"
       >
-        <pre className="main_text">{content}</pre>
+        <p className="main_text">
+          {contentTop}
+          <br />
+          {contentBottom}
+        </p>
       </ConfirmBox>
     </>
   );

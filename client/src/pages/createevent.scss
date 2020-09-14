@@ -191,19 +191,19 @@
             }
             input:checked + label::before {
               @include Virtual();
-              bottom: 1.08rem;
-              right: 1px;
-              width: 80%;
-              height: 0.2rem;
+              bottom: 0.76rem;
+              right: 0.04rem;
+              width: 75%;
+              height: 0.3rem;
               background: #3465ef;
               transform: rotate(-45deg);
             }
             input:checked + label::after {
               @include Virtual();
-              bottom: 0.78rem;
+              bottom: 0.58rem;
               left: 0.1rem;
-              width: 30%;
-              height: 0.2rem;
+              width: 40%;
+              height: 0.3rem;
               transform: rotate(45deg);
               background: #3465ef;
             }
@@ -214,7 +214,7 @@
               position: relative;
               width: 2.55rem;
               height: 2.55rem;
-              border: 2px solid $checkboxColor;
+              border: 3px solid $checkboxColor;
               border-radius: 4px;
             }
             span {

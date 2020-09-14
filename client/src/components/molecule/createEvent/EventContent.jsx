@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 export default function EventContent({ Ref, initValue }) {
   const queryRef = useRef(null);
   useEffect(() => {
+    if (!initValue) return;
     queryRef.current.nextElementSibling
       .querySelectorAll('.tui-editor-contents')
       .forEach((item, i) => {

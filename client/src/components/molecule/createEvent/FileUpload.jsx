@@ -9,6 +9,7 @@ export default function FileUpload({ inputRef, imgRef }) {
 
   const onChange = async (e) => {
     const _file = e.target.files[0];
+    console.log(_file);
     if (_file === null || _file === undefined) {
       {
         alert(`다시 시도해주세요`);
@@ -26,7 +27,8 @@ export default function FileUpload({ inputRef, imgRef }) {
     if (
       _filetype !== 'image/jpg' &&
       _filetype !== 'image/jpeg' &&
-      _filetype !== 'image/png'
+      _filetype !== 'image/png' &&
+      _filetype !== 'image/webp'
     ) {
       alert(`지원하지 않는 형식의 타입입니다. ${_filetype}`);
       return;
@@ -56,7 +58,7 @@ export default function FileUpload({ inputRef, imgRef }) {
         className="custom-file-input"
         id="customFile"
         onChange={onChange}
-        accept="image/jpeg, image/png, image/jpg"
+        accept="image/jpeg, image/png, image/jpg, image/webp"
         ref={inputRef}
       />
       <label className="custom-file-label" htmlFor="customFile">

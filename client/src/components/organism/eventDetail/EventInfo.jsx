@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import './Eventinfo.scss';
 import FavoriteButton from '../../atom/main/FavoriteButton';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,6 +9,7 @@ import { welcomeModal } from '../../../redux/modules/modal';
 export default function EventInfo({ event }) {
   const dispatch = useDispatch();
   const [isEnlisted, setIsEnlisted] = useState(false);
+  const eventInfoBar = useRef();
 
   const eventId = event && event._id;
   const thumbnail = event && event.thumbnail;
@@ -36,6 +37,10 @@ export default function EventInfo({ event }) {
       event.enlisted_users.map(
         (user) => user._id === userId && setIsEnlisted(true)
       );
+
+    // window.addEventListener('scroll', handleScroll);
+
+    // return window.removeEventListener('scroll', handleScroll);
   }, [userId]);
 
   const viewModal = useCallback(() => {
@@ -53,20 +58,35 @@ export default function EventInfo({ event }) {
     !userId && viewModal();
   };
 
+  const handleScroll = (e) => {
+    window.scrollY > 690
+      ? eventInfoBar.current.classList.add('show')
+      : eventInfoBar.current.classList.remove('show');
+  };
+
   return (
     <div className="eventInfo-wrap">
-      <div className="top-fix">
-        <div className="left">
-          <h2>{title}</h2>
-          <p>
-            <span className="price">{price}</span>
-            <span> 원</span>
-          </p>
-        </div>
-        <div className="button-wrap right">
-          <button className="enlist-button">이벤트 참석하기</button>
-          <div className="fav-button">
-            <FavoriteButton />
+      <div className="eventInfo-bar" ref={eventInfoBar}>
+        <div className="eventInfo-bar-wrap">
+          <div className="left">
+            <p className="title">{title}</p>
+            <p>
+              <span className="price">{price}</span>
+              <span> 원</span>
+            </p>
+          </div>
+          <div className="button-wrap right">
+            {!isEnlisted && (
+              <button className="enlist-button" onClick={checkAuth}>
+                이벤트 참석하기
+              </button>
+            )}
+            {isEnlisted && (
+              <button className="disable-button" disabled>
+                이벤트 참석완료
+              </button>
+            )}
+            <FavoriteButton event={event} />
           </div>
         </div>
       </div>

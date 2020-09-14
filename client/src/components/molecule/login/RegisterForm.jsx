@@ -1,7 +1,7 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import StyledErrorMessage from '../../atom/header/StyledErrorMessage';
-import registerSchema from '../../../utils/registerSchema';
+import registerSchema from '../../../utils/RegisterSchema';
 import './RegisterForm.scss';
 
 export default function RegisterForm({ handleRegister, presetValue }) {

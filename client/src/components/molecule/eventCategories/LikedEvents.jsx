@@ -1,14 +1,13 @@
 import React from 'react';
-import Card from '../../organism/main/Card';
+import LikedContainer from '../../../containers/LikedContainer';
 
 function LikedEvents(props) {
   return (
-    <div>
-      <h1>찜한 이벤트</h1>
-      <section className="cards">
-        <h1></h1>
-      </section>
-    </div>
+    <section className="cards-wrap">
+      <div className="cards">
+        <LikedContainer />
+      </div>
+    </section>
   );
 }
 

@@ -38,6 +38,23 @@
   width: 37vw;
   min-height: 30vh;
   padding: 6rem 3rem 4rem;
+  &.confirm-modal {
+    h1 {
+      font-size: 4rem;
+      color: #fff;
+    }
+    button {
+      @include modal-button;
+      &.cancel {
+        color: $font-secondary-color;
+        border-color: $font-secondary-color;
+        &:hover {
+          border-color: #fff;
+          color: #2c3035;
+        }
+      }
+    }
+  }
 
   @include tablet {
     width: 55vw;

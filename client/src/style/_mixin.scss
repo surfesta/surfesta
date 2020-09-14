@@ -49,6 +49,26 @@
     color: #fff;
   }
 }
+@mixin modal-button($border-color: #fff, $font-color: #fff) {
+  box-sizing: border-box;
+  border: 2px solid $border-color;
+  background-color: transparent;
+  font-weight: 700;
+  color: $font-color;
+  text-align: center;
+  font-size: 1.5rem;
+  border-radius: 50px;
+  outline: 0;
+  transition: all 0.3s;
+  padding: 22px 76px;
+  margin: 50px 15px 0px 15px;
+
+  &:hover {
+    border-color: #fff;
+    background-color: #fff;
+    color: #2c3035;
+  }
+}
 @mixin disable-button {
   box-sizing: border-box;
   border: 2px solid $tertiary-color;

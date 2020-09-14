@@ -4,7 +4,8 @@ import './SubNavTemplate.scss';
 
 function SubNavTemplate() {
   return (
-    <div>
+    <div style={{ paddingTop: 63 }}>
+      {/*동욱의 임시스타일링*/}
       <SubNav />
     </div>
   );

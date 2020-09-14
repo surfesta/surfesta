@@ -7,11 +7,7 @@ import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
 import './PreLoginForm.scss';
 
-export default function PreLoginForm({
-  handleEmailCheck,
-  handleFBLogin,
-  handleGGLogin,
-}) {
+export default function PreLoginForm({ handleEmailCheck, handleFBLogin, handleGGLogin }) {
   React.useEffect(() => {
     document.querySelector('.gg-button').style = {};
     document.querySelector('.gg-button div').style = {};
@@ -31,7 +27,7 @@ export default function PreLoginForm({
     >
       {({ errors, touched }) => (
         <Form noValidate>
-          <div className="social-login-button google">
+          <div type="button" className="social-login-button google">
             <GoogleLogin
               clientId="184465750767-gu3d86rn56bsj87dnsj7m3mpakma0f1a.apps.googleusercontent.com"
               buttonText="Google"

@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import './App.css';
 import './style/theme.scss';
 import Home from './pages/Home';
 import EventDetail from './pages/EventDetail';

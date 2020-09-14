@@ -37,6 +37,7 @@ function ProfileDetails() {
     },
     [dispatch, name, phoneNumber]
   );
+  // console.log();
 
   return (
     <div>

@@ -1,10 +1,11 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import './PostEventButton.scss';
 
-export default function PostEventButton({ handleClick }) {
+export default function PostEventButton() {
   return (
-    <div onClick={handleClick}>
+    <NavLink to="/createEvent">
       <button className="event-button"> 이벤트 주최하기</button>
-    </div>
+    </NavLink>
   );
 }

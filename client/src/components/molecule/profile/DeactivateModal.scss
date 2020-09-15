@@ -1,0 +1,17 @@
+@import '../../../style/variables';
+@import '../../../style/mixin';
+
+.deactivate-button {
+  @include text-button;
+  width: 35%;
+  padding: 1.5rem;
+  margin: 1rem 1.5rem;
+  border: 2px white solid;
+  background-color: transparent;
+  color: white;
+
+  &:hover {
+    background-color: white;
+    color: $secondary-color;
+  }
+}

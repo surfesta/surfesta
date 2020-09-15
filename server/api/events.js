@@ -36,7 +36,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/search', (req, res) => {
-  Event.find({ title: { $regex: req.query.q } })
+  Event.find({ title: { $regex: req.query.q, $options: '$i' } })
     .sort({ createdAt: 'desc' })
     .populate('host')
     .populate('enlisted_users')

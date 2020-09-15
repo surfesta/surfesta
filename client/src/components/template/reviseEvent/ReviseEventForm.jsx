@@ -150,7 +150,7 @@ export default function ReviseEventForm({ curEvent }) {
       online_platform: onlineRef.curPlatform,
       location: {
         name: offlineRef.curAddress,
-        details: placeState,
+        details: publicRef.curIsOnline === false ? placeState : '',
         info: offlineRef.curAddressDetailPlus,
       },
       max_count: +publicRef.curMaxPerson, // 참석 가능 인원수
@@ -220,8 +220,8 @@ export default function ReviseEventForm({ curEvent }) {
       {clearPatch && (
         <div className="goback-modal-container">
           <div className="inner-modal">
-            <div className="modal-body">
-              <pre>이벤트 수정이 완료되었습니다.</pre>
+            <div className="modal-body top-body">
+              <p>이벤트 수정이 완료되었습니다.</p>
             </div>
             <div className="modal-foot">
               <button onClick={goHome} type="button" className="one-btn">

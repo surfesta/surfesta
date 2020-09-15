@@ -24,9 +24,9 @@ export default function PreLoginForm({
         email: '',
       }}
       validationSchema={mailCheckSchema}
-      onSubmit={(values, setSubmitting) => {
+      onSubmit={(values, actions) => {
         handleEmailCheck(values);
-        setSubmitting(false);
+        actions.setSubmitting(false);
       }}
     >
       {({ errors, touched }) => (

@@ -44,12 +44,12 @@ export default function EventsTemplate({
           </div>
         )}
         <div className="cards">
-          {events &&
+          {Array.isArray(events) &&
             filter === ALL &&
             events.map((event) => {
               return event.isOpen && <Card event={event} key={event._id} />;
             })}
-          {events &&
+          {Array.isArray(events) &&
             filter === ONLINE &&
             events.map((event) => {
               return (
@@ -57,7 +57,7 @@ export default function EventsTemplate({
                 event.isOnline && <Card event={event} key={event._id} />
               );
             })}
-          {events &&
+          {Array.isArray(events) &&
             filter === OFFLINE &&
             events.map((event) => {
               return (

@@ -1,5 +1,5 @@
-@import "../style/mixin";
-@import "../style/mediaQuery";
+@import '../style/mixin';
+@import '../style/mediaQuery';
 
 .create-event-wrap,
 .revise-event-wrap {
@@ -26,7 +26,7 @@
     padding: 7.3rem 0;
     .main-title {
       transition: 0.5s;
-      @include titleFontSet(4rem, bold);
+      @include titleFontSet(4rem, 500);
       margin-bottom: 4rem;
     }
     iframe {
@@ -47,18 +47,18 @@
         &.none {
           height: 45.53rem;
           &::before {
-            content: "";
+            content: '';
             position: absolute;
             width: 3.2rem;
             height: 3.2rem;
             margin: auto;
-            background: url("/img/camera.svg") no-repeat;
+            background: url('/img/camera.svg') no-repeat;
             background-size: cover;
             background-position: center;
             z-index: 1;
           }
           &::after {
-            content: "";
+            content: '';
             position: absolute;
             width: 6.5rem;
             height: 6.5rem;
@@ -135,7 +135,7 @@
           width: 18rem;
           height: 6.5rem;
           font-size: 1.5rem;
-          font-weight: 600;
+          font-weight: 500;
           background: rgba(255, 255, 255, 0.05);
           border: 2px solid #3465ef;
           border-radius: 50px;
@@ -273,9 +273,9 @@
             transition: 0.5s;
             font-size: 1.5rem;
           }
-          input[type="text"],
-          input[type="date"],
-          input[type="time"] {
+          input[type='text'],
+          input[type='date'],
+          input[type='time'] {
             outline: none;
             border: 0;
             width: 100%;
@@ -294,15 +294,15 @@
               background: #b4b4b5;
             }
           }
-          input[type="text"] {
+          input[type='text'] {
             &:nth-child(2) {
               margin-top: 3rem;
             }
           }
-          input[type="date"] {
+          input[type='date'] {
             width: 39.5rem;
           }
-          input[type="time"] {
+          input[type='time'] {
             flex: 1;
             margin-left: 30px;
           }

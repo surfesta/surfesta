@@ -7,7 +7,6 @@
   margin: 0 auto;
   h2 {
     font-size: 3.5rem;
-    font-weight: 600;
     color: $primary-color;
   }
   .img-wrap {
@@ -21,6 +20,7 @@
     display: flex;
     flex-flow: row wrap;
     padding: 20px 0px 30px 30px;
+    min-height: 500px;
   }
 }
 

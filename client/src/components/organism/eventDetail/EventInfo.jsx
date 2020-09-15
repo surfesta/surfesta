@@ -6,6 +6,7 @@ import { toggleEnlistedUser } from '../../../redux/modules/events';
 import { toggleEnlistedEvent } from '../../../redux/modules/auth';
 import { welcomeModal } from '../../../redux/modules/modal';
 import Portal from '../../Portal';
+import ConfirmModal from '../../molecule/eventDetail/ConfirmModal';
 
 export default function EventInfo({ event }) {
   const dispatch = useDispatch();
@@ -56,7 +57,7 @@ export default function EventInfo({ event }) {
 
     setTimeout(() => {
       setVisible(false);
-    }, 1000);
+    }, 1500);
   };
 
   const checkAuth = () => {
@@ -174,7 +175,7 @@ export default function EventInfo({ event }) {
           </table>
 
           <div className="button-wrap">
-            {!isEnlisted && (
+            {!isEnlisted && maxCount !== curCount && (
               <button className="enlist-button" onClick={checkAuth}>
                 이벤트 참석하기
               </button>
@@ -184,26 +185,17 @@ export default function EventInfo({ event }) {
                 이벤트 참석완료
               </button>
             )}
+            {!isEnlisted && maxCount === curCount && (
+              <button className="disable-button" disabled>
+                현재 이벤트는 만석이에요.
+              </button>
+            )}
             <FavoriteButton event={event} />
           </div>
         </div>
       </div>
 
-      {visible && (
-        <Portal>
-          <div
-            id="modal-container"
-            onClick={(e) => {
-              if (!(e.target === e.currentTarget)) return;
-              setVisible(false);
-            }}
-          >
-            <div id="modal" className="confirm-modal">
-              <h1>이벤트 참가신청이 완료되었습니다.</h1>
-            </div>
-          </div>
-        </Portal>
-      )}
+      {visible && <ConfirmModal setVisible={setVisible} />}
     </div>
   );
 }

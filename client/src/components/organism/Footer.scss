@@ -1,0 +1,79 @@
+@import '../../style/mixin';
+@import '../../style/variables';
+@import '../../style/mediaQuery';
+
+footer {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 30px;
+  color: $dark-font-secondary-color;
+  font-size: 1.5rem;
+  font-weight: 500;
+
+  .flex-wrap {
+    @include Flex($justify: space-between);
+    div {
+      transform: translateY(-3px);
+    }
+
+    .menu {
+      li {
+        display: inline-block;
+        a {
+          font-size: 1.7rem;
+          padding-left: 20px;
+          transition: all 0.3s;
+          &:hover {
+            color: $dark-font-primary-color;
+          }
+        }
+      }
+    }
+  }
+  .detail-info {
+    margin-top: 20px;
+    li {
+      line-height: 2;
+      strong {
+        font-weight: 500;
+      }
+      span {
+        &::after {
+          content: '/';
+          display: inline-block;
+          padding: 0 10px;
+        }
+        &:last-child::after {
+          content: none;
+        }
+      }
+    }
+  }
+}
+
+@include mobile {
+  footer {
+    .flex-wrap {
+      display: block;
+      .menu {
+        li {
+          a {
+            padding-left: 0;
+            padding-right: 10px;
+          }
+        }
+      }
+    }
+    .detail-info {
+      margin-top: 30px;
+      li {
+        span {
+          display: block;
+          &::after {
+            content: none;
+          }
+        }
+      }
+    }
+  }
+}

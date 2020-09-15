@@ -59,11 +59,6 @@
   }
 }
 
-.signup-input[name='email'] {
-  color: rgb(37, 37, 37);
-  background-color: rgb(158, 158, 158);
-}
-
 #modal-divider {
   position: relative;
   div {
@@ -95,10 +90,37 @@
   padding: 2rem 3rem;
   width: 80%;
   color: $font-primary-color;
+  border: 2px transparent solid;
+  &.login {
+    color: rgb(32, 32, 32);
+    background-color: rgb(199, 199, 199);
+  }
 }
 
 #error-input-border {
-  border: 1.4px $alert-color solid;
+  border: 2px $alert-color solid;
+  animation: shivering 0.22s alternate cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes shivering {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  20% {
+    transform: translate3d(-0.8%, 0, 0);
+  }
+  40% {
+    transform: translate3d(0.8%, 0, 0);
+  }
+  60% {
+    transform: translate3d(-0.8%, 0, 0);
+  }
+  80% {
+    transform: translate3d(0.8%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
 }
 
 .basic-privacy-confirm {

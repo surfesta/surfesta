@@ -40,7 +40,6 @@ export default function ReviseEventForm({ curEvent }) {
     $maxPerson.current.value = curEvent.max_count;
     $thumbnailImage.current.src = curEvent.thumbnail;
   }, []);
-  console.log(curEvent);
   function goHome() {
     window.location.href = '/';
   }
@@ -51,9 +50,9 @@ export default function ReviseEventForm({ curEvent }) {
     openToggle(e);
     setOnlineCheck(!onlineCheck ? true : false);
   }
-  function submit(e) {
+  const submit = useCallback((e) => {
     e.preventDefault();
-  }
+  });
   const _preventDefault = useCallback((e) => {
     if (e.keyCode === 13) {
       e.preventDefault();
@@ -150,7 +149,7 @@ export default function ReviseEventForm({ curEvent }) {
       online_platform: onlineRef.curPlatform,
       location: {
         name: offlineRef.curAddress,
-        details: placeState,
+        details: publicRef.curIsOnline === false ? placeState : '',
         info: offlineRef.curAddressDetailPlus,
       },
       max_count: +publicRef.curMaxPerson, // 참석 가능 인원수
@@ -220,8 +219,8 @@ export default function ReviseEventForm({ curEvent }) {
       {clearPatch && (
         <div className="goback-modal-container">
           <div className="inner-modal">
-            <div className="modal-body">
-              <pre>이벤트 수정이 완료되었습니다.</pre>
+            <div className="modal-body top-body">
+              <p>이벤트 수정이 완료되었습니다.</p>
             </div>
             <div className="modal-foot">
               <button onClick={goHome} type="button" className="one-btn">

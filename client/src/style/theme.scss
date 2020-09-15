@@ -181,4 +181,17 @@ body.dark {
       color: $dark-font-primary-color;
     }
   }
+
+  // my-page
+  .sub-nav-div,
+  .title,
+  .logout-section h3 {
+    color: $dark-font-primary-color;
+  }
+
+  .thumb-guide,
+  .form-div label,
+  .logout-section span {
+    color: $dark-font-secondary-color;
+  }
 }

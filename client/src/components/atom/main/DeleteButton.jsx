@@ -5,6 +5,7 @@ import Portal from '../../Portal';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleEnlistedEvent } from '../../../redux/modules/auth';
 import { toggleEnlistedUser } from '../../../redux/modules/events';
+import ConfirmModal from '../../molecule/eventCategories/ConfirmModal';
 
 export default function DeleteButton({ event }) {
   const [visible, setVisible] = useState(false);
@@ -31,25 +32,7 @@ export default function DeleteButton({ event }) {
       </IconButton>
 
       {visible && (
-        <Portal>
-          <div
-            id="modal-container"
-            onClick={(e) => {
-              if (!(e.target === e.currentTarget)) return;
-              setVisible(false);
-            }}
-          >
-            <div id="modal" className="confirm-modal">
-              <h1>이벤트 참가를 취소할까요?</h1>
-              <button className="cancel" onClick={() => setVisible(false)}>
-                취소
-              </button>
-              <button className="confirm" onClick={toggleEnlisted}>
-                확인
-              </button>
-            </div>
-          </div>
-        </Portal>
+        <ConfirmModal toggleEnlisted={toggleEnlisted} setVisible={setVisible} />
       )}
     </>
   );

@@ -7,7 +7,7 @@ export default Yup.object().shape({
       excludeEmptyString: true,
     })
     .matches(
-      /^.*(.com|.net|.site|.kr|.edu|.org|.co|.xyz)$/,
+      /^.*((.com)|(.net)|(.site)|(.kr)|(.edu)|(.org)|(.co)|(.xyz))$/,
       '이메일주소를 입력해주세요'
     )
     .email('이메일형식이 아닙니다')

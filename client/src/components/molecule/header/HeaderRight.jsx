@@ -8,32 +8,29 @@ import { welcomeModal } from '../../../redux/modules/modal';
 import { push } from 'connected-react-router';
 import './HeaderRight.scss';
 import ThemeIndicator from './ThemeIndicator';
+import { NavLink } from 'react-router-dom';
 
-export default function HeaderRight() {
+export default function HeaderRight({ handleLogin }) {
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
-
-  const handleLogin = useCallback(() => {
-    dispatch(welcomeModal());
-  }, [dispatch]);
-
-  const goProfile = useCallback(() => {
-    dispatch(push('/my/profile'));
-  }, [dispatch]);
-
-  const goFavorite = useCallback(() => {
-    dispatch(push('/my/event/liked'));
-  }, [dispatch]);
 
   return (
     <section className="header-right">
       <ThemeIndicator />
-      <FavButton onClick={goFavorite} />
-      {user ? (
-        <UserAvatar goProfile={goProfile} />
-      ) : (
-        <LoginButton handleclick={handleLogin} />
-      )}
+      <div className="auth-indicator">
+        {user ? (
+          <>
+            <NavLink to="/my/event/liked">
+              <FavButton />
+            </NavLink>
+            <NavLink to="/my/profile">
+              <UserAvatar />
+            </NavLink>
+          </>
+        ) : (
+          <LoginButton handleclick={handleLogin} />
+        )}
+      </div>
     </section>
   );
 }

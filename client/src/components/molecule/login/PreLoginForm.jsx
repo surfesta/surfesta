@@ -24,14 +24,14 @@ export default function PreLoginForm({
         email: '',
       }}
       validationSchema={mailCheckSchema}
-      onSubmit={(values, setSubmitting) => {
+      onSubmit={(values, actions) => {
         handleEmailCheck(values);
-        setSubmitting(false);
+        actions.setSubmitting(false);
       }}
     >
       {({ errors, touched }) => (
         <Form noValidate>
-          <div className="social-login-button google">
+          <div type="button" className="social-login-button google">
             <GoogleLogin
               clientId="184465750767-gu3d86rn56bsj87dnsj7m3mpakma0f1a.apps.googleusercontent.com"
               buttonText="Google"
@@ -62,7 +62,7 @@ export default function PreLoginForm({
             name="email"
             type="email"
             placeholder="이메일 주소를 입력해주세요:)"
-            className="login-input"
+            className="login-input pre-login"
             id={errors.email && touched.email && 'error-input-border'}
           />
           <StyledErrorMessage name="email" errors={errors} touched={touched} />

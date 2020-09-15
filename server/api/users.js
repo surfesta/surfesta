@@ -6,13 +6,14 @@ const saltRounds = 10;
 const User = require('../models/User');
 const Event = require('../models/Event');
 const auth = require('../middlewares/auth');
+const { populate } = require('../models/User');
 
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.find()
-      .populate('enlisted_events')
-      .populate('hosting_events')
-      .populate('liked_events');
+      .populate({ path: 'enlisted_events', populate: 'host' })
+      .populate({ path: 'hosting_events', populate: 'host' })
+      .populate({ path: 'liked_events', populate: 'host' });
     res.send(users);
   } catch (error) {
     next(error);
@@ -23,9 +24,9 @@ router.get('/', async (req, res, next) => {
 router.get('/:user_id', async (req, res, next) => {
   try {
     const user = await User.findOne({ _id: req.params.user_id })
-      .populate('enlisted_events')
-      .populate('hosting_events')
-      .populate('liked_events');
+      .populate({ path: 'enlisted_events', populate: 'host' })
+      .populate({ path: 'hosting_events', populate: 'host' })
+      .populate({ path: 'liked_events', populate: 'host' });
     if (!user) return res.status(404).json({ error: 'User not found' });
     res.json(user);
   } catch (error) {
@@ -60,15 +61,15 @@ router.patch('/:user_id', async (req, res, next) => {
     async (err, output) => {
       if (err) res.status(500).json({ error: 'db failure' });
       const user = await User.findOne({ _id: req.params.user_id })
-        .populate('enlisted_events')
-        .populate('hosting_events')
-        .populate('liked_events');
+        .populate({ path: 'enlisted_events', populate: 'host' })
+        .populate({ path: 'hosting_events', populate: 'host' })
+        .populate({ path: 'liked_events', populate: 'host' });
       if (!output.n) return res.status(404).json({ error: 'User not found' });
       res.json({
         success: true,
         user,
       });
-    }
+    },
   );
 });
 // UPDATE THE User
@@ -79,15 +80,16 @@ router.patch('/', auth, async (req, res, next) => {
     async (err, output) => {
       if (err) res.status(500).json({ error: 'db failure' });
       const user = await User.findOne({ _id: req.user._id })
-        .populate('enlisted_events')
-        .populate('hosting_events')
-        .populate('liked_events');
+        .populate({ path: 'enlisted_events', populate: 'host' })
+        .populate({ path: 'hosting_events', populate: 'host' })
+        .populate({ path: 'liked_events', populate: 'host' });
+
       if (!output.n) return res.status(404).json({ error: 'User not found' });
       res.json({
         success: true,
         user,
       });
-    }
+    },
   );
 });
 
@@ -98,15 +100,16 @@ router.patch('/:user_id/enlisted', async (req, res) => {
   const target = await Event.findOne({ _id: event_id });
   if (!target) {
     const user = await User.findOne({ _id: req.params.user_id })
-      .populate('enlisted_events')
-      .populate('hosting_events')
-      .populate('liked_events');
+      .populate({ path: 'enlisted_events', populate: 'host' })
+      .populate({ path: 'hosting_events', populate: 'host' })
+      .populate({ path: 'liked_events', populate: 'host' });
     if (!user) {
       res.json({
         error: 'No user',
       });
       return;
     }
+
     res.json({
       success: true,
       user,
@@ -126,15 +129,15 @@ router.patch('/:user_id/enlisted', async (req, res) => {
       if (!output.n) return res.status(404).json({ error: 'User not found' });
 
       const user = await User.findOne({ _id: req.params.user_id })
-        .populate('enlisted_events')
-        .populate('hosting_events')
-        .populate('liked_events');
+        .populate({ path: 'enlisted_events', populate: 'host' })
+        .populate({ path: 'hosting_events', populate: 'host' })
+        .populate({ path: 'liked_events', populate: 'host' });
 
       res.json({
         success: true,
         user,
       });
-    }
+    },
   );
 });
 // UPDATE a user's liked_events
@@ -144,9 +147,9 @@ router.patch('/:user_id/liked', async (req, res) => {
   const target = await Event.findOne({ _id: event_id });
   if (!target) {
     const user = await User.findOne({ _id: req.params.user_id })
-      .populate('enlisted_events')
-      .populate('hosting_events')
-      .populate('liked_events');
+      .populate({ path: 'enlisted_events', populate: 'host' })
+      .populate({ path: 'hosting_events', populate: 'host' })
+      .populate({ path: 'liked_events', populate: 'host' });
     if (!user) {
       res.json({
         error: 'No user',
@@ -171,14 +174,14 @@ router.patch('/:user_id/liked', async (req, res) => {
       }
       if (!output.n) return res.status(404).json({ error: 'User not found' });
       const user = await User.findOne({ _id: req.params.user_id })
-        .populate('enlisted_events')
-        .populate('hosting_events')
-        .populate('liked_events');
+        .populate({ path: 'enlisted_events', populate: 'host' })
+        .populate({ path: 'hosting_events', populate: 'host' })
+        .populate({ path: 'liked_events', populate: 'host' });
       res.json({
         success: true,
         user,
       });
-    }
+    },
   );
 });
 // UPDATE a user's hosting_events
@@ -188,9 +191,9 @@ router.patch('/:user_id/hosting', async (req, res) => {
   const target = await Event.findOne({ _id: event_id });
   if (!target) {
     const user = await User.findOne({ _id: req.params.user_id })
-      .populate('enlisted_events')
-      .populate('hosting_events')
-      .populate('liked_events');
+      .populate({ path: 'enlisted_events', populate: 'host' })
+      .populate({ path: 'hosting_events', populate: 'host' })
+      .populate({ path: 'liked_events', populate: 'host' });
     res.json({
       success: true,
       user,
@@ -209,23 +212,27 @@ router.patch('/:user_id/hosting', async (req, res) => {
       }
       if (!output.n) return res.status(404).json({ error: 'User not found' });
       const user = await User.findOne({ _id: req.params.user_id })
-        .populate('enlisted_events')
-        .populate('hosting_events')
-        .populate('liked_events');
+        .populate({ path: 'enlisted_events', populate: 'host' })
+        .populate({ path: 'hosting_events', populate: 'host' })
+        .populate({ path: 'liked_events', populate: 'host' });
       res.json({
         success: true,
         user,
       });
-    }
+    },
   );
 });
 
 // Authentificate User
 router.post('/auth', auth, async (req, res) => {
-  const user = await User.findOne({ _id: req.user._id })
-    .populate('enlisted_events')
-    .populate('hosting_events')
-    .populate('liked_events');
+  const user = await User.findById(req.user._id)
+    .populate({ path: 'enlisted_events', populate: 'host' })
+    .populate({ path: 'hosting_events', populate: 'host' })
+    .populate({ path: 'liked_events', populate: 'host' });
+
+  // user.liked_events = user.liked_events.map(event=> ({...event,host: await User.findById(event.host)}))
+  // user.hosting_events = user.hosting_events.map((event) => event.populate());
+
   res.status(200).json({
     user,
     isAdmin: req.user.role === 0 ? false : true,
@@ -257,9 +264,9 @@ router.post('/emails', async (req, res, next) => {
 router.post('/login', async (req, res, next) => {
   try {
     const user = await User.findOne({ email: req.body.email })
-      .populate('enlisted_events')
-      .populate('hosting_events')
-      .populate('liked_events');
+      .populate({ path: 'enlisted_events', populate: 'host' })
+      .populate({ path: 'hosting_events', populate: 'host' })
+      .populate({ path: 'liked_events', populate: 'host' });
 
     if (!user)
       return res.json({
@@ -305,7 +312,7 @@ router.post('/logout', auth, (req, res) => {
       return res.status(200).send({
         success: true,
       });
-    }
+    },
   );
 });
 
@@ -340,7 +347,7 @@ router.delete('/', auth, (req, res) => {
         success: true,
         output,
       });
-    }
+    },
   );
 });
 // DELETE User by user_id
@@ -376,7 +383,7 @@ router.delete('/:user_id', (req, res) => {
         success: true,
         output,
       });
-    }
+    },
   );
 });
 

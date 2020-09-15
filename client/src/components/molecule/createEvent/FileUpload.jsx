@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
-// import Message from "./Message";
+import React, { useState, useCallback } from 'react';
 import axios from 'axios';
+import { useDropzone } from 'react-dropzone';
 
 export default function FileUpload({ inputRef, imgRef }) {
-  const [file, setFile] = useState('');
-  const [filename, setFilename] = useState('Choose File');
+  const onDrop = useCallback((acceptedFiles) => {
+    onChange(acceptedFiles[0]);
+  }, []);
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+  });
   const [uploadedFile, setUploadedFile] = useState({});
 
-  const onChange = async (e) => {
-    const _file = e.target.files[0];
-    console.log(_file);
+  const uploadImage = async (_file) => {
     if (_file === null || _file === undefined) {
       {
         alert(`다시 시도해주세요`);
@@ -17,7 +19,6 @@ export default function FileUpload({ inputRef, imgRef }) {
       }
     }
     const _filetype = _file.type;
-    const _filename = _file.name;
     const _filesize = _file.size;
     // 7 메가바이트
     if (_filesize > 7000000) {
@@ -45,15 +46,18 @@ export default function FileUpload({ inputRef, imgRef }) {
       console.log(res);
       const { filePath } = res.data;
       setUploadedFile({ filePath });
-      setFile(_file);
-      setFilename(_filename);
     } catch (err) {
       console.log(err);
     }
   };
+  const onChange = (e) => {
+    const _file = e.target ? e.target.files[0] : e;
+    uploadImage(_file);
+  };
   return (
-    <>
+    <div {...getRootProps()} className="drop-down-container">
       <input
+        {...getInputProps()}
         type="file"
         className="custom-file-input"
         id="customFile"
@@ -61,7 +65,10 @@ export default function FileUpload({ inputRef, imgRef }) {
         accept="image/jpeg, image/png, image/jpg, image/webp"
         ref={inputRef}
       />
-      <label className="custom-file-label" htmlFor="customFile">
+      <label
+        className={`custom-file-label ${uploadedFile.filePath ? '' : 'none'}`}
+        htmlFor="customFile"
+      >
         {uploadedFile ? (
           <img
             className="custom-thumbnail"
@@ -70,11 +77,16 @@ export default function FileUpload({ inputRef, imgRef }) {
             alt=""
           />
         ) : null}
+        {isDragActive && (
+          <div className="drag-drop">
+            <p>Drop the files here ...</p>
+          </div>
+        )}
       </label>
       <p className="upload-type">
-        7MB 이하의 png, jpg, jpeg 이미지만 업로드 가능해요.
+        7MB 이하의 png, jpg, jpeg, webp 이미지만 업로드 가능해요.
         <br /> 3:4 비율의 이미지가 가장 잘 어울리죠!
       </p>
-    </>
+    </div>
   );
 }

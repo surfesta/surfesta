@@ -15,6 +15,7 @@ import { startGetEvents } from './redux/modules/events';
 import HeaderTemplate from './components/template/HeaderTemplate';
 import ReviseEvent from './pages/ReviseEvent';
 import Meta from './components/Meta';
+import FooterTemplate from './components/template/FooterTemplate';
 
 export const ThemeContext = React.createContext();
 
@@ -50,6 +51,7 @@ function App() {
             <Route path="/my" component={MyPage} />
             <Route exact path="/" component={Home} />
           </Switch>
+          <FooterTemplate />
         </ConnectedRouter>
       </>
     </ThemeContext.Provider>

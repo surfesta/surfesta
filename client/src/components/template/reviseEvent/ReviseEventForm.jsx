@@ -40,7 +40,6 @@ export default function ReviseEventForm({ curEvent }) {
     $maxPerson.current.value = curEvent.max_count;
     $thumbnailImage.current.src = curEvent.thumbnail;
   }, []);
-  console.log(curEvent);
   function goHome() {
     window.location.href = '/';
   }
@@ -51,9 +50,9 @@ export default function ReviseEventForm({ curEvent }) {
     openToggle(e);
     setOnlineCheck(!onlineCheck ? true : false);
   }
-  function submit(e) {
+  const submit = useCallback((e) => {
     e.preventDefault();
-  }
+  });
   const _preventDefault = useCallback((e) => {
     if (e.keyCode === 13) {
       e.preventDefault();

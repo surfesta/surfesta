@@ -5,6 +5,7 @@ const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const config = require('./config');
 const port = config.PORT || 5000;
+const prerender = require('prerender-node');
 
 const mongoose = require('mongoose');
 const db = mongoose.connection;
@@ -35,6 +36,7 @@ app.use(morgan('tiny'));
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(prerender.blacklisted(['/search', '/event', '/']));
 app.use('/api/v1', api);
 
 app.listen(port, () => {

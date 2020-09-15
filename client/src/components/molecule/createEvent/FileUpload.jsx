@@ -50,10 +50,10 @@ export default function FileUpload({ inputRef, imgRef }) {
       console.log(err);
     }
   };
-  const onChange = (e) => {
+  const onChange = useCallback((e) => {
     const _file = e.target ? e.target.files[0] : e;
     uploadImage(_file);
-  };
+  });
   return (
     <div {...getRootProps()} className="drop-down-container">
       <input

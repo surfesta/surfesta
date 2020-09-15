@@ -92,9 +92,6 @@ $checkboxColor: #b4b4b5;
 $labelColor: #454b58;
 
 @mixin wrapSet {
-  position: absolute;
-  top: 0;
-  left: 0;
   background: #f2f3f6;
   margin-top: 7rem;
 }

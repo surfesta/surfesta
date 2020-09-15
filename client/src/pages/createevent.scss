@@ -46,6 +46,26 @@
       .custom-file-label {
         &.none {
           height: 45.53rem;
+          &::before {
+            content: "";
+            position: absolute;
+            width: 3.2rem;
+            height: 3.2rem;
+            margin: auto;
+            background: url("/img/camera.svg") no-repeat;
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+          }
+          &::after {
+            content: "";
+            position: absolute;
+            width: 6.5rem;
+            height: 6.5rem;
+            background: #fff;
+            border-radius: 50%;
+            z-index: 0;
+          }
         }
         outline: none;
         position: relative;
@@ -76,26 +96,6 @@
             all: unset;
           }
         }
-        &::before {
-          content: "";
-          position: absolute;
-          width: 3.2rem;
-          height: 3.2rem;
-          margin: auto;
-          background: url("/img/camera.svg") no-repeat;
-          background-size: cover;
-          background-position: center;
-          z-index: 3;
-        }
-        &::after {
-          content: "";
-          position: absolute;
-          width: 6.5rem;
-          height: 6.5rem;
-          background: #fff;
-          border-radius: 50%;
-          z-index: 2;
-        }
       }
       .custom-file-input {
         position: absolute;
@@ -104,11 +104,12 @@
         z-index: -10;
       }
       .custom-thumbnail {
+        cursor: pointer;
         display: block;
         width: 100%;
         background-position: center;
         background-size: cover;
-        z-index: 4;
+        z-index: 2;
       }
       .upload-type {
         transition: 0.5s;

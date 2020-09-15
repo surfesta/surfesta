@@ -10,7 +10,6 @@ export default function CardButtons({ event }) {
   const enlisted = '/my/event/enlisted';
   const hosting = '/my/event/hosting';
   const liked = '/my/event/liked';
-
   return (
     <div className="cardButtons-wrap">
       {path !== enlisted && path !== hosting && (
@@ -19,7 +18,7 @@ export default function CardButtons({ event }) {
       {/* {path === liked && <FavoriteButton event={event} />} */}
 
       {path === enlisted && <DeleteButton event={event} />}
-      {path === hosting && <SettingButtons />}
+      {path === hosting && <SettingButtons event={event} />}
     </div>
   );
 }

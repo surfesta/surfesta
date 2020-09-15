@@ -5,7 +5,8 @@ import HostingCard from '../components/molecule/eventCategories/HostingCard';
 function HostingContainer(props) {
   const user = useSelector((state) => state.auth.user);
   const events = user && user.hosting_events;
-  return <HostingCard events={events} />;
+  const isOpen = props.isOpen;
+  return <HostingCard events={events} isOpen={isOpen} />;
 }
 
 export default HostingContainer;

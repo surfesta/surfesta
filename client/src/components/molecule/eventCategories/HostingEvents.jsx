@@ -9,9 +9,14 @@ function HostingEvents(props) {
         <title>주최한 이벤트 | Surfesta</title>
       </Helmet>
       <div>
-        <section className="cards-wrap">
-          <div className="cards">
-            <HostingContainer />
+        <section className='cards-wrap'>
+          <h2>공개 이벤트</h2>
+          <div className='cards'>
+            <HostingContainer isOpen={true} />
+          </div>
+          <h2>비공개 이벤트</h2>
+          <div className='cards'>
+            <HostingContainer isOpen={false} />
           </div>
         </section>
       </div>

@@ -27,9 +27,9 @@
 .modal-headline {
   @include font-normal;
   padding: 0 0 3rem 0;
-  font-size: 4rem;
+  font-size: 3.5rem;
   color: white;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 #modal {
@@ -43,7 +43,7 @@
     padding: 6rem 3rem;
     min-height: 100px;
     h1 {
-      font-size: 4rem;
+      font-size: 3.5rem;
       color: #fff;
       word-break: keep-all;
     }

@@ -3,7 +3,7 @@
 @import '../../style/mixin';
 
 @mixin font-title {
-  font-size: 4rem;
+  font-size: 3.5rem;
   color: $font-primary-color;
 }
 
@@ -33,7 +33,7 @@
     display: block;
     margin-bottom: 10px;
     font-size: 2.4rem;
-    font-weight: bold;
+    font-weight: 500;
   }
 
   input {
@@ -87,12 +87,12 @@
     .profile-form {
       margin-top: 37px;
       width: 100%;
-      .form-btn {
-        div {
-          text-align: right;
-          margin-right: 2rem;
-        }
-      }
+      // .form-btn {
+      //   div {
+      //     text-align: right;
+      //     margin-right: 2rem;
+      //   }
+      // }
     }
   }
 }

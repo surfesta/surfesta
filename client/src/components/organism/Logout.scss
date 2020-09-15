@@ -7,12 +7,15 @@
 }
 
 @mixin font-title {
-  font-size: 4rem;
+  font-size: 3.5rem;
   color: $font-primary-color;
 }
 
 // 로그아웃, 회원탈퇴 영역
 .logout-section {
+  h3 {
+    font-size: 3.5rem;
+  }
   .logout-btn-div,
   .deact-btn-div {
     transform: translateY(50% - 20%);
@@ -36,11 +39,6 @@
     .deact-title-div span {
       font-size: 1.5rem;
       margin-top: 0;
-    }
-
-    .logout-div,
-    .deact-div {
-      display: block;
     }
   }
 }

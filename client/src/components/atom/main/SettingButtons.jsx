@@ -7,7 +7,6 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 export default function SettingButtons({ event }) {
-  console.log(event);
   const eventId = event._id;
   return (
     <>

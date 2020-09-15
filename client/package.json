@@ -37,7 +37,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "serve": "npx serve -s build -l 3000"
+    "serve": "npx serve -s build -l 3000",
+    "postbuild": "react-snap"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -55,7 +56,9 @@
     ]
   },
   "description": "surfesta: event hosting platform",
-  "devDependencies": {},
+  "devDependencies": {
+    "react-snap": "^1.23.0"
+  },
   "author": "",
   "license": "ISC",
   "proxy": "http://ec2-15-164-210-226.ap-northeast-2.compute.amazonaws.com:5000"

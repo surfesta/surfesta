@@ -46,7 +46,8 @@ router.post('/', async (req, res, next) => {
     res.json({
       success: false,
       error,
-      msg: error.code === 11000 ? 'duplicated user property' : 'unhandled error',
+      msg:
+        error.code === 11000 ? 'duplicated user property' : 'unhandled error',
     });
     next(error);
   }
@@ -54,36 +55,42 @@ router.post('/', async (req, res, next) => {
 
 // UPDATE THE User
 router.patch('/:user_id', async (req, res, next) => {
-  User.update({ _id: req.params.user_id }, { $set: req.body }, async (err, output) => {
-    if (err) res.status(500).json({ error: 'db failure' });
-    const user = await User.findOne({ _id: req.params.user_id })
-      .populate({ path: 'enlisted_events', populate: 'host' })
-      .populate({ path: 'hosting_events', populate: 'host' })
-      .populate({ path: 'liked_events', populate: 'host' });
-    if (!output.n) return res.status(404).json({ error: 'User not found' });
-    res.json({
-      success: true,
-      user,
-    });
-  });
+  User.update(
+    { _id: req.params.user_id },
+    { $set: req.body },
+    async (err, output) => {
+      if (err) res.status(500).json({ error: 'db failure' });
+      const user = await User.findOne({ _id: req.params.user_id })
+        .populate({ path: 'enlisted_events', populate: 'host' })
+        .populate({ path: 'hosting_events', populate: 'host' })
+        .populate({ path: 'liked_events', populate: 'host' });
+      if (!output.n) return res.status(404).json({ error: 'User not found' });
+      res.json({
+        success: true,
+        user,
+      });
+    },
+  );
 });
 // UPDATE THE User
 router.patch('/', auth, async (req, res, next) => {
-  User.update({ _id: req.user._id }, { $set: req.body }, async (err, output) => {
-    if (err) res.status(500).json({ error: 'db failure' });
-    const user = await User.findOne({ _id: req.user._id })
-      .populate({ path: 'enlisted_events', populate: 'host' })
-      .populate({ path: 'hosting_events', populate: 'host' })
-      .populate({ path: 'liked_events', populate: 'host' });
+  User.update(
+    { _id: req.user._id },
+    { $set: req.body },
+    async (err, output) => {
+      if (err) res.status(500).json({ error: 'db failure' });
+      const user = await User.findOne({ _id: req.user._id })
+        .populate({ path: 'enlisted_events', populate: 'host' })
+        .populate({ path: 'hosting_events', populate: 'host' })
+        .populate({ path: 'liked_events', populate: 'host' });
 
-    const enlistedEvents = user.enlisted_events;
-
-    if (!output.n) return res.status(404).json({ error: 'User not found' });
-    res.json({
-      success: true,
-      user,
-    });
-  });
+      if (!output.n) return res.status(404).json({ error: 'User not found' });
+      res.json({
+        success: true,
+        user,
+      });
+    },
+  );
 });
 
 // UPDATE a user's enlisted_events
@@ -130,7 +137,7 @@ router.patch('/:user_id/enlisted', async (req, res) => {
         success: true,
         user,
       });
-    }
+    },
   );
 });
 // UPDATE a user's liked_events
@@ -174,7 +181,7 @@ router.patch('/:user_id/liked', async (req, res) => {
         success: true,
         user,
       });
-    }
+    },
   );
 });
 // UPDATE a user's hosting_events
@@ -212,7 +219,7 @@ router.patch('/:user_id/hosting', async (req, res) => {
         success: true,
         user,
       });
-    }
+    },
   );
 });
 
@@ -281,7 +288,8 @@ router.post('/login', async (req, res, next) => {
           maxAge: user.tokenMaxAge,
           httpOnly: true,
           sameSite: process.env.NODE_ENV === 'production' ? 'lax' : undefined,
-          domain: process.env.NODE_ENV === 'production' ? 'surfesta.site' : undefined,
+          domain:
+            process.env.NODE_ENV === 'production' ? 'surfesta.site' : undefined,
           secure: process.env.NODE_ENV === 'production' ? true : undefined,
         });
         res.status(200).json({
@@ -304,7 +312,7 @@ router.post('/logout', auth, (req, res) => {
       return res.status(200).send({
         success: true,
       });
-    }
+    },
   );
 });
 
@@ -317,7 +325,9 @@ router.delete('/', auth, (req, res) => {
 
   Event.deleteMany({ host: req.user._id }, (err) => {
     if (err)
-      return res.status(500).json({ error: 'db failure as removing hosting event' });
+      return res
+        .status(500)
+        .json({ error: 'db failure as removing hosting event' });
   });
 
   Event.updateMany(
@@ -337,19 +347,23 @@ router.delete('/', auth, (req, res) => {
         success: true,
         output,
       });
-    }
+    },
   );
 });
 // DELETE User by user_id
 router.delete('/:user_id', (req, res) => {
   User.remove({ _id: req.params.user_id }, (err) => {
     if (err)
-      return res.status(500).json({ error: 'db failure as removing related user' });
+      return res
+        .status(500)
+        .json({ error: 'db failure as removing related user' });
   });
 
   Event.deleteMany({ host: req.params.user_id }, (err) => {
     if (err)
-      return res.status(500).json({ error: 'db failure as removing hosting event' });
+      return res
+        .status(500)
+        .json({ error: 'db failure as removing hosting event' });
   });
 
   Event.updateMany(
@@ -369,7 +383,7 @@ router.delete('/:user_id', (req, res) => {
         success: true,
         output,
       });
-    }
+    },
   );
 });
 

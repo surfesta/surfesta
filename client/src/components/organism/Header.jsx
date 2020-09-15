@@ -17,6 +17,9 @@ import LogoutDiv from '../molecule/profile/LogoutDiv';
 import ProfileBtn from '../atom/profile/ProfileBtn';
 import { NavLink } from 'react-router-dom';
 import MobileHeaderRight from './MobileHeaderRight';
+import LoginButton from '../atom/header/LoginButton';
+import UserService from '../../services/UserService';
+import { cookieCheckSagaActionCreator } from '../../redux/modules/auth';
 
 function Header() {
   const user = useSelector((state) => state.auth.user);
@@ -34,13 +37,20 @@ function Header() {
     dispatch(push('/createEvent'));
   }, [dispatch, user, location]);
 
-  const handleLogoClick = useCallback(() => {
-    dispatch(push('/'));
-  }, [dispatch]);
-
   const handleDrawerClick = useCallback(() => {
     setVisible(!visible);
   }, [visible]);
+
+  const handleLogin = useCallback(() => {
+    dispatch(welcomeModal());
+  }, [dispatch]);
+
+  const handleLogout = useCallback(async () => {
+    const { success } = await UserService.logout();
+    dispatch(cookieCheckSagaActionCreator());
+    if (success) dispatch(push('/'));
+    window.scrollTo(0, 0);
+  }, [dispatch]);
 
   return (
     <section className="main-header">
@@ -48,9 +58,11 @@ function Header() {
         <div className="not-mobile">
           <PostEventButton handleClick={handlePostEvent} />
         </div>
-        <Logo onClick={handleLogoClick} />
+        <NavLink to="/">
+          <Logo />
+        </NavLink>
         <div className="not-mobile">
-          <HeaderRight />
+          <HeaderRight handleLogin={handleLogin} />
         </div>
         <MobileHeaderRight className="only-mobile header-right">
           <ThemeIndicator />
@@ -60,31 +72,37 @@ function Header() {
       {visible && (
         <MobileDrawer>
           <ul>
-            <li>
-              <NavLink to="/my/profile" activeClassName="clicked">
-                <div className="sub-nav-div">프로필</div>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/my/event/enlisted" activeClassName="clicked">
-                <div className="sub-nav-div">참가신청한 이벤트</div>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/my/event/hosting" activeClassName="clicked">
-                <div className="sub-nav-div">주최한 이벤트 </div>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/my/event/liked" activeClassName="clicked">
-                <div className="sub-nav-div">찜한 이벤트</div>
-              </NavLink>
-            </li>
+            <li>{!user && <LoginButton handleclick={handleLogin} />}</li>
+            {user && (
+              <>
+                <hr />
+                <li>
+                  <NavLink to="/my/profile" activeClassName="clicked">
+                    <div className="sub-nav-div">프로필</div>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/my/event/enlisted" activeClassName="clicked">
+                    <div className="sub-nav-div">참가신청한 이벤트</div>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/my/event/hosting" activeClassName="clicked">
+                    <div className="sub-nav-div">주최한 이벤트 </div>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/my/event/liked" activeClassName="clicked">
+                    <div className="sub-nav-div">찜한 이벤트</div>
+                  </NavLink>
+                </li>
+              </>
+            )}
             <li>
               <PostEventButton />
             </li>
             <li>
-              <ProfileBtn name="로그아웃 하기" />
+              <ProfileBtn name="로그아웃 하기" handleclick={handleLogout} />
             </li>
           </ul>
         </MobileDrawer>

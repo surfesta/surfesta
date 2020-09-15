@@ -39,4 +39,9 @@ export default class EventService {
     const { data } = await axios.get(`${EVENT_URL}/search?q=${keyword}`);
     return data;
   }
+  static async deleteEvent(eventId) {
+    await axios.delete(`${EVENT_URL}/${eventId}`);
+    const { data } = await axios.get(`${EVENT_URL}`);
+    return data;
+  }
 }

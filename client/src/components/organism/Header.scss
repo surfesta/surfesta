@@ -1,5 +1,6 @@
 @import '../../style/variables';
 @import '../../style/mixin';
+@import '../../style/mediaQuery';
 
 .main-header * {
   user-select: none;
@@ -8,6 +9,11 @@
 .main-header {
   background-color: $primary-color;
   color: $tertiary-color;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 3;
 
   .header-wrapper {
     display: flex;
@@ -18,5 +24,21 @@
     padding: 0 30px;
 
     height: 7rem;
+  }
+}
+
+.only-mobile {
+  display: none;
+}
+
+@include mobile {
+  .not-mobile {
+    display: none;
+  }
+  .only-mobile {
+    display: block;
+  }
+  .mobile-menu-button {
+    padding-right: 0 !important;
   }
 }

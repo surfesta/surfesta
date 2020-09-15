@@ -1,14 +1,22 @@
 import React, { useCallback } from 'react';
 import HeaderRight from '../molecule/header/HeaderRight';
 import Logo from '../atom/header/Logo';
-import { useDispatch, useSelector } from 'react-redux';
-import { welcomeModal } from '../../redux/modules/modal';
 import PostEventButton from '../atom/header/PostEventButton';
-import { push } from 'connected-react-router';
 import './Header.scss';
+import { welcomeModal } from '../../redux/modules/modal';
+import MobileBurger from '../atom/header/MobileBurger';
 import useWindowWidth from '../../hooks/useWindowWidth';
-import MobileBurger from './MobileBurger';
+import { useDispatch, useSelector } from 'react-redux';
+import { push } from 'connected-react-router';
 import { useState } from 'react';
+import ThemeIndicator from '../molecule/header/ThemeIndicator';
+import UserAvatar from '../atom/header/UserAvatar';
+import MobileDrawer from '../molecule/header/MobileDrawer';
+import SubNav from './SubNav';
+import LogoutDiv from '../molecule/profile/LogoutDiv';
+import ProfileBtn from '../atom/profile/ProfileBtn';
+import { NavLink } from 'react-router-dom';
+import MobileHeaderRight from './MobileHeaderRight';
 
 function Header() {
   const user = useSelector((state) => state.auth.user);
@@ -35,20 +43,54 @@ function Header() {
   }, [visible]);
 
   return (
-    <header className="main-header">
+    <section className="main-header">
       <div className="header-wrapper">
-        {width > 390 && <PostEventButton handleClick={handlePostEvent} />}
-        <Logo onClick={handleLogoClick} />
-        {width > 390 && <HeaderRight />}
-        {width < 390 && <MobileBurger handleClick={handleDrawerClick} />}
-      </div>
-      {visible && width < 390 && (
-        <div>
-          <HeaderRight />
-          <PostEventButton />
+        <div className="not-mobile">
+          <PostEventButton handleClick={handlePostEvent} />
         </div>
+        <Logo onClick={handleLogoClick} />
+        <div className="not-mobile">
+          <HeaderRight />
+        </div>
+        <MobileHeaderRight className="only-mobile header-right">
+          <ThemeIndicator />
+          <MobileBurger onClick={handleDrawerClick} />
+        </MobileHeaderRight>
+      </div>
+      {visible && (
+        <MobileDrawer>
+          <ul>
+            <li>
+              <NavLink to="/my/profile" activeClassName="clicked">
+                <div className="sub-nav-div">프로필</div>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/my/event/enlisted" activeClassName="clicked">
+                <div className="sub-nav-div">참가신청한 이벤트</div>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/my/event/hosting" activeClassName="clicked">
+                <div className="sub-nav-div">주최한 이벤트 </div>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/my/event/liked" activeClassName="clicked">
+                <div className="sub-nav-div">찜한 이벤트</div>
+              </NavLink>
+            </li>
+            <li>
+              <PostEventButton />
+            </li>
+            <li>
+              <ProfileBtn name="로그아웃 하기" />
+            </li>
+          </ul>
+        </MobileDrawer>
       )}
-    </header>
+    </section>
   );
 }
+
 export default Header;

@@ -17,6 +17,7 @@
   justify-content: center;
 
   transition: background-color 3s ease-in-out;
+  position: fixed;
 }
 
 #modal-container * {
@@ -38,6 +39,26 @@
   width: 37vw;
   min-height: 30vh;
   padding: 6rem 3rem 4rem;
+  &.confirm-modal {
+    padding: 6rem 3rem;
+    min-height: 100px;
+    h1 {
+      font-size: 4rem;
+      color: #fff;
+      word-break: keep-all;
+    }
+    button {
+      @include modal-button;
+      &.cancel {
+        color: $font-secondary-color;
+        border-color: $font-secondary-color;
+        &:hover {
+          border-color: #fff;
+          color: #2c3035;
+        }
+      }
+    }
+  }
 
   @include tablet {
     width: 55vw;

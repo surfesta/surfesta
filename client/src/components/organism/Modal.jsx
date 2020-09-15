@@ -8,10 +8,7 @@ import { offModal } from '../../redux/modules/modal';
 import { useCallback } from 'react';
 import WaveSurf from '../molecule/modal/WaveSurf';
 import { checkSagaActionCreator } from '../../redux/modules/mailCheck';
-import {
-  signupSagaActionCreator,
-  startSocialSDKLogin,
-} from '../../redux/modules/auth';
+import { signupSagaActionCreator, startSocialSDKLogin } from '../../redux/modules/auth';
 import './Modal.scss';
 
 export default function Modal() {
@@ -20,7 +17,6 @@ export default function Modal() {
 
   useEffect(() => {
     if (modal.isModalOn) {
-      window.scrollTo(0, 0);
       document.body.style.overflow = 'hidden';
     }
     return () => (document.body.style.overflow = 'inherit');
@@ -77,7 +73,7 @@ export default function Modal() {
 
   return (
     <Portal>
-      <section id="modal-container" onClick={dismissModal} style={{}}>
+      <section id="modal-container" onClick={dismissModal}>
         <div id="modal">
           <h1 className="modal-headline">
             {modal.content}
@@ -97,9 +93,7 @@ export default function Modal() {
               presetValue={modal.presetValue}
             />
           )}
-          {(modal.preLogin || modal.forLogin || modal.forSignUp) && (
-            <WaveSurf />
-          )}
+          {(modal.preLogin || modal.forLogin || modal.forSignUp) && <WaveSurf />}
         </div>
       </section>
     </Portal>

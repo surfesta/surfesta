@@ -5,19 +5,42 @@
 .eventInfo-wrap {
   position: relative;
   word-break: keep-all;
-  .top-fix {
+  .eventInfo-bar {
     display: none;
     position: fixed;
     top: 0;
     left: 0;
     background-color: #fff;
     width: 100%;
-    padding: 30px;
+    padding: 10px 30px;
     box-shadow: 0 3px 10px #3333;
+    z-index: 1;
+    &.show {
+      display: block;
+    }
+    .eventInfo-bar-wrap {
+      max-width: 1440px;
+      display: flex;
+      margin: 0 auto;
+      padding: 0 30px;
+      .left {
+        width: 50%;
+        .title {
+          font-size: 3rem;
+        }
+        p {
+          font-size: 2.4rem;
+          padding: 0;
+          margin: 0;
+        }
+      }
+      .right {
+        width: 50%;
+        padding-left: 50px;
+      }
+    }
   }
-  .show {
-    display: block;
-  }
+
   .flex-wrap {
     display: flex;
     flex-flow: wrap;
@@ -81,7 +104,7 @@
           }
         }
       }
-      .button-wrap {
+      @at-root .button-wrap {
         padding-top: 23px;
         .enlist-button,
         .disable-button {

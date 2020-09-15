@@ -16,10 +16,15 @@ export default function FavoriteButton({ event }) {
 
   useEffect(() => {
     event &&
-      event.liked_users.map((user) => {
+      event.liked_users.forEach((user) => {
         user && user._id === userId && setSelect(true);
       });
-  }, [userId]);
+
+    user &&
+      user.liked_events.forEach((event) => {
+        event && event._id === eventId && setSelect(true);
+      });
+  }, [userId, eventId]);
 
   const viewModal = useCallback(() => {
     dispatch(welcomeModal('이 기능은 회원만 가능해요 😉'));

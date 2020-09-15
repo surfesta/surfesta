@@ -12,7 +12,7 @@
     background: 0;
     border: 0;
     outline: transparent;
-    @include font(3rem, $weight: 700);
+    @include font(3rem, $weight: 600);
     cursor: pointer;
     .more {
       margin-left: 10px;

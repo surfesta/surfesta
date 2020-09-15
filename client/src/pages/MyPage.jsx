@@ -11,10 +11,10 @@ function MyPage() {
     <>
       <SubNavTemplate />
       <section>
-        <Route path="/my/profile" component={ProfileTemplate} />
-        <Route path="/my/event/enlisted" component={EnlistedEvents} />
-        <Route path="/my/event/hosting" component={HostingEvents} />
-        <Route path="/my/event/liked" component={LikedEvents} />
+        <Route path='/my/profile' component={ProfileTemplate} />
+        <Route path='/my/event/enlisted' component={EnlistedEvents} />
+        <Route path='/my/event/hosting' component={HostingEvents} />
+        <Route path='/my/event/liked' component={LikedEvents} />
       </section>
     </>
   );

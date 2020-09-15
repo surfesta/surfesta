@@ -7,7 +7,11 @@ import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
 import './PreLoginForm.scss';
 
-export default function PreLoginForm({ handleEmailCheck, handleFBLogin, handleGGLogin }) {
+export default function PreLoginForm({
+  handleEmailCheck,
+  handleFBLogin,
+  handleGGLogin,
+}) {
   React.useEffect(() => {
     document.querySelector('.gg-button').style = {};
     document.querySelector('.gg-button div').style = {};
@@ -58,7 +62,7 @@ export default function PreLoginForm({ handleEmailCheck, handleFBLogin, handleGG
             name="email"
             type="email"
             placeholder="이메일 주소를 입력해주세요:)"
-            className="login-input"
+            className="login-input pre-login"
             id={errors.email && touched.email && 'error-input-border'}
           />
           <StyledErrorMessage name="email" errors={errors} touched={touched} />

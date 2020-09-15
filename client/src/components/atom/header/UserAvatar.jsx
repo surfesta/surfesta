@@ -16,10 +16,8 @@ export default function UserAvatar() {
   const user = useSelector((state) => state.auth.user);
 
   return (
-    <NavLink to="/my/profile">
-      <Avatar className={classes.size} alt={user.username} src={user.profile_img}>
-        U
-      </Avatar>
-    </NavLink>
+    <Avatar className={classes.size} alt={user.username} src={user.profile_img}>
+      U
+    </Avatar>
   );
 }

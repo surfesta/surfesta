@@ -28,12 +28,17 @@ export default function LoginForm() {
     >
       {({ isSubmitting, touched, errors }) => (
         <Form>
-          <Field name="email" type="email" className="login-input" disabled />
+          <Field
+            name="email"
+            type="email"
+            className="login-input login"
+            disabled
+          />
           <Field
             name="password"
             type="password"
             placeholder="비밀번호"
-            className="login-input"
+            className="login-input "
             onClick={() => setHasLoginFailed(false)}
             onFocus={() => setHasLoginFailed(false)}
             id={
@@ -46,7 +51,11 @@ export default function LoginForm() {
             {hasLoginFailed && <LoginFailMessage />}
           </div>
 
-          <button type="submit" disabled={isSubmitting} className="login-button">
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="login-button"
+          >
             로그인
           </button>
         </Form>

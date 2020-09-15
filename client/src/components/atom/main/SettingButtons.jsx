@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { IconButton } from '@material-ui/core';
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import PeopleIcon from '@material-ui/icons/People';
-import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Delete';
-import Portal from '../../Portal';
-import { deleteEvent } from '../../../redux/modules/events';
-import axios from 'axios';
+import React, { useState } from "react";
+import { IconButton } from "@material-ui/core";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
+import PeopleIcon from "@material-ui/icons/People";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
+import Portal from "../../Portal";
+import { deleteEvent } from "../../../redux/modules/events";
+import axios from "axios";
 
 export default function SettingButtons({ event }) {
   const [visible, setVisible] = useState(false);

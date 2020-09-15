@@ -1,9 +1,15 @@
+@import '../../style/variables';
 @import '../../style/mediaQuery';
 
 .cards-wrap {
   display: block;
   max-width: 1440px;
   margin: 0 auto;
+  h2 {
+    font-size: 3.5rem;
+    font-weight: 600;
+    color: $primary-color;
+  }
   .img-wrap {
     max-width: 500px;
     margin: 0 auto;

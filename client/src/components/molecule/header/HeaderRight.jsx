@@ -10,13 +10,9 @@ import './HeaderRight.scss';
 import ThemeIndicator from './ThemeIndicator';
 import { NavLink } from 'react-router-dom';
 
-export default function HeaderRight() {
+export default function HeaderRight({ handleLogin }) {
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
-
-  const handleLogin = useCallback(() => {
-    dispatch(welcomeModal());
-  }, [dispatch]);
 
   return (
     <section className="header-right">

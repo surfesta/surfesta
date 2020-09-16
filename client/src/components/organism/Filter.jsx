@@ -1,69 +1,41 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import FilterList from './FilterList';
 import './Filter.scss';
 
 export default function Filter({ filter, setFilter, filterState }) {
-  const { ALL, ONLINE, OFFLINE } = filterState;
-
-  const [selected, setSelected] = React.useState(false);
+  const [selected, setSelected] = useState(false);
   const selectRef = useRef();
   const selectListRef = useRef();
 
-  const filterEvents = (type) => {
-    setFilter(type);
+  const handleClick = (e) => {
+    if (e.target === selectListRef.current) return;
+    selectRef.current.textContent = e.target.textContent;
+    setSelected(!selected);
   };
-
   return (
     <div className="filter-wrap">
       <button
-        selected={selected}
-        onClick={() => {
+        onClick={(e) => {
           setSelected(!selected);
         }}
       >
-        <span ref={selectRef}>Our Events </span>
+        <span ref={selectRef}>All Events</span>
         <span className="more">
           <ExpandMoreIcon className={selected ? 'arrow rotataion' : 'arrow'} />
         </span>
       </button>
       <div className="selectList-wrap">
-        <ul
-          className={selected ? 'show' : 'hide'}
-          ref={selectListRef}
-          onClick={click}
-        >
-          <li
-            onClick={() => {
-              filterEvents(ALL);
-            }}
-            className={filter === ALL ? 'act' : undefined}
-          >
-            Our Events
-          </li>
-          <li
-            onClick={() => {
-              filterEvents(ONLINE);
-            }}
-            className={filter === ONLINE ? 'act' : undefined}
-          >
-            Online Events
-          </li>
-          <li
-            onClick={() => {
-              filterEvents(OFFLINE);
-            }}
-            className={filter === OFFLINE ? 'act' : undefined}
-          >
-            Offline Events
-          </li>
-        </ul>
+        <FilterList
+          selectListRef={selectListRef}
+          selected={selected}
+          setSelected={setSelected}
+          handleClick={handleClick}
+          filter={filter}
+          setFilter={setFilter}
+          filterState={filterState}
+        />
       </div>
     </div>
   );
-
-  function click(e) {
-    if (e.target === selectListRef.current) return;
-    selectRef.current.textContent = e.target.textContent;
-    setSelected(!selected);
-  }
 }

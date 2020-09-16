@@ -18,6 +18,9 @@ export default function PreLoginForm({
     document.querySelector('.gg-button span').style = {};
   }, []);
 
+  const clickEmbedButton = (e) => {
+    e.currentTarget.querySelector('button').click();
+  };
   return (
     <Formik
       initialValues={{
@@ -31,7 +34,10 @@ export default function PreLoginForm({
     >
       {({ errors, touched }) => (
         <Form noValidate>
-          <div className="social-login-button google">
+          <div
+            className="social-login-button google"
+            onClick={clickEmbedButton}
+          >
             <GoogleLogin
               clientId="184465750767-gu3d86rn56bsj87dnsj7m3mpakma0f1a.apps.googleusercontent.com"
               buttonText="Google"
@@ -41,12 +47,9 @@ export default function PreLoginForm({
               className="gg-button"
             />
           </div>
-          <button
-            type="button"
+          <div
             className="social-login-button facebook"
-            onClick={(e) => {
-              document.querySelector('.fb-button').click();
-            }}
+            onClick={clickEmbedButton}
           >
             <FacebookAppLogo className="social-icon fb" />
             <FacebookLogin
@@ -59,7 +62,7 @@ export default function PreLoginForm({
               textButton="facebook"
               cssClass="fb-button"
             />
-          </button>
+          </div>
           <div id="modal-divider">
             <div>또는</div>
             <div></div>

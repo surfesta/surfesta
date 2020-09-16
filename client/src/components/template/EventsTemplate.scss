@@ -1,6 +1,15 @@
 @import '../../style/variables';
+@import '../../style/mixin';
 @import '../../style/mediaQuery';
 
+.main {
+  .select-wrap {
+    max-width: 1440px;
+    margin: 0 auto;
+    @include Flex(space-between, flex-end);
+    margin-top: 50px;
+  }
+}
 .cards-wrap {
   display: block;
   max-width: 1440px;

@@ -2,13 +2,11 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { validateFileInput } from '../../../utils/validateFileInput';
+import UploadService from '../../../services/UploadService';
 
 function ProfileThumb({ profileImg, setProfileImg }) {
-  const user = useSelector((state) => state.auth.user);
-
   const titleRef = useRef(null);
   const imgRef = useRef(null);
-  const [uploadedFile, setUploadedFile] = useState({});
 
   useEffect(() => {
     const titleNode = titleRef.current;
@@ -23,29 +21,19 @@ function ProfileThumb({ profileImg, setProfileImg }) {
   const onChange = useCallback(
     async (e) => {
       const _file_data = e.target.files[0];
-      console.log(_file_data);
 
       if (!validateFileInput(_file_data)) return;
       const formData = new FormData();
       formData.append('file', _file_data);
 
-      //let it userService
       try {
-        const { data } = await axios.post('/api/v1/uploads', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        });
-        console.log(data);
-        const { filePath } = data;
-        setUploadedFile({ filePath });
+        const { filePath } = await UploadService.uploadImage(formData);
         setProfileImg(filePath);
       } catch (err) {
-        console.log(err);
+        console.warn(err);
       }
-      //let it userService
     },
-    [setUploadedFile, validateFileInput],
+    [validateFileInput],
   );
 
   return (

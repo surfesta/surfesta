@@ -22,7 +22,7 @@ const loginStart = () => ({
 });
 const loginSuccess = (user) => ({
   type: SUCCESS,
-  user,
+  user: { ...user, phone_number: '0' + user.phone_number },
 });
 
 const loginFail = (error) => ({
@@ -196,6 +196,7 @@ function* cookieCheckSaga() {
     yield put(loginStart());
     const { isAuth, user } = yield call(UserService.authenticate);
     if (!isAuth) throw new Error();
+
     yield put(loginSuccess(user));
   } catch (error) {
     yield put(loginFail(error));
@@ -210,6 +211,7 @@ function* loginSaga(action) {
       action.payload.setHasLoginFailed(true);
       throw new Error();
     }
+
     yield put(loginSuccess(user));
     yield put(offModal());
   } catch (error) {

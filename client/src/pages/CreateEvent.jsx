@@ -3,10 +3,15 @@ import './createevent.scss';
 import EventForm from '../components/template/createEvent/EventForm';
 // import useAuth from '../utils/useAuth';
 import RouteLeavingGuard from '../components/organism/createEvent/RouteLeavingGuard';
+import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 export default function CreateEvent({ history }) {
-  // useAuth();
   const [whenState, updateWhenState] = useState(true);
+  // useAuth()
+  const user = useSelector((state) => state.auth.user);
+  if (!user) return <Redirect to="/" />;
+
   return (
     <>
       <RouteLeavingGuard

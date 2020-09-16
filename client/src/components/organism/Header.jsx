@@ -30,6 +30,7 @@ function Header() {
 
   const handlePostEvent = useCallback(() => {
     if (location === '/createEvent') return;
+    console.log(user);
     if (user === null) {
       dispatch(welcomeModal('로그인 후 시작하기😉'));
       return;
@@ -99,7 +100,7 @@ function Header() {
               </>
             )}
             <li>
-              <PostEventButton />
+              <PostEventButton handleClick={handlePostEvent} />
             </li>
             <li>
               <ProfileBtn name="로그아웃 하기" handleclick={handleLogout} />

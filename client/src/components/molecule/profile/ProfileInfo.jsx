@@ -1,10 +1,10 @@
 import React from 'react';
 import ProfileThumb from '../../atom/profile/ProfileThumb';
 
-function ProfileInfo() {
+function ProfileInfo({ ...props }) {
   return (
     <div className="profile-info">
-      <ProfileThumb />
+      <ProfileThumb {...props} />
     </div>
   );
 }

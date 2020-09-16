@@ -64,11 +64,12 @@ export default (state = initialState, action) => {
 const START_PATCH_USER = `${prefix}/START_PATCH_USER`;
 
 // saga-action-creator
-export const startPatchUser = (username, phone_number) => ({
+export const startPatchUser = (username, phone_number, profile_img) => ({
   type: START_PATCH_USER,
   payload: {
     username,
     phone_number,
+    profile_img,
   },
 });
 

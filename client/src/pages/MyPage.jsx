@@ -5,16 +5,20 @@ import SubNavTemplate from '../components/template/SubNavTemplate';
 import EnlistedEvents from '../components/molecule/eventCategories/EnlistedEvents';
 import HostingEvents from '../components/molecule/eventCategories/HostingEvents';
 import LikedEvents from '../components/molecule/eventCategories/LikedEvents';
+import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 function MyPage() {
+  const user = useSelector((state) => state.auth.user);
+  if (!user) return <Redirect />;
   return (
     <>
       <SubNavTemplate />
       <section>
-        <Route path='/my/profile' component={ProfileTemplate} />
-        <Route path='/my/event/enlisted' component={EnlistedEvents} />
-        <Route path='/my/event/hosting' component={HostingEvents} />
-        <Route path='/my/event/liked' component={LikedEvents} />
+        <Route path="/my/profile" component={ProfileTemplate} />
+        <Route path="/my/event/enlisted" component={EnlistedEvents} />
+        <Route path="/my/event/hosting" component={HostingEvents} />
+        <Route path="/my/event/liked" component={LikedEvents} />
       </section>
     </>
   );

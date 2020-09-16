@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import './ProfileThumb.scss';
 import axios from 'axios';
+import { validateFileInput } from '../../../utils/validateFileInput';
 
-function ProfileThumb() {
+function ProfileThumb({ profileImg, setProfileImg }) {
   const user = useSelector((state) => state.auth.user);
 
   const titleRef = useRef(null);
@@ -20,53 +20,34 @@ function ProfileThumb() {
     titleNode.focus();
   }, []);
 
-  const onChange = async (e) => {
-    const _file_data = e.target.files[0];
-    console.log(_file_data);
-    const { type, size, name } = _file_data;
+  const onChange = useCallback(
+    async (e) => {
+      const _file_data = e.target.files[0];
+      console.log(_file_data);
 
-    // 7 메가바이트
-    if (size > 7000000) {
-      alert(
-        `7MB 이하 용량의 이미지를 업로드해주세요. ${
-          size * 0.000001 - 7
-        }MB 초과`,
-      );
-      return;
-    }
-    if (
-      type !== 'image/jpg' &&
-      type !== 'image/jpeg' &&
-      type !== 'image/png' &&
-      type !== 'image/webp'
-    ) {
-      alert(`${type}는 지원하지 않는 형식의 타입입니다.`);
-      return;
-    }
+      if (!validateFileInput(_file_data)) return;
+      const formData = new FormData();
+      formData.append('file', _file_data);
 
-    const formData = new FormData();
-    formData.append('file', _file_data);
+      //let it userService
+      try {
+        const { data } = await axios.post('/api/v1/uploads', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+        console.log(data);
+        const { filePath } = data;
+        setUploadedFile({ filePath });
+        setProfileImg(filePath);
+      } catch (err) {
+        console.log(err);
+      }
+      //let it userService
+    },
+    [setUploadedFile, validateFileInput],
+  );
 
-    imgRef.current.parentNode.classList.add('active');
-
-    try {
-      const { data } = await axios.post('/api/v1/uploads', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      const { filePath } = data;
-      setUploadedFile({ filePath });
-      console.log(filePath);
-
-      const { responsedata } = await axios.patch('/api/v1/users', {
-        profile_img: filePath,
-      });
-      console.log(responsedata);
-    } catch (err) {
-      console.log(err);
-    }
-  };
   return (
     <div id="profile-edit">
       <h2 ref={titleRef} className="title">
@@ -81,20 +62,11 @@ function ProfileThumb() {
           accept="image/jpeg, image/png, image/jpg, image/webp"
           ref={imgRef}
         />
-        <label className="custom-file-label" htmlFor="customFile">
-          {uploadedFile && (
-            <div>
-              <img
-                className="profile-thumb"
-                src={
-                  uploadedFile.filePath
-                    ? uploadedFile.filePath
-                    : user && user.profile_img
-                }
-                alt=""
-              />
-            </div>
-          )}
+        <label
+          className="custom-thumbnail-label profile-thumb"
+          htmlFor="customFile"
+        >
+          <img className="profile-thumb" src={profileImg} alt="" />
         </label>
         <span className="thumb-guide">
           png, jpg, jpeg 이미지만 업로드 가능해요.

@@ -31,17 +31,23 @@ export default function PreLoginForm({
     >
       {({ errors, touched }) => (
         <Form noValidate>
-          <div type="button" className="social-login-button google">
+          <div className="social-login-button google">
             <GoogleLogin
               clientId="184465750767-gu3d86rn56bsj87dnsj7m3mpakma0f1a.apps.googleusercontent.com"
               buttonText="Google"
               onSuccess={handleGGLogin}
-              onFailure={console.log}
+              onFailure={console.warn}
               cookiePolicy={'single_host_origin'}
               className="gg-button"
             />
           </div>
-          <div type="button" className="social-login-button facebook">
+          <button
+            type="button"
+            className="social-login-button facebook"
+            onClick={(e) => {
+              document.querySelector('.fb-button').click();
+            }}
+          >
             <FacebookAppLogo className="social-icon fb" />
             <FacebookLogin
               appId="3347258178701289"
@@ -49,10 +55,11 @@ export default function PreLoginForm({
               scope="public_profile,email"
               fields="name,email,picture"
               callback={handleFBLogin}
+              onFailure={console.warn}
               textButton="facebook"
               cssClass="fb-button"
             />
-          </div>
+          </button>
           <div id="modal-divider">
             <div>또는</div>
             <div></div>

@@ -1,6 +1,9 @@
 @import '../../../style/variables';
 @import '../../../style/mixin';
 
+.social-login-button * {
+  outline: none;
+}
 .social-login-button {
   @include font-normal;
   font-weight: 400;
@@ -9,13 +12,14 @@
   padding: 2rem 2rem 2rem 3rem;
   border-radius: 40px !important;
   width: 40%;
-  height: 30%;
+  height: 65px;
   margin: 1rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease-in-out;
 
+  outline: none;
   &:hover {
     transform: translate3d(0, -3%, 0);
   }
@@ -44,6 +48,7 @@
 
       color: white;
       background-color: inherit;
+      font-family: 'Montserrat', 'Noto Sans kr', sans-serif !important;
     }
   }
 }
@@ -84,11 +89,12 @@
 
 .login-input {
   @include font-normal;
-  margin: 1rem auto;
+  margin: 1rem auto 0;
   border-radius: 50px;
   outline: 0;
   padding: 2rem 3rem;
   width: 80%;
+  height: 65px;
   color: $font-primary-color;
   border: 2px transparent solid;
   &.login {
@@ -126,11 +132,13 @@
 .basic-privacy-confirm {
   color: $font-tertiary-color;
   font-weight: 200;
+  margin: 0.2rem;
 }
 
 .login-button {
   @include text-button;
   width: 45%;
+  height: 65px;
   padding: 1.5rem;
   margin: 1rem 0 4rem 0;
   border: 2px white solid;

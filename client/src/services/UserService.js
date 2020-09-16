@@ -1,6 +1,5 @@
 import axios from 'axios';
 const URL = '/api/v1/users';
-const USER_1_ID = '5f59c33719e12a35a0bee7ca';
 
 export default class UserService {
   static async authenticate() {
@@ -42,14 +41,11 @@ export default class UserService {
 
   // patch --------------------------------------------------------------
 
-  static async patchUser({ username, phone_number }) {
+  static async patchUser(payload) {
     const { data } = await axios({
       method: 'PATCH',
-      url: `${URL}/${USER_1_ID}`,
-      data: {
-        username,
-        phone_number,
-      },
+      url: `${URL}/`,
+      data: payload,
     });
     return data;
   }

@@ -7,7 +7,7 @@ export default function HeaderTemplate() {
   const isModalOn = useSelector((state) => state.modal.isModalOn);
 
   return (
-    <header>
+    <header id="header">
       <Header />
       {isModalOn && <Modal />}
     </header>

@@ -1,22 +1,19 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import ProfileBtn from '../../atom/profile/ProfileBtn';
-import Email from '../../atom/profile/Email';
-import Name from '../../atom/profile/Name';
-import Password from '../../atom/profile/Password';
-import PhoneNumber from '../../atom/profile/PhoneNumber';
-import { startPatchUser } from '../../../redux/modules/profile';
+import React, { useState, useEffect, useCallback } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import ProfileBtn from "../../atom/profile/ProfileBtn";
+import Email from "../../atom/profile/Email";
+import Name from "../../atom/profile/Name";
+import PhoneNumber from "../../atom/profile/PhoneNumber";
+import { startPatchUser } from "../../../redux/modules/profile";
 
 function ProfileDetails() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
-  const userName = (user && user.username) || '';
-  const userPhoneNumber = (user && user.phone_number) || '';
-  const userPassword = (user && user.password) || '';
+  const userName = (user && user.username) || "";
+  const userPhoneNumber = (user && user.phone_number) || "";
 
-  const [name, setName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
 
   useEffect(() => {
     setName(userName);
@@ -47,7 +44,6 @@ function ProfileDetails() {
           phoneNumber={phoneNumber}
           phoneNumChange={phoneNumChange}
         />
-        <Password />
         <div className="form-btn">
           <ProfileBtn name="제출 하기" handleClick={handleSubmit} />
         </div>

@@ -40,6 +40,14 @@
       #date-picker-inline-helper-text {
         font-size: 1.2rem;
       }
+      .tui-popup-body > label,
+      .tui-popup-body > input {
+        display: none;
+      }
+      .te-url-type.te-tab-active ~ label,
+      .te-url-type.te-tab-active ~ input {
+        display: block;
+      }
       .drop-down-container {
         outline: none;
       }
@@ -320,9 +328,6 @@
     .create-event-form,
     .revise-event-form {
       padding: 0;
-      h1 {
-        margin-bottom: 0;
-      }
       .main-title {
         margin-top: 3rem;
         margin-bottom: 0;

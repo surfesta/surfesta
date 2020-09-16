@@ -8,10 +8,16 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Portal from "../../Portal";
 import { deleteEvent } from "../../../redux/modules/events";
+import { deleteHosting } from "../../../redux/modules/auth";
 import axios from "axios";
+// import axios from "axios";
 
 export default function SettingButtons({ event }) {
   const [visible, setVisible] = useState(false);
+
+  const user = useSelector((state) => state.auth.user);
+
+  const userId = user._id;
   const eventId = event._id;
 
   const dispatch = useDispatch();
@@ -19,10 +25,9 @@ export default function SettingButtons({ event }) {
     setVisible(true);
   }
   function eventDelete() {
-    // dispatch(deleteEvent(eventId));
-    // setVisible(false);
-    axios.delete(`/api/v1/events/${eventId}`); //임시
-    window.location.reload(); //임시
+    dispatch(deleteEvent(eventId));
+    dispatch(deleteHosting(eventId, userId, false));
+    setVisible(false);
   }
   return (
     <>

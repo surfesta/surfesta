@@ -1,5 +1,5 @@
-@import './mixin';
-@import './variables';
+@import "./mixin";
+@import "./variables";
 
 body.dark {
   // backgrounds
@@ -67,11 +67,11 @@ body.dark {
   }
   .create-event-wrap,
   .revise-event-wrap {
-    background: #2c3035;
+    background: #1b1d21;
     .create-event-form,
     .revise-event-form {
-      h1 {
-        color: #ccc;
+      .main-title {
+        color: $dark-font-primary-color;
       }
       form {
         #date-picker-inline-helper-text,
@@ -79,16 +79,25 @@ body.dark {
           color: #fff;
         }
         .eventform-title {
-          color: #bebebe;
+          color: $dark-font-primary-color;
         }
         .event-sec {
-          color: #fff;
+          color: $dark-font-secondary-color;
           .event-content {
-            color: #fff;
+            color: $dark-font-secondary-color;
+          }
+          input[type="text"] {
+            background: #24272b;
+            color: #b6b7b8;
+          }
+          .time-check {
+            input[type="text"] {
+              background: inherit;
+            }
           }
         }
         .upload-type {
-          color: #fff;
+          color: $dark-font-secondary-color;
         }
         .time-check {
           label,

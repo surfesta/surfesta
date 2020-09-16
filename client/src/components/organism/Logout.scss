@@ -1,6 +1,6 @@
-@import '../../style/mediaQuery';
-@import '../../style/variables';
-@import '../../style/mixin';
+@import "../../style/mediaQuery";
+@import "../../style/variables";
+@import "../../style/mixin";
 
 * {
   box-sizing: border-box;
@@ -32,8 +32,7 @@
   .logout-section {
     width: 100%;
     display: block;
-    // display: grid;
-    // flex-wrap: wrap;
+    padding-top: 10px;
 
     .logout-title-div span,
     .deact-title-div span {
@@ -47,13 +46,15 @@
   .logout-section {
     margin: 0 auto;
 
+    .logout-title-div,
     .deact-title-div {
+      margin-top: 20px;
       margin-left: 5px;
     }
 
     .logout-btn-div,
     .deact-btn-div {
-      margin: 0;
+      margin-top: 20px;
     }
   }
 }

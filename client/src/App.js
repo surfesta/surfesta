@@ -49,7 +49,7 @@ function App() {
             <Route path="/event/:event_id" component={EventDetail} />
             <Route path="/search/:keyword" component={Search} />
             <Route path="/my" component={MyPage} />
-            <Route exact path="/" component={Home} />
+            <Route path="/" component={Home} />
           </Switch>
           <FooterTemplate />
         </ConnectedRouter>

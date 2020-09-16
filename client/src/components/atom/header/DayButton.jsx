@@ -8,4 +8,4 @@ const DayButton = ({ onChange }) => (
   </IconButton>
 );
 
-export default DayButton;
+export default React.memo(DayButton);

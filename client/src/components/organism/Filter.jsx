@@ -1,8 +1,7 @@
 import React, { useRef, useState } from 'react';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import './Filter.scss';
-
 import FilterList from './FilterList';
+import './Filter.scss';
 
 export default function Filter({ filter, setFilter, filterState }) {
   const [selected, setSelected] = useState(false);
@@ -12,24 +11,21 @@ export default function Filter({ filter, setFilter, filterState }) {
   const handleClick = (e) => {
     if (e.target === selectListRef.current) return;
     selectRef.current.textContent = e.target.textContent;
-    selected && setSelected(!selected);
+    setSelected(!selected);
   };
-
   return (
-    <div className='filter-wrap'>
+    <div className="filter-wrap">
       <button
-        onClick={() => {
+        onClick={(e) => {
           setSelected(!selected);
-          // !selected && setSelected(true);
-          // selected && setSelected(false);
         }}
       >
         <span ref={selectRef}>All Events</span>
-        <span className='more'>
+        <span className="more">
           <ExpandMoreIcon className={selected ? 'arrow rotataion' : 'arrow'} />
         </span>
       </button>
-      <div className='selectList-wrap'>
+      <div className="selectList-wrap">
         <FilterList
           selectListRef={selectListRef}
           selected={selected}

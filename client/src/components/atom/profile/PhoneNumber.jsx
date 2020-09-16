@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function PhoneNumber({ phoneNumber, phoneNumChange }) {
   // const num = phoneNumber + "";
@@ -16,7 +16,7 @@ export default function PhoneNumber({ phoneNumber, phoneNumChange }) {
       <input
         type="tel"
         name="phone_number"
-        value={`0${phoneNumber}`}
+        value={phoneNumber}
         onChange={phoneNumChange}
       />
     </div>

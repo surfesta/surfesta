@@ -27,7 +27,7 @@ export default function RegisterForm({ handleRegister, presetValue }) {
             className="signup-input email-input"
             disabled
           />
-          <StyledErrorMessage name="email" errors={errors} touched={touched} />
+          <StyledErrorMessage name="email" />
           <Field
             name="username"
             type="username"
@@ -35,16 +35,28 @@ export default function RegisterForm({ handleRegister, presetValue }) {
             className="signup-input"
             id={errors.username && touched.username && 'error-input-border'}
           />
-          <StyledErrorMessage name="username" errors={errors} touched={touched} />
+          <StyledErrorMessage
+            name="username"
+            errors={errors}
+            touched={touched}
+          />
           <Field
             name="phone_number"
-            type="phone_number"
+            type="digit"
             placeholder="휴대폰 번호"
             className="signup-input"
             maxLength="11"
-            id={errors.phone_number && touched.phone_number && 'error-input-border'}
+            id={
+              errors.phone_number &&
+              touched.phone_number &&
+              'error-input-border'
+            }
           />
-          <StyledErrorMessage name="phone_number" errors={errors} touched={touched} />
+          <StyledErrorMessage
+            name="phone_number"
+            errors={errors}
+            touched={touched}
+          />
           <Field
             name="password"
             type="password"
@@ -52,8 +64,16 @@ export default function RegisterForm({ handleRegister, presetValue }) {
             className="signup-input"
             id={errors.password && touched.password && 'error-input-border'}
           />
-          <StyledErrorMessage name="password" errors={errors} touched={touched} />
-          <button type="submit" className="signup-button" disabled={isSubmitting}>
+          <StyledErrorMessage
+            name="password"
+            errors={errors}
+            touched={touched}
+          />
+          <button
+            type="submit"
+            className="signup-button"
+            disabled={isSubmitting}
+          >
             회원가입
           </button>
         </Form>

@@ -31,14 +31,14 @@ const userSchema = mongoose.Schema(
     timestamps: true,
     collection: 'users',
     versionKey: false,
-  }
+  },
 );
 
 class UserClass {
   // virtual
   get gravatarImage() {
     const hash = md5(this.email.toLowerCase());
-    return `https://www.gravatar.com/avatar/${hash}?d=identicon&size=250`;
+    return `https://www.gravatar.com/avatar/${hash}?d=identicon&size=180`;
   }
 
   // document method

@@ -13,13 +13,16 @@ export default function FilterList({
   const { ALL, ONLINE, OFFLINE } = filterState;
 
   useEffect(() => {
-    window.document.body.addEventListener('click', () => {
+    window.document.body.addEventListener('click', (e) => {
+      if (e.target.matches('.filter-wrap *')) return;
       setSelected(false);
     });
-    return () =>
-      window.document.body.removeEventListener('click', () => {
+    return () => {
+      window.document.body.removeEventListener('click', (e) => {
+        if (e.target.matches('.filter-wrap *')) return;
         setSelected(false);
       });
+    };
   }, []);
 
   return (

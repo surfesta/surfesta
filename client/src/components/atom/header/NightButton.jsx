@@ -7,4 +7,5 @@ const NightButton = ({ onChange }) => (
     <Brightness2OutlinedIcon />
   </IconButton>
 );
-export default NightButton;
+
+export default React.memo(NightButton);

@@ -37,13 +37,9 @@ function Header() {
     dispatch(push('/createEvent'));
   }, [dispatch, user, location]);
 
-  const handleDrawerClick = useCallback(() => {
-    setVisible(!visible);
-  }, [visible]);
+  const handleDrawerClick = useCallback(() => setVisible(!visible), [visible]);
 
-  const handleLogin = useCallback(() => {
-    dispatch(welcomeModal());
-  }, [dispatch]);
+  const handleLogin = useCallback(() => dispatch(welcomeModal()), [dispatch]);
 
   const handleLogout = useCallback(async () => {
     const { success } = await UserService.logout();
@@ -52,15 +48,18 @@ function Header() {
     window.scrollTo(0, 0);
   }, [dispatch]);
 
+  const goHome = useCallback(() => {
+    dispatch(push('/'));
+    setTimeout(() => window.scrollTo(0, 0));
+  });
+
   return (
     <section className="main-header">
       <div className="header-wrapper">
         <div className="not-mobile">
           <PostEventButton handleClick={handlePostEvent} />
         </div>
-        <NavLink to="/">
-          <Logo />
-        </NavLink>
+        <Logo onClick={goHome} />
         <div className="not-mobile">
           <HeaderRight handleLogin={handleLogin} />
         </div>
@@ -99,7 +98,7 @@ function Header() {
               </>
             )}
             <li>
-              <PostEventButton />
+              <PostEventButton handleClick={handlePostEvent} />
             </li>
             <li>
               <ProfileBtn name="로그아웃 하기" handleclick={handleLogout} />

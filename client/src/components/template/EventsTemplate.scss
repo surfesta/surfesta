@@ -14,9 +14,11 @@
   display: block;
   max-width: 1440px;
   margin: 0 auto;
+  min-height: 600px;
   h2 {
     font-size: 3.5rem;
     color: $primary-color;
+    padding-left: 30px;
   }
   .img-wrap {
     max-width: 500px;
@@ -29,7 +31,7 @@
     display: flex;
     flex-flow: row wrap;
     padding: 20px 0px 30px 30px;
-    min-height: 500px;
+    min-height: 430px;
   }
 }
 

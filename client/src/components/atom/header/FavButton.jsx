@@ -8,4 +8,4 @@ const FavButton = ({ onClick }) => (
   </IconButton>
 );
 
-export default FavButton;
+export default React.memo(FavButton);

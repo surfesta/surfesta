@@ -2,7 +2,7 @@
 @import '../../style/mixin';
 @import '../../style/mediaQuery';
 
-header {
+#header {
   height: 70px;
 }
 .main-header * {
@@ -25,8 +25,7 @@ header {
     max-width: 1440px;
     margin: 0 auto;
     padding: 0 30px;
-
-    height: 7rem;
+    height: 70px;
   }
 }
 

@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
 
 const User = require('../models/User');
 const Event = require('../models/Event');
@@ -79,12 +77,14 @@ router.patch('/', auth, async (req, res, next) => {
     { $set: req.body },
     async (err, output) => {
       if (err) res.status(500).json({ error: 'db failure' });
+
       const user = await User.findOne({ _id: req.user._id })
         .populate({ path: 'enlisted_events', populate: 'host' })
         .populate({ path: 'hosting_events', populate: 'host' })
         .populate({ path: 'liked_events', populate: 'host' });
 
       if (!output.n) return res.status(404).json({ error: 'User not found' });
+
       res.json({
         success: true,
         user,

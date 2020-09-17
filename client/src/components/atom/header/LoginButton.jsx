@@ -8,4 +8,5 @@ const LoginButton = ({ handleclick }) => {
     </button>
   );
 };
-export default LoginButton;
+
+export default React.memo(LoginButton);

@@ -16,6 +16,7 @@ import HeaderTemplate from './components/template/HeaderTemplate';
 import ReviseEvent from './pages/ReviseEvent';
 import Meta from './components/Meta';
 import FooterTemplate from './components/template/FooterTemplate';
+import QrScanner from './pages/QrScanner';
 
 export const ThemeContext = React.createContext();
 
@@ -44,12 +45,13 @@ function App() {
         <ConnectedRouter history={history}>
           <HeaderTemplate />
           <Switch>
-            <Route path="/Revise/:event_id" component={ReviseEvent} />
-            <Route path="/createEvent" component={CreateEvent} />
-            <Route path="/event/:event_id" component={EventDetail} />
-            <Route path="/search/:keyword" component={Search} />
-            <Route path="/my" component={MyPage} />
-            <Route exact path="/" component={Home} />
+            <Route path='/qr' component={QrScanner} />
+            <Route path='/reviseEvent/:event_id' component={ReviseEvent} />
+            <Route path='/createEvent' component={CreateEvent} />
+            <Route path='/event/:event_id' component={EventDetail} />
+            <Route path='/search/:keyword' component={Search} />
+            <Route path='/my' component={MyPage} />
+            <Route path='/' component={Home} />
           </Switch>
           <FooterTemplate />
         </ConnectedRouter>

@@ -9,11 +9,13 @@ const userPrefix = "surfesta-user";
 const START = `${prefix}/START`;
 const SUCCESS = `${prefix}/SUCCESS`;
 const FAIL = `${prefix}/FAIL`;
+const PATCH_START = `${userPrefix}/PATCH_START`;
+const PATCH_SUCCESS = `${userPrefix}/PATCH_SUCCESS`;
+const PATCH_FAIL = `${userPrefix}/PATCH_FAIL`;
 const TOGGLE_ENLISTED_EVENT_SUCCESS = `${userPrefix}/TOGGLE_ENLISTED_EVENT_SUCCESS`;
 const TOGGLE_LIKED_EVENT_SUCCESS = `${userPrefix}/TOGGLE_LIKED_EVENT_SUCCESS`;
-const PATCH_USER_START = `${userPrefix}/START`;
-const PATCH_USER_SUCCESS = `${userPrefix}/SUCCESS`;
-const PATCH_USER_FAIL = `${userPrefix}/FAIL`;
+const DELETE_HOSTING_SUCCESS = `${prefix}/DELETE_EVENT_SUCCESS`;
+const TOGGLE_FAIL = `${userPrefix}/TOGGLE_FAIL`;
 
 // action creator
 const loginStart = () => ({
@@ -23,17 +25,25 @@ const loginSuccess = (user) => ({
   type: SUCCESS,
   user: { ...user, phone_number: "0" + user.phone_number },
 });
-const patchUserStart = () => ({
-  type: PATCH_USER_START,
-});
-const patchUserSuccess = (user) => ({
-  type: PATCH_USER_SUCCESS,
-  user,
-});
-const patchUserFail = (error) => ({
-  type: PATCH_USER_FAIL,
+
+const loginFail = (error) => ({
+  type: FAIL,
   error,
 });
+
+const patchStart = () => ({
+  type: PATCH_START,
+});
+
+const patchSuccess = (user) => ({
+  type: PATCH_SUCCESS,
+  user,
+});
+const patchFail = (error) => ({
+  type: PATCH_FAIL,
+  error,
+});
+
 const toggleEnlistedEventSuccess = (user) => ({
   type: TOGGLE_ENLISTED_EVENT_SUCCESS,
   user,
@@ -42,13 +52,14 @@ const toggleLikedEventSuccess = (user) => ({
   type: TOGGLE_LIKED_EVENT_SUCCESS,
   user,
 });
-const loginFail = (error) => ({
-  type: FAIL,
+
+const addFail = (error) => ({
+  type: TOGGLE_FAIL,
   error,
 });
-const addFail = (error) => ({
-  type: FAIL,
-  error,
+const deleteHostingSuccess = (users) => ({
+  type: DELETE_HOSTING_SUCCESS,
+  users,
 });
 
 // initial state
@@ -67,7 +78,7 @@ export default function reducer(state = initialState, action) {
         loading: true,
         error: null,
       };
-    case PATCH_USER_START:
+    case PATCH_START:
       return {
         ...state,
         loading: true,
@@ -79,7 +90,7 @@ export default function reducer(state = initialState, action) {
         user: action.user,
         error: null,
       };
-    case PATCH_USER_SUCCESS:
+    case PATCH_SUCCESS:
       return {
         loading: false,
         user: action.user,
@@ -95,13 +106,24 @@ export default function reducer(state = initialState, action) {
         ...state,
         user: action.user,
       };
+    case TOGGLE_FAIL:
+      return {
+        loading: false,
+        user: null,
+        error: action.error,
+      };
     case FAIL:
       return {
         loading: false,
         user: null,
         error: action.error,
       };
-    case PATCH_USER_FAIL:
+    case DELETE_HOSTING_SUCCESS:
+      return {
+        ...state,
+        user: action.users,
+      };
+    case PATCH_FAIL:
       return {
         loading: false,
         user: null,
@@ -120,6 +142,7 @@ const SIGN_UP_SAGA = "SIGN_UP_SAGA";
 const START_SOCIAL_SDK_LOGIN = "START_SOCIAL_SDK_LOGIN";
 const TOGGLE_ENLISTED_EVENT = `${userPrefix}/TOGGLE_ENLISTED_EVENT`;
 const TOGGLE_LIKED_EVENT = `${userPrefix}/TOGGLE_LIKED_EVENT`;
+const START_DELETE_HOSTING = `${prefix}/START_DELETE_HOSTING`;
 const PATCH_USER = `${userPrefix}/PATCH_USER`;
 
 export const cookieCheckSagaActionCreator = () => ({
@@ -155,13 +178,33 @@ export const toggleEnlistedEvent = (eventId, userId, type) => ({
     type,
   },
 });
-
 export const toggleLikedEvent = (eventId, userId, type) => ({
   type: TOGGLE_LIKED_EVENT,
   payload: {
     eventId,
     userId,
     type,
+  },
+});
+export const deleteHosting = (eventId, userId, type) => ({
+  type: START_DELETE_HOSTING,
+  payload: {
+    eventId,
+    userId,
+    type,
+  },
+});
+
+export const patchUserActionCreator = (
+  username,
+  phone_number,
+  profile_img
+) => ({
+  type: PATCH_USER,
+  payload: {
+    username,
+    phone_number,
+    profile_img,
   },
 });
 
@@ -184,6 +227,7 @@ function* cookieCheckSaga() {
     yield put(loginStart());
     const { isAuth, user } = yield call(UserService.authenticate);
     if (!isAuth) throw new Error();
+
     yield put(loginSuccess(user));
   } catch (error) {
     yield put(loginFail(error));
@@ -198,6 +242,7 @@ function* loginSaga(action) {
       action.payload.setHasLoginFailed(true);
       throw new Error();
     }
+
     yield put(loginSuccess(user));
     yield put(offModal());
   } catch (error) {
@@ -276,6 +321,25 @@ function* toggleLikedEventSaga(action) {
     yield put(addFail(error));
   }
 }
+function* startDeleteHostingSaga(action) {
+  try {
+    const { user } = yield call(UserService.toggleHostingEvent, action.payload);
+    yield put(deleteHostingSuccess(user));
+  } catch (error) {
+    yield put(addFail(error));
+  }
+}
+
+function* patchUserSaga(action) {
+  try {
+    yield put(patchStart());
+    const { user } = yield call(UserService.patchUser, action.payload);
+    if (!user) throw new Error("No user");
+    yield put(patchSuccess(user));
+  } catch (error) {
+    yield put(patchFail(error));
+  }
+}
 
 //  saga reducer - Update the user info
 function* patchUserSaga(action) {
@@ -296,5 +360,6 @@ export function* authSaga() {
   yield takeEvery(SIGN_UP_SAGA, signupSaga);
   yield takeLatest(TOGGLE_ENLISTED_EVENT, toggleEnlistedEventSaga);
   yield takeLatest(TOGGLE_LIKED_EVENT, toggleLikedEventSaga);
+  yield takeEvery(START_DELETE_HOSTING, startDeleteHostingSaga);
   yield takeLatest(PATCH_USER, patchUserSaga);
 }

@@ -9,6 +9,7 @@
   padding: 2rem 3rem;
   width: 80%;
   border: 2px solid transparent;
+  height: 65px;
 
   &.email-input {
     color: rgb(32, 32, 32);
@@ -25,10 +26,12 @@
   @include text-button;
   width: 45%;
   padding: 1.5rem;
-  margin: 2rem auto 4rem;
+  margin: 1rem auto 4rem;
   border: 3px white solid;
   background-color: transparent;
   color: white;
+  height: 65px;
+
   &:hover {
     background-color: white;
     color: $secondary-color;

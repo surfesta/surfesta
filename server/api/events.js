@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
         return {
           ...event._doc,
           isLiked: event._doc.liked_users.some(
-            (user) => user && user._id == current_user_id
+            (user) => user && user._id == current_user_id,
           ),
           like_count: new Set(event.liked_users).size,
           cur_count: new Set(event.enlisted_users).size,
@@ -51,7 +51,6 @@ router.get('/search', (req, res) => {
 });
 // GET SINGLE Event
 router.get('/:event_id', (req, res) => {
-  console.log('?');
   Event.findOne({ _id: req.params.event_id })
     .sort({ createdAt: 'desc' })
     .populate('host')
@@ -61,7 +60,7 @@ router.get('/:event_id', (req, res) => {
       if (err) return res.status(500).json({ error: err });
       if (!event || event.length === 0)
         return res.status(404).json({ error: 'event not found' });
-
+      event.attended = !!false;
       event.like_count = new Set(event.liked_users).size;
       event.cur_count = new Set(event.enlisted_users).size;
       res.json(event);
@@ -113,7 +112,7 @@ router.patch('/:event_id', (req, res) => {
         success: true,
         event,
       });
-    }
+    },
   );
 });
 // UPDATE a event's enlisted_users
@@ -139,7 +138,7 @@ router.patch('/:event_id/enlisted', async (req, res) => {
       res.json({
         event,
       });
-    }
+    },
   );
 });
 // UPDATE a event's liked_users
@@ -167,7 +166,7 @@ router.patch('/:event_id/liked', async (req, res) => {
         success: true,
         event,
       });
-    }
+    },
   );
 });
 
@@ -193,7 +192,7 @@ router.delete('/:event_id', (req, res) => {
         success: true,
         output,
       });
-    }
+    },
   );
 });
 

@@ -1,14 +1,16 @@
-import React, { Component } from "react";
-import QrReader from "react-qr-reader";
-import "./qrscanner.scss";
+import React, { Component } from 'react';
+import QrReader from 'react-qr-reader';
+import './qrscanner.scss';
 
 export default class QrScanner extends Component {
   state = {
-    result: "QR Code를 스캔해주세요.",
+    result: 'QR Code를 스캔해주세요.',
   };
 
   handleScan = (data) => {
     console.log(data);
+    // patch data(eventid & userid) to DB
+    // replace redux
     if (data) {
       this.setState({
         result: data,

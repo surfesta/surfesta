@@ -32,8 +32,14 @@ const eventSchema = mongoose.Schema(
         ref: 'User',
       },
     ], // 해당 이벤트를 좋아요한 유저들의 배열
+    attended_users: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ], // 해당 이벤트에 실제 참여한 유저들의 배열
   },
-  { collection: 'events', versionKey: false, timestamps: true }
+  { collection: 'events', versionKey: false, timestamps: true },
 );
 
 module.exports = mongoose.model('Event', eventSchema);

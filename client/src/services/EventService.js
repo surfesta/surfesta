@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const EVENT_URL = '/api/v1/events';
+const EVENT_URI = '/api/v1/events';
 
 export default class EventService {
   static async getEvents() {
-    const { data } = await axios.get(EVENT_URL);
+    const { data } = await axios.get(EVENT_URI);
     return data;
   }
 
@@ -16,7 +16,7 @@ export default class EventService {
   static async toggleEnlistedUser({ eventId, userId, type }) {
     const { data } = await axios({
       method: 'PATCH',
-      url: `${EVENT_URL}/${eventId}/enlisted?type=${type}`,
+      url: `${EVENT_URI}/${eventId}/enlisted?type=${type}`,
       data: {
         user_id: userId,
       },
@@ -27,7 +27,7 @@ export default class EventService {
   static async toggleLikedUser({ eventId, userId, type }) {
     const { data } = await axios({
       method: 'PATCH',
-      url: `${EVENT_URL}/${eventId}/liked?type=${type}`,
+      url: `${EVENT_URI}/${eventId}/liked?type=${type}`,
       data: {
         user_id: userId,
       },
@@ -36,12 +36,12 @@ export default class EventService {
   }
 
   static async searchEvents({ keyword }) {
-    const { data } = await axios.get(`${EVENT_URL}/search?q=${keyword}`);
+    const { data } = await axios.get(`${EVENT_URI}/search?q=${keyword}`);
     return data;
   }
   static async deleteEvent(eventId) {
-    await axios.delete(`${EVENT_URL}/${eventId}`);
-    const { data } = await axios.get(`${EVENT_URL}`);
+    await axios.delete(`${EVENT_URI}/${eventId}`);
+    const { data } = await axios.get(`${EVENT_URI}`);
     return data;
   }
 }

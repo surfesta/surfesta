@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import QrReader from "react-qr-reader";
 import "./qrscanner.scss";
 
-export default class Test extends Component {
+export default class QrScanner extends Component {
   state = {
     result: "QR Code를 스캔해주세요.",
   };
 
   handleScan = (data) => {
+    console.log(data);
     if (data) {
       this.setState({
         result: data,

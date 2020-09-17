@@ -26,7 +26,7 @@
     padding: 7.3rem 0;
     .main-title {
       transition: all 0.2s ease-in-out;
-      @include titleFontSet(4rem, bold);
+      @include titleFontSet(4rem, 500);
       margin-bottom: 4rem;
     }
     iframe {
@@ -143,7 +143,7 @@
           width: 18rem;
           height: 6.5rem;
           font-size: 1.5rem;
-          font-weight: 600;
+          font-weight: 500;
           background: rgba(255, 255, 255, 0.05);
           border: 2px solid #3465ef;
           border-radius: 50px;

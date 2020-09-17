@@ -1,9 +1,9 @@
-@import '../../style/mediaQuery';
-@import '../../style/variables';
-@import '../../style/mixin';
+@import "../../style/mediaQuery";
+@import "../../style/variables";
+@import "../../style/mixin";
 
 @mixin font-title {
-  font-size: 4rem;
+  font-size: 3.5rem;
   color: $font-primary-color;
 }
 
@@ -21,7 +21,6 @@
   .profile-form {
     margin-top: 37px;
     width: 690px;
-    margin: 0 auto;
 
     .profile-btn {
       @include text-button;
@@ -33,7 +32,7 @@
     display: block;
     margin-bottom: 10px;
     font-size: 2.4rem;
-    font-weight: bold;
+    font-weight: 500;
   }
 
   input {
@@ -50,14 +49,30 @@
   }
   .thumb-div {
     margin-top: 20px;
-  }
 
-  .profile-thumb {
-    width: 400px;
-    height: 400px;
-    border-radius: 200px;
-    display: flex;
-    margin: 0 auto;
+    .custom-thumbnail-input {
+      visibility: hidden;
+      height: 0;
+    }
+
+    .custom-thumbnail-label {
+      cursor: pointer;
+      border-radius: 200px;
+      margin: 0 auto;
+      width: 400px;
+
+      .profile-thumb {
+        -webkit-user-drag: none;
+        -moz-user-drag: none;
+        user-select: none;
+        width: 400px;
+        height: 400px;
+        border-radius: 200px;
+        display: flex;
+        background-color: rgb(204, 204, 204);
+        margin: 0 auto;
+      }
+    }
   }
 
   .thumb-guide {
@@ -87,12 +102,7 @@
     .profile-form {
       margin-top: 37px;
       width: 100%;
-      .form-btn {
-        div {
-          text-align: right;
-          margin-right: 2rem;
-        }
-      }
+      padding-bottom: 20px;
     }
   }
 }
@@ -117,6 +127,8 @@
     .profile-form {
       margin-top: 37px;
       max-width: 400px;
+      padding-bottom: 10px;
+
       .form-btn {
         div {
           text-align: center;

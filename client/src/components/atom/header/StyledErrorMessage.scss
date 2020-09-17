@@ -3,9 +3,11 @@
 
 .modal-error-message {
   @include Flex();
-  font-size: 1.4rem;
-  color: #ee4b4b;
+  font-size: 1.3rem;
+  color: rgb(255, 91, 91);
 
-  text-align: center;
-  height: 1.4rem;
+  height: 2.6rem;
+
+  justify-content: start;
+  transform: translate3d(17%, 0, 0);
 }

@@ -3,75 +3,41 @@
 @import '../../style/mediaQuery';
 
 footer {
-  max-width: 1440px;
-  margin: 0 auto;
   padding: 0 30px;
   color: $dark-font-secondary-color;
   font-size: 1.5rem;
-  font-weight: 500;
-
-  .flex-wrap {
-    @include Flex($justify: space-between);
-    div {
-      transform: translateY(-3px);
+  font-weight: 400;
+  text-align: center;
+  .github {
+    display: inline-block;
+    padding: 0 10px;
+    &:hover img {
+      transform: rotate3D(0, 1, 0, 180deg);
     }
-
-    .menu {
-      li {
-        display: inline-block;
-        a {
-          font-size: 1.7rem;
-          padding-left: 20px;
-          transition: all 0.3s;
-          &:hover {
-            color: $dark-font-primary-color;
-          }
-        }
-      }
+    img {
+      width: 30px;
+      height: 30px;
+      transition: all 0.3s;
     }
   }
+
   .detail-info {
     margin-top: 20px;
     li {
       line-height: 2;
-      strong {
-        font-weight: 500;
+      display: inline-block;
+      &::after {
+        content: '·';
+        display: inline-block;
       }
-      span {
-        &::after {
-          content: '/';
-          display: inline-block;
-          padding: 0 10px;
-        }
-        &:last-child::after {
-          content: none;
-        }
+      &:last-child::after {
+        content: none;
       }
-    }
-  }
-}
-
-@include mobile {
-  footer {
-    .flex-wrap {
-      display: block;
-      .menu {
-        li {
-          a {
-            padding-left: 0;
-            padding-right: 10px;
-          }
-        }
-      }
-    }
-    .detail-info {
-      margin-top: 30px;
-      li {
-        span {
-          display: block;
-          &::after {
-            content: none;
-          }
+      a {
+        padding: 0 10px;
+        transition: all 0.3s;
+        &:hover {
+          color: $dark-font-primary-color;
         }
       }
     }

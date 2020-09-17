@@ -8,7 +8,10 @@ import { offModal } from '../../redux/modules/modal';
 import { useCallback } from 'react';
 import WaveSurf from '../molecule/modal/WaveSurf';
 import { checkSagaActionCreator } from '../../redux/modules/mailCheck';
-import { signupSagaActionCreator, startSocialSDKLogin } from '../../redux/modules/auth';
+import {
+  signupSagaActionCreator,
+  startSocialSDKLogin,
+} from '../../redux/modules/auth';
 import './Modal.scss';
 
 export default function Modal() {
@@ -28,18 +31,18 @@ export default function Modal() {
       if (!e.target.matches('#modal-container')) return;
       dispatch(offModal());
     },
-    [dispatch]
+    [dispatch],
   );
   // 모달은 redux-store에 저장된 상태에 따라 다른 UI가 됩니다(다른 자식컴포넌트를 보여줍니다)
 
   const handleEmailCheck = useCallback(
     (values) => dispatch(checkSagaActionCreator(values)),
 
-    [dispatch]
+    [dispatch],
   );
   const handleRegister = useCallback(
     (values) => dispatch(signupSagaActionCreator(values)),
-    [dispatch]
+    [dispatch],
   );
 
   const handleFBLogin = useCallback(
@@ -49,11 +52,11 @@ export default function Modal() {
           email,
           username,
           password,
-          profile_img: picture.data.url,
-        })
+          profile_img: picture && picture.data.url,
+        }),
       );
     },
-    [dispatch]
+    [dispatch],
   );
 
   const handleGGLogin = useCallback(
@@ -68,7 +71,7 @@ export default function Modal() {
       const username = familyName + givenName;
       dispatch(startSocialSDKLogin({ email, username, password, profile_img }));
     },
-    [dispatch]
+    [dispatch],
   );
 
   return (
@@ -93,7 +96,9 @@ export default function Modal() {
               presetValue={modal.presetValue}
             />
           )}
-          {(modal.preLogin || modal.forLogin || modal.forSignUp) && <WaveSurf />}
+          {(modal.preLogin || modal.forLogin || modal.forSignUp) && (
+            <WaveSurf />
+          )}
         </div>
       </section>
     </Portal>

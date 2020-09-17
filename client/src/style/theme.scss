@@ -14,6 +14,9 @@ body.dark {
     background-color: #2c3035;
   }
   .cards-wrap {
+    h2 {
+      color: $dark-font-primary-color;
+    }
     .cards {
       .card-wrap {
         background-color: #2c3035;
@@ -193,6 +196,9 @@ body.dark {
   }
 
   // my-page
+  .sub-nav-section {
+    background-color: #2c3035;
+  }
   .sub-nav-div,
   .title,
   .logout-section h3 {

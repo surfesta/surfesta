@@ -27,9 +27,9 @@
 .modal-headline {
   @include font-normal;
   padding: 0 0 3rem 0;
-  font-size: 4rem;
+  font-size: 3.5rem;
   color: white;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 #modal {
@@ -38,12 +38,12 @@
   border-radius: 8px;
   width: 37vw;
   min-height: 30vh;
-  padding: 6rem 3rem 4rem;
+  padding: 5rem 3rem 5rem;
   &.confirm-modal {
     padding: 6rem 3rem;
     min-height: 100px;
     h1 {
-      font-size: 4rem;
+      font-size: 3.5rem;
       color: #fff;
       word-break: keep-all;
     }

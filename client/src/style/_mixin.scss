@@ -84,7 +84,7 @@
 @mixin thumbnail($color: #f2f3f6, $position: center) {
   background-color: $color;
   background-position: $position;
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
 }
 

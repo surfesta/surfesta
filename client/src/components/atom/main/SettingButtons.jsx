@@ -37,7 +37,7 @@ export default function SettingButtons({ event }) {
       <IconButton aria-label="edit">
         <Link
           to={{
-            pathname: `/Revise/${eventId}`,
+            pathname: `/reviseEvent/${eventId}`,
             state: {
               event,
             },

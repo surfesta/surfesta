@@ -1,21 +1,15 @@
 .qr-container {
+  font-size: 2rem;
+  color: #000;
   min-height: 80vh;
-  & > section {
-    & > section {
-      padding-top: 80vh !important;
-      & > div {
-        border: 20px solid rgba(0, 0, 0, 0.02) !important;
-      }
-    }
-  }
-  .qr-result {
-    transition: all 0.2s ease-in-out;
-    background: rgba(0, 0, 0, 0.02);
+  display: flex;
+  flex-wrap: wrap;
+  & > div {
+    text-align: center;
     width: 100%;
-    font-size: 2rem;
-    margin-bottom: 1.3rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 20vh;
+  }
+  .qr-scanner {
+    height: 70vh;
   }
 }

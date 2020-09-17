@@ -9,8 +9,6 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import Portal from "../../Portal";
 import { deleteEvent } from "../../../redux/modules/events";
 import { deleteHosting } from "../../../redux/modules/auth";
-import axios from "axios";
-// import axios from "axios";
 
 export default function SettingButtons({ event }) {
   const [visible, setVisible] = useState(false);

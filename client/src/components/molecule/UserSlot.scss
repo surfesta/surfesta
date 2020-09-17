@@ -1,0 +1,50 @@
+@import '../../style/mediaQuery';
+@import '../../style/variables';
+@import '../../style/mixin';
+
+.listed-users {
+  padding: 1rem;
+}
+
+.user-slot {
+  @include Flex();
+  font-size: 2rem;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: white;
+  justify-content: space-between;
+
+  margin: 20px 0;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+
+  .user-profile {
+    @include Flex(left);
+    // background-color: plum;
+    width: 17rem;
+    .user-profile-img {
+      width: 4rem;
+      border-radius: 4rem;
+      margin: 0 20px 0 0;
+    }
+  }
+  .user-profile-email {
+    // background-color: greenyellow;
+    width: 22rem;
+  }
+  .user-profile-number {
+    // background-color: peru;
+    width: 15rem;
+  }
+  .user-profile-check {
+    width: 3.4rem;
+    svg {
+      font-size: 2.8rem;
+      &.O {
+        fill: blue;
+      }
+      &.X {
+        fill: gray;
+      }
+    }
+  }
+}

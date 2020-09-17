@@ -5,6 +5,7 @@ body.dark {
   // backgrounds
   #root {
     background-color: #1b1d21;
+    transition: all 0.2s ease-in-out;
   }
   .main {
     transition: all 0.2s ease-in-out;
@@ -202,5 +203,10 @@ body.dark {
   .form-div label,
   .logout-section span {
     color: $dark-font-secondary-color;
+  }
+  .qr-container {
+    .qr-result {
+      color: $dark-font-primary-color;
+    }
   }
 }

@@ -1,0 +1,20 @@
+.qr-container {
+  margin-top: 7rem;
+  width: 100%;
+  & > section {
+    & > section {
+      & > div {
+        border: 20px solid rgba(0, 0, 0, 0.02) !important;
+      }
+    }
+  }
+  .qr-result {
+    transition: all 0.2s ease-in-out;
+    position: absolute;
+    width: 100%;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

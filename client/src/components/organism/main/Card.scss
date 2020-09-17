@@ -1,6 +1,6 @@
-@import '../../../style/mediaQuery';
-@import '../../../style/variables';
-@import '../../../style/mixin';
+@import "../../../style/mediaQuery";
+@import "../../../style/variables";
+@import "../../../style/mixin";
 
 .card-wrap {
   position: relative;
@@ -109,6 +109,17 @@
     position: absolute;
     bottom: 0;
     right: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .qr-img {
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+      background: url(/img/qr_code.svg) no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
     svg {
       font-size: 2rem;
       color: $font-tertiary-color;

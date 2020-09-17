@@ -3,7 +3,7 @@
 
 .create-event-wrap,
 .revise-event-wrap {
-  transition: 0.5s;
+  transition: all 0.2s ease-in-out;
   box-sizing: border-box;
   @include wrapSet;
   width: 100%;
@@ -25,7 +25,7 @@
   .revise-event-form {
     padding: 7.3rem 0;
     .main-title {
-      transition: 0.5s;
+      transition: all 0.2s ease-in-out;
       @include titleFontSet(4rem, bold);
       margin-bottom: 4rem;
     }
@@ -120,14 +120,14 @@
         z-index: 2;
       }
       .upload-type {
-        transition: 0.5s;
+        transition: all 0.2s ease-in-out;
         @include contentFontSet;
         font-size: 1.5rem;
         line-height: 20px;
         margin-top: 1.567rem;
       }
       .eventform-title {
-        transition: 0.5s;
+        transition: all 0.2s ease-in-out;
         @include titleFontSet();
         margin-bottom: 2.8rem;
         margin-top: 5.5rem;
@@ -174,14 +174,14 @@
       .event-sec {
         width: 100%;
         @include Flex(space-between, flex-start);
-        transition: 0.5s;
+        transition: all 0.2s ease-in-out;
         .event-content {
           width: 50rem;
           margin-bottom: 5.5rem;
           font-size: 1.5rem;
           line-height: 2rem;
           @include contentFontSet;
-          transition: 0.5s;
+          transition: all 0.2s ease-in-out;
         }
 
         .input-box {
@@ -265,20 +265,20 @@
           }
           #date-picker-inline,
           #time-picker {
-            transition: 0.5s;
+            transition: all 0.2s ease-in-out;
             padding: 6px 0 7px;
             height: auto;
           }
           .MuiFormControl-root {
             width: 50%;
-            transition: 0.5s;
+            transition: all 0.2s ease-in-out;
             &:nth-child(2) {
               margin-left: 20px;
             }
           }
           #date-picker-inline-label,
           #time-picker-label {
-            transition: 0.5s;
+            transition: all 0.2s ease-in-out;
             font-size: 1.5rem;
           }
           input[type="text"],

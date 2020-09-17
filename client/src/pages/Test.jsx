@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import QrReader from "react-qr-reader";
+import "./qrscanner.scss";
 
 export default class Test extends Component {
   state = {
-    result: "No result",
+    result: "QR Code를 스캔해주세요.",
   };
 
   handleScan = (data) => {
@@ -18,14 +19,11 @@ export default class Test extends Component {
   };
   render() {
     return (
-      <div>
-        <QrReader
-          delay={300}
-          onError={this.handleError}
-          onScan={this.handleScan}
-          style={{ width: "100%", marginTop: "7rem" }}
-        />
-        <p>{this.state.result}</p>
+      <div className="qr-container">
+        <QrReader onError={this.handleError} onScan={this.handleScan} />
+        <div className="qr-result">
+          <p>{this.state.result}</p>
+        </div>
       </div>
     );
   }

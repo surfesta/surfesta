@@ -1,9 +1,9 @@
-@import '../style/mixin';
-@import '../style/mediaQuery';
+@import "../style/mixin";
+@import "../style/mediaQuery";
 
 .create-event-wrap,
 .revise-event-wrap {
-  transition: 0.5s;
+  transition: all 0.2s ease-in-out;
   box-sizing: border-box;
   @include wrapSet;
   width: 100%;
@@ -25,7 +25,7 @@
   .revise-event-form {
     padding: 7.3rem 0;
     .main-title {
-      transition: 0.5s;
+      transition: all 0.2s ease-in-out;
       @include titleFontSet(4rem, 500);
       margin-bottom: 4rem;
     }
@@ -40,6 +40,14 @@
       #date-picker-inline-helper-text {
         font-size: 1.2rem;
       }
+      .tui-popup-body > label,
+      .tui-popup-body > input {
+        display: none;
+      }
+      .te-url-type.te-tab-active ~ label,
+      .te-url-type.te-tab-active ~ input {
+        display: block;
+      }
       .drop-down-container {
         outline: none;
       }
@@ -47,18 +55,18 @@
         &.none {
           height: 45.53rem;
           &::before {
-            content: '';
+            content: "";
             position: absolute;
             width: 3.2rem;
             height: 3.2rem;
             margin: auto;
-            background: url('/img/camera.svg') no-repeat;
+            background: url("/img/camera.svg") no-repeat;
             background-size: cover;
             background-position: center;
             z-index: 1;
           }
           &::after {
-            content: '';
+            content: "";
             position: absolute;
             width: 6.5rem;
             height: 6.5rem;
@@ -98,6 +106,7 @@
         }
       }
       .custom-file-input {
+        display: block !important;
         position: absolute;
         top: 0;
         left: 0;
@@ -112,14 +121,14 @@
         z-index: 2;
       }
       .upload-type {
-        transition: 0.5s;
+        transition: all 0.2s ease-in-out;
         @include contentFontSet;
         font-size: 1.5rem;
         line-height: 20px;
         margin-top: 1.567rem;
       }
       .eventform-title {
-        transition: 0.5s;
+        transition: all 0.2s ease-in-out;
         @include titleFontSet();
         margin-bottom: 2.8rem;
         margin-top: 5.5rem;
@@ -166,14 +175,14 @@
       .event-sec {
         width: 100%;
         @include Flex(space-between, flex-start);
-        transition: 0.5s;
+        transition: all 0.2s ease-in-out;
         .event-content {
           width: 50rem;
           margin-bottom: 5.5rem;
           font-size: 1.5rem;
           line-height: 2rem;
           @include contentFontSet;
-          transition: 0.5s;
+          transition: all 0.2s ease-in-out;
         }
 
         .input-box {
@@ -257,25 +266,25 @@
           }
           #date-picker-inline,
           #time-picker {
-            transition: 0.5s;
+            transition: all 0.2s ease-in-out;
             padding: 6px 0 7px;
             height: auto;
           }
           .MuiFormControl-root {
             width: 50%;
-            transition: 0.5s;
+            transition: all 0.2s ease-in-out;
             &:nth-child(2) {
               margin-left: 20px;
             }
           }
           #date-picker-inline-label,
           #time-picker-label {
-            transition: 0.5s;
+            transition: all 0.2s ease-in-out;
             font-size: 1.5rem;
           }
-          input[type='text'],
-          input[type='date'],
-          input[type='time'] {
+          input[type="text"],
+          input[type="date"],
+          input[type="time"] {
             outline: none;
             border: 0;
             width: 100%;
@@ -294,15 +303,15 @@
               background: #b4b4b5;
             }
           }
-          input[type='text'] {
+          input[type="text"] {
             &:nth-child(2) {
               margin-top: 3rem;
             }
           }
-          input[type='date'] {
+          input[type="date"] {
             width: 39.5rem;
           }
-          input[type='time'] {
+          input[type="time"] {
             flex: 1;
             margin-left: 30px;
           }
@@ -320,9 +329,6 @@
     .create-event-form,
     .revise-event-form {
       padding: 0;
-      h1 {
-        margin-bottom: 0;
-      }
       .main-title {
         margin-top: 3rem;
         margin-bottom: 0;

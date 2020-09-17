@@ -6,6 +6,7 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import SearchIcon from '@material-ui/icons/Search';
 import './HostTemplate.scss';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export default function HostTemplate({ event_id }) {
   const events = useSelector((state) => state.events.events);
@@ -39,10 +40,10 @@ export default function HostTemplate({ event_id }) {
           <input type="text" placeholder="검색하기" />
           <SearchIcon />
         </div>
-        <button className="qr-reader-btn">
+        <Link className="qr-reader-btn" to="/qr">
           <img src="https://img.icons8.com/fluent-systems-regular/1x/qr-code.png" />
           <span>QRCODE</span>
-        </button>
+        </Link>
       </section>
       <AttendeeListing event={currentHostingEvent} />
     </div>

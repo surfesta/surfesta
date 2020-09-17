@@ -1,5 +1,5 @@
-import axios from 'axios';
-const USER_URI = '/api/v1/users';
+import axios from "axios";
+const USER_URI = "/api/v1/users";
 
 export default class UserService {
   static async authenticate() {
@@ -10,7 +10,7 @@ export default class UserService {
 
   static async checkEmail({ email }) {
     const { data } = await axios({
-      method: 'POST',
+      method: "POST",
       url: `${USER_URI}/emails`,
       data: {
         email,
@@ -20,7 +20,7 @@ export default class UserService {
   }
   static async login({ email, password }) {
     const { data } = await axios({
-      method: 'POST',
+      method: "POST",
       url: `${USER_URI}/login`,
       data: {
         email,
@@ -32,7 +32,7 @@ export default class UserService {
 
   static async register(user) {
     const { data } = await axios({
-      method: 'POST',
+      method: "POST",
       url: `${USER_URI}/`,
       data: user,
     });
@@ -41,7 +41,7 @@ export default class UserService {
 
   static async patchUser(payload) {
     const { data } = await axios({
-      method: 'PATCH',
+      method: "PATCH",
       url: `${USER_URI}/`,
       data: payload,
     });
@@ -50,7 +50,7 @@ export default class UserService {
 
   static async logout() {
     const { data } = await axios({
-      method: 'POST',
+      method: "POST",
       url: `${USER_URI}/logout`,
     });
     return data;
@@ -58,7 +58,7 @@ export default class UserService {
 
   static async deactivate(user) {
     const result = await axios({
-      method: 'DELETE',
+      method: "DELETE",
       url: `${USER_URI}/`,
     });
     return result.status;
@@ -66,7 +66,7 @@ export default class UserService {
 
   static async toggleEnlistedEvent({ eventId, userId, type }) {
     const { data } = await axios({
-      method: 'PATCH',
+      method: "PATCH",
       url: `${USER_URI}/${userId}/enlisted?type=${type}`,
       data: {
         event_id: eventId,
@@ -77,8 +77,18 @@ export default class UserService {
 
   static async toggleLikedEvent({ eventId, userId, type }) {
     const { data } = await axios({
-      method: 'PATCH',
+      method: "PATCH",
       url: `${USER_URI}/${userId}/liked?type=${type}`,
+      data: {
+        event_id: eventId,
+      },
+    });
+    return data;
+  }
+  static async toggleHostingEvent({ eventId, userId, type }) {
+    const { data } = await axios({
+      method: "PATCH",
+      url: `${USER_URI}/${userId}/hosting?type=${type}`,
       data: {
         event_id: eventId,
       },

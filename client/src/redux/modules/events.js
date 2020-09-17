@@ -1,8 +1,8 @@
-import { put, call, takeEvery, takeLatest } from 'redux-saga/effects';
-import EventService from '../../services/EventService';
-import { push } from 'connected-react-router';
+import { put, call, takeEvery, takeLatest } from "redux-saga/effects";
+import EventService from "../../services/EventService";
+import { push } from "connected-react-router";
 
-const prefix = 'surfesta-events';
+const prefix = "surfesta-events";
 
 // action type
 const START = `${prefix}/START`;
@@ -98,7 +98,6 @@ export default function reducer(state = initialState, action) {
         error: action.error,
       };
     case DELETE_EVENT_SUCCESS:
-      console.log(action);
       return {
         ...state,
         events: action.event,
@@ -149,11 +148,10 @@ export const deleteEvent = (eventId) => ({
     eventId,
   },
 });
-
 //saga-reducer
 function* startGetEventsSaga() {
   try {
-    yield put(start());
+    // yield put(start());
     const events = yield call(EventService.getEvents);
     yield put(success(events));
   } catch (error) {
@@ -195,8 +193,8 @@ function* startDeleteEventSaga(action) {
   try {
     const event = yield call(EventService.deleteEvent, eventId);
     yield put(deleteEventSuccess(event));
-  } catch (e) {
-    yield put(fail(e));
+  } catch (error) {
+    yield put(fail(error));
   }
 }
 

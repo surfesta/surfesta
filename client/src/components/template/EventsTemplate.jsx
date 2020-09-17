@@ -8,7 +8,6 @@ import Sort from '../organism/Sort';
 // Presentational Component
 export default function EventsTemplate({
   events,
-  loading,
   error,
   imgSrc,
   searchedKeyword,
@@ -21,6 +20,7 @@ export default function EventsTemplate({
     CHEAPEST: 'CHEAPEST',
     MOSTEXPENSIVE: 'MOSTEXPENSIVE',
   };
+
   const {
     NEWEST,
     OLDEST,
@@ -35,6 +35,7 @@ export default function EventsTemplate({
     ONLINE: 'ONLINE',
     OFFLINE: 'OFFLINE',
   };
+
   const { ALL, ONLINE, OFFLINE } = filterState;
 
   const [sort, setSort] = useState(NEWEST);
@@ -107,10 +108,6 @@ export default function EventsTemplate({
         {error && (
           <div className='img-wrap'>
             <img src='/img/error.png' alt='에러' />
-            {/* <span>
-              Illustration by <a href="undefined">Maria Shukshina</a> from
-              <a href="https://icons8.com/">Icons8</a>
-            </span> */}
           </div>
         )}
         {imgSrc && (

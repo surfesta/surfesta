@@ -17,6 +17,7 @@ import ReviseEvent from './pages/ReviseEvent';
 import Meta from './components/Meta';
 import FooterTemplate from './components/template/FooterTemplate';
 import HostOffice from './pages/HostOffice';
+import QrScanner from './pages/QrScanner';
 
 export const ThemeContext = React.createContext();
 
@@ -45,7 +46,8 @@ function App() {
         <ConnectedRouter history={history}>
           <HeaderTemplate />
           <Switch>
-            <Route path="/revise/:event_id" component={ReviseEvent} />
+            <Route path="/qr" component={QrScanner} />
+            <Route path="/reviseEvent/:event_id" component={ReviseEvent} />
             <Route path="/createEvent" component={CreateEvent} />
             <Route path="/event/:event_id" component={EventDetail} />
             <Route path="/search/:keyword" component={Search} />

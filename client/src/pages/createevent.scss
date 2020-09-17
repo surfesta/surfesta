@@ -52,7 +52,8 @@
         outline: none;
       }
       .custom-file-label {
-        &.none {
+        &.none,
+        &:hover {
           height: 45.53rem;
           &::before {
             content: "";
@@ -63,7 +64,7 @@
             background: url("/img/camera.svg") no-repeat;
             background-size: cover;
             background-position: center;
-            z-index: 1;
+            z-index: 3;
           }
           &::after {
             content: "";
@@ -72,7 +73,7 @@
             height: 6.5rem;
             background: #fff;
             border-radius: 50%;
-            z-index: 0;
+            z-index: 2;
           }
         }
         outline: none;
@@ -116,8 +117,7 @@
         cursor: pointer;
         display: block;
         width: 100%;
-        background-position: center;
-        background-size: cover;
+        object-fit: cover;
         z-index: 2;
       }
       .upload-type {

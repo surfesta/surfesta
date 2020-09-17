@@ -165,11 +165,16 @@ export const toggleLikedEvent = (eventId, userId, type) => ({
   },
 });
 
-export const patchUserActionCreator = (username, phone_number) => ({
+export const patchUserActionCreator = (
+  username,
+  phone_number,
+  profile_img
+) => ({
   type: PATCH_USER,
   payload: {
     username,
     phone_number,
+    profile_img,
   },
 });
 
@@ -277,7 +282,6 @@ function* patchUserSaga(action) {
   try {
     yield put(patchUserStart());
     const { user } = yield call(UserService.patchUser, action.payload);
-    console.log({ user });
     if (!user) throw new Error("No User");
     yield put(patchUserSuccess(user));
   } catch (error) {

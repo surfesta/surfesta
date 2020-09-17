@@ -8,18 +8,19 @@ import "./Profile.scss";
 function ProfileSection() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
-  // const userName = user && user.username;
   const userName = (user && user.username) || "";
-  // const userPhoneNumber = user && user.phone_number;
   const userPhoneNumber = (user && user.phone_number) || "";
+  const userProfileImg = (user && user.profile_img) || "";
 
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [profileImg, setProfileImg] = useState("");
 
   useEffect(() => {
     setName(userName);
     setPhoneNumber(userPhoneNumber);
-  }, [userName, userPhoneNumber]);
+    setProfileImg(userProfileImg);
+  }, [userName, userPhoneNumber, userProfileImg]);
 
   const nameChange = (e) => {
     setName(e.target.value);
@@ -30,12 +31,16 @@ function ProfileSection() {
   };
 
   const handleSubmit = useCallback(() => {
-    dispatch(patchUserActionCreator(name, phoneNumber));
-  }, [dispatch, name, phoneNumber]);
+    dispatch(patchUserActionCreator(name, phoneNumber, profileImg));
+  }, [dispatch, name, phoneNumber, profileImg]);
 
   return (
     <section className="profile-section">
-      <ProfileInfo className="profile-info" />
+      <ProfileInfo
+        className="profile-info"
+        profileImg={profileImg}
+        setPhoneNumber={setProfileImg}
+      />
       <ProfileForm
         className="profile-form"
         user={user}

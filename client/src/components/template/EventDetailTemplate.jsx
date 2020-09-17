@@ -16,11 +16,11 @@ export default function EventDetailTemplate({ event }) {
     <>
       <Helmet>
         <title>{title}</title>
-        <meta property="og:title" content={title} />
-        <meta property="og:image" content={thumbnail} />
+        <meta property='og:title' content={title} />
+        <meta property='og:image' content={thumbnail} />
       </Helmet>
-      <main className="main">
-        <div className="eventDetail">
+      <main className='main'>
+        <div className='eventDetail'>
           <EventInfo event={event} />
           <EventContents event={event} />
         </div>

@@ -153,7 +153,7 @@ export const deleteEvent = (eventId) => ({
 //saga-reducer
 function* startGetEventsSaga() {
   try {
-    yield put(start());
+    // yield put(start());
     const events = yield call(EventService.getEvents);
     yield put(success(events));
   } catch (error) {

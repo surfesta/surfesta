@@ -44,12 +44,12 @@ function App() {
         <ConnectedRouter history={history}>
           <HeaderTemplate />
           <Switch>
-            <Route path="/Revise/:event_id" component={ReviseEvent} />
-            <Route path="/createEvent" component={CreateEvent} />
-            <Route path="/event/:event_id" component={EventDetail} />
-            <Route path="/search/:keyword" component={Search} />
-            <Route path="/my" component={MyPage} />
-            <Route path="/" component={Home} />
+            <Route path='/Revise/:event_id' component={ReviseEvent} />
+            <Route path='/createEvent' component={CreateEvent} />
+            <Route path='/event/:event_id' component={EventDetail} />
+            <Route path='/search/:keyword' component={Search} />
+            <Route path='/my' component={MyPage} />
+            <Route path='/' component={Home} />
           </Switch>
           <FooterTemplate />
         </ConnectedRouter>

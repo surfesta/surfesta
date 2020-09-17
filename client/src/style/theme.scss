@@ -1,5 +1,5 @@
-@import "./mixin";
-@import "./variables";
+@import './mixin';
+@import './variables';
 
 body.dark {
   // backgrounds
@@ -12,6 +12,28 @@ body.dark {
   }
   .search-wrap {
     background-color: #2c3035;
+  }
+  .filter-wrap {
+    .selectList-wrap ul {
+      background-color: #2c3035;
+      color: $dark-font-primary-color;
+    }
+  }
+  .sort-wrap {
+    button {
+      border-color: $dark-font-secondary-color;
+      color: $dark-font-secondary-color;
+      &:hover {
+        box-shadow: 0 0 3px 2px #9a9a9a40;
+      }
+      &:active {
+        box-shadow: none;
+      }
+    }
+    .selectList-wrap ul {
+      background-color: #2c3035;
+      color: $dark-font-primary-color;
+    }
   }
   .cards-wrap {
     h2 {
@@ -43,11 +65,6 @@ body.dark {
             font-weight: 500;
           }
         }
-      }
-
-      // modals
-      .selectList-wrap ul {
-        background-color: #2c3035;
       }
 
       //btn & icons
@@ -90,12 +107,12 @@ body.dark {
           .event-content {
             color: $dark-font-secondary-color;
           }
-          input[type="text"] {
+          input[type='text'] {
             background: #24272b;
             color: #b6b7b8;
           }
           .time-check {
-            input[type="text"] {
+            input[type='text'] {
               background: inherit;
             }
           }

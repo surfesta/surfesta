@@ -5,35 +5,45 @@ import './Filter.scss';
 
 export default function Filter({ filter, setFilter, filterState }) {
   const [selected, setSelected] = useState(false);
+  const [isShow, setIsShow] = useState(false);
   const selectRef = useRef();
   const selectListRef = useRef();
 
   const handleClick = (e) => {
     if (e.target === selectListRef.current) return;
     selectRef.current.textContent = e.target.textContent;
-    setSelected(!selected);
+
+    toggleModal();
   };
+
+  const toggleModal = () => {
+    setIsShow(!isShow);
+
+    !selected && setSelected(true);
+    selected &&
+      setTimeout(() => {
+        setSelected(false);
+      }, 100);
+  };
+
   return (
-    <div className="filter-wrap">
-      <button
-        onClick={(e) => {
-          setSelected(!selected);
-        }}
-      >
+    <div className='filter-wrap'>
+      <button onClick={toggleModal}>
         <span ref={selectRef}>All Events</span>
-        <span className="more">
-          <ExpandMoreIcon className={selected ? 'arrow rotataion' : 'arrow'} />
+        <span className='more'>
+          <ExpandMoreIcon className={isShow ? 'arrow rotataion' : 'arrow'} />
         </span>
       </button>
-      <div className="selectList-wrap">
+      <div className={isShow ? 'selectList-wrap show' : 'selectList-wrap '}>
         <FilterList
-          selectListRef={selectListRef}
-          selected={selected}
-          setSelected={setSelected}
-          handleClick={handleClick}
           filter={filter}
           setFilter={setFilter}
           filterState={filterState}
+          selected={selected}
+          setSelected={setSelected}
+          setIsShow={setIsShow}
+          selectListRef={selectListRef}
+          handleClick={handleClick}
         />
       </div>
     </div>

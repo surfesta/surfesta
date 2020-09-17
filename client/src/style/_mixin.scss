@@ -23,7 +23,7 @@
 // $LivingCoral: #ff6f61;
 // $ClassicBlue: #0f4c81;
 
-@mixin font($size, $color: $font-primary-color, $weight: 600) {
+@mixin font($size, $color: $font-primary-color, $weight: 500) {
   font-size: $size;
   color: $color;
   font-weight: $weight;
@@ -36,7 +36,7 @@
   box-sizing: border-box;
   border: 2px solid $point-color;
   background-color: transparent;
-  font-weight: 700;
+  font-weight: 500;
   color: $point-color;
   text-align: center;
   font-size: 1.5rem;
@@ -53,7 +53,7 @@
   box-sizing: border-box;
   border: 2px solid $border-color;
   background-color: transparent;
-  font-weight: 700;
+  font-weight: 500;
   color: $font-color;
   text-align: center;
   font-size: 1.5rem;
@@ -73,7 +73,7 @@
   box-sizing: border-box;
   border: 2px solid $tertiary-color;
   background-color: $tertiary-color;
-  font-weight: 700;
+  font-weight: 500;
   color: $font-primary-color;
   text-align: center;
   font-size: 1.5rem;
@@ -81,9 +81,9 @@
   outline: 0;
   transition: all 0.3s;
 }
-@mixin thumbnail($color: #f2f3f6) {
+@mixin thumbnail($color: #f2f3f6, $position: center) {
   background-color: $color;
-  background-position: center;
+  background-position: $position;
   background-size: contain;
   background-repeat: no-repeat;
 }
@@ -92,9 +92,6 @@ $checkboxColor: #b4b4b5;
 $labelColor: #454b58;
 
 @mixin wrapSet {
-  position: absolute;
-  top: 0;
-  left: 0;
   background: #f2f3f6;
   margin-top: 7rem;
 }

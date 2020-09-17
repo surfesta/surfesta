@@ -1,5 +1,6 @@
 import { put, call, takeEvery, takeLatest } from 'redux-saga/effects';
 import EventService from '../../services/EventService';
+import { push } from 'connected-react-router';
 
 const prefix = 'surfesta-events';
 
@@ -10,6 +11,7 @@ const TOGGLE_ENLISTED_USER_SUCCESS = `${prefix} TOGGLE_ENLISTED_USER_SUCCESS`;
 const TOGGLE_LIKED_USER_SUCCESS = `${prefix}/TOGGLE_LIKED_USER_SUCCESS`;
 const SEARCH_EVENTS_SUCCESS = `${prefix}/SEARCH_EVENTS_SUCCESS`;
 const FAIL = `${prefix}/FAIL`;
+const DELETE_EVENT_SUCCESS = `${prefix}/DELETE_EVENT_SUCCESS`;
 
 // action creator
 export const start = () => ({
@@ -34,6 +36,10 @@ const toggleLikedUserSuccess = (event) => ({
 const searchEventsSuccess = (searchedEvents) => ({
   type: SEARCH_EVENTS_SUCCESS,
   searchedEvents,
+});
+const deleteEventSuccess = (event) => ({
+  type: DELETE_EVENT_SUCCESS,
+  event,
 });
 
 export const fail = (error) => ({
@@ -91,7 +97,12 @@ export default function reducer(state = initialState, action) {
         loading: false,
         error: action.error,
       };
-
+    case DELETE_EVENT_SUCCESS:
+      console.log(action);
+      return {
+        ...state,
+        events: action.event,
+      };
     default:
       return state;
   }
@@ -102,6 +113,7 @@ const START_GET_EVENTS = `${prefix}/START_GET_EVENTS`;
 const TOGGLE_ENLISTED_USER = `${prefix}/TOGGLE_ENLISTED_USER`;
 const TOGGLE_LIKED_USER = `${prefix}/TOGGLE_LIKED_USER`;
 const START_SEARCH_EVENTS = `${prefix}/START_SEARCH_EVENTS`;
+const START_DELETE_EVENT = `${prefix}/START_DELETE_EVENT`;
 
 export const startGetEvents = () => ({
   type: START_GET_EVENTS,
@@ -129,6 +141,12 @@ export const startSearchEvents = (keyword) => ({
   type: START_SEARCH_EVENTS,
   payload: {
     keyword,
+  },
+});
+export const deleteEvent = (eventId) => ({
+  type: START_DELETE_EVENT,
+  payload: {
+    eventId,
   },
 });
 
@@ -172,10 +190,20 @@ function* startSearchEventsSaga(action) {
     yield put(fail(error));
   }
 }
+function* startDeleteEventSaga(action) {
+  const { eventId } = action.payload;
+  try {
+    const event = yield call(EventService.deleteEvent, eventId);
+    yield put(deleteEventSuccess(event));
+  } catch (e) {
+    yield put(fail(e));
+  }
+}
 
 export function* eventsSaga() {
   yield takeEvery(START_GET_EVENTS, startGetEventsSaga);
   yield takeLatest(TOGGLE_ENLISTED_USER, toggleEnlistedUserSaga);
   yield takeLatest(TOGGLE_LIKED_USER, toggleLikedUserSaga);
   yield takeLatest(START_SEARCH_EVENTS, startSearchEventsSaga);
+  yield takeLatest(START_DELETE_EVENT, startDeleteEventSaga);
 }

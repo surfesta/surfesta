@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
-function ProfileBtn({ name, handleClick }) {
+function ProfileBtn({ name, handleSubmit }) {
   return (
-    <button type="button" className="profile-btn" onClick={handleClick}>
+    <button type="button" className="profile-btn" onClick={handleSubmit}>
       <div>{name}</div>
     </button>
   );

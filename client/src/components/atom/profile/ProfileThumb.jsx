@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
-import './ProfileThumb.scss';
-import axios from 'axios';
+import React, { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
+import "./ProfileThumb.scss";
+import axios from "axios";
 
-function ProfileThumb() {
+function ProfileThumb({ profileImg, setProfileImg }) {
   const user = useSelector((state) => state.auth.user);
 
   const titleRef = useRef(null);
@@ -12,10 +12,10 @@ function ProfileThumb() {
 
   useEffect(() => {
     const titleNode = titleRef.current;
-    titleNode.setAttribute('tabindex', -1);
+    titleNode.setAttribute("tabindex", -1);
     titleNode.setAttribute(
-      'aria-label',
-      '나의 프로필 정보를 수정하는 페이지입니다.',
+      "aria-label",
+      "나의 프로필 정보를 수정하는 페이지입니다."
     );
     titleNode.focus();
   }, []);
@@ -28,38 +28,36 @@ function ProfileThumb() {
     // 7 메가바이트
     if (size > 7000000) {
       alert(
-        `7MB 이하 용량의 이미지를 업로드해주세요. ${
-          size * 0.000001 - 7
-        }MB 초과`,
+        `7MB 이하 용량의 이미지를 업로드해주세요. ${size * 0.000001 - 7}MB 초과`
       );
       return;
     }
     if (
-      type !== 'image/jpg' &&
-      type !== 'image/jpeg' &&
-      type !== 'image/png' &&
-      type !== 'image/webp'
+      type !== "image/jpg" &&
+      type !== "image/jpeg" &&
+      type !== "image/png" &&
+      type !== "image/webp"
     ) {
       alert(`${type}는 지원하지 않는 형식의 타입입니다.`);
       return;
     }
 
     const formData = new FormData();
-    formData.append('file', _file_data);
+    formData.append("file", _file_data);
 
-    imgRef.current.parentNode.classList.add('active');
+    imgRef.current.parentNode.classList.add("active");
 
     try {
-      const { data } = await axios.post('/api/v1/uploads', formData, {
+      const { data } = await axios.post("/api/v1/uploads", formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          "Content-Type": "multipart/form-data",
         },
       });
       const { filePath } = data;
       setUploadedFile({ filePath });
       console.log(filePath);
 
-      const { responsedata } = await axios.patch('/api/v1/users', {
+      const { responsedata } = await axios.patch("/api/v1/users", {
         profile_img: filePath,
       });
       console.log(responsedata);

@@ -2,6 +2,9 @@
 @import '../../style/mixin';
 @import '../../style/mediaQuery';
 
+header {
+  height: 70px;
+}
 .main-header * {
   user-select: none;
   outline: none;

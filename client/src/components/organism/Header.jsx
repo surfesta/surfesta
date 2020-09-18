@@ -49,10 +49,8 @@ function Header() {
   }, [dispatch]);
 
   const goHome = useCallback(() => {
-    dispatch(push('/'));
-    window.location.replace('http://localhost:3000/');
-    setTimeout(() => window.scrollTo(0, 0));
-  }, [dispatch]);
+    window.location.href = '/';
+  }, []);
 
   return (
     <section className="main-header">

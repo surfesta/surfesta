@@ -15,6 +15,7 @@ export default function UserSlot({
   useEffect(() => {
     if (hostingEvent.attended_users.some((u) => u._id === user._id))
       setAttendance(true);
+    setAttendAcount(hostingEvent.attended_users.length);
   }, [hostingEvent.attended_users, setAttendAcount]);
 
   return (

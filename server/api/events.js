@@ -30,6 +30,7 @@ router.get('/', (req, res) => {
           ),
           like_count: new Set(event.liked_users).size,
           cur_count: new Set(event.enlisted_users).size,
+          attendance_count: new Set(event.attended_users).size,
         };
       });
       res.json(likeCheckedEvents);
@@ -48,6 +49,7 @@ router.get('/search', (req, res) => {
         res.json({ error });
         return;
       }
+
       res.json(events);
     });
 });

@@ -38,13 +38,13 @@ export default function SortList({
     };
   }, []);
 
-  const toggleClassName = (filter) => (filter === sort ? 'act' : null);
+  const toggleClassName = (state) => (state === sort ? 'act' : null);
 
   return (
     selected && (
       <ul ref={selectListRef} onClick={handleClick}>
         <li
-          onClick={() => {
+          onClick={(e) => {
             setSort(NEWEST);
           }}
         >

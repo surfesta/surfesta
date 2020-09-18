@@ -1,6 +1,6 @@
-import React, { useState, useCallback } from "react";
-import axios from "axios";
-import { useDropzone } from "react-dropzone";
+import React, { useState, useCallback } from 'react';
+import axios from 'axios';
+import { useDropzone } from 'react-dropzone';
 
 export default function FileUpload({ inputRef, imgRef }) {
   const onDrop = useCallback((acceptedFiles) => {
@@ -26,21 +26,25 @@ export default function FileUpload({ inputRef, imgRef }) {
       return;
     }
     if (
-      _filetype !== "image/jpg" &&
-      _filetype !== "image/jpeg" &&
-      _filetype !== "image/png" &&
-      _filetype !== "image/webp"
+      _filetype !== 'image/jpg' &&
+      _filetype !== 'image/jpeg' &&
+      _filetype !== 'image/png' &&
+      _filetype !== 'image/webp'
     ) {
       alert(`지원하지 않는 형식의 타입입니다. ${_filetype}`);
       return;
     }
-    imgRef.current.parentNode.classList.add("active");
+    imgRef.current.parentNode.classList.add('active');
     const formData = new FormData();
-    formData.append("file", _file);
+    formData.append('file', _file);
     try {
-      const res = await axios.post("/api/v1/uploads", formData, {
+      const BASE_URL =
+        navigator.userAgent === 'ReactSnap'
+          ? 'http://ec2-15-164-210-226.ap-northeast-2.compute.amazonaws.com:5000'
+          : '';
+      const res = await axios.post(`${BASE_URL}/api/v1/uploads`, formData, {
         headers: {
-          "Content-Type": "multipart/form-data",
+          'Content-Type': 'multipart/form-data',
         },
       });
       console.log(res);
@@ -66,7 +70,7 @@ export default function FileUpload({ inputRef, imgRef }) {
         ref={inputRef}
       />
       <label
-        className={`custom-file-label ${uploadedFile.filePath ? "" : "none"}`}
+        className={`custom-file-label ${uploadedFile.filePath ? '' : 'none'}`}
         htmlFor="customFile"
       >
         {uploadedFile ? (

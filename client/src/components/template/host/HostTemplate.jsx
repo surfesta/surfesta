@@ -1,5 +1,5 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import AttendeeListing from '../../organism/AttendeeListing';
 import { IconButton } from '@material-ui/core';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
@@ -7,20 +7,23 @@ import SearchIcon from '@material-ui/icons/Search';
 import './HostTemplate.scss';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import EventService from '../../../services/EventService';
+import { startAttendUser } from '../../../redux/modules/events';
+import { useCallback } from 'react';
 
 export default function HostTemplate({ event_id }) {
   const events = useSelector((state) => state.events.events);
-  const currentHostingEvent = events.find((event) => event._id === event_id);
-  console.log(currentHostingEvent);
-  const getTargetEvent = async () => {
-    const BASE_URL =
-      navigator.userAgent === 'ReactSnap'
-        ? 'http://ec2-15-164-210-226.ap-northeast-2.compute.amazonaws.com:5000'
-        : '';
-    const { data } = await axios.get(`${BASE_URL}/api/v1/events/${event_id}`);
-    console.log(data);
-    return data;
-  };
+  const hostingEvent = events.find((event) => event._id === event_id);
+  const [attend_acount, setAttendAcount] = useState(0);
+  const dispatch = useDispatch();
+
+  const handleClick = useCallback(
+    (user_id, type) => {
+      dispatch(startAttendUser(event_id, user_id, type));
+      setAttendAcount(hostingEvent.attendance_acount);
+    },
+    [dispatch, hostingEvent],
+  );
 
   return (
     <div className="host-template">
@@ -32,9 +35,9 @@ export default function HostTemplate({ event_id }) {
           <div>이벤트 참가신청 리스트</div>
         </div>
         <div className="list-main-header">
-          <h1>{currentHostingEvent && currentHostingEvent.title}</h1>
+          <h1>{hostingEvent && hostingEvent.title}</h1>
           <div className="attendee-counter">
-            <div>2명 참석</div>
+            <div>{attend_acount}명 참석</div>
           </div>
         </div>
       </section>
@@ -48,7 +51,11 @@ export default function HostTemplate({ event_id }) {
           <span>QRCODE</span>
         </Link>
       </section>
-      <AttendeeListing event={currentHostingEvent} />
+      <AttendeeListing
+        hostingEvent={hostingEvent}
+        handleClick={handleClick}
+        setAttendAcount={setAttendAcount}
+      />
     </div>
   );
 }

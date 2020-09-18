@@ -38,10 +38,22 @@ export default class EventService {
     return data;
   }
 
+  static async haveUserAttended({ eventId, userId, type }) {
+    const { data } = await axios({
+      method: 'PATCH',
+      url: `${EVENT_URI}/${eventId}/attended?type=${type}`,
+      data: {
+        user_id: userId,
+      },
+    });
+    return data;
+  }
+
   static async searchEvents({ keyword }) {
     const { data } = await axios.get(`${EVENT_URI}/search?q=${keyword}`);
     return data;
   }
+
   static async deleteEvent(eventId) {
     await axios.delete(`${EVENT_URI}/${eventId}`);
     const { data } = await axios.get(`${EVENT_URI}`);

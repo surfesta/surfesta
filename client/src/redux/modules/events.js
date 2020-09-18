@@ -1,14 +1,15 @@
-import { put, call, takeEvery, takeLatest } from "redux-saga/effects";
-import EventService from "../../services/EventService";
-import { push } from "connected-react-router";
+import { put, call, takeEvery, takeLatest } from 'redux-saga/effects';
+import EventService from '../../services/EventService';
+import { push } from 'connected-react-router';
 
-const prefix = "surfesta-events";
+const prefix = 'surfesta-events';
 
 // action type
 const START = `${prefix}/START`;
 const SUCCESS = `${prefix}/SUCCESS`;
 const TOGGLE_ENLISTED_USER_SUCCESS = `${prefix} TOGGLE_ENLISTED_USER_SUCCESS`;
 const TOGGLE_LIKED_USER_SUCCESS = `${prefix}/TOGGLE_LIKED_USER_SUCCESS`;
+const HAVE_USER_ATTENDED_SUCCESS = `${prefix}/HAVE_USER_ATTENDED_SUCCESS`;
 const SEARCH_EVENTS_SUCCESS = `${prefix}/SEARCH_EVENTS_SUCCESS`;
 const FAIL = `${prefix}/FAIL`;
 const DELETE_EVENT_SUCCESS = `${prefix}/DELETE_EVENT_SUCCESS`;
@@ -30,6 +31,11 @@ const toggleEnlistedUserSuccess = (event) => ({
 
 const toggleLikedUserSuccess = (event) => ({
   type: TOGGLE_LIKED_USER_SUCCESS,
+  event,
+});
+
+const haveUserAttendedSuccess = (event) => ({
+  type: HAVE_USER_ATTENDED_SUCCESS,
   event,
 });
 
@@ -58,8 +64,8 @@ const initialState = {
 // reducer
 export default function reducer(state = initialState, action) {
   const eventId = action.event && action.event._id;
-  const events = [...state.events].map((event) =>
-    event._id === eventId ? action.event : event
+  const events = state.events.map((event) =>
+    event._id === eventId ? action.event : event,
   );
 
   switch (action.type) {
@@ -82,6 +88,11 @@ export default function reducer(state = initialState, action) {
         events,
       };
     case TOGGLE_LIKED_USER_SUCCESS:
+      return {
+        ...state,
+        events,
+      };
+    case HAVE_USER_ATTENDED_SUCCESS:
       return {
         ...state,
         events,
@@ -113,6 +124,7 @@ const TOGGLE_ENLISTED_USER = `${prefix}/TOGGLE_ENLISTED_USER`;
 const TOGGLE_LIKED_USER = `${prefix}/TOGGLE_LIKED_USER`;
 const START_SEARCH_EVENTS = `${prefix}/START_SEARCH_EVENTS`;
 const START_DELETE_EVENT = `${prefix}/START_DELETE_EVENT`;
+const START_ATTEND_USER = `${prefix}/START_ATTEND_USER`;
 
 export const startGetEvents = () => ({
   type: START_GET_EVENTS,
@@ -129,6 +141,15 @@ export const toggleEnlistedUser = (eventId, userId, type) => ({
 
 export const toggleLikedUser = (eventId, userId, type) => ({
   type: TOGGLE_LIKED_USER,
+  payload: {
+    eventId,
+    userId,
+    type,
+  },
+});
+
+export const startAttendUser = (eventId, userId, type) => ({
+  type: START_ATTEND_USER,
   payload: {
     eventId,
     userId,
@@ -163,7 +184,7 @@ function* toggleEnlistedUserSaga(action) {
   try {
     const { event } = yield call(
       EventService.toggleEnlistedUser,
-      action.payload
+      action.payload,
     );
     yield put(toggleEnlistedUserSuccess(event));
   } catch (error) {
@@ -175,6 +196,14 @@ function* toggleLikedUserSaga(action) {
   try {
     const { event } = yield call(EventService.toggleLikedUser, action.payload);
     yield put(toggleLikedUserSuccess(event));
+  } catch (error) {
+    yield put(fail(error));
+  }
+}
+function* startAttnedUser(action) {
+  try {
+    const { event } = yield call(EventService.haveUserAttended, action.payload);
+    yield put(haveUserAttendedSuccess(event));
   } catch (error) {
     yield put(fail(error));
   }
@@ -204,4 +233,5 @@ export function* eventsSaga() {
   yield takeLatest(TOGGLE_LIKED_USER, toggleLikedUserSaga);
   yield takeLatest(START_SEARCH_EVENTS, startSearchEventsSaga);
   yield takeLatest(START_DELETE_EVENT, startDeleteEventSaga);
+  yield takeLatest(START_ATTEND_USER, startAttnedUser);
 }

@@ -12,6 +12,7 @@ router.get('/', (req, res) => {
     .populate('host')
     .populate('enlisted_users')
     .populate('liked_users')
+    .populate('attended_users')
     .exec((err, events) => {
       if (err) return res.status(500).send({ error: 'db failure' });
 
@@ -29,6 +30,7 @@ router.get('/', (req, res) => {
           ),
           like_count: new Set(event.liked_users).size,
           cur_count: new Set(event.enlisted_users).size,
+          attendance_count: new Set(event.attended_users).size,
         };
       });
       res.json(likeCheckedEvents);
@@ -41,11 +43,13 @@ router.get('/search', (req, res) => {
     .populate('host')
     .populate('enlisted_users')
     .populate('liked_users')
+    .populate('attended_users')
     .exec((error, events) => {
       if (error) {
         res.json({ error });
         return;
       }
+
       res.json(events);
     });
 });
@@ -56,6 +60,7 @@ router.get('/:event_id', (req, res) => {
     .populate('host')
     .populate('enlisted_users')
     .populate('liked_users')
+    .populate('attended_users')
     .exec((err, event) => {
       if (err) return res.status(500).json({ error: err });
       if (!event || event.length === 0)
@@ -106,7 +111,8 @@ router.patch('/:event_id', (req, res) => {
       const event = await Event.findOne({ _id: req.params.event_id })
         .populate('host')
         .populate('enlisted_users')
-        .populate('liked_users');
+        .populate('liked_users')
+        .populate('attended_users');
 
       res.json({
         success: true,
@@ -132,7 +138,8 @@ router.patch('/:event_id/enlisted', async (req, res) => {
       const event = await Event.findOne({ _id: req.params.event_id })
         .populate('host')
         .populate('enlisted_users')
-        .populate('liked_users');
+        .populate('liked_users')
+        .populate('attended_users');
       event.cur_count = new Set(event.enlisted_users).size;
       event.save();
       res.json({
@@ -159,8 +166,40 @@ router.patch('/:event_id/liked', async (req, res) => {
       const event = await Event.findOne({ _id: req.params.event_id })
         .populate('host')
         .populate('enlisted_users')
-        .populate('liked_users');
+        .populate('liked_users')
+        .populate('attended_users');
       event.like_count = new Set(event.liked_users).size;
+      event.save();
+      res.json({
+        success: true,
+        event,
+      });
+    },
+  );
+});
+
+// UPDATE a event's attended_users
+
+router.patch('/:event_id/attended', async (req, res) => {
+  const type = req.query.type !== 'false' ? true : false;
+
+  Event.update(
+    { _id: req.params.event_id },
+    type
+      ? { $addToSet: { attended_users: req.body.user_id } }
+      : { $pull: { attended_users: req.body.user_id } },
+    async (err, output) => {
+      if (err) {
+        res.status(500).json({ error: 'db failure' });
+        return;
+      }
+      if (!output.n) return res.status(404).json({ error: 'Event not found' });
+      const event = await Event.findOne({ _id: req.params.event_id })
+        .populate('host')
+        .populate('enlisted_users')
+        .populate('liked_users')
+        .populate('attended_users');
+      event.attendance_count = new Set(event.attended_users).size;
       event.save();
       res.json({
         success: true,

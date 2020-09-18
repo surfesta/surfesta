@@ -15,6 +15,7 @@ export default class UploadService {
       },
       data: formData,
     });
+
     return data;
   }
 }

@@ -36,16 +36,18 @@ export default function FavoriteButton({ event }) {
   };
 
   const checkAuth = () => {
-    !userId && viewModal();
-    userId && setSelect(!select);
+    if (!userId) {
+      return viewModal();
+    }
 
+    userId && setSelect(!select);
     !select && toggleLiked(true);
     select && toggleLiked(false);
   };
 
   return (
     <div className={select ? 'act favoriteButton-wrap' : 'favoriteButton-wrap'}>
-      <IconButton aria-label="favorite" onClick={checkAuth}>
+      <IconButton aria-label='favorite' onClick={checkAuth}>
         <FavoriteIcon />
       </IconButton>
     </div>

@@ -119,16 +119,16 @@ export default function ReviseEventForm({ curEvent }) {
       curPlatform: publicRef.curIsOnline ? $onlinePlatform.current.value : '',
     };
     const startDateValue = publicRef.curStartDate.firstElementChild.querySelector(
-      'input'
+      'input',
     ).value;
     const startTimeValue = publicRef.curStartDate.lastElementChild.querySelector(
-      'input'
+      'input',
     ).value;
     const endDateValue = publicRef.curEndDate.firstElementChild.querySelector(
-      'input'
+      'input',
     ).value;
     const endTimeValue = publicRef.curEndDate.lastElementChild.querySelector(
-      'input'
+      'input',
     ).value;
     const payload = {
       isOpen: publicRef.curIsOpen,
@@ -212,7 +212,11 @@ export default function ReviseEventForm({ curEvent }) {
       return;
     }
     setClearPatch(true);
-    axios.patch(`/api/v1/events/${curEvent._id}`, payload);
+    const BASE_URL =
+      navigator.userAgent === 'ReactSnap'
+        ? 'http://ec2-15-164-210-226.ap-northeast-2.compute.amazonaws.com:5000'
+        : '';
+    axios.patch(`${BASE_URL}/api/v1/events/${curEvent._id}`, payload);
   }
   return (
     <div className="revise-event-form">

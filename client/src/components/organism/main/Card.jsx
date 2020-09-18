@@ -29,16 +29,16 @@ export default function Card({ event }) {
     cardRef.current && observer.observe(cardRef.current);
   }, []);
 
-  const goToEventDetail = (e) => {
+  const goToEventDetail = () => {
     dispatch(push(`/event/${eventId}`));
   };
 
   const loadCard = () => setIsLoad(true);
 
   return (
-    <div className="card-wrap" ref={cardRef}>
+    <div className='card-wrap' ref={cardRef}>
       {!isLoad && (
-        <div className="loading-wrap">
+        <div className='loading-wrap'>
           <span></span>
         </div>
       )}

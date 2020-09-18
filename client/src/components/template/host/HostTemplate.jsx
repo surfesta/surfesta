@@ -11,13 +11,16 @@ import { Link } from 'react-router-dom';
 export default function HostTemplate({ event_id }) {
   const events = useSelector((state) => state.events.events);
   const currentHostingEvent = events.find((event) => event._id === event_id);
-
+  console.log(currentHostingEvent);
   const getTargetEvent = async () => {
-    const { data } = await axios.get(`/api/v1/events/${event_id}`);
+    const BASE_URL =
+      navigator.userAgent === 'ReactSnap'
+        ? 'http://ec2-15-164-210-226.ap-northeast-2.compute.amazonaws.com:5000'
+        : '';
+    const { data } = await axios.get(`${BASE_URL}/api/v1/events/${event_id}`);
     console.log(data);
     return data;
   };
-  getTargetEvent();
 
   return (
     <div className="host-template">

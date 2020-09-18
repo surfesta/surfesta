@@ -21,7 +21,6 @@ function ProfileThumb({ profileImg, setProfileImg }) {
   const onChange = useCallback(
     async (e) => {
       const _file_data = e.target.files[0];
-
       if (!validateFileInput(_file_data)) return;
       const formData = new FormData();
       formData.append('file', _file_data);
@@ -33,7 +32,7 @@ function ProfileThumb({ profileImg, setProfileImg }) {
         console.warn(err);
       }
     },
-    [validateFileInput],
+    [validateFileInput, setProfileImg],
   );
 
   return (

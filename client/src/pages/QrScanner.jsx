@@ -1,33 +1,32 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { useState } from 'react';
 import QrReader from 'react-qr-reader';
+import { useDispatch } from 'react-redux';
+import { startAttendUser } from '../redux/modules/events';
 import './qrscanner.scss';
 
-export default class QrScanner extends Component {
-  state = {
-    result: 'QR Code를 스캔해주세요.',
-  };
+export default function QrScanner({ match }) {
+  const [result, setResult] = useState('QR Code를 스캔해주세요.');
+  const dispatch = useDispatch();
 
-  handleScan = (data) => {
-    console.log(data);
-    // patch data(eventid & userid) to DB
-    // replace redux
+  const handleScan = (data) => {
     if (data) {
-      this.setState({
-        result: data,
-      });
+      // find out there's user by server request
+      // if theres user? call hem name and welcome hem.
+      // no user? 'no user found'
+      setResult(data);
     }
+    dispatch(startAttendUser(match.params.event_id, data, true));
   };
-  handleError = (err) => {
+  const handleError = (err) => {
     console.error(err);
   };
-  render() {
-    return (
-      <div className="qr-container">
-        <QrReader onError={this.handleError} onScan={this.handleScan} />
-        <div className="qr-result">
-          <p>{this.state.result}</p>
-        </div>
+  return (
+    <div className="qr-container">
+      <QrReader onError={handleError} onScan={handleScan} />
+      <div className="qr-result">
+        <p>{result}</p>
       </div>
-    );
-  }
+    </div>
+  );
 }

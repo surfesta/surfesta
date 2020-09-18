@@ -12,11 +12,10 @@ export default function CardButtons({ event }) {
   const liked = '/my/event/liked';
 
   return (
-    <div className="cardButtons-wrap">
+    <div className='cardButtons-wrap'>
       {path !== enlisted && path !== hosting && (
         <FavoriteButton event={event} />
       )}
-      {/* {path === liked && <FavoriteButton event={event} />} */}
 
       {path === enlisted && <DeleteButton event={event} />}
       {path === hosting && <SettingButtons event={event} />}

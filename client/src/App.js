@@ -46,7 +46,7 @@ function App() {
         <ConnectedRouter history={history}>
           <HeaderTemplate />
           <Switch>
-            <Route path="/qr" component={QrScanner} />
+            <Route path="/qr/:event_id" component={QrScanner} />
             <Route path="/reviseEvent/:event_id" component={ReviseEvent} />
             <Route path="/createEvent" component={CreateEvent} />
             <Route path="/event/:event_id" component={EventDetail} />

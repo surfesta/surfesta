@@ -1,11 +1,7 @@
 import React from 'react';
 import UserSlot from '../molecule/UserSlot';
 
-export default function AttendeeListing({
-  hostingEvent,
-  handleClick,
-  setAttendAcount,
-}) {
+export default function AttendeeListing({ hostingEvent, handleClick }) {
   return (
     <>
       <div className="listed-users">
@@ -16,7 +12,6 @@ export default function AttendeeListing({
               user={user}
               key={user._id}
               handleClick={handleClick}
-              setAttendAcount={setAttendAcount}
             />
           ))}
       </div>

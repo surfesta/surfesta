@@ -40,9 +40,6 @@ export default function EventInfo({ event }) {
       event.enlisted_users.map(
         (user) => user._id === userId && setIsEnlisted(true)
       );
-
-    // window.addEventListener('scroll', handleScroll);
-    // return window.removeEventListener('scroll', handleScroll);
   }, [userId]);
 
   const viewModal = useCallback(() => {
@@ -72,24 +69,24 @@ export default function EventInfo({ event }) {
   };
 
   return (
-    <div className="eventInfo-wrap">
-      <div className="eventInfo-bar" ref={eventInfoBar}>
-        <div className="eventInfo-bar-wrap">
-          <div className="left">
-            <p className="title">{title}</p>
+    <div className='eventInfo-wrap'>
+      <div className='eventInfo-bar' ref={eventInfoBar}>
+        <div className='eventInfo-bar-wrap'>
+          <div className='left'>
+            <p className='title'>{title}</p>
             <p>
-              <span className="price">{price}</span>
+              <span className='price'>{price}</span>
               <span> 원</span>
             </p>
           </div>
-          <div className="button-wrap right">
+          <div className='button-wrap right'>
             {!isEnlisted && (
-              <button className="enlist-button" onClick={checkAuth}>
+              <button className='enlist-button' onClick={checkAuth}>
                 이벤트 참석하기
               </button>
             )}
             {isEnlisted && (
-              <button className="disable-button" disabled>
+              <button className='disable-button' disabled>
                 이벤트 참석완료
               </button>
             )}
@@ -97,28 +94,28 @@ export default function EventInfo({ event }) {
           </div>
         </div>
       </div>
-      <div className="flex-wrap">
-        <div className="left">
+      <div className='flex-wrap'>
+        <div className='left'>
           <div
-            className="thumbnail"
+            className='thumbnail'
             style={thumbnail && { backgroundImage: `url(${thumbnail})` }}
           ></div>
         </div>
-        <div className="right">
+        <div className='right'>
           <h2>{title}</h2>
           <p>
-            <span className="price">{price}</span>
+            <span className='price'>{price}</span>
             <span> 원</span>
           </p>
           <table>
             <tbody>
               {isOnline ? (
-                <tr className="top-line">
+                <tr className='top-line'>
                   <th>온라인 플랫폼</th>
                   <td>{onlinePlatform}</td>
                 </tr>
               ) : (
-                <tr className="top-line">
+                <tr className='top-line'>
                   <th>위치</th>
                   <td>
                     {loactionName}
@@ -130,20 +127,20 @@ export default function EventInfo({ event }) {
               <tr>
                 <th>일시</th>
                 <td>
-                  <span className="start">
+                  <span className='start'>
                     {startDate} {startTime}
                   </span>
                   <span>~ </span>
-                  <span className="end">
+                  <span className='end'>
                     {endDate} {endTime}
                   </span>
                 </td>
               </tr>
-              <tr className="top-line">
+              <tr className='top-line'>
                 <th>주최자</th>
                 <td>
                   <span
-                    className="host-thumbnail"
+                    className='host-thumbnail'
                     style={
                       hostProfileImg && {
                         backgroundImage: `url(${hostProfileImg})`,
@@ -174,19 +171,19 @@ export default function EventInfo({ event }) {
             </tbody>
           </table>
 
-          <div className="button-wrap">
+          <div className='button-wrap'>
             {!isEnlisted && maxCount !== curCount && (
-              <button className="enlist-button" onClick={checkAuth}>
+              <button className='enlist-button' onClick={checkAuth}>
                 이벤트 참석하기
               </button>
             )}
             {isEnlisted && (
-              <button className="disable-button" disabled>
+              <button className='disable-button' disabled>
                 이벤트 참석완료
               </button>
             )}
             {!isEnlisted && maxCount === curCount && (
-              <button className="disable-button" disabled>
+              <button className='disable-button' disabled>
                 현재 이벤트는 만석이에요.
               </button>
             )}

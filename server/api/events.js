@@ -179,14 +179,15 @@ router.patch('/:event_id/liked', async (req, res) => {
 });
 
 // UPDATE a event's attended_users
-
 router.patch('/:event_id/attended', async (req, res) => {
   const type = req.query.type !== 'false' ? true : false;
 
-  Event.update(
+  Event.updateOne(
     { _id: req.params.event_id },
     type
-      ? { $addToSet: { attended_users: req.body.user_id } }
+      ? {
+          $addToSet: { attended_users: req.body.user_id },
+        }
       : { $pull: { attended_users: req.body.user_id } },
     async (err, output) => {
       if (err) {
@@ -199,6 +200,7 @@ router.patch('/:event_id/attended', async (req, res) => {
         .populate('enlisted_users')
         .populate('liked_users')
         .populate('attended_users');
+
       event.attendance_count = new Set(event.attended_users).size;
       event.save();
       res.json({

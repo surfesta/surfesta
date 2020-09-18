@@ -200,7 +200,7 @@ function* toggleLikedUserSaga(action) {
     yield put(fail(error));
   }
 }
-function* startAttnedUser(action) {
+function* startAttendUserSaga(action) {
   try {
     const { event } = yield call(EventService.haveUserAttended, action.payload);
     yield put(haveUserAttendedSuccess(event));
@@ -233,5 +233,5 @@ export function* eventsSaga() {
   yield takeLatest(TOGGLE_LIKED_USER, toggleLikedUserSaga);
   yield takeLatest(START_SEARCH_EVENTS, startSearchEventsSaga);
   yield takeLatest(START_DELETE_EVENT, startDeleteEventSaga);
-  yield takeLatest(START_ATTEND_USER, startAttnedUser);
+  yield takeLatest(START_ATTEND_USER, startAttendUserSaga);
 }

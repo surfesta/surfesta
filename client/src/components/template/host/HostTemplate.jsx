@@ -10,19 +10,21 @@ import { Link } from 'react-router-dom';
 import EventService from '../../../services/EventService';
 import { startAttendUser } from '../../../redux/modules/events';
 import { useCallback } from 'react';
+import { useEffect } from 'react';
+import { push } from 'connected-react-router';
 
 export default function HostTemplate({ event_id }) {
-  const events = useSelector((state) => state.events.events);
-  const hostingEvent = events.find((event) => event._id === event_id);
-  const [attend_acount, setAttendAcount] = useState(0);
+  const hostingEvent = useSelector((state) =>
+    state.events.events.find((event) => event._id === event_id),
+  );
+  // const hostingEvent = events.find((event) => event._id === event_id);
   const dispatch = useDispatch();
 
   const handleClick = useCallback(
     (user_id, type) => {
       dispatch(startAttendUser(event_id, user_id, type));
-      setAttendAcount(hostingEvent.attendance_acount);
     },
-    [dispatch, hostingEvent],
+    [dispatch],
   );
 
   return (
@@ -37,7 +39,9 @@ export default function HostTemplate({ event_id }) {
         <div className="list-main-header">
           <h1>{hostingEvent && hostingEvent.title}</h1>
           <div className="attendee-counter">
-            <div>{attend_acount}명 참석</div>
+            <div>
+              {(hostingEvent && hostingEvent.attendance_count) || 0}명 참석
+            </div>
           </div>
         </div>
       </section>
@@ -46,16 +50,15 @@ export default function HostTemplate({ event_id }) {
           <input type="text" placeholder="검색하기" />
           <SearchIcon />
         </div>
-        <Link className="qr-reader-btn" to="/qr">
+        <div
+          className="qr-reader-btn"
+          onClick={() => dispatch(push(`/qr/${event_id}`))}
+        >
           <img src="https://img.icons8.com/fluent-systems-regular/1x/qr-code.png" />
           <span>QRCODE</span>
-        </Link>
+        </div>
       </section>
-      <AttendeeListing
-        hostingEvent={hostingEvent}
-        handleClick={handleClick}
-        setAttendAcount={setAttendAcount}
-      />
+      <AttendeeListing hostingEvent={hostingEvent} handleClick={handleClick} />
     </div>
   );
 }

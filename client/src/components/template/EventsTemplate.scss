@@ -36,6 +36,11 @@
 }
 
 @include mobile {
+  .main {
+    .select-wrap {
+      align-items: center;
+    }
+  }
   .cards-wrap {
     .img-wrap {
       max-width: 300px;

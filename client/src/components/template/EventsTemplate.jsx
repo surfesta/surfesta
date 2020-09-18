@@ -99,7 +99,7 @@ export default function EventsTemplate({
           setFilter={setFilter}
           filterState={filterState}
         />
-        <Sort sort={sort} setSort={setSort} sortState={sortState} />
+        <Sort setSort={setSort} sortState={sortState} />
       </div>
 
       <section className='cards-wrap'>

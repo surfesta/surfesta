@@ -1,0 +1,88 @@
+@import '../../../style/mediaQuery';
+@import '../../../style/variables';
+@import '../../../style/mixin';
+
+.host-template {
+  max-width: 1380px;
+  padding: 30px;
+  margin: 0 auto;
+}
+
+.enlisted-list-header {
+  .list-sub-header {
+    @include Flex(left);
+    color: rgb(155, 155, 155);
+    font-weight: 500;
+    padding: 0 0 20px;
+    .mui-arrow {
+      width: 3rem;
+      height: 3rem;
+      background-color: rgb(230, 230, 230);
+      margin-right: 12px;
+    }
+
+    div {
+      font-size: 2rem;
+    }
+  }
+  .list-main-header {
+    @include Flex(left, center);
+    margin-bottom: 2.5rem;
+    h1 {
+      font-weight: 600;
+      font-size: 3rem;
+      line-height: 4rem;
+    }
+    .attendee-counter {
+      text-align: center;
+      background-color: rgb(55, 55, 255);
+      color: white;
+      font-size: 1.4rem;
+      line-height: 2.4rem;
+      font-weight: 400;
+
+      height: 190%;
+      border-radius: 50px;
+      padding: 0.6rem;
+
+      margin-left: 2rem;
+      width: 8rem;
+    }
+  }
+}
+.enlisted-list-features {
+  @include Flex(left);
+  justify-content: space-between;
+
+  padding: 1rem;
+  .listed-user-search {
+    @include Flex();
+    flex-grow: 1;
+    margin-right: 20px;
+    input {
+      background-color: rgb(214, 214, 214);
+      height: 100%;
+      width: 100%;
+      border-radius: 8px;
+      outline: none;
+      padding: 1.4rem 2rem;
+    }
+    button {
+      height: 100%;
+      background-color: rgb(214, 214, 214);
+      border-radius: 8px;
+    }
+  }
+  .qr-reader-btn {
+    @include Flex();
+    flex-wrap: wrap;
+    background-color: rgb(112, 112, 112);
+    border-radius: 7px;
+    padding: 4px;
+    color: white;
+
+    img {
+      filter: invert(100%);
+    }
+  }
+}

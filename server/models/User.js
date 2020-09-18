@@ -20,6 +20,7 @@ const userSchema = mongoose.Schema(
     enlisted_events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }],
     hosting_events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }],
     liked_events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }],
+    attended_events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }],
     role: { type: Number, default: 0 },
     token: {
       type: String,

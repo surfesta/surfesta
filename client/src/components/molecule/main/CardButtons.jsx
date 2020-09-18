@@ -10,6 +10,7 @@ export default function CardButtons({ event }) {
   const enlisted = '/my/event/enlisted';
   const hosting = '/my/event/hosting';
   const liked = '/my/event/liked';
+
   return (
     <div className="cardButtons-wrap">
       {path !== enlisted && path !== hosting && (

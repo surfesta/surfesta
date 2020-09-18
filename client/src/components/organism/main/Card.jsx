@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import './Card.scss';
 import CardContent from '../../molecule/main/CardContent';
 import CardButtons from '../../molecule/main/CardButtons';
@@ -8,15 +8,12 @@ import { push } from 'connected-react-router';
 
 export default function Card({ event }) {
   const dispatch = useDispatch();
+  const [isLoad, setIsLoad] = useState(false);
+  const history = useHistory();
   const eventId = event && event._id;
   const cardRef = useRef(null);
-  const [isLoad, setIsLoad] = useState(false);
 
   useEffect(() => {
-    function loadCard() {
-      setIsLoad(true);
-    }
-
     const card = cardRef.current;
     card && card.addEventListener(LOAD_TYPE, loadCard);
 
@@ -35,6 +32,8 @@ export default function Card({ event }) {
   const goToEventDetail = (e) => {
     dispatch(push(`/event/${eventId}`));
   };
+
+  const loadCard = () => setIsLoad(true);
 
   return (
     <div className="card-wrap" ref={cardRef}>

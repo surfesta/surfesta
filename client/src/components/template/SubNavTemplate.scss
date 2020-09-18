@@ -7,6 +7,7 @@
   justify-content: center;
   text-align: center;
   background-color: #fff;
+  margin-bottom: 60px;
 
   .sub-nav-div {
     @include font(2rem, $font-primary-color, $weight: 500);

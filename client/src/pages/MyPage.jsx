@@ -7,7 +7,6 @@ import HostingEvents from '../components/molecule/eventCategories/HostingEvents'
 import LikedEvents from '../components/molecule/eventCategories/LikedEvents';
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { useEffect } from 'react';
 
 function MyPage() {
   const user = useSelector((state) => state.auth.user);

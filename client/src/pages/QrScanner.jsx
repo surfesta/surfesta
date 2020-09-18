@@ -1,15 +1,15 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import jsQR from "jsqr";
 import "./qrscanner.scss";
 import Portal from "../components/Portal";
 
-export default function QrScanner({location}) {
+export default function QrScanner({ location }) {
   if (!location.state) {
     window.location.href = "/";
   }
   const [userCheck, setUserCheck] = useState(false);
   const [failCheck, setFailCheck] = useState(false);
-  const {event} = location.state;
+  const { event } = location.state;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -54,7 +54,7 @@ export default function QrScanner({location}) {
       // 카메라 사용시
 
       navigator.mediaDevices
-        .getUserMedia({video: {facingMode: "environment"}})
+        .getUserMedia({ video: { facingMode: "environment" } })
         .then(function (stream) {
           video.srcObject = stream;
 
@@ -175,7 +175,7 @@ export default function QrScanner({location}) {
             }}
           >
             <div id="modal" className="confirm-modal">
-              <h1 style={{color: "greenYellow"}}>참가신청한 유저 입니다.</h1>
+              <h1 style={{ color: "greenYellow" }}>참가신청한 유저 입니다.</h1>
             </div>
           </div>
         </Portal>
@@ -190,7 +190,7 @@ export default function QrScanner({location}) {
             }}
           >
             <div id="modal" className="confirm-modal">
-              <h1 style={{color: "red"}}>등록되지 않은 유저 입니다.</h1>
+              <h1 style={{ color: "red" }}>등록되지 않은 유저 입니다.</h1>
             </div>
           </div>
         </Portal>

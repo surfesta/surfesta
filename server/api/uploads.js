@@ -40,16 +40,16 @@ const upload = multer({
 
 router.post("/", upload.any(), (req, res, next) => {
   // console.log(req.files[0]);
-  const upload = new Upload(req.body);
-  console.log(upload);
-  upload.save((err, doc) => {
-    if (err) {
-      console.log(err);
-      res.json({ success: false });
-      return;
-    }
-    res.json({ success: true, doc, filePath: req.files[0].location });
-  });
+  // const upload = new Upload(req.body);
+  // console.log(upload);
+  // upload.save((err, doc) => {
+  //   if (err) {
+  //     console.log(err);
+  //     res.json({ success: false });
+  //     return;
+  //   }
+  //   res.json({ success: true, doc, filePath: req.files[0].location });
+  // });
 });
 
 module.exports = router;

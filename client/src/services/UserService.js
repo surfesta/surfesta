@@ -39,8 +39,6 @@ export default class UserService {
     return data;
   }
 
-  // patch --------------------------------------------------------------
-
   static async patchUser(payload) {
     const { data } = await axios({
       method: "PATCH",
@@ -49,8 +47,6 @@ export default class UserService {
     });
     return data;
   }
-
-  // --------------------------------------------------------------------
 
   static async logout() {
     const { data } = await axios({

@@ -52,8 +52,7 @@
         outline: none;
       }
       .custom-file-label {
-        &.none,
-        &:hover {
+        &.none {
           height: 45.53rem;
           &::before {
             content: "";
@@ -76,6 +75,29 @@
             z-index: 2;
           }
         }
+        &:hover {
+          &::before {
+            content: "";
+            position: absolute;
+            width: 3.2rem;
+            height: 3.2rem;
+            margin: auto;
+            background: url("/img/camera.svg") no-repeat;
+            background-size: cover;
+            background-position: center;
+            z-index: 3;
+          }
+          &::after {
+            content: "";
+            position: absolute;
+            width: 6.5rem;
+            height: 6.5rem;
+            background: #fff;
+            border-radius: 50%;
+            z-index: 2;
+          }
+        }
+
         outline: none;
         position: relative;
         width: 68rem;

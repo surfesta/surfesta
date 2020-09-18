@@ -14,6 +14,8 @@ import EventContent from "../../molecule/createEvent/EventContent";
 import EventDate from "../../molecule/createEvent/EventDate";
 import axios from "axios";
 import TermsCheck from "../../molecule/createEvent/TermsCheck";
+import EventService from "../../../services/EventService";
+import UserService from "../../../services/UserService";
 
 const EventForm = () => {
   const _preventDefault = useCallback((e) => {
@@ -130,6 +132,7 @@ const EventForm = () => {
 
       enlisted_users: [], // 해당 이벤트 참여신청을 한 유저들의 배열
       liked_users: [], // 해당 이벤트 찜한 유저들의 배열
+      attended_users: [], // 해당 이벤트에 실제 참여한 유저들의 배열
     };
 
     if (payload.thumbnail.trim() === "") {
@@ -215,14 +218,15 @@ const EventForm = () => {
     setModalCheck(false);
     console.log(eventPayload);
     try {
-      const res = await axios.post("/api/v1/events", eventPayload);
-      const { _id } = res.data.doc;
-      const _hosting_events = await axios.get(`/api/v1/users/${user._id}`);
-      const { hosting_events } = _hosting_events.data;
+      const { doc } = await EventService.postEvent(eventPayload);
+      const { _id } = doc;
+      const { hosting_events } = await UserService.getUserDetail(user._id);
+      console.log(hosting_events);
       const hosting_payload = {
         hosting_events: [...hosting_events, _id],
       };
-      axios.patch(`/api/v1/users/${user._id}`, hosting_payload);
+      console.log(hosting_payload);
+      UserService.toggleHostingEvent(user._id, hosting_payload);
     } catch (err) {
       console.log(err);
     }

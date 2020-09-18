@@ -1,14 +1,14 @@
-import axios from 'axios';
+import axios from "axios";
 
-const UPLOAD_URI = '/api/v1/uploads';
+const UPLOAD_URI = "/api/v1/uploads";
 
 export default class UploadService {
   static async uploadImage(formData) {
     const { data } = await axios({
-      method: 'POST',
+      method: "POST",
       url: `${UPLOAD_URI}/`,
       headers: {
-        'Content-Type': 'multipart/form-data',
+        "Content-Type": "multipart/form-data",
       },
       data: formData,
     });

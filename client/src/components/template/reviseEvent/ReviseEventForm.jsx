@@ -1,29 +1,30 @@
-import React, { useRef, useState, useCallback, useEffect } from 'react';
-import EventDislose from '../../molecule/createEvent/EventDisclose';
-import EventTitle from '../../molecule/createEvent/EventTitle';
-import EventOnlineCheck from '../../molecule/createEvent/EventOnlineCheck';
-import EventAddress from '../../molecule/createEvent/EventAddress';
-import EventAddressDetail from '../../organism/createEvent/EventAddressDetail';
-import EventAddressDetailPlus from '../../molecule/createEvent/EventAddressDetailPlus';
-import EventPlatform from '../../molecule/createEvent/EventPlatform';
-import EventPrice from '../../molecule/createEvent/EventPrice';
-import EventMaxPerson from '../../molecule/createEvent/EventMaxPerson';
-import EventThumbnail from '../../organism/createEvent/EventThumbnail';
-import EventContent from '../../molecule/createEvent/EventContent';
-import EventDate from '../../molecule/createEvent/EventDate';
-import axios from 'axios';
+import React, { useRef, useState, useCallback, useEffect } from "react";
+import EventDislose from "../../molecule/createEvent/EventDisclose";
+import EventTitle from "../../molecule/createEvent/EventTitle";
+import EventOnlineCheck from "../../molecule/createEvent/EventOnlineCheck";
+import EventAddress from "../../molecule/createEvent/EventAddress";
+import EventAddressDetail from "../../organism/createEvent/EventAddressDetail";
+import EventAddressDetailPlus from "../../molecule/createEvent/EventAddressDetailPlus";
+import EventPlatform from "../../molecule/createEvent/EventPlatform";
+import EventPrice from "../../molecule/createEvent/EventPrice";
+import EventMaxPerson from "../../molecule/createEvent/EventMaxPerson";
+import EventThumbnail from "../../organism/createEvent/EventThumbnail";
+import EventContent from "../../molecule/createEvent/EventContent";
+import EventDate from "../../molecule/createEvent/EventDate";
+import axios from "axios";
+import EventService from "../../../services/EventService";
 
 export default function ReviseEventForm({ curEvent }) {
   useEffect(() => {
     $isOpen.current.checked = curEvent.isOpen;
     $eventTitle.current.value = curEvent.title;
-    $startDate.current.firstElementChild.querySelector('input').value =
+    $startDate.current.firstElementChild.querySelector("input").value =
       curEvent.event_date.start.date;
-    $startDate.current.lastElementChild.querySelector('input').value =
+    $startDate.current.lastElementChild.querySelector("input").value =
       curEvent.event_date.start.time;
-    $endDate.current.firstElementChild.querySelector('input').value =
+    $endDate.current.firstElementChild.querySelector("input").value =
       curEvent.event_date.end.date;
-    $endDate.current.lastElementChild.querySelector('input').value =
+    $endDate.current.lastElementChild.querySelector("input").value =
       curEvent.event_date.end.time;
 
     $isOnline.current.checked = curEvent.isOnline;
@@ -32,7 +33,6 @@ export default function ReviseEventForm({ curEvent }) {
       $addressDetail.current.value = curEvent.location.details; //쿼리
       $addressDetailPlus.current.value = curEvent.location.info;
     } else {
-      console.log($onlinePlatform);
       $onlinePlatform.current.value = curEvent.online_platform;
     }
     $price.current.value = curEvent.price;
@@ -41,10 +41,10 @@ export default function ReviseEventForm({ curEvent }) {
     $thumbnailImage.current.src = curEvent.thumbnail;
   }, []);
   function goHome() {
-    window.location.href = '/';
+    window.location.href = "/";
   }
   function openToggle(e) {
-    e.target.parentNode.classList.toggle('active');
+    e.target.parentNode.classList.toggle("active");
   }
   function onlineToggle(e) {
     openToggle(e);
@@ -58,19 +58,19 @@ export default function ReviseEventForm({ curEvent }) {
       e.preventDefault();
     }
   });
-  const inputErr = useCallback((Ref, msg = '필수 입력 사항입니다.') => {
+  const inputErr = useCallback((Ref, msg = "필수 입력 사항입니다.") => {
     Ref.current.focus();
-    Ref.current.classList.add('err');
-    if (!Ref.current.parentNode.querySelector('.err-text')) {
-      const $span = document.createElement('span');
-      $span.className = 'err-text';
+    Ref.current.classList.add("err");
+    if (!Ref.current.parentNode.querySelector(".err-text")) {
+      const $span = document.createElement("span");
+      $span.className = "err-text";
       $span.textContent = msg;
       Ref.current.parentNode.appendChild($span);
     }
   });
   const inputComplete = useCallback((Ref) => {
-    Ref.current.classList.remove('err');
-    const $err = Ref.current.parentNode.querySelector('.err-text');
+    Ref.current.classList.remove("err");
+    const $err = Ref.current.parentNode.querySelector(".err-text");
     Ref.current.parentNode.removeChild($err);
   });
 
@@ -107,28 +107,28 @@ export default function ReviseEventForm({ curEvent }) {
       curToast: $toast.current.getInstance().getHtml(),
     };
     const offlineRef = {
-      curAddress: publicRef.curIsOnline ? '' : $address.current.value,
+      curAddress: publicRef.curIsOnline ? "" : $address.current.value,
       curAddressDetail: publicRef.curIsOnline
-        ? ''
+        ? ""
         : $addressDetail.current.value,
       curAddressDetailPlus: publicRef.curIsOnline
-        ? ''
+        ? ""
         : $addressDetailPlus.current.value,
     };
     const onlineRef = {
-      curPlatform: publicRef.curIsOnline ? $onlinePlatform.current.value : '',
+      curPlatform: publicRef.curIsOnline ? $onlinePlatform.current.value : "",
     };
     const startDateValue = publicRef.curStartDate.firstElementChild.querySelector(
-      'input'
+      "input"
     ).value;
     const startTimeValue = publicRef.curStartDate.lastElementChild.querySelector(
-      'input'
+      "input"
     ).value;
     const endDateValue = publicRef.curEndDate.firstElementChild.querySelector(
-      'input'
+      "input"
     ).value;
     const endTimeValue = publicRef.curEndDate.lastElementChild.querySelector(
-      'input'
+      "input"
     ).value;
     const payload = {
       isOpen: publicRef.curIsOpen,
@@ -149,70 +149,70 @@ export default function ReviseEventForm({ curEvent }) {
       online_platform: onlineRef.curPlatform,
       location: {
         name: offlineRef.curAddress,
-        details: publicRef.curIsOnline === false ? placeState : '',
+        details: publicRef.curIsOnline === false ? placeState : "",
         info: offlineRef.curAddressDetailPlus,
       },
       max_count: +publicRef.curMaxPerson, // 참석 가능 인원수
     };
-    if (payload.thumbnail.trim() === '') {
+    if (payload.thumbnail.trim() === "") {
       inputErr($thumbnailInput);
     } else {
-      if ($thumbnailInput.current.classList.contains('err'))
+      if ($thumbnailInput.current.classList.contains("err"))
         inputComplete($thumbnailInput);
     }
     if (isNaN(payload.max_count) || payload.max_count === 0) {
-      inputErr($maxPerson, '필수 입력 사항입니다, 숫자로 입력해주세요.');
+      inputErr($maxPerson, "필수 입력 사항입니다, 숫자로 입력해주세요.");
     } else {
-      if ($maxPerson.current.classList.contains('err'))
+      if ($maxPerson.current.classList.contains("err"))
         inputComplete($maxPerson);
     }
-    if (publicRef.curIsOnline && payload.online_platform.trim() === '') {
+    if (publicRef.curIsOnline && payload.online_platform.trim() === "") {
       inputErr($onlinePlatform);
     } else if (publicRef.curIsOnline) {
-      if ($onlinePlatform.current.classList.contains('err'))
+      if ($onlinePlatform.current.classList.contains("err"))
         inputComplete($onlinePlatform);
     }
-    if (!publicRef.curIsOnline && payload.location.info.trim() === '') {
+    if (!publicRef.curIsOnline && payload.location.info.trim() === "") {
       inputErr($addressDetailPlus);
     } else if (!publicRef.curIsOnline) {
-      if ($addressDetailPlus.current.classList.contains('err'))
+      if ($addressDetailPlus.current.classList.contains("err"))
         inputComplete($addressDetailPlus);
     }
 
-    if (!publicRef.curIsOnline && payload.location.details.trim() === '') {
+    if (!publicRef.curIsOnline && payload.location.details.trim() === "") {
       inputErr($addressDetail);
     } else if (!publicRef.curIsOnline) {
-      if ($addressDetail.current.classList.contains('err'))
+      if ($addressDetail.current.classList.contains("err"))
         inputComplete($addressDetail);
     }
-    if (!publicRef.curIsOnline && payload.location.name.trim() === '') {
+    if (!publicRef.curIsOnline && payload.location.name.trim() === "") {
       inputErr($address);
     } else if (!publicRef.curIsOnline) {
-      if ($address.current.classList.contains('err')) inputComplete($address);
+      if ($address.current.classList.contains("err")) inputComplete($address);
     }
 
-    if (payload.title.trim() === '') {
+    if (payload.title.trim() === "") {
       inputErr($eventTitle);
     } else {
-      if ($eventTitle.current.classList.contains('err'))
+      if ($eventTitle.current.classList.contains("err"))
         inputComplete($eventTitle);
     }
     console.log(payload);
     if (
-      (publicRef.curIsOnline && payload.online_platform.trim() === '') ||
-      (!publicRef.curIsOnline && payload.location.name.trim() === '') ||
-      (!publicRef.curIsOnline && payload.location.details.trim() === '') ||
-      (!publicRef.curIsOnline && payload.location.info.trim() === '') ||
-      payload.title.trim() === '' ||
-      publicRef.curMaxPerson.trim() === '' ||
+      (publicRef.curIsOnline && payload.online_platform.trim() === "") ||
+      (!publicRef.curIsOnline && payload.location.name.trim() === "") ||
+      (!publicRef.curIsOnline && payload.location.details.trim() === "") ||
+      (!publicRef.curIsOnline && payload.location.info.trim() === "") ||
+      payload.title.trim() === "" ||
+      publicRef.curMaxPerson.trim() === "" ||
       isNaN(payload.max_count) ||
       payload.max_count === 0 ||
-      payload.thumbnail.trim() === ''
+      payload.thumbnail.trim() === ""
     ) {
       return;
     }
     setClearPatch(true);
-    axios.patch(`/api/v1/events/${curEvent._id}`, payload);
+    EventService.resiveEvent(curEvent._id, payload);
   }
   return (
     <div className="revise-event-form">

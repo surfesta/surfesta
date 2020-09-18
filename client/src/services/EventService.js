@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios from "axios";
 
-const EVENT_URI = '/api/v1/events';
+const EVENT_URI = "/api/v1/events";
 
 export default class EventService {
   static async getEvents() {
@@ -9,13 +9,13 @@ export default class EventService {
   }
 
   static async getEventDetail(eventId) {
-    const { data } = await axios.get(`EVENT_URL/${eventId}`);
+    const { data } = await axios.get(`${EVENT_URI}/${eventId}`);
     return data;
   }
 
   static async toggleEnlistedUser({ eventId, userId, type }) {
     const { data } = await axios({
-      method: 'PATCH',
+      method: "PATCH",
       url: `${EVENT_URI}/${eventId}/enlisted?type=${type}`,
       data: {
         user_id: userId,
@@ -26,7 +26,7 @@ export default class EventService {
 
   static async toggleLikedUser({ eventId, userId, type }) {
     const { data } = await axios({
-      method: 'PATCH',
+      method: "PATCH",
       url: `${EVENT_URI}/${eventId}/liked?type=${type}`,
       data: {
         user_id: userId,
@@ -43,5 +43,16 @@ export default class EventService {
     await axios.delete(`${EVENT_URI}/${eventId}`);
     const { data } = await axios.get(`${EVENT_URI}`);
     return data;
+  }
+  static async postEvent(payload) {
+    const { data } = await axios({
+      method: "POST",
+      url: `${EVENT_URI}/`,
+      data: payload,
+    });
+    return data;
+  }
+  static async resiveEvent(eventId, payload) {
+    axios.patch(`${EVENT_URI}/${eventId}`, payload);
   }
 }

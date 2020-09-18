@@ -2,6 +2,10 @@ import axios from "axios";
 const USER_URI = "/api/v1/users";
 
 export default class UserService {
+  static async getUserDetail(userId) {
+    const { data } = await axios.get(`${USER_URI}/${userId}`);
+    return data;
+  }
   static async authenticate() {
     const { data } = await axios.post(`${USER_URI}/auth`);
     console.log(`User authentication done: ${data.isAuth}`);
@@ -85,14 +89,7 @@ export default class UserService {
     });
     return data;
   }
-  static async toggleHostingEvent({ eventId, userId, type }) {
-    const { data } = await axios({
-      method: "PATCH",
-      url: `${USER_URI}/${userId}/hosting?type=${type}`,
-      data: {
-        event_id: eventId,
-      },
-    });
-    return data;
+  static async toggleHostingEvent(userId, payload) {
+    axios.patch(`${USER_URI}/${userId}`, payload);
   }
 }

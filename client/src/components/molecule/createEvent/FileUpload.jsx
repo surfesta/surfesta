@@ -1,6 +1,9 @@
 import React, { useState, useCallback } from "react";
 import axios from "axios";
 import { useDropzone } from "react-dropzone";
+import { validateFileInput } from "../../../utils/validateFileInput";
+import UploadService from "../../../services/UploadService";
+import { useEffect } from "react";
 
 export default function FileUpload({ inputRef, imgRef }) {
   const onDrop = useCallback((acceptedFiles) => {
@@ -10,41 +13,21 @@ export default function FileUpload({ inputRef, imgRef }) {
     onDrop,
   });
   const [uploadedFile, setUploadedFile] = useState({});
-
-  const uploadImage = async (_file) => {
-    if (_file === null || _file === undefined) {
-      {
-        alert(`다시 시도해주세요`);
-        return;
+  useEffect(() => {
+    setTimeout(() => {
+      if (imgRef.current.src) {
+        setUploadedFile({ filePath: imgRef.current.src });
       }
-    }
-    const _filetype = _file.type;
-    const _filesize = _file.size;
-    // 7 메가바이트
-    if (_filesize > 7000000) {
-      alert(`파일이 허용 범위를 초과했습니다. ${_filesize * 0.000001}MB > 7MB`);
-      return;
-    }
-    if (
-      _filetype !== "image/jpg" &&
-      _filetype !== "image/jpeg" &&
-      _filetype !== "image/png" &&
-      _filetype !== "image/webp"
-    ) {
-      alert(`지원하지 않는 형식의 타입입니다. ${_filetype}`);
-      return;
-    }
+    }, 1);
+  }, [setUploadedFile]);
+  const uploadImage = async (_file) => {
+    if (!validateFileInput(_file)) return;
     imgRef.current.parentNode.classList.add("active");
     const formData = new FormData();
     formData.append("file", _file);
     try {
-      const res = await axios.post("/api/v1/uploads", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      console.log(res);
-      const { filePath } = res.data;
+      const { filePath } = await UploadService.uploadImage(formData);
+      console.log(filePath);
       setUploadedFile({ filePath });
     } catch (err) {
       console.log(err);

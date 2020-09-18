@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import { IconButton } from "@material-ui/core";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import React, {useState} from "react";
+import {IconButton} from "@material-ui/core";
+import {Link} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import PeopleIcon from "@material-ui/icons/People";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Portal from "../../Portal";
-import { deleteEvent } from "../../../redux/modules/events";
-import { deleteHosting } from "../../../redux/modules/auth";
+import {deleteEvent} from "../../../redux/modules/events";
+import {deleteHosting} from "../../../redux/modules/auth";
 
-export default function SettingButtons({ event }) {
+export default function SettingButtons({event}) {
   const [visible, setVisible] = useState(false);
 
   const user = useSelector((state) => state.auth.user);
@@ -29,6 +29,16 @@ export default function SettingButtons({ event }) {
   }
   return (
     <>
+      <Link
+        to={{
+          pathname: `/qrScanner/${eventId}`,
+          state: {
+            event,
+          },
+        }}
+      >
+        QR-Scanner
+      </Link>
       <IconButton aria-label="enlistedUsers">
         <PeopleIcon />
       </IconButton>

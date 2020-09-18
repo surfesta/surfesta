@@ -39,13 +39,13 @@ function App() {
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{theme, toggleTheme}}>
       <>
         <Meta data={data} />
         <ConnectedRouter history={history}>
           <HeaderTemplate />
           <Switch>
-            <Route path="/qr" component={QrScanner} />
+            <Route path="/qrScanner/:event_id" component={QrScanner} />
             <Route path="/reviseEvent/:event_id" component={ReviseEvent} />
             <Route path="/createEvent" component={CreateEvent} />
             <Route path="/event/:event_id" component={EventDetail} />

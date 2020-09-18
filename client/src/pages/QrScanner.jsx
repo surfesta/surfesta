@@ -1,24 +1,41 @@
-import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import React, {useEffect, useState} from "react";
 import jsQR from "jsqr";
 import "./qrscanner.scss";
+import Portal from "../components/Portal";
 
-export default function QrScanner() {
+export default function QrScanner({location}) {
+  if (!location.state) {
+    window.location.href = "/";
+  }
+  const [userCheck, setUserCheck] = useState(false);
+  const [failCheck, setFailCheck] = useState(false);
+  const {event} = location.state;
+
   useEffect(() => {
+    window.scrollTo(0, 0);
+    if (failCheck) {
+      setTimeout(() => {
+        setFailCheck(false);
+      }, 1500);
+    } else if (userCheck) {
+      setTimeout(() => {
+        setUserCheck(false);
+      }, 1500);
+    }
     const scannerStart = () => {
-      var video = document.createElement("video");
+      const video = document.createElement("video");
 
-      var canvasElement = document.getElementById("canvas");
+      const canvasElement = document.getElementById("canvas");
 
-      var canvas = canvasElement.getContext("2d");
+      const canvas = canvasElement.getContext("2d");
 
-      var loadingMessage = document.getElementById("loadingMessage");
+      const loadingMessage = document.getElementById("loadingMessage");
 
-      var outputContainer = document.getElementById("output");
+      const outputContainer = document.getElementById("output");
 
-      var outputMessage = document.getElementById("outputMessage");
+      const outputMessage = document.getElementById("outputMessage");
 
-      var outputData = document.getElementById("outputData");
+      const outputData = document.getElementById("outputData");
 
       function drawLine(begin, end, color) {
         canvas.beginPath();
@@ -37,7 +54,7 @@ export default function QrScanner() {
       // 카메라 사용시
 
       navigator.mediaDevices
-        .getUserMedia({ video: { facingMode: "environment" } })
+        .getUserMedia({video: {facingMode: "environment"}})
         .then(function (stream) {
           video.srcObject = stream;
 
@@ -72,14 +89,14 @@ export default function QrScanner() {
             canvasElement.height
           );
 
-          var imageData = canvas.getImageData(
+          const imageData = canvas.getImageData(
             0,
             0,
             canvasElement.width,
             canvasElement.height
           );
 
-          var code = jsQR(imageData.data, imageData.width, imageData.height, {
+          const code = jsQR(imageData.data, imageData.width, imageData.height, {
             inversionAttempts: "dontInvert",
           });
 
@@ -118,7 +135,15 @@ export default function QrScanner() {
 
             // QR코드 메시지 출력
 
-            outputData.innerHTML = code.data;
+            const _FIND = event.enlisted_users.find(
+              (itemId) => itemId === code.data
+            );
+            if (_FIND) {
+              setUserCheck(true);
+            } else {
+              setFailCheck(true);
+            }
+            // outputData.innerHTML = code.data;
 
             // return을 써서 함수를 빠져나가면 QR코드 프로그램이 종료된다.
 
@@ -136,25 +161,50 @@ export default function QrScanner() {
         requestAnimationFrame(tick);
       }
     };
-    document.addEventListener("DOMContentLoaded", scannerStart);
-    return () => {
-      document.removeEventListener("DOMContentLoaded", scannerStart);
-    };
-  }, []);
+    scannerStart();
+  }, [setUserCheck, setFailCheck]);
   return (
     <div className="qr-container">
+      {userCheck && (
+        <Portal>
+          <div
+            id="modal-container"
+            onClick={(e) => {
+              if (!(e.target === e.currentTarget)) return;
+              setUserCheck(false);
+            }}
+          >
+            <div id="modal" className="confirm-modal">
+              <h1 style={{color: "greenYellow"}}>참가신청한 유저 입니다.</h1>
+            </div>
+          </div>
+        </Portal>
+      )}
+      {failCheck && (
+        <Portal>
+          <div
+            id="modal-container"
+            onClick={(e) => {
+              if (!(e.target === e.currentTarget)) return;
+              setUserCheck(false);
+            }}
+          >
+            <div id="modal" className="confirm-modal">
+              <h1 style={{color: "red"}}>등록되지 않은 유저 입니다.</h1>
+            </div>
+          </div>
+        </Portal>
+      )}
       <div>
         <h1>QR 코드 리더</h1>
         <div id="output">
           <div id="outputMessage">QR코드를 카메라에 노출시켜 주세요</div>
-
           <div id="outputLayer" hidden>
             <span id="outputData"></span>
           </div>
         </div>
       </div>
       <div className="qr-scanner">
-        <h1>스캔</h1>
         <div id="frame">
           <div id="loadingMessage">
             🎥 비디오 스트림에 액세스 할 수 없습니다

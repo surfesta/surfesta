@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import jsQR from "jsqr";
 import "./qrscanner.scss";
 import Portal from "../components/Portal";
-import { useDispatch } from "react-redux";
-import { startAttendUser } from "../redux/modules/events";
+import {useDispatch} from "react-redux";
+import {startAttendUser} from "../redux/modules/events";
 
-export default function QrScanner({ location }) {
+export default function QrScanner({location}) {
   if (!location.state) {
     window.location.href = "/";
   }
   const dispatch = useDispatch();
   const [userCheck, setUserCheck] = useState(false);
   const [failCheck, setFailCheck] = useState(false);
-  const { event } = location.state;
-
+  const {hostingEvent} = location.state;
+  console.log(hostingEvent);
   useEffect(() => {
     window.scrollTo(0, 0);
     if (failCheck) {
@@ -57,7 +57,7 @@ export default function QrScanner({ location }) {
       // 카메라 사용시
 
       navigator.mediaDevices
-        .getUserMedia({ video: { facingMode: "environment" } })
+        .getUserMedia({video: {facingMode: "environment"}})
         .then(function (stream) {
           video.srcObject = stream;
 
@@ -132,18 +132,17 @@ export default function QrScanner({ location }) {
               "#FF0000"
             );
 
-            outputMessage.hidden = true;
+            // outputMessage.hidden = true;
 
             outputData.parentElement.hidden = false;
 
             // QR코드 메시지 출력
-
-            const _FIND = event.enlisted_users.find(
-              (itemId) => itemId === code.data
+            const _FIND = hostingEvent.enlisted_users.find(
+              (item) => item._id === code.data
             );
             if (_FIND) {
               setUserCheck(true);
-              dispatch(startAttendUser(event._id, code.data, true));
+              dispatch(startAttendUser(hostingEvent._id, code.data, true));
             } else {
               setFailCheck(true);
             }
@@ -166,7 +165,7 @@ export default function QrScanner({ location }) {
       }
     };
     scannerStart();
-  }, [setUserCheck, setFailCheck]);
+  }, [setUserCheck, setFailCheck, userCheck, failCheck]);
   return (
     <div className="qr-container">
       {userCheck && (
@@ -179,7 +178,7 @@ export default function QrScanner({ location }) {
             }}
           >
             <div id="modal" className="confirm-modal">
-              <h1 style={{ color: "green" }}>참가신청한 유저 입니다.</h1>
+              <h1 style={{color: "green"}}>참가신청한 유저 입니다.</h1>
             </div>
           </div>
         </Portal>
@@ -194,7 +193,7 @@ export default function QrScanner({ location }) {
             }}
           >
             <div id="modal" className="confirm-modal">
-              <h1 style={{ color: "red" }}>등록되지 않은 유저 입니다.</h1>
+              <h1 style={{color: "red"}}>등록되지 않은 유저 입니다.</h1>
             </div>
           </div>
         </Portal>

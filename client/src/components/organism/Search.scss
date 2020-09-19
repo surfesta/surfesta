@@ -12,7 +12,7 @@
   .search-wrap {
     width: 100%;
     height: 200px;
-    background-color: #1c1e22bd;
+    background-color: #0b0f19b3;
     display: flex;
     align-items: center;
     .center {
@@ -33,19 +33,29 @@
         font-weight: 400;
         outline: transparent;
         color: $dark-font-primary-color;
+        border-radius: 10px;
+        box-sizing: border-box;
         transition: all 0.1s;
+        color: $font-primary-color;
         &::placeholder {
           color: #c6c7ca;
         }
         &:focus {
-          background-color: #1c1e22e3;
+          // background-color: #1c1e22e3;
+          background-color: $dark-font-primary-color;
+        }
+        &.value {
+          color: $dark-font-primary-color;
+          &:focus {
+            color: $font-primary-color;
+          }
         }
       }
       .search-btn {
         position: absolute;
         top: 0;
         right: 0;
-        padding: 8px;
+        padding: 8px 15px 8px 8px;
         button svg {
           font-size: 2rem;
           color: #c6c7ca;
@@ -57,19 +67,24 @@
 
 @include mobile {
   .search-back {
-    height: 60px;
+    height: 100px;
     img {
       width: 100%;
-      height: 60px;
+      height: 100px;
       overflow: hidden;
     }
     .search-wrap {
-      height: 60px;
+      height: 100px;
       .center {
         width: 100%;
         border-radius: 0;
+        background-color: transparent;
+        box-shadow: none;
         input {
           font-size: 2.4rem;
+          &:focus {
+            background-color: transparent;
+          }
         }
         .search-btn {
           button svg {
@@ -86,16 +101,13 @@
     .search-wrap {
       .center {
         width: 100%;
-      }
-    }
-  }
-}
-
-@include desktop {
-  .search-back {
-    .search-wrap {
-      .center {
-        width: 100%;
+        background-color: transparent;
+        box-shadow: none;
+        input {
+          &:focus {
+            background-color: transparent;
+          }
+        }
       }
     }
   }

@@ -65,7 +65,7 @@ const initialState = {
 export default function reducer(state = initialState, action) {
   const eventId = action.event && action.event._id;
   const events = state.events.map((event) =>
-    event._id === eventId ? action.event : event,
+    event._id === eventId ? action.event : event
   );
 
   switch (action.type) {
@@ -184,7 +184,7 @@ function* toggleEnlistedUserSaga(action) {
   try {
     const { event } = yield call(
       EventService.toggleEnlistedUser,
-      action.payload,
+      action.payload
     );
     yield put(toggleEnlistedUserSuccess(event));
   } catch (error) {
@@ -217,6 +217,7 @@ function* startSearchEventsSaga(action) {
     yield put(fail(error));
   }
 }
+
 function* startDeleteEventSaga(action) {
   const { eventId } = action.payload;
   try {

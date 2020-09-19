@@ -6,12 +6,12 @@
   @include Flex();
   background-color: $dark-font-primary-color;
   background-size: cover;
-  height: 200px;
+  height: 205px;
   opacity: 0.95;
 
   .search-wrap {
     width: 100%;
-    height: 200px;
+    height: 100%;
     background-color: #0b0f19b3;
     display: flex;
     align-items: center;
@@ -89,23 +89,6 @@
         .search-btn {
           button svg {
             font-size: 2.4rem;
-          }
-        }
-      }
-    }
-  }
-}
-
-@include tablet {
-  .search-back {
-    .search-wrap {
-      .center {
-        width: 100%;
-        background-color: transparent;
-        box-shadow: none;
-        input {
-          &:focus {
-            background-color: transparent;
           }
         }
       }

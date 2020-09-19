@@ -12,7 +12,7 @@ export default function EventsContainer() {
       {events.length ? (
         <EventsTemplate events={events} error={error} />
       ) : (
-        <main className='init-height'></main>
+        <div className='init-height'></div>
       )}
     </>
   );

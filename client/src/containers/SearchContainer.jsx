@@ -27,7 +27,7 @@ export default function SearchContainer({ searchedKeyword }) {
           searchedKeyword={searchedKeyword}
         />
       )}
-      {!events && <main className='init-height'></main>}
+      {!events && <div className='init-height'></div>}
     </>
   );
 }

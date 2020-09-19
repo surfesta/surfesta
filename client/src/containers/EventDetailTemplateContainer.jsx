@@ -9,7 +9,7 @@ export default function EventDetailTemplateContainer({ eventId }) {
   return (
     <>
       {events.length && <EventDetailTemplate event={event} />}
-      {!events.length && <main className='init-height'></main>}
+      {!events.length && <div className='init-height'></div>}
     </>
   );
 }

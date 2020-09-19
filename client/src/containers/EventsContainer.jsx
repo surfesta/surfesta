@@ -9,8 +9,11 @@ export default function EventsContainer() {
 
   return (
     <>
-      {events.length && <EventsTemplate events={events} error={error} />}
-      {!events.length && <main className='init-height'></main>}
+      {events.length ? (
+        <EventsTemplate events={events} error={error} />
+      ) : (
+        <div className='init-height'></div>
+      )}
     </>
   );
 }

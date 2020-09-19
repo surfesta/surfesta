@@ -7,9 +7,6 @@ body.dark {
     background-color: #1b1d21;
     transition: all 0.2s ease-in-out;
   }
-  .search-wrap {
-    background-color: #2c3035;
-  }
   .filter-wrap {
     button {
       .more {
@@ -75,11 +72,11 @@ body.dark {
       }
     }
   }
-  .search-wrap {
-    input {
-      color: $dark-font-primary-color;
-    }
-  }
+  // .search-wrap {
+  //   input {
+  //     color: $dark-font-primary-color;
+  //   }
+  // }
   .filter-wrap {
     button {
       color: $dark-font-primary-color;

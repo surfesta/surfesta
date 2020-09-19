@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import Card from "../organism/main/Card";
-import "./EventsTemplate.scss";
-import Search from "../organism/Search";
-import Filter from "../organism/Filter";
-import Sort from "../organism/Sort";
+import React, { useState } from 'react';
+import Card from '../organism/main/Card';
+import './EventsTemplate.scss';
+import Search from '../organism/Search';
+import Filter from '../organism/Filter';
+import Sort from '../organism/Sort';
 
 // Presentational Component
 export default function EventsTemplate({
@@ -13,12 +13,12 @@ export default function EventsTemplate({
   searchedKeyword,
 }) {
   const sortState = {
-    NEWEST: "NEWEST",
-    OLDEST: "OLDEST",
-    MOSTLIKED: "MOSTLIKED",
-    MOSTPOPULAR: "MOSTPOPULAR",
-    CHEAPEST: "CHEAPEST",
-    MOSTEXPENSIVE: "MOSTEXPENSIVE",
+    NEWEST: 'NEWEST',
+    OLDEST: 'OLDEST',
+    MOSTLIKED: 'MOSTLIKED',
+    MOSTPOPULAR: 'MOSTPOPULAR',
+    CHEAPEST: 'CHEAPEST',
+    MOSTEXPENSIVE: 'MOSTEXPENSIVE',
   };
 
   const {
@@ -31,9 +31,9 @@ export default function EventsTemplate({
   } = sortState;
 
   const filterState = {
-    ALL: "ALL",
-    ONLINE: "ONLINE",
-    OFFLINE: "OFFLINE",
+    ALL: 'ALL',
+    ONLINE: 'ONLINE',
+    OFFLINE: 'OFFLINE',
   };
 
   const { ALL, ONLINE, OFFLINE } = filterState;
@@ -84,10 +84,10 @@ export default function EventsTemplate({
     });
 
   return (
-    <main className="main">
-      <h2 className="a11y-hidden">이벤트 검색</h2>
+    <main className='main'>
+      <h2 className='a11y-hidden'>이벤트 검색</h2>
       <Search searchedKeyword={searchedKeyword} />
-      <div className="select-wrap">
+      <div className='select-wrap'>
         <Filter
           filter={filter}
           setFilter={setFilter}
@@ -96,20 +96,20 @@ export default function EventsTemplate({
         <Sort setSort={setSort} sortState={sortState} />
       </div>
 
-      <section className="cards-wrap">
-        <h2 className="a11y-hidden">이벤트 리스트</h2>
+      <section className='cards-wrap'>
+        <h2 className='a11y-hidden'>이벤트 리스트</h2>
 
         {error && (
-          <div className="img-wrap">
-            <img src="/img/error.png" alt="에러" />
+          <div className='img-wrap'>
+            <img src='/img/error.png' alt='에러' />
           </div>
         )}
         {imgSrc && (
-          <div className="img-wrap nosearch">
-            <img src={imgSrc} alt="검색결과를 찾을 수 없습니다." />
+          <div className='img-wrap nosearch'>
+            <img src={imgSrc} alt='검색결과를 찾을 수 없습니다.' />
           </div>
         )}
-        <div className="cards">
+        <div className='cards'>
           {Array.isArray(events) &&
             filter === ALL &&
             events.map((event) => {

@@ -228,9 +228,7 @@ body.dark {
     color: $dark-font-secondary-color;
   }
   .qr-container {
-    .qr-result {
-      color: $dark-font-primary-color;
-    }
+    color: $dark-font-primary-color;
   }
   .qr-img {
     filter: invert(1);

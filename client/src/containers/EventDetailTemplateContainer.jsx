@@ -6,5 +6,10 @@ export default function EventDetailTemplateContainer({ eventId }) {
   const events = useSelector((state) => state.events.events);
   const [event] = events.filter((event) => event._id === eventId);
 
-  return events.length && <EventDetailTemplate event={event} />;
+  return (
+    <>
+      {events.length && <EventDetailTemplate event={event} />}
+      {!events.length && <main className='init-height'></main>}
+    </>
+  );
 }

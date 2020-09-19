@@ -1,18 +1,16 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './Eventinfo.scss';
 import FavoriteButton from '../../atom/main/FavoriteButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleEnlistedUser } from '../../../redux/modules/events';
 import { toggleEnlistedEvent } from '../../../redux/modules/auth';
 import { welcomeModal } from '../../../redux/modules/modal';
-import Portal from '../../Portal';
 import ConfirmModal from '../../molecule/eventDetail/ConfirmModal';
 
 export default function EventInfo({ event }) {
   const dispatch = useDispatch();
   const [isEnlisted, setIsEnlisted] = useState(false);
   const [visible, setVisible] = useState(false);
-  const eventInfoBar = useRef();
 
   const eventId = event._id;
   const thumbnail = event.thumbnail;
@@ -61,38 +59,8 @@ export default function EventInfo({ event }) {
     !userId && viewModal();
   };
 
-  const handleScroll = (e) => {
-    window.scrollY > 690
-      ? eventInfoBar.current.classList.add('show')
-      : eventInfoBar.current.classList.remove('show');
-  };
-
   return (
     <div className='eventInfo-wrap'>
-      <div className='eventInfo-bar' ref={eventInfoBar}>
-        <div className='eventInfo-bar-wrap'>
-          <div className='left'>
-            <p className='title'>{title}</p>
-            <p>
-              <span className='price'>{price}</span>
-              <span> 원</span>
-            </p>
-          </div>
-          <div className='button-wrap right'>
-            {!isEnlisted && (
-              <button className='enlist-button' onClick={checkAuth}>
-                이벤트 참석하기
-              </button>
-            )}
-            {isEnlisted && (
-              <button className='disable-button' disabled>
-                이벤트 참석완료
-              </button>
-            )}
-            <FavoriteButton event={event} />
-          </div>
-        </div>
-      </div>
       <div className='flex-wrap'>
         <div className='left'>
           <div
@@ -108,12 +76,13 @@ export default function EventInfo({ event }) {
           </p>
           <table>
             <tbody>
-              {isOnline ? (
+              {isOnline && (
                 <tr className='top-line'>
                   <th>온라인 플랫폼</th>
                   <td>{onlinePlatform}</td>
                 </tr>
-              ) : (
+              )}
+              {!isOnline && (
                 <tr className='top-line'>
                   <th>위치</th>
                   <td>

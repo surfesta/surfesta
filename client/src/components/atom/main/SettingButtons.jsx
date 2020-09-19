@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import { IconButton } from "@material-ui/core";
-import PeopleIcon from "@material-ui/icons/People";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import { push } from "connected-react-router";
-import { deleteEvent } from "../../../redux/modules/events";
-import { deleteHosting } from "../../../redux/modules/auth";
-import Portal from "../../Portal";
+import React, { useState } from 'react';
+import { IconButton } from '@material-ui/core';
+import PeopleIcon from '@material-ui/icons/People';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { push } from 'connected-react-router';
+import { deleteEvent } from '../../../redux/modules/events';
+import { deleteHosting } from '../../../redux/modules/auth';
+import Portal from '../../Portal';
 
 export default function SettingButtons({ event }) {
   const dispatch = useDispatch();
@@ -20,10 +20,6 @@ export default function SettingButtons({ event }) {
   const eventId = event._id;
   const userId = user._id;
 
-  const goToHostOffice = () => dispatch(push(`/my/host/${eventId}`));
-
-  const click = () => setVisible(true);
-
   function eventDelete() {
     dispatch(deleteEvent(eventId));
     dispatch(deleteHosting(eventId, userId, false));
@@ -32,19 +28,15 @@ export default function SettingButtons({ event }) {
 
   return (
     <>
-      {/* <Link
+      <Link
         to={{
-          pathname: `/qrScanner/${eventId}`,
-          state: {
-            event,
-          },
+          pathname: `/my/host/${eventId}`,
         }}
       >
-        QR-Scanner
-      </Link> */}
-      <IconButton aria-label="enlistedUsers" onClick={goToHostOffice}>
-        <PeopleIcon />
-      </IconButton>
+        <IconButton aria-label="enlistedUsers">
+          <PeopleIcon />
+        </IconButton>
+      </Link>
       <IconButton aria-label="edit">
         <Link
           to={{
@@ -57,7 +49,7 @@ export default function SettingButtons({ event }) {
           <EditIcon />
         </Link>
       </IconButton>
-      <IconButton aria-label="delete" onClick={click}>
+      <IconButton aria-label="delete" onClick={setVisible}>
         <DeleteIcon />
       </IconButton>
 

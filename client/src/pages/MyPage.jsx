@@ -21,7 +21,7 @@ function MyPage() {
     if (user) setAuthDone(true);
     if (error) {
       console.warn(
-        '로그인인증에 문제가 생겼습니다. (토큰은 있지만, 서버에서 인증에러)',
+        '로그인인증에 문제가 생겼습니다. (토큰은 있지만, 서버에서 인증에러)'
       );
       dispatch(push('/'));
     }
@@ -30,7 +30,7 @@ function MyPage() {
   // if cookie is there, wait til the redux store hydrated.
   // there's no cookie, just to home.
 
-  if (!clientCookie) return <Redirect to="/" />;
+  if (!clientCookie) return <Redirect to='/' />;
 
   return (
     <>
@@ -38,10 +38,10 @@ function MyPage() {
         <>
           <SubNavTemplate />
           <section>
-            <Route path="/my/profile" component={ProfileTemplate} />
-            <Route path="/my/event/enlisted" component={EnlistedEvents} />
-            <Route path="/my/event/hosting" component={HostingEvents} />
-            <Route path="/my/event/liked" component={LikedEvents} />
+            <Route path='/my/profile' component={ProfileTemplate} />
+            <Route path='/my/event/enlisted' component={EnlistedEvents} />
+            <Route path='/my/event/hosting' component={HostingEvents} />
+            <Route path='/my/event/liked' component={LikedEvents} />
           </section>
         </>
       )}

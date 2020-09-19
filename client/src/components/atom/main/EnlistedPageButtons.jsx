@@ -1,20 +1,19 @@
-import React, { useState } from "react";
-import { IconButton } from "@material-ui/core";
-import DeleteIcon from "@material-ui/icons/Delete";
-import Portal from "../../Portal";
-import { useDispatch, useSelector } from "react-redux";
-import { toggleEnlistedEvent } from "../../../redux/modules/auth";
-import { toggleEnlistedUser } from "../../../redux/modules/events";
-import ConfirmModal from "../../molecule/eventCategories/ConfirmModal";
-import { useRef } from "react";
+import React, { useState } from 'react';
+import { IconButton } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Portal from '../../Portal';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleEnlistedEvent } from '../../../redux/modules/auth';
+import { toggleEnlistedUser } from '../../../redux/modules/events';
+import ConfirmModal from '../../molecule/eventCategories/ConfirmModal';
 
-export default function DeleteButton({ event }) {
+export default function EnlistedPageButtons({ event }) {
   const [visible, setVisible] = useState(false);
   const [qrSelect, setQrSelect] = useState(false);
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
 
-  const eventId = event && event._id;
+  const eventId = event._id;
   const userId = user && user._id;
 
   const toggleEnlisted = () => {
@@ -25,18 +24,18 @@ export default function DeleteButton({ event }) {
 
   return (
     <>
-      <button onClick={() => setQrSelect(true)} className="qr-img" />
+      <button onClick={() => setQrSelect(true)} className='qr-img' />
       {qrSelect && (
         <Portal>
           <div
-            id="modal-container"
+            id='modal-container'
             onClick={(e) => {
               if (!(e.target === e.currentTarget)) return;
               setQrSelect(false);
             }}
           >
-            <div id="modal" className="confirm-modal">
-              <h1 style={{ marginBottom: "3rem" }}>내 QR코드</h1>
+            <div id='modal' className='confirm-modal'>
+              <h1 style={{ marginBottom: '3rem' }}>내 QR코드</h1>
               <img
                 src={`https://api.qrserver.com/v1/create-qr-code/?data=${userId}&size=240x240`}
               />

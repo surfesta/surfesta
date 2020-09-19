@@ -9,8 +9,8 @@ export default function EventDetailTemplate({ event }) {
     window.scrollTo(0, 0);
   }, []);
 
-  const title = event && event.title;
-  const thumbnail = event && event.thumbnail;
+  const title = event.title;
+  const thumbnail = event.thumbnail;
 
   return (
     <>

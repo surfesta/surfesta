@@ -1,23 +1,25 @@
 import React, { useEffect } from 'react';
-import './style/theme.scss';
-import Home from './pages/Home';
-import EventDetail from './pages/EventDetail';
-import MyPage from './pages/MyPage';
-import Search from './pages/Search';
 import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { history } from './index';
 import { cookieCheckSagaActionCreator } from './redux/modules/auth';
-import CreateEvent from './pages/CreateEvent';
-import useThemeWithLocalStorage from './hooks/useThemeWithLocalStorage';
+import { ErrorBoundary } from 'react-error-boundary';
 import { useDispatch } from 'react-redux';
 import { startGetEvents } from './redux/modules/events';
+import Home from './pages/Home';
+import EventDetail from './pages/EventDetail';
+import MyPage from './pages/MyPage';
+import Search from './pages/Search';
+import ErrorPage from './pages/ErrorPage';
+import CreateEvent from './pages/CreateEvent';
+import useThemeWithLocalStorage from './hooks/useThemeWithLocalStorage';
 import HeaderTemplate from './components/template/HeaderTemplate';
 import ReviseEvent from './pages/ReviseEvent';
 import Meta from './components/Meta';
 import FooterTemplate from './components/template/FooterTemplate';
 import HostOffice from './pages/HostOffice';
 import QrScanner from './pages/QrScanner';
+import './style/theme.scss';
 
 export const ThemeContext = React.createContext();
 
@@ -42,21 +44,24 @@ function App() {
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       <>
-        <Meta data={data} />
-        <ConnectedRouter history={history}>
-          <HeaderTemplate />
-          <Switch>
-            <Route path="/qr/:event_id" component={QrScanner} />
-            <Route path="/reviseEvent/:event_id" component={ReviseEvent} />
-            <Route path="/createEvent" component={CreateEvent} />
-            <Route path="/event/:event_id" component={EventDetail} />
-            <Route path="/search/:keyword" component={Search} />
-            <Route path="/my/host/:event_id" component={HostOffice} />
-            <Route path="/my" component={MyPage} />
-            <Route path="/" component={Home} />
-          </Switch>
-          <FooterTemplate />
-        </ConnectedRouter>
+        <ErrorBoundary FallbackComponent={ErrorPage}>
+          <Meta data={data} />
+          <ConnectedRouter history={history}>
+            <HeaderTemplate />
+            <Switch>
+              <Route path="/qr/:event_id" component={QrScanner} />
+              <Route path="/reviseEvent/:event_id" component={ReviseEvent} />
+              <Route path="/createEvent" component={CreateEvent} />
+              <Route path="/event/:event_id" component={EventDetail} />
+              <Route path="/search/:keyword" component={Search} />
+              <Route path="/my/host/:event_id" component={HostOffice} />
+              <Route path="/my" component={MyPage} />
+              <Route path="/" component={Home} />
+            </Switch>
+            <FooterTemplate />
+          </ConnectedRouter>
+        </ErrorBoundary>
+        ,
       </>
     </ThemeContext.Provider>
   );

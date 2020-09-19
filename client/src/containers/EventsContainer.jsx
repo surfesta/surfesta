@@ -7,5 +7,10 @@ export default function EventsContainer() {
   const events = useSelector((state) => state.events.events);
   const error = useSelector((state) => state.events.error);
 
-  return events.length && <EventsTemplate events={events} error={error} />;
+  return (
+    <>
+      {events.length && <EventsTemplate events={events} error={error} />}
+      {!events.length && <main className='init-height'></main>}
+    </>
+  );
 }

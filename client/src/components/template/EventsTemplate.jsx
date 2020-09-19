@@ -44,7 +44,6 @@ export default function EventsTemplate({
   // Newest
   let _events =
     sort === NEWEST &&
-    events &&
     events.sort((a, b) => {
       return new Date(b.createdAt) - new Date(a.createdAt);
     });
@@ -52,7 +51,6 @@ export default function EventsTemplate({
   // Oldest
   _events =
     sort === OLDEST &&
-    events &&
     events.sort((a, b) => {
       return new Date(a.createdAt) - new Date(b.createdAt);
     });
@@ -60,7 +58,6 @@ export default function EventsTemplate({
   // Most liked
   _events =
     sort === MOSTLIKED &&
-    events &&
     events.sort((a, b) => {
       return b.like_count - a.like_count;
     });
@@ -68,7 +65,6 @@ export default function EventsTemplate({
   // Most popular
   _events =
     sort === MOSTPOPULAR &&
-    events &&
     events.sort((a, b) => {
       return b.cur_count / b.max_count - a.cur_count / a.max_count;
     });
@@ -76,7 +72,6 @@ export default function EventsTemplate({
   // Cheapest
   _events =
     sort === CHEAPEST &&
-    events &&
     events.sort((a, b) => {
       return a.price - b.price;
     });
@@ -84,7 +79,6 @@ export default function EventsTemplate({
   // Most expensice
   _events =
     sort === MOSTEXPENSIVE &&
-    events &&
     events.sort((a, b) => {
       return b.price - a.price;
     });

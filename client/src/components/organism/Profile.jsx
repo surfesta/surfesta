@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import ProfileForm from '../molecule/profile/ProfileForm';
-import ProfileInfo from '../molecule/profile/ProfileInfo';
-import { patchUserActionCreator } from '../../redux/modules/auth';
-import './Profile.scss';
+import React, { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import ProfileForm from "../molecule/profile/ProfileForm";
+import ProfileInfo from "../molecule/profile/ProfileInfo";
+import { patchUserActionCreator } from "../../redux/modules/auth";
+import "./Profile.scss";
 
 function Profile() {
   const dispatch = useDispatch();
@@ -18,9 +18,9 @@ function Profile() {
   이렇게 객체로 관리하면서 context로 뿌려주기까지하면 
   지역상태로 리덕스와 동일한 역할도 수행할 수 있습니다.
   */
-  const [name, setName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [profileImg, setProfileImg] = useState('');
+  const [name, setName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [profileImg, setProfileImg] = useState("");
 
   // page 컴포넌트인 MyPage 단에서 이미, user가 없으면 홈으로 보내기때문에 null체크가 불필요하다
   const userName = user.username;

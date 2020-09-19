@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import AttendeeListing from '../../organism/AttendeeListing';
-import { IconButton } from '@material-ui/core';
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import SearchIcon from '@material-ui/icons/Search';
-import './HostTemplate.scss';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import EventService from '../../../services/EventService';
-import { startAttendUser } from '../../../redux/modules/events';
-import { useCallback } from 'react';
-import { useEffect } from 'react';
-import { push } from 'connected-react-router';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import AttendeeListing from "../../organism/AttendeeListing";
+import { IconButton } from "@material-ui/core";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import SearchIcon from "@material-ui/icons/Search";
+import "./HostTemplate.scss";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import EventService from "../../../services/EventService";
+import { startAttendUser } from "../../../redux/modules/events";
+import { useCallback } from "react";
+import { useEffect } from "react";
+import { push } from "connected-react-router";
 
 export default function HostTemplate({ event_id }) {
   const hostingEvent = useSelector((state) =>
-    state.events.events.find((event) => event._id === event_id),
+    state.events.events.find((event) => event._id === event_id)
   );
   // const hostingEvent = events.find((event) => event._id === event_id);
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ export default function HostTemplate({ event_id }) {
     (user_id, type) => {
       dispatch(startAttendUser(event_id, user_id, type));
     },
-    [dispatch],
+    [dispatch]
   );
 
   return (
@@ -50,13 +50,19 @@ export default function HostTemplate({ event_id }) {
           <input type="text" placeholder="검색하기" />
           <SearchIcon />
         </div>
-        <div
-          className="qr-reader-btn"
-          onClick={() => dispatch(push(`/qr/${event_id}`))}
+        <Link
+          to={{
+            pathname: `/qrScanner/${event_id}`,
+            state: {
+              hostingEvent,
+            },
+          }}
         >
-          <img src="https://img.icons8.com/fluent-systems-regular/1x/qr-code.png" />
-          <span>QRCODE</span>
-        </div>
+          <div className="qr-reader-btn">
+            <img src="https://img.icons8.com/fluent-systems-regular/1x/qr-code.png" />
+            <span>QRCODE</span>
+          </div>
+        </Link>
       </section>
       <AttendeeListing hostingEvent={hostingEvent} handleClick={handleClick} />
     </div>

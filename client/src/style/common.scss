@@ -1,12 +1,12 @@
 /* 미디어쿼리 */
-@import "./mediaQuery";
+@import './mediaQuery';
 
 /* 노토산스 */
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
 /* 담미온 */
-@import url("https://fonts.googleapis.com/css2?family=Damion&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Damion&display=swap');
 /* Montserrat */
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap');
 
 /* 숨긴콘텐츠 */
 .a11y-hidden {
@@ -43,11 +43,11 @@ html {
 /* 스타일 초기화*/
 body {
   margin: 0;
-  font-family: "Montserrat", "Noto Sans kr", sans-serif;
+  font-family: 'Montserrat', 'Noto Sans kr', sans-serif;
   background-color: #f2f3f6;
 }
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
@@ -83,11 +83,11 @@ button {
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  font-family: "Montserrat", "Noto Sans kr", sans-serif;
+  font-family: 'Montserrat', 'Noto Sans kr', sans-serif;
 }
 input {
   border: none;
-  font-family: "Montserrat", "Noto Sans kr", sans-serif;
+  font-family: 'Montserrat', 'Noto Sans kr', sans-serif;
   font-weight: 500;
 }
 /* table 초기화 */
@@ -95,6 +95,10 @@ table {
   border-color: transparent;
   border-collapse: collapse;
   border-spacing: 0;
+}
+/* 높이 초기화 */
+.init-height {
+  min-height: 100vh;
 }
 
 @include mobile {

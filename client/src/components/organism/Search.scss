@@ -1,6 +1,6 @@
-@import "../../style/mixin";
-@import "../../style/variables";
-@import "../../style/mediaQuery";
+@import '../../style/mixin';
+@import '../../style/variables';
+@import '../../style/mediaQuery';
 
 .search-back {
   @include Flex();

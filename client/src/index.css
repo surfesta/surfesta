@@ -9,4 +9,5 @@
 #root {
   scroll-behavior: smooth;
   min-height: 100vh;
+  transition: all 0.2s ease-in-out;
 }

@@ -8,7 +8,9 @@ import axios from "axios";
 
 export default function Search({ searchedKeyword }) {
   const dispatch = useDispatch();
+  const [imgs, setImgs] = useState([]);
   const [value, setValue] = useState(searchedKeyword);
+  const searchBack = useRef();
   const inputRef = useRef();
   const UNSPLASH_API_KEY = "RGq76XlXseELsXOMgGPq_AglsX_DzwNUK1omuwzYGDc";
   const URL = "https://api.unsplash.com";
@@ -25,23 +27,25 @@ export default function Search({ searchedKeyword }) {
     searchEvents();
   };
 
-  //-------------------------------------------------------------------------
-  const [imgs, setImgs] = useState([]);
-  const searchBack = useRef();
+  useEffect(() => {
+    let ignore = false;
 
-  useEffect(async () => {
-    const response = await axios.get(`${URL}/photos/random`, {
-      params: {
-        client_id: UNSPLASH_API_KEY,
-        collections: "35262406",
-        count: 1,
-      },
-    });
-    const imgs = response.data[0].urls.regular;
-    setImgs(imgs);
+    async function getBackground() {
+      const response = await axios.get(`${URL}/photos/random`, {
+        params: {
+          client_id: UNSPLASH_API_KEY,
+          collections: "35262406",
+          count: 1,
+        },
+      });
+      if (!ignore) setImgs(response.data[0].urls.regular);
+    }
+
+    getBackground();
+    return () => {
+      ignore = true;
+    };
   }, [setImgs]);
-
-  //-------------------------------------------------------------------------
 
   return (
     <div

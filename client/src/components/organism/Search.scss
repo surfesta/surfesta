@@ -5,8 +5,9 @@
 .search-back {
   @include Flex();
   background-color: $dark-font-primary-color;
+  background-size: cover;
   height: 30vh;
-  opacity: 0.7;
+  opacity: 0.8;
 
   .search-wrap {
     width: 600px;

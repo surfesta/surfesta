@@ -1,39 +1,40 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import AttendeeListing from "../../organism/AttendeeListing";
-import { IconButton } from "@material-ui/core";
-import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
-import SearchIcon from "@material-ui/icons/Search";
-import "./HostTemplate.scss";
-import axios from "axios";
-import { Link } from "react-router-dom";
-import EventService from "../../../services/EventService";
-import { startAttendUser } from "../../../redux/modules/events";
-import { useCallback } from "react";
-import { useEffect } from "react";
-import { push } from "connected-react-router";
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import AttendeeListing from '../../organism/AttendeeListing';
+import { IconButton } from '@material-ui/core';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import SearchIcon from '@material-ui/icons/Search';
+import './HostTemplate.scss';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import EventService from '../../../services/EventService';
+import { startAttendUser } from '../../../redux/modules/events';
+import { useCallback } from 'react';
+import { useEffect } from 'react';
+import { push } from 'connected-react-router';
 
 export default function HostTemplate({ event_id }) {
   const hostingEvent = useSelector((state) =>
-    state.events.events.find((event) => event._id === event_id)
+    state.events.events.find((event) => event._id === event_id),
   );
-  // const hostingEvent = events.find((event) => event._id === event_id);
   const dispatch = useDispatch();
 
   const handleClick = useCallback(
     (user_id, type) => {
       dispatch(startAttendUser(event_id, user_id, type));
     },
-    [dispatch]
+    [dispatch],
   );
 
   return (
     <div className="host-template">
       <section className="enlisted-list-header">
         <div className="list-sub-header">
-          <IconButton className="mui-arrow">
-            <ArrowBackIosIcon />
-          </IconButton>
+          <Link to="/my/event/hosting">
+            <IconButton className="mui-arrow">
+              <ArrowBackIosIcon />
+            </IconButton>
+          </Link>
           <div>이벤트 참가신청 리스트</div>
         </div>
         <div className="list-main-header">
@@ -52,7 +53,7 @@ export default function HostTemplate({ event_id }) {
         </div>
         <Link
           to={{
-            pathname: `/qrScanner/${event_id}`,
+            pathname: `/qr/${event_id}`,
             state: {
               hostingEvent,
             },

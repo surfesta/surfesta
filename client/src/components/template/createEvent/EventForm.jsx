@@ -1,19 +1,20 @@
-import React, { useRef, useState, useCallback } from 'react';
-import { useSelector } from 'react-redux';
-import EventDislose from '../../molecule/createEvent/EventDisclose';
-import EventTitle from '../../molecule/createEvent/EventTitle';
-import EventOnlineCheck from '../../molecule/createEvent/EventOnlineCheck';
-import EventAddress from '../../molecule/createEvent/EventAddress';
-import EventAddressDetail from '../../organism/createEvent/EventAddressDetail';
-import EventAddressDetailPlus from '../../molecule/createEvent/EventAddressDetailPlus';
-import EventPlatform from '../../molecule/createEvent/EventPlatform';
-import EventPrice from '../../molecule/createEvent/EventPrice';
-import EventMaxPerson from '../../molecule/createEvent/EventMaxPerson';
-import EventThumbnail from '../../organism/createEvent/EventThumbnail';
-import EventContent from '../../molecule/createEvent/EventContent';
-import EventDate from '../../molecule/createEvent/EventDate';
-import axios from 'axios';
-import TermsCheck from '../../molecule/createEvent/TermsCheck';
+import React, { useRef, useState, useCallback } from "react";
+import { useSelector } from "react-redux";
+import EventDislose from "../../molecule/createEvent/EventDisclose";
+import EventTitle from "../../molecule/createEvent/EventTitle";
+import EventOnlineCheck from "../../molecule/createEvent/EventOnlineCheck";
+import EventAddress from "../../molecule/createEvent/EventAddress";
+import EventAddressDetail from "../../organism/createEvent/EventAddressDetail";
+import EventAddressDetailPlus from "../../molecule/createEvent/EventAddressDetailPlus";
+import EventPlatform from "../../molecule/createEvent/EventPlatform";
+import EventPrice from "../../molecule/createEvent/EventPrice";
+import EventMaxPerson from "../../molecule/createEvent/EventMaxPerson";
+import EventThumbnail from "../../organism/createEvent/EventThumbnail";
+import EventContent from "../../molecule/createEvent/EventContent";
+import EventDate from "../../molecule/createEvent/EventDate";
+import TermsCheck from "../../molecule/createEvent/TermsCheck";
+import EventService from "../../../services/EventService";
+import UserService from "../../../services/UserService";
 
 const EventForm = () => {
   const _preventDefault = useCallback((e) => {
@@ -22,7 +23,7 @@ const EventForm = () => {
     }
   });
   const user = useSelector((state) => state.auth.user);
-  const [placeState, setPlaceState] = useState('');
+  const [placeState, setPlaceState] = useState("");
   const [onlineCheck, setOnlineCheck] = useState(false);
   const [modalCheck, setModalCheck] = useState(false);
   const [eventPayload, setEventPayload] = useState();
@@ -44,19 +45,19 @@ const EventForm = () => {
   const $thumbnailImage = useRef(null);
   const $toast = useRef(null);
 
-  const inputErr = useCallback((Ref, msg = '필수 입력 사항입니다.') => {
+  const inputErr = useCallback((Ref, msg = "필수 입력 사항입니다.") => {
     Ref.current.focus();
-    Ref.current.classList.add('err');
-    if (!Ref.current.parentNode.querySelector('.err-text')) {
-      const $span = document.createElement('span');
-      $span.className = 'err-text';
+    Ref.current.classList.add("err");
+    if (!Ref.current.parentNode.querySelector(".err-text")) {
+      const $span = document.createElement("span");
+      $span.className = "err-text";
       $span.textContent = msg;
       Ref.current.parentNode.appendChild($span);
     }
   });
   const inputComplete = useCallback((Ref) => {
-    Ref.current.classList.remove('err');
-    const $err = Ref.current.parentNode.querySelector('.err-text');
+    Ref.current.classList.remove("err");
+    const $err = Ref.current.parentNode.querySelector(".err-text");
     Ref.current.parentNode.removeChild($err);
   });
   function modalPop(payload) {
@@ -78,28 +79,28 @@ const EventForm = () => {
       curToast: $toast.current.getInstance().getHtml(),
     };
     const offlineRef = {
-      curAddress: publicRef.curIsOnline ? '' : $address.current.value,
+      curAddress: publicRef.curIsOnline ? "" : $address.current.value,
       curAddressDetail: publicRef.curIsOnline
-        ? ''
+        ? ""
         : $addressDetail.current.value,
       curAddressDetailPlus: publicRef.curIsOnline
-        ? ''
+        ? ""
         : $addressDetailPlus.current.value,
     };
     const onlineRef = {
-      curPlatform: publicRef.curIsOnline ? $onlinePlatform.current.value : '',
+      curPlatform: publicRef.curIsOnline ? $onlinePlatform.current.value : "",
     };
     const startDateValue = publicRef.curStartDate.firstElementChild.querySelector(
-      'input',
+      "input"
     ).value;
     const startTimeValue = publicRef.curStartDate.lastElementChild.querySelector(
-      'input',
+      "input"
     ).value;
     const endDateValue = publicRef.curEndDate.firstElementChild.querySelector(
-      'input',
+      "input"
     ).value;
     const endTimeValue = publicRef.curEndDate.lastElementChild.querySelector(
-      'input',
+      "input"
     ).value;
     const payload = {
       isOpen: publicRef.curIsOpen,
@@ -124,74 +125,75 @@ const EventForm = () => {
         details: placeState,
         info: offlineRef.curAddressDetailPlus,
       },
-      price: publicRef.curPrice.trim() === '' ? 0 : +publicRef.curPrice, // 입장료
+      price: publicRef.curPrice.trim() === "" ? 0 : +publicRef.curPrice, // 입장료
       max_count: +publicRef.curMaxPerson, // 참석 가능 인원수
       cur_count: 0, // 참석 인원
 
       enlisted_users: [], // 해당 이벤트 참여신청을 한 유저들의 배열
       liked_users: [], // 해당 이벤트 찜한 유저들의 배열
+      attended_users: [], // 해당 이벤트에 실제 참여한 유저들의 배열
     };
 
-    if (payload.thumbnail.trim() === '') {
+    if (payload.thumbnail.trim() === "") {
       inputErr($thumbnailInput);
     } else {
-      if ($thumbnailInput.current.classList.contains('err'))
+      if ($thumbnailInput.current.classList.contains("err"))
         inputComplete($thumbnailInput);
     }
     if (isNaN(payload.max_count) || payload.max_count === 0) {
-      inputErr($maxPerson, '필수 입력 사항입니다, 숫자로 입력해주세요.');
+      inputErr($maxPerson, "필수 입력 사항입니다, 숫자로 입력해주세요.");
     } else {
-      if ($maxPerson.current.classList.contains('err'))
+      if ($maxPerson.current.classList.contains("err"))
         inputComplete($maxPerson);
     }
     if (isNaN(payload.price)) {
-      inputErr($price, '숫자로 입력해주세요.');
+      inputErr($price, "숫자로 입력해주세요.");
     } else {
-      if ($price.current.classList.contains('err')) inputComplete($price);
+      if ($price.current.classList.contains("err")) inputComplete($price);
     }
-    if (publicRef.curIsOnline && payload.online_platform.trim() === '') {
+    if (publicRef.curIsOnline && payload.online_platform.trim() === "") {
       inputErr($onlinePlatform);
     } else if (publicRef.curIsOnline) {
-      if ($onlinePlatform.current.classList.contains('err'))
+      if ($onlinePlatform.current.classList.contains("err"))
         inputComplete($onlinePlatform);
     }
-    if (!publicRef.curIsOnline && payload.location.info.trim() === '') {
+    if (!publicRef.curIsOnline && payload.location.info.trim() === "") {
       inputErr($addressDetailPlus);
     } else if (!publicRef.curIsOnline) {
-      if ($addressDetailPlus.current.classList.contains('err'))
+      if ($addressDetailPlus.current.classList.contains("err"))
         inputComplete($addressDetailPlus);
     }
 
-    if (!publicRef.curIsOnline && payload.location.details.trim() === '') {
+    if (!publicRef.curIsOnline && payload.location.details.trim() === "") {
       inputErr($addressDetail);
     } else if (!publicRef.curIsOnline) {
-      if ($addressDetail.current.classList.contains('err'))
+      if ($addressDetail.current.classList.contains("err"))
         inputComplete($addressDetail);
     }
-    if (!publicRef.curIsOnline && payload.location.name.trim() === '') {
+    if (!publicRef.curIsOnline && payload.location.name.trim() === "") {
       inputErr($address);
     } else if (!publicRef.curIsOnline) {
-      if ($address.current.classList.contains('err')) inputComplete($address);
+      if ($address.current.classList.contains("err")) inputComplete($address);
     }
 
-    if (payload.title.trim() === '') {
+    if (payload.title.trim() === "") {
       inputErr($eventTitle);
     } else {
-      if ($eventTitle.current.classList.contains('err'))
+      if ($eventTitle.current.classList.contains("err"))
         inputComplete($eventTitle);
     }
 
     if (
-      (publicRef.curIsOnline && payload.online_platform.trim() === '') ||
-      (!publicRef.curIsOnline && payload.location.name.trim() === '') ||
-      (!publicRef.curIsOnline && payload.location.details.trim() === '') ||
-      (!publicRef.curIsOnline && payload.location.info.trim() === '') ||
-      payload.title.trim() === '' ||
-      publicRef.curMaxPerson.trim() === '' ||
+      (publicRef.curIsOnline && payload.online_platform.trim() === "") ||
+      (!publicRef.curIsOnline && payload.location.name.trim() === "") ||
+      (!publicRef.curIsOnline && payload.location.details.trim() === "") ||
+      (!publicRef.curIsOnline && payload.location.info.trim() === "") ||
+      payload.title.trim() === "" ||
+      publicRef.curMaxPerson.trim() === "" ||
       isNaN(payload.max_count) ||
       payload.max_count === 0 ||
       isNaN(payload.price) ||
-      payload.thumbnail.trim() === ''
+      payload.thumbnail.trim() === ""
     ) {
       return;
     }
@@ -202,7 +204,7 @@ const EventForm = () => {
     setTerms(!termsCheck ? true : false);
   }
   function openToggle(e) {
-    e.target.parentNode.classList.toggle('active');
+    e.target.parentNode.classList.toggle("active");
   }
   function onlineToggle(e) {
     openToggle(e);
@@ -215,26 +217,21 @@ const EventForm = () => {
     setModalCheck(false);
     console.log(eventPayload);
     try {
-      const BASE_URL =
-        navigator.userAgent === 'ReactSnap'
-          ? 'http://ec2-15-164-210-226.ap-northeast-2.compute.amazonaws.com:5000'
-          : '';
-      const res = await axios.post(`${BASE_URL}/api/v1/events`, eventPayload);
-      const { _id } = res.data.doc;
-      const _hosting_events = await axios.get(`/api/v1/users/${user._id}`);
-      const { hosting_events } = _hosting_events.data;
+      const { doc } = await EventService.postEvent(eventPayload);
+      const { _id } = doc;
+      const { hosting_events } = await UserService.getUserDetail(user._id);
       const hosting_payload = {
         hosting_events: [...hosting_events, _id],
       };
 
-      axios.patch(`${BASE_URL}/api/v1/users/${user._id}`, hosting_payload);
+      UserService.plusHosting(user._id, hosting_payload);
     } catch (err) {
       console.log(err);
     }
     setClearPost(true);
   }
   function goHome() {
-    window.location.href = '/';
+    window.location.href = "/";
   }
   return (
     <div className="create-event-form">

@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { IconButton } from '@material-ui/core';
-import PeopleIcon from '@material-ui/icons/People';
-import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Delete';
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { push } from 'connected-react-router';
-import { deleteEvent } from '../../../redux/modules/events';
-import { deleteHosting } from '../../../redux/modules/auth';
-import Portal from '../../Portal';
+import React, { useState } from "react";
+import { IconButton } from "@material-ui/core";
+import PeopleIcon from "@material-ui/icons/People";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
+import { push } from "connected-react-router";
+import { deleteEvent } from "../../../redux/modules/events";
+import { deleteHosting } from "../../../redux/modules/auth";
+import Portal from "../../Portal";
 
 export default function SettingButtons({ event }) {
   const dispatch = useDispatch();
@@ -32,6 +32,16 @@ export default function SettingButtons({ event }) {
 
   return (
     <>
+      {/* <Link
+        to={{
+          pathname: `/qrScanner/${eventId}`,
+          state: {
+            event,
+          },
+        }}
+      >
+        QR-Scanner
+      </Link> */}
       <IconButton aria-label="enlistedUsers" onClick={goToHostOffice}>
         <PeopleIcon />
       </IconButton>

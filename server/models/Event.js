@@ -20,6 +20,7 @@ const eventSchema = mongoose.Schema(
     max_count: { type: Number, default: 0 }, // 참석 가능 인원수
     cur_count: { type: Number, default: 0 }, // 참석 인원
     like_count: Number,
+    attendance_count: Number,
     enlisted_users: [
       {
         type: mongoose.Schema.Types.ObjectId,

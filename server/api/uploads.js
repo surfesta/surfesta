@@ -13,17 +13,6 @@ const s3 = new aws.S3({
   secretAccessKey: config.AWS_SECRET_ACCESS_KEY_ID,
   region: "ap-northeast-2",
 });
-// const params = {
-//   Bucket: "surfesta",
-//   Key: "eventThumbnails/twitter-1600159682635.png",
-// };
-// s3.deleteObject(params, function (err, data) {
-//   if (err) {
-//     console.log(err);
-//   } else {
-//     console.log(data);
-//   }
-// });
 
 const upload = multer({
   storage: multerS3({
@@ -39,17 +28,14 @@ const upload = multer({
 });
 
 router.post("/", upload.any(), (req, res, next) => {
-  // console.log(req.files[0]);
-  // const upload = new Upload(req.body);
-  // console.log(upload);
-  // upload.save((err, doc) => {
-  //   if (err) {
-  //     console.log(err);
-  //     res.json({ success: false });
-  //     return;
-  //   }
-  //   res.json({ success: true, doc, filePath: req.files[0].location });
-  // });
+  const upload = new Upload(req.body);
+  upload.save((err) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    res.json({ filePath: req.files[0].location });
+  });
 });
 
 module.exports = router;

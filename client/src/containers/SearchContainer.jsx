@@ -17,12 +17,17 @@ export default function SearchContainer({ searchedKeyword }) {
   }, [dispatch, searchedKeyword]);
 
   return (
-    <EventsTemplate
-      events={events}
-      loading={loading}
-      error={error}
-      imgSrc={imgSrc}
-      searchedKeyword={searchedKeyword}
-    />
+    <>
+      {events && (
+        <EventsTemplate
+          events={events}
+          loading={loading}
+          error={error}
+          imgSrc={imgSrc}
+          searchedKeyword={searchedKeyword}
+        />
+      )}
+      {!events && <main className='init-height'></main>}
+    </>
   );
 }

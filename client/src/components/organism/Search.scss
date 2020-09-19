@@ -33,6 +33,8 @@
         font-weight: 400;
         outline: transparent;
         color: $dark-font-primary-color;
+        border-radius: 10px;
+        box-sizing: border-box;
         transition: all 0.1s;
         &::placeholder {
           color: #c6c7ca;

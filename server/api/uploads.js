@@ -13,17 +13,6 @@ const s3 = new aws.S3({
   secretAccessKey: config.AWS_SECRET_ACCESS_KEY_ID,
   region: "ap-northeast-2",
 });
-// const params = {
-//   Bucket: "surfesta",
-//   Key: "eventThumbnails/twitter-1600159682635.png",
-// };
-// s3.deleteObject(params, function (err, data) {
-//   if (err) {
-//     console.log(err);
-//   } else {
-//     console.log(data);
-//   }
-// });
 
 const upload = multer({
   storage: multerS3({

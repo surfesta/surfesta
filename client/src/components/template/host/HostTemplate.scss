@@ -3,22 +3,35 @@
 @import '../../../style/mixin';
 
 .host-template {
-  max-width: 1380px;
-  padding: 30px;
+  max-width: 1000px;
+  min-height: 700px;
+  padding: 50px 30px;
   margin: 0 auto;
 }
 
 .enlisted-list-header {
   .list-sub-header {
     @include Flex(left);
-    color: rgb(155, 155, 155);
+    color: $font-secondary-color;
     font-weight: 500;
     padding: 0 0 20px;
     .mui-arrow {
       width: 3rem;
       height: 3rem;
-      background-color: rgb(230, 230, 230);
+      background-color: #c7c8ce;
       margin-right: 12px;
+      transition: all 0.2s;
+      &:hover {
+        box-shadow: 0 0 3px 2px #00000020;
+      }
+      &:active {
+        box-shadow: none;
+      }
+      svg {
+        transform: translateX(2px);
+        // color: $dark-font-primary-color;
+        color: #fff;
+      }
     }
 
     div {
@@ -26,12 +39,13 @@
     }
   }
   .list-main-header {
-    @include Flex(left, center);
-    margin-bottom: 2.5rem;
+    @include Flex(left, flex-start);
+    margin-bottom: 5rem;
     h1 {
       font-weight: 600;
       font-size: 3rem;
       line-height: 4rem;
+      word-break: keep-all;
     }
     .attendee-counter {
       text-align: center;
@@ -46,7 +60,7 @@
       padding: 0.6rem;
 
       margin-left: 2rem;
-      width: 8rem;
+      min-width: 8rem;
     }
   }
 }
@@ -54,18 +68,23 @@
   @include Flex(left);
   justify-content: space-between;
 
-  padding: 1rem;
   .listed-user-search {
-    @include Flex();
-    flex-grow: 1;
+    position: relative;
     margin-right: 20px;
+    width: 100%;
     input {
-      background-color: rgb(214, 214, 214);
-      height: 100%;
       width: 100%;
+      color: $font-primary-color;
+      background-color: #e5e6eb;
       border-radius: 8px;
       outline: none;
-      padding: 1.4rem 2rem;
+      padding: 15px 50px 15px 20px;
+    }
+    svg {
+      position: absolute;
+      top: 15px;
+      right: 2rem;
+      cursor: pointer;
     }
     button {
       height: 100%;
@@ -75,13 +94,23 @@
   }
   .qr-reader-btn {
     @include Flex();
-    flex-wrap: wrap;
-    background-color: rgb(112, 112, 112);
+    padding: 10px;
+    height: 46px;
+    background-color: #5c6775;
     border-radius: 7px;
-    padding: 4px;
     color: white;
+    font-size: 1.5rem;
+    transition: all 0.3s;
+    &:hover {
+      box-shadow: 0 0 3px 2px #00000030;
+    }
+    &:active {
+      box-shadow: none;
+    }
 
     img {
+      width: 17px;
+      margin-right: 5px;
       filter: invert(100%);
     }
   }

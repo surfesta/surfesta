@@ -32,7 +32,7 @@ export default function SettingButtons({ event }) {
 
   return (
     <>
-      <Link
+      {/* <Link
         to={{
           pathname: `/qrScanner/${eventId}`,
           state: {
@@ -41,7 +41,7 @@ export default function SettingButtons({ event }) {
         }}
       >
         QR-Scanner
-      </Link>
+      </Link> */}
       <IconButton aria-label="enlistedUsers" onClick={goToHostOffice}>
         <PeopleIcon />
       </IconButton>

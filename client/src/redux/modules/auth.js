@@ -1,10 +1,10 @@
-import { takeEvery, put, delay, call, takeLatest } from "redux-saga/effects";
-import UserService from "../../services/UserService";
-import { offModal, setSignInModal } from "./modal";
-import { checkStart, checkSuccess, checkFail } from "./mailCheck";
+import { takeEvery, put, delay, call, takeLatest } from 'redux-saga/effects';
+import UserService from '../../services/UserService';
+import { offModal, setSignInModal } from './modal';
+import { checkStart, checkSuccess, checkFail } from './mailCheck';
 
-const prefix = "surfesta-login";
-const userPrefix = "surfesta-user";
+const prefix = 'surfesta-login';
+const userPrefix = 'surfesta-user';
 // action type
 const START = `${prefix}/START`;
 const SUCCESS = `${prefix}/SUCCESS`;
@@ -23,7 +23,12 @@ const loginStart = () => ({
 });
 const loginSuccess = (user) => ({
   type: SUCCESS,
-  user: { ...user, phone_number: "0" + user.phone_number },
+  user: {
+    ...user,
+    phone_number: user.phone_number
+      ? '0' + user.phone_number
+      : user.phone_number,
+  },
 });
 
 const loginFail = (error) => ({
@@ -135,11 +140,11 @@ export default function reducer(state = initialState, action) {
 }
 
 //saga-action
-const START_COOKIE_CHECK_SAGA = "START_COOKIE_CHECK_SAGA";
-const START_LOGIN_SAGA = "START_LOGIN_SAGA";
-const START_LOGOUT_SAGA = "START_LOGOUT_SAGA";
-const SIGN_UP_SAGA = "SIGN_UP_SAGA";
-const START_SOCIAL_SDK_LOGIN = "START_SOCIAL_SDK_LOGIN";
+const START_COOKIE_CHECK_SAGA = 'START_COOKIE_CHECK_SAGA';
+const START_LOGIN_SAGA = 'START_LOGIN_SAGA';
+const START_LOGOUT_SAGA = 'START_LOGOUT_SAGA';
+const SIGN_UP_SAGA = 'SIGN_UP_SAGA';
+const START_SOCIAL_SDK_LOGIN = 'START_SOCIAL_SDK_LOGIN';
 const TOGGLE_ENLISTED_EVENT = `${userPrefix}/TOGGLE_ENLISTED_EVENT`;
 const TOGGLE_LIKED_EVENT = `${userPrefix}/TOGGLE_LIKED_EVENT`;
 const START_DELETE_HOSTING = `${prefix}/START_DELETE_HOSTING`;
@@ -198,7 +203,7 @@ export const deleteHosting = (eventId, userId, type) => ({
 export const patchUserActionCreator = (
   username,
   phone_number,
-  profile_img
+  profile_img,
 ) => ({
   type: PATCH_USER,
   payload: {
@@ -243,7 +248,7 @@ function* signupSaga(action) {
     yield put(loginStart());
     const { success, newUser } = yield call(
       UserService.register,
-      action.payload
+      action.payload,
     );
     if (!success) throw new Error();
     const { loginResult, user } = yield call(UserService.login, action.payload);
@@ -276,7 +281,7 @@ function* socialLoginSaga(action) {
     yield put(checkFail());
     const { success, newuser } = yield call(
       UserService.register,
-      action.payload
+      action.payload,
     );
     if (!success) throw new Error();
     const { user } = yield call(UserService.login, action.payload);
@@ -291,7 +296,7 @@ function* toggleEnlistedEventSaga(action) {
   try {
     const { user } = yield call(
       UserService.toggleEnlistedEvent,
-      action.payload
+      action.payload,
     );
     yield put(toggleEnlistedEventSuccess(user));
   } catch (error) {
@@ -321,7 +326,7 @@ function* patchUserSaga(action) {
   try {
     yield put(patchStart());
     const { user } = yield call(UserService.patchUser, action.payload);
-    if (!user) throw new Error("No user");
+    if (!user) throw new Error('No user');
     yield put(patchSuccess(user));
   } catch (error) {
     yield put(patchFail(error));

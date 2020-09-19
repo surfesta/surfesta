@@ -1,6 +1,9 @@
 import axios from "axios";
-
-const EVENT_URI = "/api/v1/events";
+const BASE_URL =
+  navigator.userAgent === "ReactSnap"
+    ? "http://ec2-15-164-210-226.ap-northeast-2.compute.amazonaws.com:5000"
+    : "";
+const EVENT_URI = `${BASE_URL}/api/v1/events`;
 
 export default class EventService {
   static async getEvents() {
@@ -35,10 +38,22 @@ export default class EventService {
     return data;
   }
 
+  static async haveUserAttended({ eventId, userId, type }) {
+    const { data } = await axios({
+      method: "PATCH",
+      url: `${EVENT_URI}/${eventId}/attended?type=${type}`,
+      data: {
+        user_id: userId,
+      },
+    });
+    return data;
+  }
+
   static async searchEvents({ keyword }) {
     const { data } = await axios.get(`${EVENT_URI}/search?q=${keyword}`);
     return data;
   }
+
   static async deleteEvent(eventId) {
     await axios.delete(`${EVENT_URI}/${eventId}`);
     const { data } = await axios.get(`${EVENT_URI}`);

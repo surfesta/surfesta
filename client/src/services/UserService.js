@@ -1,5 +1,10 @@
 import axios from "axios";
-const USER_URI = "/api/v1/users";
+const BASE_URL =
+  navigator.userAgent === "ReactSnap"
+    ? "http://ec2-15-164-210-226.ap-northeast-2.compute.amazonaws.com:5000"
+    : "";
+
+const USER_URI = `${BASE_URL}/api/v1/users`;
 
 export default class UserService {
   static async getUserDetail(userId) {
@@ -89,7 +94,18 @@ export default class UserService {
     });
     return data;
   }
-  static async toggleHostingEvent(userId, payload) {
+  static async plusHosting(userId, payload) {
     axios.patch(`${USER_URI}/${userId}`, payload);
+  }
+
+  static async toggleHostingEvent({ eventId, userId, type }) {
+    const { data } = await axios({
+      method: "PATCH",
+      url: `${USER_URI}/${userId}/hosting?type=${type}`,
+      data: {
+        event_id: eventId,
+      },
+    });
+    return data;
   }
 }

@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import jsQR from "jsqr";
 import "./qrscanner.scss";
 import Portal from "../components/Portal";
+import { useDispatch } from "react-redux";
+import { startAttendUser } from "../redux/modules/events";
 
 export default function QrScanner({ location }) {
   if (!location.state) {
     window.location.href = "/";
   }
+  const dispatch = useDispatch();
   const [userCheck, setUserCheck] = useState(false);
   const [failCheck, setFailCheck] = useState(false);
   const { event } = location.state;
@@ -16,11 +19,11 @@ export default function QrScanner({ location }) {
     if (failCheck) {
       setTimeout(() => {
         setFailCheck(false);
-      }, 1500);
+      }, 1000);
     } else if (userCheck) {
       setTimeout(() => {
         setUserCheck(false);
-      }, 1500);
+      }, 1000);
     }
     const scannerStart = () => {
       const video = document.createElement("video");
@@ -140,6 +143,7 @@ export default function QrScanner({ location }) {
             );
             if (_FIND) {
               setUserCheck(true);
+              dispatch(startAttendUser(event._id, code.data, true));
             } else {
               setFailCheck(true);
             }
@@ -175,7 +179,7 @@ export default function QrScanner({ location }) {
             }}
           >
             <div id="modal" className="confirm-modal">
-              <h1 style={{ color: "greenYellow" }}>참가신청한 유저 입니다.</h1>
+              <h1 style={{ color: "green" }}>참가신청한 유저 입니다.</h1>
             </div>
           </div>
         </Portal>

@@ -12,7 +12,6 @@ import EventMaxPerson from "../../molecule/createEvent/EventMaxPerson";
 import EventThumbnail from "../../organism/createEvent/EventThumbnail";
 import EventContent from "../../molecule/createEvent/EventContent";
 import EventDate from "../../molecule/createEvent/EventDate";
-import axios from "axios";
 import TermsCheck from "../../molecule/createEvent/TermsCheck";
 import EventService from "../../../services/EventService";
 import UserService from "../../../services/UserService";
@@ -221,12 +220,11 @@ const EventForm = () => {
       const { doc } = await EventService.postEvent(eventPayload);
       const { _id } = doc;
       const { hosting_events } = await UserService.getUserDetail(user._id);
-      console.log(hosting_events);
       const hosting_payload = {
         hosting_events: [...hosting_events, _id],
       };
-      console.log(hosting_payload);
-      UserService.toggleHostingEvent(user._id, hosting_payload);
+
+      UserService.plusHosting(user._id, hosting_payload);
     } catch (err) {
       console.log(err);
     }

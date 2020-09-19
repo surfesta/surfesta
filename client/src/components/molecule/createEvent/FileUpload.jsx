@@ -1,5 +1,4 @@
 import React, { useState, useCallback } from "react";
-import axios from "axios";
 import { useDropzone } from "react-dropzone";
 import { validateFileInput } from "../../../utils/validateFileInput";
 import UploadService from "../../../services/UploadService";
@@ -27,7 +26,6 @@ export default function FileUpload({ inputRef, imgRef }) {
     formData.append("file", _file);
     try {
       const { filePath } = await UploadService.uploadImage(formData);
-      console.log(filePath);
       setUploadedFile({ filePath });
     } catch (err) {
       console.log(err);

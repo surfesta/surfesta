@@ -1,48 +1,59 @@
-@import '../../style/mixin';
-@import '../../style/variables';
-@import '../../style/mediaQuery';
+@import "../../style/mixin";
+@import "../../style/variables";
+@import "../../style/mediaQuery";
 
-.search-wrap {
-  background-color: white;
-  .center {
-    position: relative;
-    width: 1440px;
-    margin: 0 auto;
-    input {
-      @include Flex();
-      height: 12rem;
-      background-color: transparent;
-      width: 100%;
-      padding: 30px;
-      padding-right: 80px;
-      box-sizing: border-box;
-      border: 0;
-      font-size: 3.5rem;
-      outline: transparent;
-    }
-    .search-btn {
-      position: absolute;
-      top: 0;
-      right: 0;
-      padding: 34px;
-      button svg {
-        font-size: 3rem;
+.search-back {
+  @include Flex();
+  background-color: $dark-font-primary-color;
+  height: 30vh;
+  opacity: 0.7;
+
+  .search-wrap {
+    width: 600px;
+    .center {
+      position: relative;
+      width: 600px;
+      margin: 0 auto;
+      input {
+        height: 6rem;
+        background-color: transparent;
+        width: 100%;
+        padding: 30px;
+        padding-right: 80px;
+        font-size: 3.5rem;
+        outline: transparent;
+      }
+      .search-btn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 10px;
+        button svg {
+          font-size: 3rem;
+        }
       }
     }
   }
 }
 
 @include mobile {
-  .search-wrap {
-    .center {
+  .search-back {
+    height: 17rem;
+    img {
       width: 100%;
-      input {
-        font-size: 2.4rem;
-      }
-      .search-btn {
-        padding: 31px;
-        button svg {
+      height: 30vh;
+      overflow: hidden;
+    }
+    .search-wrap {
+      .center {
+        width: 100%;
+        input {
           font-size: 2.4rem;
+        }
+        .search-btn {
+          button svg {
+            font-size: 2.4rem;
+          }
         }
       }
     }
@@ -50,17 +61,21 @@
 }
 
 @include tablet {
-  .search-wrap {
-    .center {
-      width: 100%;
+  .search-back {
+    .search-wrap {
+      .center {
+        width: 100%;
+      }
     }
   }
 }
 
 @include desktop {
-  .search-wrap {
-    .center {
-      width: 100%;
+  .search-back {
+    .search-wrap {
+      .center {
+        width: 100%;
+      }
     }
   }
 }

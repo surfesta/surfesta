@@ -14,32 +14,31 @@ export default function EventInfo({ event }) {
   const [visible, setVisible] = useState(false);
   const eventInfoBar = useRef();
 
-  const eventId = event && event._id;
-  const thumbnail = event && event.thumbnail;
-  const startDate = event && event.event_date.start.date;
-  const startTime = event && event.event_date.start.time;
-  const endDate = event && event.event_date.end.date;
-  const endTime = event && event.event_date.end.time;
-  const title = event && event.title;
-  const price = event && event.price.toLocaleString();
-  const isOnline = event && event.isOnline;
-  const onlinePlatform = event && event.online_platform;
-  const loactionName = event && event.location.name;
-  const loactionDetails = event && event.location.details;
-  const hostProfileImg = event && event.host.profile_img;
-  const hostName = event && event.host.username;
-  const hostEmail = event && event.host.email;
-  const maxCount = event && event.max_count;
-  const curCount = event && event.cur_count;
+  const eventId = event._id;
+  const thumbnail = event.thumbnail;
+  const startDate = event.event_date.start.date;
+  const startTime = event.event_date.start.time;
+  const endDate = event.event_date.end.date;
+  const endTime = event.event_date.end.time;
+  const title = event.title;
+  const price = event.price.toLocaleString();
+  const isOnline = event.isOnline;
+  const onlinePlatform = event.online_platform;
+  const loactionName = event.location.name;
+  const loactionDetails = event.location.details;
+  const hostProfileImg = event.host.profile_img;
+  const hostName = event.host.username;
+  const hostEmail = event.host.email;
+  const maxCount = event.max_count;
+  const curCount = event.cur_count;
 
   const user = useSelector((state) => state.auth.user);
   const userId = user && user._id;
 
   useEffect(() => {
-    event &&
-      event.enlisted_users.map(
-        (user) => user._id === userId && setIsEnlisted(true)
-      );
+    event.enlisted_users.map(
+      (user) => user._id === userId && setIsEnlisted(true)
+    );
   }, [userId]);
 
   const viewModal = useCallback(() => {

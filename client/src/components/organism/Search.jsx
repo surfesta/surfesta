@@ -67,6 +67,7 @@ export default function Search({ searchedKeyword }) {
                 setValue(e.target.value);
               }}
               value={value ? value : ''}
+              className={value ? 'value' : ''}
             />
           </form>
           <div className='search-btn' onClick={searchEvents}>

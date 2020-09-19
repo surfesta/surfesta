@@ -1,9 +1,9 @@
-import React from 'react';
-import ProfileBtn from '../../atom/profile/ProfileBtn';
-import Email from '../../atom/profile/Email';
-import Name from '../../atom/profile/Name';
-import PhoneNumber from '../../atom/profile/PhoneNumber';
-import { useSelector } from 'react-redux';
+import React from "react";
+import ProfileBtn from "../../atom/profile/ProfileBtn";
+import Email from "../../atom/profile/Email";
+import Name from "../../atom/profile/Name";
+import PhoneNumber from "../../atom/profile/PhoneNumber";
+import { useSelector } from "react-redux";
 
 function ProfileForm({
   user,

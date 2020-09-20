@@ -1,6 +1,6 @@
-@import '../../style/variables';
-@import '../../style/mixin';
-@import '../../style/mediaQuery';
+@import "../../style/variables";
+@import "../../style/mixin";
+@import "../../style/mediaQuery";
 
 #modal-container * :not(input) {
   -moz-user-select: none;

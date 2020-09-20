@@ -1,6 +1,6 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import EnlistedCard from '../components/molecule/eventCategories/EnlistedCard';
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import EnlistedCard from "../components/molecule/eventCategories/EnlistedCard";
 
 export default function EnlistedContainer() {
   const user = useSelector((state) => state.auth.user);

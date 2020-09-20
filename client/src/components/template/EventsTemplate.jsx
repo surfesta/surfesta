@@ -13,12 +13,12 @@ export default function EventsTemplate({
   searchedKeyword,
 }) {
   const sortState = {
-    NEWEST: 'NEWEST',
-    OLDEST: 'OLDEST',
-    MOSTLIKED: 'MOSTLIKED',
-    MOSTPOPULAR: 'MOSTPOPULAR',
-    CHEAPEST: 'CHEAPEST',
-    MOSTEXPENSIVE: 'MOSTEXPENSIVE',
+    NEWEST: 'Newest',
+    OLDEST: 'Oldest',
+    MOSTLIKED: 'Most liked',
+    MOSTPOPULAR: 'Most popular',
+    CHEAPEST: 'Cheapest',
+    MOSTEXPENSIVE: 'Most expensive',
   };
 
   const {
@@ -31,9 +31,9 @@ export default function EventsTemplate({
   } = sortState;
 
   const filterState = {
-    ALL: 'ALL',
-    ONLINE: 'ONLINE',
-    OFFLINE: 'OFFLINE',
+    ALL: 'All',
+    ONLINE: 'Online',
+    OFFLINE: 'Offline',
   };
 
   const { ALL, ONLINE, OFFLINE } = filterState;
@@ -93,7 +93,7 @@ export default function EventsTemplate({
           setFilter={setFilter}
           filterState={filterState}
         />
-        <Sort setSort={setSort} sortState={sortState} />
+        <Sort sort={sort} setSort={setSort} sortState={sortState} />
       </div>
 
       <section className='cards-wrap'>

@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import ProfileBtn from "../../atom/profile/ProfileBtn";
 import Email from "../../atom/profile/Email";
 import Name from "../../atom/profile/Name";
 import PhoneNumber from "../../atom/profile/PhoneNumber";
-import { useSelector } from "react-redux";
+import SubmitModal from "../../molecule/profile/SubmitModal";
 
 function ProfileForm({
   user,
@@ -12,6 +12,8 @@ function ProfileForm({
   nameChange,
   phoneNumChange,
   handleSubmit,
+  visible,
+  setVisible,
 }) {
   return (
     <form className="profile-form">
@@ -21,6 +23,7 @@ function ProfileForm({
       <div className="form-btn">
         <ProfileBtn name="제출 하기" handleClick={handleSubmit} />
       </div>
+      {visible && <SubmitModal setVisible={setVisible} />}
     </form>
   );
 }

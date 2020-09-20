@@ -13,6 +13,7 @@
 
   .form-div {
     margin-top: 20px;
+    display: flex;
   }
 
   .profile-info {
@@ -24,20 +25,20 @@
 
     .profile-btn {
       @include text-button;
-      margin-bottom: 5rem;
+      margin: 3rem 0 5rem 0;
     }
   }
 
   label {
-    display: block;
     margin-bottom: 10px;
+    padding: 10px 0 0 0;
+    width: 140px;
     font-size: 2.4rem;
     font-weight: 500;
   }
 
   input {
     @include font-normal;
-    display: block;
     margin-bottom: 10px;
     border-radius: 4px;
     border: none;

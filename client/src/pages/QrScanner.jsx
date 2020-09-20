@@ -20,6 +20,7 @@ export default function QrScanner({ location, match }) {
   const { hostingEvent } = location.state;
 
   let startQRtick;
+  let mediaStream;
 
   const scannerStart = async () => {
     const video = document.createElement('video');
@@ -28,7 +29,7 @@ export default function QrScanner({ location, match }) {
 
     // 카메라 사용시
     try {
-      const mediaStream = await navigator.mediaDevices.getUserMedia({
+      mediaStream = await navigator.mediaDevices.getUserMedia({
         video: { facingMode: 'environment' },
       });
       video.srcObject = mediaStream;
@@ -52,7 +53,11 @@ export default function QrScanner({ location, match }) {
   useEffect(() => {
     window.scrollTo(0, 0);
     scannerStart();
-    return () => clearInterval(startQRtick);
+
+    return () => {
+      mediaStream.getTracks()[0].stop();
+      clearInterval(startQRtick);
+    };
   }, [setUserCheck]);
 
   function QRtick(video, canvasElement, canvas, mediaStream) {

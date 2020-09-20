@@ -17,7 +17,9 @@ export default function HostTemplate({ event_id }) {
   const hostingEvent = useSelector((state) =>
     state.events.events.find((event) => event._id === event_id),
   );
+
   const dispatch = useDispatch();
+  const [users, setUsers] = useState([]);
 
   const handleClick = useCallback(
     (user_id, type) => {
@@ -25,6 +27,16 @@ export default function HostTemplate({ event_id }) {
     },
     [dispatch],
   );
+
+  const filterUsers = (e) => {
+    hostingEvent &&
+      setUsers(
+        hostingEvent.enlisted_users.filter((user) => {
+          user.username.match(new RegExp(e.target.value));
+        }),
+      );
+    console.log(users);
+  };
 
   return (
     <div className="host-template">
@@ -48,7 +60,7 @@ export default function HostTemplate({ event_id }) {
       </section>
       <section className="enlisted-list-features">
         <div className="listed-user-search">
-          <input type="text" placeholder="검색하기" />
+          <input type="text" placeholder="검색하기" onChange={filterUsers} />
           <SearchIcon />
         </div>
         <Link
@@ -65,7 +77,11 @@ export default function HostTemplate({ event_id }) {
           </div>
         </Link>
       </section>
-      <AttendeeListing hostingEvent={hostingEvent} handleClick={handleClick} />
+      <AttendeeListing
+        hostingEvent={hostingEvent}
+        handleClick={handleClick}
+        users={users}
+      />
     </div>
   );
 }

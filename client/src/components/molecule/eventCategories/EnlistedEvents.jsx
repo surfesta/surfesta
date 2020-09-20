@@ -1,5 +1,5 @@
-import React from 'react';
-import EnlistedContainer from '../../../containers/EnlistedContainer';
+import React from "react";
+import EnlistedContainer from "../../../containers/EnlistedContainer";
 
 export default function EnlistedEvents() {
   return (

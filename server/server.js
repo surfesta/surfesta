@@ -1,17 +1,17 @@
-const express = require('express');
-const cors = require('cors');
-const morgan = require('morgan');
-const helmet = require('helmet');
-const cookieParser = require('cookie-parser');
-const config = require('./config');
+const express = require("express");
+const cors = require("cors");
+const morgan = require("morgan");
+const helmet = require("helmet");
+const cookieParser = require("cookie-parser");
+const config = require("./config");
 const port = config.PORT || 5000;
-
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const db = mongoose.connection;
+const axios = require("axios");
 
-db.on('error', console.error);
-db.once('open', () => {
-  console.log('Connect to mongo server');
+db.on("error", console.error);
+db.once("open", () => {
+  console.log("Connect to mongo server");
 });
 
 mongoose.connect(config.MONGO_URI, {
@@ -21,21 +21,21 @@ mongoose.connect(config.MONGO_URI, {
   useFindAndModify: false,
 });
 
-const api = require('./api');
+const api = require("./api");
 const app = express();
 
 app.use(
   cors({
-    origin: '*',
+    origin: "*",
     credentials: true,
-  }),
+  })
 );
 app.use(helmet());
-app.use(morgan('tiny'));
+app.use(morgan("tiny"));
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use('/api/v1', api);
+app.use("/api/v1", api);
 
 app.listen(port, () => {
   console.log(process.env.NODE_ENV);

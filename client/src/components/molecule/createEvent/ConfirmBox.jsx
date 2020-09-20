@@ -1,14 +1,6 @@
-import React from 'react';
-import './confirmbox.scss';
-const ConfirmBox = ({
-  yes,
-  no,
-  visible,
-  onCancel,
-  onConfirm,
-  className,
-  children,
-}) => {
+import React from "react";
+import Portal from "../../Portal";
+const ConfirmBox = ({ yes, no, visible, onCancel, onConfirm, children }) => {
   const confirm = () => {
     onCancel();
     onConfirm();
@@ -16,19 +8,29 @@ const ConfirmBox = ({
   return (
     <>
       {visible && (
-        <div className="goback-modal-container">
-          <div className="inner-modal">
-            <div className="modal-body">{children}</div>
-            <div className="modal-foot">
-              <button onClick={() => onCancel()} type="button">
+        <Portal>
+          <div
+            id="modal-container"
+            onClick={(e) => {
+              if (!(e.target === e.currentTarget)) return;
+              onCancel();
+            }}
+          >
+            <div id="modal" className="confirm-modal">
+              <h1>{children}</h1>
+              <button
+                className="cancel"
+                onClick={() => onCancel()}
+                type="button"
+              >
                 {no}
               </button>
-              <button onClick={confirm} type="button">
+              <button className="confirm" onClick={confirm} type="button">
                 {yes}
               </button>
             </div>
           </div>
-        </div>
+        </Portal>
       )}
     </>
   );

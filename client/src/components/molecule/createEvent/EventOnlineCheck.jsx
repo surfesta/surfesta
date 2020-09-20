@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export default function EventOnlineCheck({ toggle, Ref }) {
   return (
@@ -20,8 +20,24 @@ export default function EventOnlineCheck({ toggle, Ref }) {
             id="onlinecheck"
           />
           <label className="custom-label" htmlFor="onlinecheck"></label>
-          <span className="not">아니요, 오프라인으로 진행할게요!</span>
-          <span className="yes">네, 온라인으로 진행할게요!</span>
+          <span
+            className="not"
+            onClick={(e) => {
+              toggle(e);
+              Ref.current.checked = Ref.current.checked ? false : true;
+            }}
+          >
+            아니요, 오프라인으로 진행할게요!
+          </span>
+          <span
+            className="yes"
+            onClick={(e) => {
+              toggle(e);
+              Ref.current.checked = Ref.current.checked ? false : true;
+            }}
+          >
+            네, 온라인으로 진행할게요!
+          </span>
         </div>
       </div>
     </>

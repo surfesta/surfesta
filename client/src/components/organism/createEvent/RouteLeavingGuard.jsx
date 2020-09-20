@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { Prompt } from 'react-router-dom';
-import ConfirmBox from '../../molecule/createEvent/ConfirmBox';
+import React, { useEffect, useState } from "react";
+import { Prompt } from "react-router-dom";
+import ConfirmBox from "../../molecule/createEvent/ConfirmBox";
+import Portal from "../../Portal";
 
 export const RouteLeavingGuard = ({
   navigate,
@@ -60,11 +61,9 @@ export const RouteLeavingGuard = ({
         onConfirm={handleConfirmNavigationClick}
         className="prompt-guide"
       >
-        <p className="main_text">
-          {contentTop}
-          <br />
-          {contentBottom}
-        </p>
+        {contentTop}
+        <br />
+        {contentBottom}
       </ConfirmBox>
     </>
   );

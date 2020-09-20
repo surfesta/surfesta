@@ -15,6 +15,7 @@ import EventDate from "../../molecule/createEvent/EventDate";
 import TermsCheck from "../../molecule/createEvent/TermsCheck";
 import EventService from "../../../services/EventService";
 import UserService from "../../../services/UserService";
+import Portal from "../../Portal";
 
 const EventForm = () => {
   const _preventDefault = useCallback((e) => {
@@ -205,6 +206,7 @@ const EventForm = () => {
   }
   function openToggle(e) {
     e.target.parentNode.classList.toggle("active");
+    // $isOpen.current.checked = $isOpen.current.checked ? false : true;
   }
   function onlineToggle(e) {
     openToggle(e);
@@ -236,39 +238,45 @@ const EventForm = () => {
   return (
     <div className="create-event-form">
       {modalCheck && (
-        <div className="goback-modal-container">
-          <div className="inner-modal">
-            <div className="modal-body">
-              <p>
+        <Portal>
+          <div
+            id="modal-container"
+            onClick={(e) => {
+              if (!(e.target === e.currentTarget)) return;
+              setModalCheck(false);
+            }}
+          >
+            <div id="modal" className="confirm-modal">
+              <h1>
                 해당 내용으로
                 <br />
                 이벤트를 주최할까요?
-              </p>
-            </div>
-            <div className="modal-foot">
-              <button onClick={() => setModalCheck(false)} type="button">
+              </h1>
+              <button
+                className="cancel"
+                onClick={() => setModalCheck(false)}
+                type="button"
+              >
                 취소
               </button>
-              <button onClick={PostPayload} type="button">
+              <button className="confirm" onClick={PostPayload} type="button">
                 확인
               </button>
             </div>
           </div>
-        </div>
+        </Portal>
       )}
       {clearPost && (
-        <div className="goback-modal-container">
-          <div className="inner-modal">
-            <div className="modal-body top-body">
-              <p>이벤트가 게시되었어요!</p>
-            </div>
-            <div className="modal-foot">
-              <button onClick={goHome} type="button" className="one-btn">
+        <Portal>
+          <div id="modal-container">
+            <div id="modal" className="confirm-modal">
+              <h1>이벤트가 게시되었어요!</h1>
+              <button className="confirm" type="button" onClick={goHome}>
                 확인
               </button>
             </div>
           </div>
-        </div>
+        </Portal>
       )}
       <h1 className="main-title">이벤트 주최하기</h1>
       <form

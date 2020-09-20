@@ -4,7 +4,7 @@ import EventsContainer from '../containers/EventsContainer';
 export default function Home() {
   return (
     <div className='init-height'>
-      <EventsContainer />;
+      <EventsContainer />
     </div>
   );
 }

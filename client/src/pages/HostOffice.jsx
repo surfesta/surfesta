@@ -17,7 +17,11 @@ export default function HostOffice({ match }) {
     if (error) dispatch(push('/'));
   }, [setAuthDone, user, error]);
 
-  if (!clientCookie) return <Redirect to="/" />;
+  if (!clientCookie) return <Redirect to='/' />;
 
-  return <>{authDone && <HostTemplate event_id={event_id} />}</>;
+  return (
+    <div className='init-height'>
+      {authDone && <HostTemplate event_id={event_id} />}
+    </div>
+  );
 }

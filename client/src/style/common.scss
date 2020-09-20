@@ -98,7 +98,7 @@ table {
 }
 /* 높이 초기화 */
 .init-height {
-  min-height: 100vh;
+  min-height: calc(100vh - 264px);
 }
 
 @include mobile {

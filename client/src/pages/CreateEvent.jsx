@@ -27,10 +27,10 @@ export default function CreateEvent({ history }) {
   // if cookie is there, wait til the redux store hydrated.
   // there's no cookie, just to home.
 
-  if (!clientCookie) return <Redirect to="/" />;
+  if (!clientCookie) return <Redirect to='/' />;
 
   return (
-    <>
+    <div className='init-height'>
       {done && (
         <>
           <RouteLeavingGuard
@@ -44,19 +44,19 @@ export default function CreateEvent({ history }) {
               }
               return false;
             }}
-            yes="확인"
-            no="취소"
+            yes='확인'
+            no='취소'
             contentTop={'이 페이지를 벗어나면'}
             contentBottom={'정성스럽게 작성한 글이 날아가요.'}
           />
-          <div className="create-event-wrap">
-            <div className="w1440-container">
+          <div className='create-event-wrap'>
+            <div className='w1440-container'>
               <EventForm />
             </div>
           </div>
         </>
       )}
-    </>
+    </div>
   );
 }
 

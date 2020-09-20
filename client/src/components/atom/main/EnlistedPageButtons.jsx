@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { IconButton } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Portal from "../../Portal";
@@ -6,9 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleEnlistedEvent } from "../../../redux/modules/auth";
 import { toggleEnlistedUser } from "../../../redux/modules/events";
 import ConfirmModal from "../../molecule/eventCategories/ConfirmModal";
-import { useRef } from "react";
 
-export default function DeleteButton({ event }) {
+export default function EnlistedPageButtons({ event }) {
   const btnRef = useRef(null);
   const [visible, setVisible] = useState(false);
   const [qrSelect, setQrSelect] = useState(false);

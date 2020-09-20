@@ -17,11 +17,11 @@ const s3 = new aws.S3({
 const upload = multer({
   storage: multerS3({
     s3: s3,
-    bucket: "surfesta",
+    bucket: "surfesta2",
     key: function (req, file, cb) {
       const extension = path.extname(file.originalname);
       const basename = path.basename(file.originalname, extension);
-      cb(null, `/eventThumbnails/${basename}-${Date.now()}${extension}`);
+      cb(null, `event-thumbnails/${basename}-${Date.now()}${extension}`);
     },
     acl: "public-read-write",
   }),

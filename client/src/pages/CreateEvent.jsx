@@ -39,7 +39,7 @@ export default function CreateEvent({ history }) {
   if (!clientCookie) return <Redirect to="/" />;
 
   return (
-    <>
+    <div className="init-height">
       {done && (
         <>
           <RouteLeavingGuard
@@ -65,7 +65,7 @@ export default function CreateEvent({ history }) {
           </div>
         </>
       )}
-    </>
+    </div>
   );
 }
 

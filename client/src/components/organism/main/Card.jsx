@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import "./Card.scss";
 import CardContent from "../../molecule/main/CardContent";
 import CardButtons from "../../molecule/main/CardButtons";
@@ -9,8 +9,7 @@ import { push } from "connected-react-router";
 export default function Card({ event }) {
   const dispatch = useDispatch();
   const [isLoad, setIsLoad] = useState(false);
-  const history = useHistory();
-  const eventId = event && event._id;
+  const eventId = event._id;
   const cardRef = useRef(null);
 
   useEffect(() => {

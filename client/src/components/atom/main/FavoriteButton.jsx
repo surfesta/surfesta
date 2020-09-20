@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { welcomeModal } from '../../../redux/modules/modal';
 import { IconButton } from '@material-ui/core';
@@ -11,18 +11,17 @@ export default function FavoriteButton({ event }) {
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
 
-  const eventId = event && event._id;
+  const eventId = event._id;
   const userId = user && user._id;
 
   useEffect(() => {
-    event &&
-      event.liked_users.forEach((user) => {
-        user && user._id === userId && setSelect(true);
-      });
+    event.liked_users.forEach((user) => {
+      user && user._id === userId && setSelect(true);
+    });
 
     user &&
       user.liked_events.forEach((event) => {
-        event && event._id === eventId && setSelect(true);
+        event._id === eventId && setSelect(true);
       });
   }, [userId, eventId]);
 

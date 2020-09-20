@@ -18,8 +18,8 @@ export default function Home() {
   //   );
   // }, []);
   return (
-    <>
+    <div className='init-height'>
       <EventsContainer />
-    </>
+    </div>
   );
 }

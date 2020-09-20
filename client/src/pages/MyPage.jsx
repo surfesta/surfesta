@@ -33,7 +33,7 @@ function MyPage() {
   if (!clientCookie) return <Redirect to="/" />;
 
   return (
-    <>
+    <div className="init-height">
       {authDone && (
         <>
           <SubNavTemplate />
@@ -45,7 +45,7 @@ function MyPage() {
           </section>
         </>
       )}
-    </>
+    </div>
   );
 }
 

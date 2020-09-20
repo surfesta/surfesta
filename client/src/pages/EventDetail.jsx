@@ -1,14 +1,13 @@
-import React, { useEffect, useCallback } from "react";
+import React from 'react';
 
-import HeaderTemplate from "../components/template/HeaderTemplate";
-import EventDetailTemplateContainer from "../containers/EventDetailTemplateContainer";
+import EventDetailTemplateContainer from '../containers/EventDetailTemplateContainer';
 
 export default function EventDetail(props) {
   const eventId = props.match.params.event_id;
 
   return (
-    <>
+    <div className='init-height'>
       <EventDetailTemplateContainer eventId={eventId} />
-    </>
+    </div>
   );
 }

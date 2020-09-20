@@ -1,5 +1,5 @@
-import React from 'react';
-import ProfileThumb from '../../atom/profile/ProfileThumb';
+import React from "react";
+import ProfileThumb from "../../atom/profile/ProfileThumb";
 
 function ProfileInfo({ ...props }) {
   return (

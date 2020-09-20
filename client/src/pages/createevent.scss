@@ -7,7 +7,6 @@
   box-sizing: border-box;
   @include wrapSet;
   width: 100%;
-  min-height: 100vh;
   * {
     margin: 0;
     padding: 0;
@@ -357,7 +356,7 @@
       padding: 0;
       .main-title {
         margin-top: 3rem;
-        margin-bottom: 0;
+        margin-bottom: 2.8rem;
       }
       form {
         .custom-file-label {
@@ -403,7 +402,7 @@
     .create-event-form,
     .revise-event-form {
       .main-title {
-        margin-bottom: 2rem;
+        margin-bottom: 2.8rem;
       }
       form {
         .custom-file-label {

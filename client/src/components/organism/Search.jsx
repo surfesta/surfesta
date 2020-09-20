@@ -29,7 +29,6 @@ export default function Search({ searchedKeyword }) {
 
   useEffect(() => {
     let ignore = false;
-
     async function getBackground() {
       const response = await axios.get(`${URL}/photos/random`, {
         params: {
@@ -40,7 +39,6 @@ export default function Search({ searchedKeyword }) {
       });
       if (!ignore) setImgs(response.data[0].urls.regular);
     }
-
     getBackground();
     return () => {
       ignore = true;
@@ -49,19 +47,19 @@ export default function Search({ searchedKeyword }) {
 
   return (
     <div
-      className='search-back'
+      className="search-back"
       ref={searchBack}
       style={{
         backgroundImage: `url(${imgs})`,
         backgroundPosition: 'center',
       }}
     >
-      <div className='search-wrap'>
-        <div className='center'>
+      <div className="search-wrap">
+        <div className="center">
           <form onSubmit={submit}>
             <input
-              placeholder='어떤 이벤트를 찾고 계세요?'
-              aria-label='검색'
+              placeholder="어떤 이벤트를 찾고 계세요?"
+              aria-label="검색"
               ref={inputRef}
               onChange={(e) => {
                 setValue(e.target.value);
@@ -70,7 +68,7 @@ export default function Search({ searchedKeyword }) {
               className={value ? 'value' : ''}
             />
           </form>
-          <div className='search-btn' onClick={searchEvents}>
+          <div className="search-btn" onClick={searchEvents}>
             <SearchButton />
           </div>
         </div>

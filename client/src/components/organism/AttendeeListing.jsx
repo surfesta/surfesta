@@ -10,7 +10,7 @@ export default function AttendeeListing({
   return (
     <>
       <div className="listed-users">
-        {filteredUsers.length == 0
+        {hostingEvent && filteredUsers.length == 0
           ? hostingEvent.enlisted_users.map((user) => (
               <UserSlot
                 hostingEvent={hostingEvent}

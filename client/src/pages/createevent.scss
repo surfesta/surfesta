@@ -216,6 +216,9 @@
               width: 100%;
             }
           }
+          & > span {
+            cursor: pointer;
+          }
           .err-text {
             position: absolute;
             top: -24px;
@@ -279,6 +282,7 @@
           }
           .custom-label {
             color: $labelColor;
+            cursor: pointer;
           }
           .time-check {
             @include Flex(space-between, flex-start);

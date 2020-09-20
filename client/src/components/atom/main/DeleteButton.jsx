@@ -9,11 +9,12 @@ import ConfirmModal from "../../molecule/eventCategories/ConfirmModal";
 import { useRef } from "react";
 
 export default function DeleteButton({ event }) {
+  const btnRef = useRef(null);
   const [visible, setVisible] = useState(false);
   const [qrSelect, setQrSelect] = useState(false);
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
-
+  const qr = `https://api.qrserver.com/v1/create-qr-code/?data=${user._id}&size=240x240`;
   const eventId = event && event._id;
   const userId = user && user._id;
 
@@ -25,7 +26,22 @@ export default function DeleteButton({ event }) {
 
   return (
     <>
-      <button onClick={() => setQrSelect(true)} className="qr-img" />
+      <img src={qr} style={{ display: "none" }} hidden />
+      <IconButton
+        ref={btnRef}
+        className="qr-imgbox"
+        onClick={(e) => {
+          setQrSelect(true);
+          // const ripples = document.createElement("span");
+          // btnRef.current.appendChild(ripples);
+
+          // setTimeout(() => {
+          //   ripples.remove();
+          // }, 500);
+        }}
+      >
+        <div className="qr-img" />
+      </IconButton>
       {qrSelect && (
         <Portal>
           <div
@@ -37,9 +53,7 @@ export default function DeleteButton({ event }) {
           >
             <div id="modal" className="confirm-modal">
               <h1 style={{ marginBottom: "3rem" }}>내 QR코드</h1>
-              <img
-                src={`https://api.qrserver.com/v1/create-qr-code/?data=${userId}&size=240x240`}
-              />
+              <img src={qr} />
             </div>
           </div>
         </Portal>

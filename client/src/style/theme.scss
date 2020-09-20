@@ -1,5 +1,5 @@
-@import './mixin';
-@import './variables';
+@import "./mixin";
+@import "./variables";
 
 body.dark {
   // backgrounds
@@ -107,12 +107,12 @@ body.dark {
           .event-content {
             color: $dark-font-secondary-color;
           }
-          input[type='text'] {
+          input[type="text"] {
             background: #24272b;
             color: #b6b7b8;
           }
           .time-check {
-            input[type='text'] {
+            input[type="text"] {
               background: inherit;
             }
           }
@@ -231,7 +231,7 @@ body.dark {
     color: $dark-font-primary-color;
   }
   .qr-img {
-    filter: invert(1);
+    filter: invert(1) !important;
   }
 
   .enlisted-list-header {

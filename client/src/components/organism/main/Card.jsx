@@ -1,10 +1,10 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import './Card.scss';
-import CardContent from '../../molecule/main/CardContent';
-import CardButtons from '../../molecule/main/CardButtons';
-import { useDispatch } from 'react-redux';
-import { push } from 'connected-react-router';
+import React, { useRef, useState, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
+import "./Card.scss";
+import CardContent from "../../molecule/main/CardContent";
+import CardButtons from "../../molecule/main/CardButtons";
+import { useDispatch } from "react-redux";
+import { push } from "connected-react-router";
 
 export default function Card({ event }) {
   const dispatch = useDispatch();
@@ -36,9 +36,9 @@ export default function Card({ event }) {
   const loadCard = () => setIsLoad(true);
 
   return (
-    <div className='card-wrap' ref={cardRef}>
+    <div className="card-wrap" ref={cardRef}>
       {!isLoad && (
-        <div className='loading-wrap'>
+        <div className="loading-wrap">
           <span></span>
         </div>
       )}
@@ -56,7 +56,7 @@ export default function Card({ event }) {
 }
 
 let observer = null;
-const LOAD_TYPE = 'loadCard';
+const LOAD_TYPE = "loadCard";
 
 function onIntersection(entries, io) {
   entries.forEach((entry) => {

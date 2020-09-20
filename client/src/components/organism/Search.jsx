@@ -19,7 +19,7 @@ export default function Search({ searchedKeyword }) {
     const keyword = inputRef.current.value.trim();
 
     dispatch(startSearchEvents(keyword));
-    keyword !== '' && dispatch(push(`/search/${keyword}`));
+    dispatch(push(`/search/${keyword}`));
   };
 
   const submit = (e) => {

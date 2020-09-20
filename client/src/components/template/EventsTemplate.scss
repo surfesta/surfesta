@@ -33,7 +33,7 @@
     padding: 20px 0px 30px 30px;
     min-height: 430px;
     .no-event-text {
-      @include font(3rem);
+      @include font(3rem, $color: $dark-font-secondary-color);
       text-align: center;
       width: 100%;
       img {

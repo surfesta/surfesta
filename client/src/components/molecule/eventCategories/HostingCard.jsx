@@ -4,13 +4,11 @@ import Card from '../../organism/main/Card';
 function HostingCards({ events, isOpen }) {
   return (
     <>
-      {events &&
-        isOpen &&
+      {isOpen &&
         events.map((event) => {
           return event.isOpen && <Card event={event} key={event._id} />;
         })}
-      {events &&
-        !isOpen &&
+      {!isOpen &&
         events.map((event) => {
           return !event.isOpen && <Card event={event} key={event._id} />;
         })}

@@ -81,7 +81,7 @@
   outline: 0;
   transition: all 0.3s;
 }
-@mixin thumbnail($color: #f2f3f6, $position: center) {
+@mixin thumbnail($color: transparent, $position: center) {
   background-color: $color;
   background-position: $position;
   background-size: cover;

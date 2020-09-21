@@ -11,7 +11,6 @@ export default function Filter({ filter, setFilter, filterState }) {
 
   const handleClick = (e) => {
     if (e.target === selectListRef.current) return;
-    selectRef.current.textContent = e.target.textContent;
 
     toggleModal();
   };
@@ -29,7 +28,7 @@ export default function Filter({ filter, setFilter, filterState }) {
   return (
     <div className='filter-wrap'>
       <button onClick={toggleModal}>
-        <span ref={selectRef}>All Events</span>
+        <span>{filter} Events</span>
         <span className='more'>
           <ExpandMoreIcon className={isShow ? 'arrow rotataion' : 'arrow'} />
         </span>

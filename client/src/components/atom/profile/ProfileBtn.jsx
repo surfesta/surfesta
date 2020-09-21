@@ -1,4 +1,5 @@
 import React from "react";
+import toggleVisibility from "../../molecule/profile/ProfileForm";
 
 function ProfileBtn({ name, handleClick }) {
   return (

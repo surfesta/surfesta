@@ -1,6 +1,6 @@
-@import "../../../style/mediaQuery";
-@import "../../../style/variables";
-@import "../../../style/mixin";
+@import '../../../style/mediaQuery';
+@import '../../../style/variables';
+@import '../../../style/mixin';
 
 .card-wrap {
   position: relative;
@@ -55,7 +55,7 @@
       .thumbnail {
         width: 100%;
         padding-bottom: 66.66%;
-        @include thumbnail(#fff);
+        @include thumbnail();
       }
     }
     .content-wrap {
@@ -95,8 +95,7 @@
         display: inline-block;
         width: 23px;
         height: 23px;
-        background-color: $point-color;
-        background-size: cover;
+        @include thumbnail();
         border-radius: 50%;
       }
       .host-name {

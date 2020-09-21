@@ -68,11 +68,6 @@ body.dark {
       }
     }
   }
-  // .search-wrap {
-  //   input {
-  //     color: $dark-font-primary-color;
-  //   }
-  // }
   .filter-wrap {
     button {
       color: $dark-font-primary-color;
@@ -174,12 +169,6 @@ body.dark {
             }
           }
         }
-        .button-wrap {
-          .favoriteButton-wrap {
-            &.act svg {
-            }
-          }
-        }
       }
     }
   }
@@ -215,6 +204,11 @@ body.dark {
   .title,
   .logout-section h3 {
     color: $dark-font-primary-color;
+  }
+
+  .profile-section input {
+    background: #24272b;
+    color: #b6b7b8;
   }
 
   .thumb-guide,

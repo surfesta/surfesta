@@ -6,11 +6,25 @@
   position: absolute;
   width: 100vw;
   background-color: $secondary-color;
-  z-index: 99;
+  z-index: 40;
+  padding: 0.4rem 3rem 1rem;
+
+  &.animated {
+    background-color: springgreen;
+  }
+  .mobile-divider {
+    background-color: dimgray;
+    height: 1px;
+    width: 100%;
+  }
+
   li {
     @include font-normal;
     color: $dark-font-primary-color;
-    padding: 1.2rem 3.2rem;
+    font-weight: 400;
+    padding: 1.2rem 0.5rem;
+    margin: 1rem 0;
+
     .sub-nav-div {
       width: 100%;
       max-width: 100%; //to cancel preset

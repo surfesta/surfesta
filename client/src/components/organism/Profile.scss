@@ -1,6 +1,6 @@
-@import "../../style/mediaQuery";
-@import "../../style/variables";
-@import "../../style/mixin";
+@import '../../style/mediaQuery';
+@import '../../style/variables';
+@import '../../style/mixin';
 
 @mixin font-title {
   font-size: 3.5rem;
@@ -49,8 +49,6 @@
     font-size: 1.5rem;
   }
   .thumb-div {
-    margin-top: 20px;
-
     .custom-thumbnail-input {
       visibility: hidden;
       height: 0;
@@ -60,8 +58,8 @@
       cursor: pointer;
       border-radius: 150px;
       margin: 0 auto;
-      width: 300px;
-
+      width: 400px;
+      @include Flex();
       .profile-thumb {
         -webkit-user-drag: none;
         -moz-user-drag: none;
@@ -70,8 +68,9 @@
         height: 300px;
         border-radius: 150px;
         display: flex;
-        background-color: rgb(204, 204, 204);
-        margin: 0 auto;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
       }
     }
   }

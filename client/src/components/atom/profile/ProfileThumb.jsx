@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
-import axios from "axios";
-import { validateFileInput } from "../../../utils/validateFileInput";
-import UploadService from "../../../services/UploadService";
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
+import { validateFileInput } from '../../../utils/validateFileInput';
+import UploadService from '../../../services/UploadService';
 
 function ProfileThumb({ profileImg, setProfileImg }) {
   const titleRef = useRef(null);
@@ -10,10 +10,10 @@ function ProfileThumb({ profileImg, setProfileImg }) {
 
   useEffect(() => {
     const titleNode = titleRef.current;
-    titleNode.setAttribute("tabindex", -1);
+    titleNode.setAttribute('tabindex', -1);
     titleNode.setAttribute(
-      "aria-label",
-      "나의 프로필 정보를 수정하는 페이지입니다."
+      'aria-label',
+      '나의 프로필 정보를 수정하는 페이지입니다.',
     );
     titleNode.focus();
   }, []);
@@ -23,7 +23,7 @@ function ProfileThumb({ profileImg, setProfileImg }) {
       const _file_data = e.target.files[0];
       if (!validateFileInput(_file_data)) return;
       const formData = new FormData();
-      formData.append("file", _file_data);
+      formData.append('file', _file_data);
 
       try {
         const { filePath } = await UploadService.uploadImage(formData);
@@ -32,7 +32,7 @@ function ProfileThumb({ profileImg, setProfileImg }) {
         console.warn(err);
       }
     },
-    [validateFileInput, setProfileImg]
+    [validateFileInput, setProfileImg],
   );
 
   return (
@@ -53,7 +53,12 @@ function ProfileThumb({ profileImg, setProfileImg }) {
           className="custom-thumbnail-label profile-thumb"
           htmlFor="customFile"
         >
-          <img className="profile-thumb" src={profileImg} alt="" />
+          <div
+            className="profile-thumb"
+            style={{
+              backgroundImage: `url(${profileImg})`,
+            }}
+          />
         </label>
         <span className="thumb-guide">
           png, jpg, jpeg 이미지만 업로드 가능해요.

@@ -30,7 +30,6 @@ export default function Search({ searchedKeyword }) {
 
   useEffect(() => {
     let ignore = false;
-
     async function getBackground() {
       const response = await axios.get(`${URL}/photos/random`, {
         params: {
@@ -41,7 +40,6 @@ export default function Search({ searchedKeyword }) {
       });
       if (!ignore) setImgs(response.data[0].urls.regular);
     }
-
     getBackground();
     return () => {
       ignore = true;

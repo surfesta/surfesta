@@ -1,6 +1,6 @@
-@import "../../style/variables";
-@import "../../style/mixin";
-@import "../../style/mediaQuery";
+@import '../../style/variables';
+@import '../../style/mixin';
+@import '../../style/mediaQuery';
 
 #modal-container * :not(input) {
   -moz-user-select: none;
@@ -40,6 +40,10 @@
   width: 37vw;
   min-height: 30vh;
   padding: 5rem 3rem 5rem;
+  &.deact {
+    min-height: 20vh;
+  }
+
   &.confirm-modal {
     padding: 6rem 3rem;
     min-height: 100px;

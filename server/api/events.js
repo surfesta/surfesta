@@ -53,6 +53,22 @@ router.get('/search', (req, res) => {
       res.json(events);
     });
 });
+
+router.get('/:event_id/attendee/search', (req, res) => {
+  Event.findOne({ _id: req.params.event_id })
+    .populate('host')
+    .populate('enlisted_users')
+    .populate('attended_users')
+    .exec((err, event) => {
+      if (err) return res.status(500).json({ error: err });
+      if (!event || event.length === 0)
+        return res.status(404).json({ error: 'event not found' });
+      const users = event.enlisted_users.filter((user) => {
+        return user.username.match(new RegExp(req.query.q));
+      });
+      res.json(users);
+    });
+});
 // GET SINGLE Event
 router.get('/:event_id', (req, res) => {
   Event.findOne({ _id: req.params.event_id })

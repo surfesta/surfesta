@@ -1,5 +1,6 @@
 @import '../../../style/variables';
 @import '../../../style/mixin';
+@import '../../../style/mediaQuery';
 
 .social-login-button * {
   outline: none;
@@ -31,11 +32,14 @@
     .gg-button {
       width: 100%;
       background-color: transparent;
-      display: flex;
-      align-items: center;
-      span {
-        flex-grow: 1;
-        text-align: center;
+      @include Flex();
+      & div {
+        transform: translate3d(-60%, 0, 0);
+        margin: 0 8px;
+      }
+      & span {
+        margin: 0 8px;
+        transform: translate3d(-20%, 0, 0);
       }
     }
   }
@@ -51,6 +55,34 @@
       background-color: inherit;
       font-family: 'Montserrat', 'Noto Sans kr', sans-serif !important;
     }
+  }
+  @include mobile {
+    &.facebook {
+      @include Flex();
+    }
+  }
+
+  @include mobile {
+    .gg-button {
+      @include Flex();
+      div {
+        transform: translate3d(-18px, 4px, 0) !important;
+      }
+      span {
+        font-size: 1.8rem;
+        transform: translate3d(-15px, 2px, 0) !important;
+      }
+    }
+  }
+  @include mobile {
+    .fb-button {
+      font-size: 1.8rem !important;
+    }
+  }
+  @include mobile {
+    display: block;
+    width: 90%;
+    margin: 1.3rem auto;
   }
 }
 

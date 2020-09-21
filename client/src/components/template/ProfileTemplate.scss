@@ -1,10 +1,6 @@
-@import "../../style/mediaQuery";
-@import "../../style/variables";
-@import "../../style/mixin";
-
-* {
-  box-sizing: border-box;
-}
+@import '../../style/mediaQuery';
+@import '../../style/variables';
+@import '../../style/mixin';
 
 @mixin font-title {
   font-size: 3.5rem;
@@ -17,7 +13,8 @@
     display: flex;
     justify-content: center;
     margin: 0 auto;
-    padding-bottom: 20px;
+    max-width: 1440px;
+    padding: 0 30px;
   }
 
   margin: 0 auto;
@@ -47,25 +44,23 @@
   }
 }
 
-.logout-section {
+section.logout-section {
   .logout-div,
   .deact-div {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    margin-top: 50px;
+    align-items: center;
   }
 
   @include font-title;
   border-top: 2px solid $tertiary-color;
-  display: flex;
-  justify-content: center;
-  width: 1380px;
   height: 100%;
+  margin-top: 50px;
 
   .logout-title-div,
   .deact-title-div {
-    padding-top: 2rem;
-
     span {
       display: block;
       margin-top: 2rem;
@@ -76,11 +71,19 @@
     padding: 2rem;
     width: 180px;
   }
-  padding-top: 40px;
+  .logout-div {
+    padding-right: 70px;
+  }
+  .deact-div {
+    padding-left: 60px;
+  }
 }
 
 @include mobile {
   .profile {
+    section {
+      width: 100%;
+    }
     .profile-section,
     .logout-section {
       display: block;
@@ -93,6 +96,16 @@
       }
       .logout-div {
         margin-bottom: 5rem;
+        padding-right: 0;
+        .logout-btn-div {
+          margin-top: 4rem;
+        }
+      }
+      .deact-div {
+        padding-left: 0;
+        .deact-btn-div {
+          margin-top: 4rem;
+        }
       }
     }
   }
@@ -110,9 +123,21 @@
 
 @include tablet {
   .profile {
+    section {
+      width: 100%;
+    }
     .profile-section,
     .logout-section {
       padding: 0 30px;
+    }
+    .logout-section {
+      display: block;
+      .logout-div {
+        padding-right: 0;
+      }
+      .deact-div {
+        padding-left: 0;
+      }
     }
   }
   .profile-section,
@@ -122,9 +147,9 @@
 }
 
 @include desktop {
-  .profile-section,
-  .logout-section {
-    width: 1024px;
-    margin: 0 auto;
+  .profile {
+    section {
+      width: 100%;
+    }
   }
 }

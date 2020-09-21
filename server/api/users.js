@@ -287,10 +287,10 @@ router.post('/login', async (req, res, next) => {
         res.cookie('surf_auth', user.token, {
           maxAge: user.tokenMaxAge,
           httpOnly: false,
-          sameSite: process.env.NODE_ENV === 'production' ? 'lax' : undefined,
-          domain:
-            process.env.NODE_ENV === 'production' ? 'surfesta.site' : undefined,
-          secure: process.env.NODE_ENV === 'production' ? true : undefined,
+          // sameSite: process.env.NODE_ENV === 'production' ? 'lax' : undefined,
+          // domain:
+          //   process.env.NODE_ENV === 'production' ? 'surfesta.site' : undefined,
+          // secure: process.env.NODE_ENV === 'production' ? true : undefined,
         });
         res.status(200).json({
           loginResult: true,

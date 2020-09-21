@@ -5,13 +5,10 @@ import { IconButton } from '@material-ui/core';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import SearchIcon from '@material-ui/icons/Search';
 import './HostTemplate.scss';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import EventService from '../../../services/EventService';
 import { startAttendUser } from '../../../redux/modules/events';
 import { useCallback } from 'react';
-import { useEffect } from 'react';
-import { push } from 'connected-react-router';
 
 export default function HostTemplate({ event_id }) {
   const hostingEvent = useSelector((state) =>
@@ -19,7 +16,7 @@ export default function HostTemplate({ event_id }) {
   );
 
   const dispatch = useDispatch();
-  const [users, setUsers] = useState([]);
+  const [filteredUsers, setfilteredUsers] = useState([]);
 
   const handleClick = useCallback(
     (user_id, type) => {
@@ -28,14 +25,13 @@ export default function HostTemplate({ event_id }) {
     [dispatch],
   );
 
-  const filterUsers = (e) => {
-    hostingEvent &&
-      setUsers(
-        hostingEvent.enlisted_users.filter((user) => {
-          user.username.match(new RegExp(e.target.value));
-        }),
-      );
-    console.log(users);
+  const filterUsers = async (e) => {
+    if (!(e.keyCode === 13)) return;
+    const users = await EventService.searchListedUsers({
+      event_id,
+      keyword: e.target.parentNode.firstChild.value,
+    });
+    setfilteredUsers(users);
   };
 
   return (
@@ -60,8 +56,8 @@ export default function HostTemplate({ event_id }) {
       </section>
       <section className="enlisted-list-features">
         <div className="listed-user-search">
-          <input type="text" placeholder="검색하기" onChange={filterUsers} />
-          <SearchIcon />
+          <input type="text" placeholder="검색하기" onKeyDown={filterUsers} />
+          <SearchIcon onClick={filterUsers} />
         </div>
         <Link
           to={{
@@ -80,7 +76,7 @@ export default function HostTemplate({ event_id }) {
       <AttendeeListing
         hostingEvent={hostingEvent}
         handleClick={handleClick}
-        users={users}
+        filteredUsers={filteredUsers}
       />
     </div>
   );

@@ -53,6 +53,12 @@ export default class EventService {
     const { data } = await axios.get(`${EVENT_URI}/search?q=${keyword}`);
     return data;
   }
+  static async searchListedUsers({ event_id, keyword }) {
+    const { data } = await axios.get(
+      `${EVENT_URI}/${event_id}/attendee/search?q=${keyword}`,
+    );
+    return data;
+  }
 
   static async deleteEvent(eventId) {
     await axios.delete(`${EVENT_URI}/${eventId}`);

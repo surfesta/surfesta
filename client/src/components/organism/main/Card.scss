@@ -1,6 +1,6 @@
-@import '../../../style/mediaQuery';
-@import '../../../style/variables';
-@import '../../../style/mixin';
+@import "../../../style/mediaQuery";
+@import "../../../style/variables";
+@import "../../../style/mixin";
 
 .card-wrap {
   position: relative;
@@ -117,8 +117,6 @@
       outline: none;
       background: transparent;
       cursor: pointer;
-      width: 4.4rem;
-      height: 4.4rem;
       @include Flex();
       transition: background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1) 0ms;
       overflow: hidden;

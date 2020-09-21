@@ -13,13 +13,14 @@ export default function Search({ searchedKeyword }) {
   const searchBack = useRef();
   const inputRef = useRef();
   const UNSPLASH_API_KEY = 'RGq76XlXseELsXOMgGPq_AglsX_DzwNUK1omuwzYGDc';
+
   const URL = 'https://api.unsplash.com';
 
   const searchEvents = () => {
     const keyword = inputRef.current.value.trim();
 
     dispatch(startSearchEvents(keyword));
-    keyword !== '' && dispatch(push(`/search/${keyword}`));
+    dispatch(push(`/search/${keyword}`));
   };
 
   const submit = (e) => {

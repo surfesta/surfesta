@@ -43,11 +43,6 @@ body.dark {
       .card-wrap {
         background-color: #2c3035;
         .cardContent-wrap {
-          .thumbnail-wrap {
-            .thumbnail {
-              background-color: #2c3035;
-            }
-          }
           .content-wrap {
             border-bottom: 1px #4b4b4b solid;
             .date {
@@ -228,7 +223,7 @@ body.dark {
     color: $dark-font-primary-color;
   }
   .qr-img {
-    filter: invert(1);
+    filter: invert(1) !important;
   }
 
   .enlisted-list-header {

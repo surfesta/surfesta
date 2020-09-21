@@ -1,0 +1,15 @@
+@import "../../../style/variables";
+@import "../../../style/mixin";
+@import "../../../style/mediaQuery";
+
+.confirm-btn {
+  @include modal-button;
+  &.cancel {
+    color: $font-secondary-color;
+    border-color: $font-secondary-color;
+    &:hover {
+      border-color: #fff;
+      color: #2c3035;
+    }
+  }
+}

@@ -7,7 +7,7 @@ const BASE_URL =
 const USER_URI = `${BASE_URL}/api/v1/users`;
 
 export default class UserService {
-  static async getUserDetail(userId) {
+  static async getUserDetail(userId = "") {
     const { data } = await axios.get(`${USER_URI}/${userId}`);
     return data;
   }

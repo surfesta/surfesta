@@ -13,6 +13,7 @@
 
   .form-div {
     margin-top: 20px;
+    display: flex;
   }
 
   .profile-info {
@@ -24,20 +25,20 @@
 
     .profile-btn {
       @include text-button;
-      margin-bottom: 5rem;
+      margin: 3rem 0 5rem 0;
     }
   }
 
   label {
-    display: block;
     margin-bottom: 10px;
+    padding: 10px 0 0 0;
+    width: 140px;
     font-size: 2.4rem;
     font-weight: 500;
   }
 
   input {
     @include font-normal;
-    display: block;
     margin-bottom: 10px;
     border-radius: 4px;
     border: none;
@@ -48,8 +49,6 @@
     font-size: 1.5rem;
   }
   .thumb-div {
-    margin-top: 20px;
-
     .custom-thumbnail-input {
       visibility: hidden;
       height: 0;
@@ -60,7 +59,7 @@
       border-radius: 200px;
       margin: 0 auto;
       width: 400px;
-
+      @include Flex();
       .profile-thumb {
         -webkit-user-drag: none;
         -moz-user-drag: none;
@@ -69,8 +68,7 @@
         height: 400px;
         border-radius: 200px;
         display: flex;
-        margin: 0 auto;
-        background-size: contain;
+        background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
       }

@@ -21,6 +21,7 @@ function Profile() {
   const [name, setName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [profileImg, setProfileImg] = useState('');
+  const [visible, setVisible] = useState(false);
 
   // page 컴포넌트인 MyPage 단에서 이미, user가 없으면 홈으로 보내기때문에 null체크가 불필요하다
   const userName = user && user.username;
@@ -41,10 +42,19 @@ function Profile() {
     setPhoneNumber(e.target.value);
   };
 
+  // const toggleVisibility = () => {
+  //   setVisible(true);
+  // };
+
   const handleSubmit = useCallback(() => {
     console.log(name, phoneNumber, profileImg);
     dispatch(patchUserActionCreator(name, phoneNumber, profileImg));
-  }, [dispatch, name, phoneNumber, profileImg]);
+
+    function toggleVisibility() {
+      return setVisible(true);
+    }
+    toggleVisibility();
+  }, [dispatch, name, phoneNumber, profileImg, setVisible]);
 
   return (
     <section className="profile-section">
@@ -61,6 +71,8 @@ function Profile() {
         user={user}
         name={name}
         phoneNumber={phoneNumber}
+        visible={visible}
+        setVisible={setVisible}
       />
     </section>
   );

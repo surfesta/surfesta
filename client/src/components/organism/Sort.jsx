@@ -11,7 +11,6 @@ export default function Sort({ sort, setSort, sortState }) {
 
   const handleClick = (e) => {
     if (e.target === selectListRef.current) return;
-    selectRef.current.textContent = e.target.textContent;
 
     toggleModal();
   };
@@ -29,7 +28,7 @@ export default function Sort({ sort, setSort, sortState }) {
   return (
     <div className='sort-wrap'>
       <button selected={selected} onClick={toggleModal}>
-        <span ref={selectRef}>Newest</span>
+        <span>{sort}</span>
         <span className='more'>
           <ExpandMoreIcon className={isShow ? 'rotataion' : ''} />
         </span>

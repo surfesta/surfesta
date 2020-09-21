@@ -93,7 +93,6 @@ $labelColor: #454b58;
 
 @mixin wrapSet {
   background: #f2f3f6;
-  margin-top: 7rem;
 }
 
 @mixin titleFontSet($size: 2.4rem, $weight: normal) {
@@ -132,7 +131,7 @@ $labelColor: #454b58;
   grid-row: $row;
 }
 @mixin VirtualFill($pos: absolute) {
-  content: '';
+  content: "";
   position: $pos;
   top: 0;
   left: 0;
@@ -140,7 +139,7 @@ $labelColor: #454b58;
   height: 100%;
 }
 @mixin Virtual($pos: absolute) {
-  content: '';
+  content: "";
   position: $pos;
 }
 @mixin Size($width: 100%, $height: 100%) {

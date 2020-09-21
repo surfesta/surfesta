@@ -16,8 +16,20 @@ import TermsCheck from "../../molecule/createEvent/TermsCheck";
 import EventService from "../../../services/EventService";
 import UserService from "../../../services/UserService";
 import Portal from "../../Portal";
+import { useEffect } from "react";
+
+const onUnload = (e) => {
+  e.preventDefault();
+  window.scrollTo(0, 0);
+  e.returnValue = "이 페이지를 벗어나면 정성스럽게 작성한 글이 날아가요.";
+};
 
 const EventForm = () => {
+  useEffect(() => {
+    window.addEventListener("beforeunload", onUnload);
+
+    return () => window.removeEventListener("beforeunload", onUnload);
+  });
   const _preventDefault = useCallback((e) => {
     if (e.keyCode === 13) {
       e.preventDefault();
@@ -233,6 +245,7 @@ const EventForm = () => {
     setClearPost(true);
   }
   function goHome() {
+    window.removeEventListener("beforeunload", onUnload);
     window.location.href = "/";
   }
   return (

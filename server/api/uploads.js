@@ -20,8 +20,8 @@ const upload = multer({
     bucket: "surfesta2",
     key: function (req, file, cb) {
       const extension = path.extname(file.originalname);
-      const basename = path.basename(file.originalname, extension);
-      cb(null, `event-thumbnails/${basename}-${Date.now()}${extension}`);
+      // const basename = path.basename(file.originalname, extension);
+      cb(null, `event-thumbnails/${Date.now()}${extension}`);
     },
     acl: "public-read-write",
   }),
@@ -42,9 +42,9 @@ router.post("/", upload.any(), (req, res, next) => {
 // const USER_URI = `http://localhost:5000/api/v1/users`;
 // const EVENT_URI = `http://localhost:5000/api/v1/events`;
 // const params = {
-//   Bucket: "surfesta",
+//   Bucket: "surfesta2",
 // };
-// const prefix = "https://surfesta.s3.ap-northeast-2.amazonaws.com";
+// const prefix = "https://surfesta2.s3.ap-northeast-2.amazonaws.com";
 // s3.listObjects(params, async function (err, data) {
 //   if (err) console.log(err, err.stack);
 //   // an error occurred
@@ -65,7 +65,7 @@ router.post("/", upload.any(), (req, res, next) => {
 //     });
 //     console.log(delObj);
 //     const params = {
-//       Bucket: "surfesta",
+//       Bucket: "surfesta2",
 //       Delete: {
 //         Objects: delObj,
 //       },

@@ -36,7 +36,8 @@ function App() {
     locale: 'ko',
     title: 'Surfesta! - 이벤트를 찾는 빠른 방법',
     canonical: 'https://surfesta.site',
-    description: '서페스타입니다',
+    description: '지금 다가오는 🔥핫한 테크 이벤트. 한 곳에서 확인하세요!',
+    canonical: 'https://surfesta.site',
     image:
       'https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/3110e469822527.5b8ed1c3d5977.jpg',
   };
@@ -49,14 +50,14 @@ function App() {
           <ConnectedRouter history={history}>
             <HeaderTemplate />
             <Switch>
-              <Route path='/qr/:event_id' component={QrScanner} />
-              <Route path='/reviseEvent/:event_id' component={ReviseEvent} />
-              <Route path='/createEvent' component={CreateEvent} />
-              <Route path='/event/:event_id' component={EventDetail} />
-              <Route path='/search/:keyword' component={Search} />
-              <Route path='/my/host/:event_id' component={HostOffice} />
-              <Route path='/my' component={MyPage} />
-              <Route path='/' component={Home} />
+              <Route path="/qr/:event_id" component={QrScanner} />
+              <Route path="/reviseEvent/:event_id" component={ReviseEvent} />
+              <Route path="/createEvent" component={CreateEvent} />
+              <Route path="/event/:event_id" component={EventDetail} />
+              <Route path="/search/:keyword" component={Search} />
+              <Route path="/my/host/:event_id" component={HostOffice} />
+              <Route path="/my" component={MyPage} />
+              <Route path="/" component={Home} />
             </Switch>
             <FooterTemplate />
           </ConnectedRouter>

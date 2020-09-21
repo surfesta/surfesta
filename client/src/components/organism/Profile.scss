@@ -61,7 +61,8 @@
       cursor: pointer;
       border-radius: 150px;
       margin: 0 auto;
-
+      width: 400px;
+      @include Flex();
       .profile-thumb {
         -webkit-user-drag: none;
         -moz-user-drag: none;
@@ -70,8 +71,9 @@
         height: 250px;
         border-radius: 150px;
         display: flex;
-        background-color: rgb(204, 204, 204);
-        margin: 0 auto;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
       }
     }
   }

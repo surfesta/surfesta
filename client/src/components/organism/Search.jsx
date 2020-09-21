@@ -1,10 +1,10 @@
-import React, { useRef, useEffect, useCallback, useState } from 'react';
-import SearchButton from '../atom/main/SearchButton';
-import './Search.scss';
-import { useSelector, useDispatch } from 'react-redux';
-import { push } from 'connected-react-router';
-import { startSearchEvents } from '../../redux/modules/events';
-import axios from 'axios';
+import React, { useRef, useEffect, useCallback, useState } from "react";
+import SearchButton from "../atom/main/SearchButton";
+import "./Search.scss";
+import { useSelector, useDispatch } from "react-redux";
+import { push } from "connected-react-router";
+import { startSearchEvents } from "../../redux/modules/events";
+import axios from "axios";
 
 export default function Search({ searchedKeyword }) {
   const dispatch = useDispatch();
@@ -12,9 +12,9 @@ export default function Search({ searchedKeyword }) {
   const [value, setValue] = useState(searchedKeyword);
   const searchBack = useRef();
   const inputRef = useRef();
-  // const UNSPLASH_API_KEY = 'RGq76XlXseELsXOMgGPq_AglsX_DzwNUK1omuwzYGDc';
-  const UNSPLASH_API_KEY = 'yhw2eRSWUjNPVMJkZr5YEPkZJgvxkcSb4Zi_pAJrMu0';
-  const URL = 'https://api.unsplash.com';
+  const UNSPLASH_API_KEY = "RGq76XlXseELsXOMgGPq_AglsX_DzwNUK1omuwzYGDc";
+
+  const URL = "https://api.unsplash.com";
 
   const searchEvents = () => {
     const keyword = inputRef.current.value.trim();
@@ -35,7 +35,7 @@ export default function Search({ searchedKeyword }) {
       const response = await axios.get(`${URL}/photos/random`, {
         params: {
           client_id: UNSPLASH_API_KEY,
-          collections: '35262406',
+          collections: "35262406",
           count: 1,
         },
       });
@@ -50,28 +50,28 @@ export default function Search({ searchedKeyword }) {
 
   return (
     <div
-      className='search-back'
+      className="search-back"
       ref={searchBack}
       style={{
         backgroundImage: `url(${imgs})`,
-        backgroundPosition: 'center',
+        backgroundPosition: "center",
       }}
     >
-      <div className='search-wrap'>
-        <div className='center'>
+      <div className="search-wrap">
+        <div className="center">
           <form onSubmit={submit}>
             <input
-              placeholder='어떤 이벤트를 찾고 계세요?'
-              aria-label='검색'
+              placeholder="어떤 이벤트를 찾고 계세요?"
+              aria-label="검색"
               ref={inputRef}
               onChange={(e) => {
                 setValue(e.target.value);
               }}
-              value={value ? value : ''}
-              className={value ? 'value' : ''}
+              value={value ? value : ""}
+              className={value ? "value" : ""}
             />
           </form>
-          <div className='search-btn' onClick={searchEvents}>
+          <div className="search-btn" onClick={searchEvents}>
             <SearchButton />
           </div>
         </div>

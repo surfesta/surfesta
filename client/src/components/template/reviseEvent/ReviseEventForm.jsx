@@ -11,9 +11,13 @@ import EventMaxPerson from "../../molecule/createEvent/EventMaxPerson";
 import EventThumbnail from "../../organism/createEvent/EventThumbnail";
 import EventContent from "../../molecule/createEvent/EventContent";
 import EventDate from "../../molecule/createEvent/EventDate";
-import axios from "axios";
 import EventService from "../../../services/EventService";
+import Portal from "../../Portal";
 
+const onUnload = (e) => {
+  e.preventDefault();
+  e.returnValue = "이 페이지를 벗어나면 정성스럽게 수정한 글이 날아가요.";
+};
 export default function ReviseEventForm({ curEvent }) {
   useEffect(() => {
     $isOpen.current.checked = curEvent.isOpen;
@@ -39,8 +43,13 @@ export default function ReviseEventForm({ curEvent }) {
     $price.current.disabled = true;
     $maxPerson.current.value = curEvent.max_count;
     $thumbnailImage.current.src = curEvent.thumbnail;
+
+    window.addEventListener("beforeunload", onUnload);
+
+    return () => window.removeEventListener("beforeunload", onUnload);
   }, []);
   function goHome() {
+    window.removeEventListener("beforeunload", onUnload);
     window.location.href = "/";
   }
   function openToggle(e) {
@@ -217,18 +226,16 @@ export default function ReviseEventForm({ curEvent }) {
   return (
     <div className="revise-event-form">
       {clearPatch && (
-        <div className="goback-modal-container">
-          <div className="inner-modal">
-            <div className="modal-body top-body">
-              <p>이벤트 수정이 완료되었습니다.</p>
-            </div>
-            <div className="modal-foot">
-              <button onClick={goHome} type="button" className="one-btn">
+        <Portal>
+          <div id="modal-container">
+            <div id="modal" className="confirm-modal">
+              <h1>이벤트 수정이 완료되었습니다.</h1>
+              <button className="confirm" type="button" onClick={goHome}>
                 확인
               </button>
             </div>
           </div>
-        </div>
+        </Portal>
       )}
       <h1 className="main-title">이벤트 수정하기</h1>
       <form

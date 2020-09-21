@@ -14,7 +14,6 @@
   display: block;
   max-width: 1440px;
   margin: 0 auto;
-  // min-height: 700px;
   h2 {
     font-size: 3.5rem;
     color: $primary-color;
@@ -30,8 +29,18 @@
   .cards {
     display: flex;
     flex-flow: row wrap;
+    align-items: center;
     padding: 20px 0px 30px 30px;
     min-height: 430px;
+    .no-event-text {
+      @include font(3rem, $color: $dark-font-secondary-color);
+      text-align: center;
+      width: 100%;
+      img {
+        width: 3rem;
+        margin-left: 1rem;
+      }
+    }
   }
 }
 

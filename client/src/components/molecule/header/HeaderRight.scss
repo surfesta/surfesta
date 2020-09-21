@@ -4,6 +4,11 @@
 .header-right {
   display: flex;
   align-items: center;
+  min-width: 130px;
+
+  &.only-mobile {
+    min-width: unset;
+  }
 
   .MuiSvgIcon-root {
     width: 1.4em !important;

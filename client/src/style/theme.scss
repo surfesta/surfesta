@@ -7,6 +7,7 @@ body.dark {
     background-color: #1b1d21;
     transition: all 0.2s ease-in-out;
   }
+
   .filter-wrap {
     button {
       .more {
@@ -42,11 +43,6 @@ body.dark {
       .card-wrap {
         background-color: #2c3035;
         .cardContent-wrap {
-          .thumbnail-wrap {
-            .thumbnail {
-              background-color: #2c3035;
-            }
-          }
           .content-wrap {
             border-bottom: 1px #4b4b4b solid;
             .date {
@@ -94,6 +90,9 @@ body.dark {
         #date-picker-inline-helper-text,
         #time-picker-helper-text {
           color: #fff;
+        }
+        .MuiInput-underline:before {
+          border-bottom: 1px solid rgba(255, 255, 255, 0.42);
         }
         .eventform-title {
           color: $dark-font-primary-color;
@@ -227,7 +226,7 @@ body.dark {
     color: $dark-font-primary-color;
   }
   .qr-img {
-    filter: invert(1);
+    filter: invert(1) !important;
   }
 
   .enlisted-list-header {

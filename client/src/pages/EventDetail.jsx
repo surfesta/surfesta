@@ -5,5 +5,9 @@ import EventDetailTemplateContainer from '../containers/EventDetailTemplateConta
 export default function EventDetail(props) {
   const eventId = props.match.params.event_id;
 
-  return <EventDetailTemplateContainer eventId={eventId} />;
+  return (
+    <div className='init-height'>
+      <EventDetailTemplateContainer eventId={eventId} />
+    </div>
+  );
 }

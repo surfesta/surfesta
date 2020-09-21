@@ -30,7 +30,7 @@ export default function ReviseEvent({ history, location }) {
   if (!clientCookie) return <Redirect to="/" />;
 
   return (
-    <>
+    <div className="init-height">
       {authDone && (
         <>
           <RouteLeavingGuard
@@ -56,6 +56,6 @@ export default function ReviseEvent({ history, location }) {
           </div>
         </>
       )}
-    </>
+    </div>
   );
 }

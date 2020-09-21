@@ -49,14 +49,14 @@ function App() {
           <ConnectedRouter history={history}>
             <HeaderTemplate />
             <Switch>
-              <Route path='/qr/:event_id' component={QrScanner} />
-              <Route path='/reviseEvent/:event_id' component={ReviseEvent} />
-              <Route path='/createEvent' component={CreateEvent} />
-              <Route path='/event/:event_id' component={EventDetail} />
-              <Route path='/search/:keyword' component={Search} />
-              <Route path='/my/host/:event_id' component={HostOffice} />
-              <Route path='/my' component={MyPage} />
-              <Route path='/' component={Home} />
+              <Route path="/qr/:event_id" component={QrScanner} />
+              <Route path="/reviseEvent/:event_id" component={ReviseEvent} />
+              <Route path="/createEvent" component={CreateEvent} />
+              <Route path="/event/:event_id" component={EventDetail} />
+              <Route path="/search/:keyword" component={Search} />
+              <Route path="/my/host/:event_id" component={HostOffice} />
+              <Route path="/my" component={MyPage} />
+              <Route path="/" component={Home} />
             </Switch>
             <FooterTemplate />
           </ConnectedRouter>

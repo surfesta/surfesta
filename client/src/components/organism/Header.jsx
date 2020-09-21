@@ -15,7 +15,7 @@ import MobileDrawer from '../molecule/header/MobileDrawer';
 import SubNav from './SubNav';
 import LogoutDiv from '../molecule/profile/LogoutDiv';
 import ProfileBtn from '../atom/profile/ProfileBtn';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import MobileHeaderRight from './MobileHeaderRight';
 import LoginButton from '../atom/header/LoginButton';
 import UserService from '../../services/UserService';
@@ -24,7 +24,6 @@ import { cookieCheckSagaActionCreator } from '../../redux/modules/auth';
 function Header() {
   const user = useSelector((state) => state.auth.user);
   const location = useSelector((state) => state.router.location.pathname);
-  const width = useWindowWidth();
   const [visible, setVisible] = useState(false);
   const dispatch = useDispatch();
 
@@ -73,32 +72,31 @@ function Header() {
             <li>{!user && <LoginButton handleclick={handleLogin} />}</li>
             {user && (
               <>
-                <hr />
                 <li>
-                  <NavLink to="/my/profile" activeClassName="clicked">
+                  <Link to="/my/profile">
                     <div className="sub-nav-div">프로필</div>
-                  </NavLink>
+                  </Link>
                 </li>
                 <li>
-                  <NavLink to="/my/event/enlisted" activeClassName="clicked">
+                  <Link to="/my/event/enlisted">
                     <div className="sub-nav-div">참가신청한 이벤트</div>
-                  </NavLink>
+                  </Link>
                 </li>
                 <li>
-                  <NavLink to="/my/event/hosting" activeClassName="clicked">
+                  <Link to="/my/event/hosting">
                     <div className="sub-nav-div">주최한 이벤트 </div>
-                  </NavLink>
+                  </Link>
                 </li>
                 <li>
-                  <NavLink to="/my/event/liked" activeClassName="clicked">
+                  <Link to="/my/event/liked">
                     <div className="sub-nav-div">찜한 이벤트</div>
-                  </NavLink>
+                  </Link>
+                </li>
+                <li>
+                  <PostEventButton handleClick={handlePostEvent} />
                 </li>
               </>
             )}
-            <li>
-              <PostEventButton handleClick={handlePostEvent} />
-            </li>
             <li>
               <ProfileBtn name="로그아웃 하기" handleclick={handleLogout} />
             </li>

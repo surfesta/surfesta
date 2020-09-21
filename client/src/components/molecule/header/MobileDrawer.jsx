@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './MobileDrawer.scss';
 
-export default function MobileDrawer({ children }) {
-  return <div className="mobile-drawer">{children}</div>;
+export default function MobileDrawer(props) {
+  return <div className="mobile-drawer">{props.children}</div>;
 }

@@ -1,3 +1,4 @@
+@import './mediaQuery';
 @import './mixin';
 @import './variables';
 
@@ -276,5 +277,11 @@ body.dark {
       box-shadow: none;
       border: 1px solid #252627;
     }
+  }
+}
+
+@include mobile {
+  body.dark .filter-wrap button .more {
+    background-color: transparent;
   }
 }

@@ -1,6 +1,13 @@
 #logo {
   font-family: 'Damion', cursive;
-  font-size: 3.6rem;
-  color: white;
   cursor: pointer;
+  transform: translate3d(0, 0.3rem, 0);
+
+  width: 11rem;
+
+  path {
+    fill: white;
+    stroke: white;
+    stroke-width: 0.03rem;
+  }
 }

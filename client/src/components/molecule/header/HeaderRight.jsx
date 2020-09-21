@@ -18,7 +18,7 @@ export default function HeaderRight({ handleLogin }) {
   useEffect(() => setTimeout(() => setvisible(true), 280), []);
 
   return (
-    <div style={{ width: 132, display: 'flex', justifyContent: 'right' }}>
+    <div className="header-right-wrapper">
       {visible && (
         <section className="header-right">
           <ThemeIndicator />

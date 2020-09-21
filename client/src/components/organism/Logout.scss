@@ -1,6 +1,6 @@
-@import "../../style/mediaQuery";
-@import "../../style/variables";
-@import "../../style/mixin";
+@import '../../style/mediaQuery';
+@import '../../style/variables';
+@import '../../style/mixin';
 
 * {
   box-sizing: border-box;
@@ -18,25 +18,32 @@
   }
   .logout-btn-div,
   .deact-btn-div {
-    transform: translateY(50% - 20%);
-    margin-right: 2rem;
+    // transform: translateY(50% - 20%);
+    // margin-right: 2rem;
+    // margin-top: 1rem;
   }
 
   .logout-div {
     border-right: 2px solid $tertiary-color;
   }
-
+  .logout-title-div,
   .deact-title-div {
-    padding-left: 2rem;
+    // padding: 0 2rem;
+    word-break: keep-all;
   }
 }
 
 // 미디어 쿼리
 @include mobile {
-  .logout-section {
+  section.logout-section {
     width: 100%;
     display: block;
     padding-top: 10px;
+    text-align: center;
+
+    .logout-div {
+      border-right: none;
+    }
 
     .logout-title-div span,
     .deact-title-div span {
@@ -47,39 +54,9 @@
 }
 
 @include tablet {
-  .logout-section {
-    margin: 0 auto;
-
+  section.logout-section {
     .logout-div {
       border-right: none;
-    }
-
-    .logout-title-div,
-    .deact-title-div {
-      margin-top: 20px;
-      margin-left: 5px;
-    }
-
-    .logout-btn-div,
-    .deact-btn-div {
-      margin-top: 20px;
-    }
-  }
-}
-
-@include desktop {
-  .logout-section {
-    width: 1024px;
-    margin: 0 auto;
-
-    .logout-title-div,
-    .deact-title-div {
-      margin-left: 2rem;
-    }
-
-    .logout-btn-div,
-    .deact-btn-div {
-      right: 20px;
     }
   }
 }

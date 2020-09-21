@@ -13,9 +13,9 @@ export default function EnlistedPageButtons({ event }) {
   const [qrSelect, setQrSelect] = useState(false);
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
-  const qr = `https://api.qrserver.com/v1/create-qr-code/?data=${user._id}&size=240x240`;
   const eventId = event && event._id;
   const userId = user && user._id;
+  const qr = `https://api.qrserver.com/v1/create-qr-code/?data=${userId}&size=240x240`;
 
   const toggleEnlisted = () => {
     dispatch(toggleEnlistedEvent(eventId, userId, false));
@@ -25,7 +25,6 @@ export default function EnlistedPageButtons({ event }) {
 
   return (
     <>
-      <img src={qr} style={{ display: "none" }} hidden />
       <IconButton
         ref={btnRef}
         className="qr-imgbox"

@@ -22,8 +22,12 @@
     margin-right: 2rem;
   }
 
-  .logout-div ::after {
+  .logout-div {
     border-right: 2px solid $tertiary-color;
+  }
+
+  .deact-title-div {
+    padding-left: 2rem;
   }
 }
 
@@ -45,6 +49,10 @@
 @include tablet {
   .logout-section {
     margin: 0 auto;
+
+    .logout-div {
+      border-right: none;
+    }
 
     .logout-title-div,
     .deact-title-div {

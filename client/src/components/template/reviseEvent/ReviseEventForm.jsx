@@ -14,6 +14,10 @@ import EventDate from "../../molecule/createEvent/EventDate";
 import EventService from "../../../services/EventService";
 import Portal from "../../Portal";
 
+const onUnload = (e) => {
+  e.preventDefault();
+  e.returnValue = "이 페이지를 벗어나면 정성스럽게 수정한 글이 날아가요.";
+};
 export default function ReviseEventForm({ curEvent }) {
   useEffect(() => {
     $isOpen.current.checked = curEvent.isOpen;
@@ -39,8 +43,13 @@ export default function ReviseEventForm({ curEvent }) {
     $price.current.disabled = true;
     $maxPerson.current.value = curEvent.max_count;
     $thumbnailImage.current.src = curEvent.thumbnail;
+
+    window.addEventListener("beforeunload", onUnload);
+
+    return () => window.removeEventListener("beforeunload", onUnload);
   }, []);
   function goHome() {
+    window.removeEventListener("beforeunload", onUnload);
     window.location.href = "/";
   }
   function openToggle(e) {

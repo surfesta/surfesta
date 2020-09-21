@@ -47,7 +47,6 @@ function Profile() {
   // };
 
   const handleSubmit = useCallback(() => {
-    console.log(name, phoneNumber, profileImg);
     dispatch(patchUserActionCreator(name, phoneNumber, profileImg));
 
     function toggleVisibility() {

@@ -20,14 +20,6 @@ export default function ReviseEvent({ history, location }) {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    const onUnload = (e) => {
-      e.preventDefault();
-      e.returnValue = "이 페이지를 벗어나면 정성스럽게 수정한 글이 날아가요.";
-    };
-
-    window.addEventListener("beforeunload", onUnload);
-
-    return () => window.removeEventListener("beforeunload", onUnload);
   }, []);
 
   useEffect(() => {
@@ -38,7 +30,7 @@ export default function ReviseEvent({ history, location }) {
   if (!clientCookie) return <Redirect to="/" />;
 
   return (
-    <>
+    <div className="init-height">
       {authDone && (
         <>
           <RouteLeavingGuard
@@ -64,6 +56,6 @@ export default function ReviseEvent({ history, location }) {
           </div>
         </>
       )}
-    </>
+    </div>
   );
 }

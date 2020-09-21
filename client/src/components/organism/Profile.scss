@@ -71,6 +71,24 @@
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
+        position: relative;
+        &:hover {
+          filter: grayscale(30%);
+          &::before {
+            content: '';
+            position: absolute;
+            top: 150px;
+            left: 150px;
+            background-image: url(/img/camera.svg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: rgb(235, 235, 235);
+            border-radius: 80px;
+            height: 80px;
+            width: 80px;
+            transform: translate3d(-50%, -50%, 0);
+          }
+        }
       }
     }
   }

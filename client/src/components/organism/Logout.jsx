@@ -20,11 +20,9 @@ function LogoutSection() {
   }, [dispatch]);
 
   const handleDeactivate = useCallback(async () => {
-    // 메인으로돌아가기
-    // 로그아웃 사가 실행해서, 로그아웃(토큰 비우기) 요청, 다시 auth체크해서(애초에 홈에서만 auth하면되지않나)
-    dispatch(push('/'));
+    window.location.href = '/';
     window.scrollTo(0, 0);
-    const status = await UserService.deactivate(user);
+    await UserService.deactivate(user);
     dispatch(cookieCheckSagaActionCreator());
   }, [dispatch, user]);
 

@@ -23,11 +23,7 @@ const loginStart = () => ({
 });
 const loginSuccess = (user) => ({
   type: SUCCESS,
-  user: {
-    ...user,
-    phone_number:
-      user.phone_number === '' ? '0' + user.phone_number : user.phone_number,
-  },
+  user,
 });
 
 const loginFail = (error) => ({

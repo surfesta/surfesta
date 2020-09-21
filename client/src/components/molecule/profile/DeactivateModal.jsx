@@ -18,9 +18,12 @@ export default function DeactivateModal({ handleClick, setVisible }) {
           setVisible(false);
         }}
       >
-        <div id="modal">
-          <h1 className="modal-headline">정말 떠나시나요?😥</h1>
-          <button className="deactivate-button cancel" onClick={() => setVisible(false)}>
+        <div id="modal" className="deact">
+          <h1 className="modal-headline ">정말 떠나시나요?😥</h1>
+          <button
+            className="deactivate-button cancel"
+            onClick={() => setVisible(false)}
+          >
             취소
           </button>
           <button className="deactivate-button confirm" onClick={handleClick}>

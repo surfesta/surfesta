@@ -15,10 +15,12 @@ export default function HeaderRight({ handleLogin }) {
 
   const [visible, setvisible] = useState(false);
 
-  useEffect(() => setTimeout(() => setvisible(true), 280), []);
+  useEffect(() => {
+    setTimeout(() => setvisible(true), 280);
+  }, []);
 
   return (
-    <div style={{ width: 132, display: 'flex', justifyContent: 'right' }}>
+    <div className="header-right-wrapper">
       {visible && (
         <section className="header-right">
           <ThemeIndicator />
@@ -33,7 +35,10 @@ export default function HeaderRight({ handleLogin }) {
                 </NavLink>
               </>
             ) : (
-              <LoginButton handleclick={handleLogin} />
+              <LoginButton
+                className="header-login-button"
+                onClick={handleLogin}
+              />
             )}
           </div>
         </section>

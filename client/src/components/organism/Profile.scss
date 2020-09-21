@@ -20,7 +20,7 @@
     width: 690px;
   }
   .profile-form {
-    margin-top: 37px;
+    margin-top: 65px;
     width: 690px;
 
     .profile-btn {
@@ -58,17 +58,17 @@
 
     .custom-thumbnail-label {
       cursor: pointer;
-      border-radius: 200px;
+      border-radius: 150px;
       margin: 0 auto;
-      width: 400px;
+      width: 300px;
 
       .profile-thumb {
         -webkit-user-drag: none;
         -moz-user-drag: none;
         user-select: none;
-        width: 400px;
-        height: 400px;
-        border-radius: 200px;
+        width: 300px;
+        height: 300px;
+        border-radius: 150px;
         display: flex;
         background-color: rgb(204, 204, 204);
         margin: 0 auto;

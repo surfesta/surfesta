@@ -74,35 +74,40 @@ function Header() {
           <ul>
             <li onClick={handlePostEvent}>
               <Link to="/my/event/liked">
-                <div className="sub-nav-div">이벤트 주최하기</div>
+                <button className="sub-nav-div">이벤트 주최하기</button>
               </Link>
             </li>
             <div className="mobile-divider" />
             {!user && (
               <li>
-                <LoginButton handleclick={handleLogin} />
+                <button
+                  className="sub-nav-div mobile-login-button"
+                  onClick={handleLogin}
+                >
+                  로그인
+                </button>
               </li>
             )}
             {user && (
               <>
                 <li>
                   <Link to="/my/profile">
-                    <div className="sub-nav-div">프로필</div>
+                    <button className="sub-nav-div">프로필</button>
                   </Link>
                 </li>
                 <li>
                   <Link to="/my/event/enlisted">
-                    <div className="sub-nav-div">참가신청한 이벤트</div>
+                    <button className="sub-nav-div">참가신청한 이벤트</button>
                   </Link>
                 </li>
                 <li>
                   <Link to="/my/event/hosting">
-                    <div className="sub-nav-div">주최한 이벤트 </div>
+                    <button className="sub-nav-div">주최한 이벤트 </button>
                   </Link>
                 </li>
                 <li>
                   <Link to="/my/event/liked">
-                    <div className="sub-nav-div">찜한 이벤트</div>
+                    <button className="sub-nav-div">찜한 이벤트</button>
                   </Link>
                 </li>
               </>

@@ -20,14 +20,15 @@
 
   li {
     @include font-normal;
-    color: $dark-font-primary-color;
     font-weight: 400;
     padding: 1.2rem 0.5rem;
     margin: 1rem 0;
 
     .sub-nav-div {
+      color: $dark-font-primary-color;
       width: 100%;
       max-width: 100%; //to cancel preset
+      background-color: transparent;
       :active {
         background-color: none;
       }

@@ -50,7 +50,7 @@ export default function ReviseEventForm({ curEvent }) {
   }, []);
   function goHome() {
     window.removeEventListener("beforeunload", onUnload);
-    window.location.href = "/";
+    window.location.href = "/my/event/hosting";
   }
   function openToggle(e) {
     e.target.parentNode.classList.toggle("active");

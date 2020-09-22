@@ -224,7 +224,7 @@ body.dark {
     color: $dark-font-primary-color;
   }
   .qr-img {
-    filter: invert(1) !important;
+    filter: contrast(0.55) invert(1) !important;
   }
 
   .enlisted-list-header {

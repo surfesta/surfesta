@@ -118,16 +118,15 @@
       background: transparent;
       cursor: pointer;
       @include Flex();
-      transition: background-color 0.15s cubic-bezier(0.4, 0, 0.2, 1) 0ms;
       overflow: hidden;
       &:hover {
         background-color: rgba(0, 0, 0, 0.04);
       }
       .qr-img {
-        width: 2.4rem;
-        height: 2.4rem;
-        filter: contrast(0.5);
-        background: url(/img/qr-code.png) no-repeat;
+        width: 2rem;
+        height: 2rem;
+        filter: contrast(0.2);
+        background: url(/img/qr.png) no-repeat;
         background-size: cover;
         background-position: center;
       }

@@ -101,6 +101,9 @@ body.dark {
           input[type="text"] {
             background: #24272b;
             color: #b6b7b8;
+            &:disabled {
+              color: #3b3c3e;
+            }
           }
           .time-check {
             input[type="text"] {

@@ -1,0 +1,167 @@
+// @import './variables';
+//PANTONE
+// $Cerulean: #9bb7d4;
+// $FuchsiaRose: #c74375;
+// $TrueRed: #bf1932;
+// $AquaSkyl: #7bc4c4;
+// $Tigerlily: #e2583e;
+// $BlueTurquoise: #53b0ae;
+// $SandDollar: #decdbe;
+// $ChiliPepper: #9b1b30;
+// $BlueIris: #5a5b9f;
+// $Mimosa: #f0c05a;
+// $Turquoise: #45b5aa;
+// $Honeysuckle: #d94f70;
+// $TangerineTango: #dd4124;
+// $Emeraldl: #009473;
+// $RadiantOrchid: #b163a3;
+// $Marsala: #955251;
+// $RoseQuartz: #f7cac9;
+// $Serenity: #92a8d1;
+// $Greenery: #88b04b;
+// $UltraViolet: #5f4b8b;
+// $LivingCoral: #ff6f61;
+// $ClassicBlue: #0f4c81;
+
+@mixin font($size, $color: $font-primary-color, $weight: 500) {
+  font-size: $size;
+  color: $color;
+  font-weight: $weight;
+}
+@mixin font-normal {
+  font-size: 1.5rem;
+  color: $font-primary-color;
+}
+@mixin text-button {
+  box-sizing: border-box;
+  border: 2px solid $point-color;
+  background-color: transparent;
+  font-weight: 500;
+  color: $point-color;
+  text-align: center;
+  font-size: 1.5rem;
+  border-radius: 50px;
+  outline: 0;
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: $point-color;
+    color: #fff;
+  }
+}
+@mixin modal-button($border-color: #fff, $font-color: #fff) {
+  box-sizing: border-box;
+  border: 2px solid $border-color;
+  background-color: transparent;
+  font-weight: 500;
+  color: $font-color;
+  text-align: center;
+  font-size: 1.5rem;
+  border-radius: 50px;
+  outline: 0;
+  transition: all 0.3s;
+  padding: 22px 76px;
+  margin: 50px 15px 0px 15px;
+
+  &:hover {
+    border-color: #fff;
+    background-color: #fff;
+    color: #2c3035;
+  }
+}
+@mixin disable-button {
+  box-sizing: border-box;
+  border: 2px solid $tertiary-color;
+  background-color: $tertiary-color;
+  font-weight: 500;
+  color: $font-primary-color;
+  text-align: center;
+  font-size: 1.5rem;
+  border-radius: 50px;
+  outline: 0;
+  transition: all 0.3s;
+}
+@mixin thumbnail($color: transparent, $position: center) {
+  background-color: $color;
+  background-position: $position;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+$checkboxColor: #b4b4b5;
+$labelColor: #454b58;
+
+@mixin wrapSet {
+  background: #f2f3f6;
+}
+
+@mixin titleFontSet($size: 2.4rem, $weight: normal) {
+  color: $labelColor;
+  font-size: $size;
+  font-weight: $weight;
+}
+@mixin contentFontSet {
+  color: #717174;
+}
+@mixin placeholderSet {
+  color: #a0a0a2;
+}
+
+@mixin BgSet($path, $size, $pos: center) {
+  background: url($path);
+  background-size: $size;
+  background-position: $pos;
+  background-repeat: no-repeat;
+}
+@mixin Flex($justify: center, $align: center) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+}
+@mixin Grid($gap, $auto, $columns, $rows, $aria) {
+  display: grid;
+  grid-gap: $gap;
+  grid-auto-flow: $auto;
+  grid-template-columns: $columns;
+  grid-template-rows: $rows;
+  grid-area: $aria;
+}
+@mixin GridChild($column, $row) {
+  grid-column: $column;
+  grid-row: $row;
+}
+@mixin VirtualFill($pos: absolute) {
+  content: "";
+  position: $pos;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+@mixin Virtual($pos: absolute) {
+  content: "";
+  position: $pos;
+}
+@mixin Size($width: 100%, $height: 100%) {
+  width: $width;
+  height: $height;
+}
+@mixin Anim($duration, $timing, $delay: 0) {
+  $name: anim-#{unique-id()};
+
+  @keyframes #{$name} {
+    @content;
+  }
+
+  @keyframes #{$name} {
+    @content;
+  }
+  animation-name: $name;
+  animation-duration: $duration;
+  animation-timing-function: $timing;
+  animation-delay: $delay;
+}
+
+@mixin LinearGradient($deg, $color...) {
+  background: linear-gradient($deg, $color);
+}

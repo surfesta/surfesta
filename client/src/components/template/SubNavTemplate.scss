@@ -1,0 +1,71 @@
+@import '../../style/mixin';
+@import '../../style/variables';
+@import '../../style/mediaQuery';
+
+.sub-nav-section {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  background-color: #fff;
+  margin-bottom: 60px;
+
+  .sub-nav-div {
+    @include font(2rem, $font-primary-color, $weight: 500);
+    width: 345px;
+    padding: 35px 0;
+    cursor: pointer;
+  }
+
+  a {
+    overflow: hidden;
+    &.clicked::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 3px;
+      background-color: $point-color;
+      transform: translateX(0%);
+    }
+    &::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 3px;
+      background-color: $point-color;
+      transform: translateX(-100%);
+      transition: all 0.3s;
+    }
+    &:hover::after {
+      transform: translateX(0%);
+    }
+  }
+}
+
+@include mobile {
+  .sub-nav-section {
+    display: none;
+  }
+  .nav-link {
+    margin: 0 20px;
+  }
+  .sub-nav-div {
+    padding: 0 0px;
+    max-width: 90px;
+    word-break: keep-all;
+    cursor: pointer;
+  }
+}
+
+@include tablet {
+  .sub-nav-div {
+    max-width: 200px;
+    cursor: pointer;
+  }
+}
+
+@include desktop {
+  .sub-nav-div {
+    max-width: 260px;
+    cursor: pointer;
+  }
+}

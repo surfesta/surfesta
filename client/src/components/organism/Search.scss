@@ -1,0 +1,104 @@
+@import "../../style/mixin";
+@import "../../style/variables";
+@import "../../style/mediaQuery";
+
+.search-back {
+  @include Flex();
+  background-color: $dark-font-primary-color;
+  background-size: cover;
+  height: 180px;
+
+  .search-wrap {
+    width: 100%;
+    height: 100%;
+    background-color: #0b0f1999;
+    display: flex;
+    align-items: center;
+    .center {
+      position: relative;
+      width: 600px;
+      margin: 0 auto;
+      background-color: #ffffff26;
+      border-radius: 10px;
+      box-shadow: 0 0 5px 3px #00000020;
+      overflow: hidden;
+      input {
+        height: 6rem;
+        background-color: transparent;
+        width: 100%;
+        padding: 30px;
+        padding-right: 80px;
+        font-size: 2.4rem;
+        font-weight: 400;
+        outline: transparent;
+        color: $dark-font-primary-color;
+        border-radius: 10px;
+        box-sizing: border-box;
+        transition: all 0.1s;
+        color: $font-primary-color;
+        &::placeholder {
+          color: #c6c7ca;
+        }
+        &:focus {
+          // background-color: #1c1e22e3;
+          background-color: $dark-font-primary-color;
+        }
+        &.value {
+          color: $dark-font-primary-color;
+          &:focus {
+            color: $font-primary-color;
+          }
+        }
+      }
+      .search-btn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 8px 15px 8px 8px;
+        button svg {
+          font-size: 2rem;
+          color: #c6c7ca;
+        }
+      }
+    }
+  }
+}
+
+@include mobile {
+  .search-back {
+    height: 100px;
+    img {
+      width: 100%;
+      height: 100px;
+      overflow: hidden;
+    }
+    .search-wrap {
+      height: 100px;
+      .center {
+        width: 100%;
+        border-radius: 0;
+        background-color: transparent;
+        box-shadow: none;
+        input {
+          font-size: 2.4rem;
+          color: $dark-font-primary-color;
+          &.value {
+            color: $dark-font-primary-color;
+            &:focus {
+              color: $dark-font-primary-color;
+            }
+          }
+          &:focus {
+            background-color: transparent;
+            color: $dark-font-primary-color;
+          }
+        }
+        .search-btn {
+          button svg {
+            font-size: 2.4rem;
+          }
+        }
+      }
+    }
+  }
+}

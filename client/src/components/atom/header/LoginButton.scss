@@ -1,0 +1,14 @@
+@import '../../../style/variables';
+@import '../../../style/mixin';
+
+.header-login-button {
+  @include font-normal;
+  color: $dark-font-secondary-color;
+  font-weight: 600;
+  background-color: transparent;
+  padding: 1rem;
+
+  &:hover {
+    color: #c7c7c7;
+  }
+}

@@ -1,0 +1,71 @@
+@import '../../style/variables';
+@import '../../style/mixin';
+@import '../../style/mediaQuery';
+
+.main {
+  .select-wrap {
+    max-width: 1440px;
+    margin: 0 auto;
+    @include Flex(space-between, flex-end);
+    margin-top: 50px;
+  }
+}
+.cards-wrap {
+  display: block;
+  max-width: 1440px;
+  margin: 0 auto;
+  h2 {
+    font-size: 3.5rem;
+    color: $primary-color;
+    padding-left: 30px;
+  }
+  .img-wrap {
+    max-width: 500px;
+    margin: 0 auto;
+    img {
+      width: 100%;
+    }
+  }
+  .cards {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    padding: 20px 0px 30px 30px;
+    min-height: 430px;
+    .no-event-text {
+      @include font(3rem, $color: $dark-font-secondary-color);
+      text-align: center;
+      width: 100%;
+      word-break: keep-all;
+      img {
+        width: 3rem;
+        margin-left: 1rem;
+      }
+    }
+  }
+}
+
+@include mobile {
+  .main {
+    .select-wrap {
+      align-items: center;
+    }
+  }
+  .cards-wrap {
+    .img-wrap {
+      max-width: 300px;
+    }
+    .cards {
+      .no-event-text {
+        padding-right: 30px;
+      }
+    }
+  }
+}
+@include tablet {
+  .cards-wrap {
+    .img-wrap {
+      max-width: 400px;
+    }
+  }
+}

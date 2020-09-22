@@ -1,0 +1,62 @@
+@import '../../style/mediaQuery';
+@import '../../style/variables';
+@import '../../style/mixin';
+
+* {
+  box-sizing: border-box;
+}
+
+@mixin font-title {
+  font-size: 3.5rem;
+  color: $font-primary-color;
+}
+
+// 로그아웃, 회원탈퇴 영역
+.logout-section {
+  h3 {
+    font-size: 3.5rem;
+  }
+  .logout-btn-div,
+  .deact-btn-div {
+    // transform: translateY(50% - 20%);
+    // margin-right: 2rem;
+    // margin-top: 1rem;
+  }
+
+  .logout-div {
+    border-right: 2px solid $tertiary-color;
+  }
+  .logout-title-div,
+  .deact-title-div {
+    // padding: 0 2rem;
+    word-break: keep-all;
+  }
+}
+
+// 미디어 쿼리
+@include mobile {
+  section.logout-section {
+    width: 100%;
+    display: block;
+    padding-top: 10px;
+    text-align: center;
+
+    .logout-div {
+      border-right: none;
+    }
+
+    .logout-title-div span,
+    .deact-title-div span {
+      font-size: 1.5rem;
+      margin-top: 0;
+    }
+  }
+}
+
+@include tablet {
+  section.logout-section {
+    .logout-div {
+      border-right: none;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+#modal-root {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  scroll-behavior: initial;
+}
+
+#root {
+  scroll-behavior: smooth;
+  min-height: 100vh;
+  transition: all 0.2s ease-in-out;
+}

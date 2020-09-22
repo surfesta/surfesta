@@ -1,0 +1,182 @@
+@import "../../../style/mediaQuery";
+@import "../../../style/variables";
+@import "../../../style/mixin";
+
+.card-wrap {
+  position: relative;
+  width: calc(25% - 30px);
+  height: 100%;
+  margin: 0 30px 30px 0px;
+  border-radius: $radius;
+  background: #fff;
+  overflow: hidden;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  transition: all 0.3s;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 5px 8px #00000010;
+  }
+  .loading-wrap {
+    // background-color: #f2f3f6;
+    padding-top: 50px;
+    padding-bottom: 300px;
+    text-align: center;
+    span {
+      display: inline-block;
+      width: 5rem;
+      height: 5rem;
+      border: 0.3rem solid rgba(0, 0, 0, 0.1);
+      border-radius: 50%;
+      border-top-color: $point-color;
+      animation: spin 1s ease-in-out infinite;
+      -webkit-animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+      }
+    }
+    @-webkit-keyframes spin {
+      to {
+        transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+      }
+    }
+  }
+  .cardContent-wrap {
+    cursor: pointer;
+    .thumbnail-wrap {
+      .thumbnail {
+        width: 100%;
+        padding-bottom: 66.66%;
+        @include thumbnail();
+      }
+    }
+    .content-wrap {
+      position: relative;
+      padding: 20px 20px 0 20px;
+      border-bottom: 1px solid #f2f3f6;
+      p {
+        margin: 0;
+      }
+      .date {
+        @include font(1.5rem, $font-secondary-color);
+      }
+      h3 {
+        @include font(1.8rem, $weight: 600);
+        padding: 5px 0 30px 0;
+        min-height: 91px;
+        word-break: keep-all;
+      }
+      .price {
+        @include font(1.3rem);
+        padding-bottom: 20px;
+      }
+      .online {
+        @include font(1.3rem);
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+      }
+    }
+    .host-wrap {
+      padding: 0 20px;
+      span {
+        display: inline-block;
+        vertical-align: middle;
+      }
+      .host-profile {
+        display: inline-block;
+        width: 23px;
+        height: 23px;
+        @include thumbnail();
+        border-radius: 50%;
+      }
+      .host-name {
+        @include font(1.3rem);
+        padding-left: 8px;
+      }
+    }
+  }
+  .cardButtons-wrap {
+    position: absolute;
+    bottom: 0;
+    right: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .qr-imgbox {
+      position: relative;
+      border-radius: 50%;
+      outline: none;
+      background: transparent;
+      cursor: pointer;
+      @include Flex();
+      overflow: hidden;
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.04);
+      }
+      .qr-img {
+        width: 2rem;
+        height: 2rem;
+        filter: contrast(0.2);
+        background: url(/img/qr.png) no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+
+      // span {
+      //   position: absolute;
+      //   pointer-events: none;
+      //   border-radius: 50%;
+      //   @include Anim(0.3s, linear) {
+      //     0% {
+      //       width: 0px;
+      //       height: 0px;
+      //       opacity: 0.5;
+      //     }
+      //     100% {
+      //       width: 44px;
+      //       height: 44px;
+      //       border: 4px solid black;
+      //       opacity: 0;
+      //     }
+      //   }
+      // }
+    }
+
+    svg {
+      font-size: 2rem;
+      color: $font-tertiary-color;
+    }
+    .favoriteButton-wrap {
+      &.act svg {
+        color: $point-color;
+      }
+    }
+  }
+}
+
+@include mobile {
+  .card-wrap {
+    width: 100%;
+  }
+}
+
+@include tablet {
+  .card-wrap {
+    width: calc(50% - 30px);
+  }
+}
+
+@include desktop {
+  .card-wrap {
+    width: calc(33.33% - 30px);
+  }
+}

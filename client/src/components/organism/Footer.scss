@@ -1,0 +1,45 @@
+@import '../../style/mixin';
+@import '../../style/variables';
+@import '../../style/mediaQuery';
+
+footer {
+  padding: 0 30px;
+  color: $dark-font-secondary-color;
+  font-size: 1.5rem;
+  font-weight: 400;
+  text-align: center;
+  .github {
+    display: inline-block;
+    padding: 0 10px;
+    &:hover img {
+      transform: rotate3D(0, 1, 0, 180deg);
+    }
+    img {
+      width: 30px;
+      height: 30px;
+      transition: all 0.3s;
+    }
+  }
+
+  .detail-info {
+    margin-top: 20px;
+    li {
+      line-height: 2;
+      display: inline-block;
+      &::after {
+        content: '·';
+        display: inline-block;
+      }
+      &:last-child::after {
+        content: none;
+      }
+      a {
+        padding: 0 10px;
+        transition: all 0.3s;
+        &:hover {
+          color: $dark-font-primary-color;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,155 @@
+@import '../../style/mediaQuery';
+@import '../../style/variables';
+@import '../../style/mixin';
+
+@mixin font-title {
+  font-size: 3.5rem;
+  color: $font-primary-color;
+}
+
+// profile template(profile-section, logout-section) 내 공통 적용 요소
+.profile {
+  section {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 1440px;
+    padding: 0 30px;
+  }
+
+  margin: 0 auto;
+
+  .title {
+    font-size: 3.5rem;
+    font-weight: 500;
+    outline: none;
+  }
+
+  span {
+    font-size: 1.5rem;
+  }
+
+  #profile-edit {
+    margin-bottom: 3rem;
+  }
+
+  .form-div {
+    margin-bottom: 5.5rem;
+  }
+
+  .profile-btn {
+    @include text-button;
+    padding: 2rem;
+    width: 180px;
+  }
+}
+
+section.logout-section {
+  .logout-div,
+  .deact-div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+    align-items: center;
+  }
+
+  @include font-title;
+  border-top: 2px solid $tertiary-color;
+  height: 100%;
+  margin-top: 50px;
+
+  .logout-title-div,
+  .deact-title-div {
+    span {
+      display: block;
+      margin-top: 2rem;
+    }
+  }
+  .profile-btn {
+    @include text-button;
+    padding: 2rem;
+    width: 180px;
+  }
+  .logout-div {
+    padding-right: 70px;
+  }
+  .deact-div {
+    padding-left: 60px;
+  }
+}
+
+@include mobile {
+  .profile {
+    section {
+      width: 100%;
+    }
+    .profile-section,
+    .logout-section {
+      display: block;
+      padding: 0 30px;
+
+      .logout-div,
+      .deact-div {
+        display: block;
+        padding-top: 10px;
+      }
+      .logout-div {
+        margin-bottom: 5rem;
+        padding-right: 0;
+        .logout-btn-div {
+          margin-top: 4rem;
+        }
+      }
+      .deact-div {
+        padding-left: 0;
+        .deact-btn-div {
+          margin-top: 4rem;
+        }
+      }
+    }
+  }
+
+  .profile,
+  .profile-section,
+  .logout-section {
+    width: 100%;
+  }
+
+  .profile-btn {
+    margin-top: 2rem;
+  }
+}
+
+@include tablet {
+  .profile {
+    section {
+      width: 100%;
+    }
+    .profile-section,
+    .logout-section {
+      padding: 0 30px;
+    }
+    .logout-section {
+      display: block;
+      .logout-div {
+        padding-right: 0;
+      }
+      .deact-div {
+        padding-left: 0;
+      }
+    }
+  }
+  .profile-section,
+  .logout-section {
+    width: 100%;
+  }
+}
+
+@include desktop {
+  .profile {
+    section {
+      width: 100%;
+    }
+  }
+}

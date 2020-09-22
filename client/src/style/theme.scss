@@ -1,0 +1,315 @@
+@import "./mediaQuery";
+@import "./mixin";
+@import "./variables";
+
+body.dark {
+  // backgrounds
+  #root {
+    background-color: #1b1d21;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .filter-wrap {
+    button {
+      .more {
+        background-color: #2c3035;
+      }
+    }
+    .selectList-wrap ul {
+      background-color: #2c3035;
+      color: $dark-font-primary-color;
+    }
+  }
+  .sort-wrap {
+    button {
+      border-color: $dark-font-secondary-color;
+      color: $dark-font-secondary-color;
+      &:hover {
+        box-shadow: 0 0 3px 2px #9a9a9a40;
+      }
+      &:active {
+        box-shadow: none;
+      }
+    }
+    .selectList-wrap ul {
+      background-color: #2c3035;
+      color: $dark-font-primary-color;
+    }
+  }
+  .cards-wrap {
+    h2 {
+      color: $dark-font-primary-color;
+    }
+    .cards {
+      .card-wrap {
+        background-color: #2c3035;
+        .cardContent-wrap {
+          .content-wrap {
+            border-bottom: 1px #4b4b4b solid;
+            .date {
+              color: $dark-font-secondary-color;
+            }
+            h3,
+            p,
+            span {
+              font-weight: 500;
+              color: $dark-font-primary-color;
+            }
+          }
+          .host-wrap .host-name {
+            color: $dark-font-primary-color;
+            font-weight: 500;
+          }
+        }
+      }
+
+      //btn & icons
+      .search-btn {
+        color: dimgray;
+      }
+    }
+  }
+  .filter-wrap {
+    button {
+      color: $dark-font-primary-color;
+    }
+  }
+  .create-event-wrap,
+  .revise-event-wrap {
+    background: #1b1d21;
+    .create-event-form,
+    .revise-event-form {
+      .main-title {
+        color: $dark-font-primary-color;
+      }
+      form {
+        #date-picker-inline-helper-text,
+        #time-picker-helper-text {
+          color: #fff;
+        }
+        .MuiInput-underline:before {
+          border-bottom: 1px solid rgba(255, 255, 255, 0.42);
+        }
+        .eventform-title {
+          color: $dark-font-primary-color;
+        }
+        .event-sec {
+          color: $dark-font-secondary-color;
+          .event-content {
+            color: $dark-font-secondary-color;
+          }
+          input[type="text"] {
+            background: #24272b;
+            color: #b6b7b8;
+            &:disabled {
+              color: #3b3c3e;
+            }
+          }
+          .time-check {
+            input[type="text"] {
+              background: inherit;
+            }
+          }
+        }
+        .upload-type {
+          color: $dark-font-secondary-color;
+        }
+        .time-check {
+          label,
+          input,
+          button {
+            color: #fff;
+          }
+        }
+        .create-event-submit,
+        .revise-event-submit {
+          button {
+            color: #fff;
+            border-color: #fff;
+            background: transparent;
+            &:hover {
+              color: #000;
+              background: #fff;
+            }
+          }
+        }
+        .revise-event-submit {
+          button {
+            &:first-child {
+              border: 2px solid #bdbdc4;
+              color: #bdbdc4;
+              &:hover {
+                background: #bdbdc4;
+                color: #2c3035;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .eventInfo-wrap {
+    h2 {
+      color: $dark-font-primary-color;
+    }
+    .flex-wrap {
+      .left {
+        .thumbnail {
+          background-color: #1a1d21;
+        }
+      }
+      .right {
+        p {
+          color: $dark-font-primary-color;
+        }
+        table {
+          tr {
+            th {
+              color: $dark-font-secondary-color;
+            }
+            td {
+              color: $dark-font-primary-color;
+            }
+          }
+        }
+      }
+    }
+  }
+  .eventContents-wrap {
+    .content {
+      color: $dark-font-primary-color;
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p,
+      ul,
+      ol,
+      li,
+      table,
+      a,
+      span {
+        color: #dadbde !important;
+      }
+    }
+    table {
+      color: $dark-font-primary-color;
+    }
+  }
+
+  // my-page
+  .sub-nav-section {
+    background-color: #2c3035;
+  }
+  .sub-nav-div,
+  .title,
+  .logout-section h3 {
+    color: $dark-font-primary-color;
+  }
+
+  .profile-section input {
+    background: #24272b;
+    color: #b6b7b8;
+  }
+
+  .thumb-guide,
+  .form-div label,
+  .logout-section span {
+    color: $dark-font-secondary-color;
+  }
+  .qr-container {
+    color: $dark-font-primary-color;
+  }
+  .qr-img {
+    filter: contrast(0.55) invert(1) !important;
+  }
+
+  .enlisted-list-header {
+    .list-sub-header {
+      color: $dark-font-secondary-color;
+    }
+    .mui-arrow {
+      background-color: #24282b;
+      svg {
+        color: $dark-font-secondary-color;
+      }
+      &:hover {
+        box-shadow: 0 0 2px 2px #3b3c3e;
+      }
+      &:active {
+        box-shadow: none;
+      }
+    }
+  }
+  .list-main-header {
+    h1 {
+      color: $dark-font-primary-color;
+    }
+  }
+
+  .enlisted-list-features {
+    .listed-user-search {
+      input {
+        background: #24272b;
+        color: #b6b7b8;
+      }
+      svg {
+        color: #b6b7b8;
+      }
+    }
+    .qr-reader-btn {
+      background: #24272b;
+      &:hover {
+        box-shadow: 0 0 3px 2px #3b3c3e;
+      }
+      &:active {
+        box-shadow: none;
+      }
+    }
+  }
+
+  .user-slot {
+    background-color: transparent;
+    color: #f2f3f6;
+    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.3);
+    border: 1px solid #36373a;
+    &:hover {
+      box-shadow: none;
+      border: 1px solid #252627;
+    }
+  }
+
+  .error-page-wrap {
+    display: table;
+    width: 100vw;
+    height: 100vh;
+    .error-page-inner-wrap {
+      display: table-cell;
+      text-align: center;
+      vertical-align: middle;
+      h1,
+      a {
+        align-items: center;
+        height: 6rem;
+        color: #f2f3f6;
+      }
+    }
+
+    h1 {
+      font-size: 3rem;
+    }
+
+    a {
+      font-size: 2rem;
+    }
+  }
+}
+
+@include mobile {
+  body.dark .filter-wrap button .more {
+    background-color: transparent;
+  }
+}

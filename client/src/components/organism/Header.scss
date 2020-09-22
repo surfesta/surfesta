@@ -1,0 +1,46 @@
+@import '../../style/variables';
+@import '../../style/mixin';
+@import '../../style/mediaQuery';
+
+#header {
+  height: 70px;
+}
+.main-header * {
+  user-select: none;
+  outline: none;
+}
+.main-header {
+  background-color: $primary-color;
+  color: $tertiary-color;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 99;
+
+  .header-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 30px;
+    height: 70px;
+  }
+}
+
+.only-mobile {
+  display: none;
+}
+
+@include mobile {
+  .not-mobile {
+    display: none;
+  }
+  .only-mobile {
+    display: block;
+  }
+  .mobile-menu-button {
+    padding-right: 0 !important;
+  }
+}

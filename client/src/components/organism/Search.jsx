@@ -4,7 +4,7 @@ import "./Search.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { push } from "connected-react-router";
 import { startSearchEvents } from "../../redux/modules/events";
-import { UNSPLASH_API_KEY } from "/Users/soarm/OneDrive/Desktop/surfesta/client/src/apiKey";
+import { UNSPLASH_API_KEY } from "../../apiKey";
 import axios from "axios";
 
 export default function Search({ searchedKeyword }) {

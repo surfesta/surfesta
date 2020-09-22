@@ -36,6 +36,7 @@
       @include font(3rem, $color: $dark-font-secondary-color);
       text-align: center;
       width: 100%;
+      word-break: keep-all;
       img {
         width: 3rem;
         margin-left: 1rem;
@@ -53,6 +54,11 @@
   .cards-wrap {
     .img-wrap {
       max-width: 300px;
+    }
+    .cards {
+      .no-event-text {
+        padding-right: 30px;
+      }
     }
   }
 }

@@ -1,12 +1,16 @@
 import React from 'react';
 import UserSlot from '../molecule/UserSlot';
 
-export default function AttendeeListing({ hostingEvent, handleClick, users }) {
-  console.log(users);
+export default function AttendeeListing({
+  hostingEvent,
+  handleClick,
+  filteredUsers,
+}) {
+  console.log(filteredUsers.length);
   return (
     <>
       <div className="listed-users">
-        {users
+        {hostingEvent && filteredUsers.length == 0
           ? hostingEvent.enlisted_users.map((user) => (
               <UserSlot
                 hostingEvent={hostingEvent}
@@ -15,7 +19,7 @@ export default function AttendeeListing({ hostingEvent, handleClick, users }) {
                 handleClick={handleClick}
               />
             ))
-          : users.map((user) => (
+          : filteredUsers.map((user) => (
               <UserSlot
                 hostingEvent={hostingEvent}
                 user={user}

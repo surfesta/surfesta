@@ -3,7 +3,8 @@
 
 .header-login-button {
   @include font-normal;
-  color: $font-tertiary-color;
+  color: $dark-font-secondary-color;
+  font-weight: 600;
   background-color: transparent;
   padding: 1rem;
 

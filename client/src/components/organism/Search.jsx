@@ -13,7 +13,6 @@ export default function Search({ searchedKeyword }) {
   const [value, setValue] = useState(searchedKeyword);
   const searchBack = useRef();
   const inputRef = useRef();
-  // const UNSPLASH_API_KEY = "MQQ7GOoCPkTPY9i6GdANsOmI0qVCfwkEEmIvNmv626A";
   const URL = "https://api.unsplash.com";
 
   const searchEvents = () => {

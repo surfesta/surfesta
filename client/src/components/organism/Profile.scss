@@ -1,6 +1,6 @@
-@import '../../style/mediaQuery';
-@import '../../style/variables';
-@import '../../style/mixin';
+@import "../../style/mediaQuery";
+@import "../../style/variables";
+@import "../../style/mixin";
 
 @mixin font-title {
   font-size: 3.5rem;
@@ -14,7 +14,7 @@
   .form-div {
     margin-top: 20px;
     display: flex;
-    input[name='email'] {
+    input[name="email"] {
       cursor: initial;
     }
   }
@@ -78,10 +78,10 @@
         &:hover {
           filter: grayscale(30%);
           &::before {
-            content: '';
+            content: "";
             position: absolute;
-            top: 150px;
-            left: 150px;
+            top: 130px;
+            left: 130px;
             background-image: url(/img/camera.svg);
             background-repeat: no-repeat;
             background-position: center;

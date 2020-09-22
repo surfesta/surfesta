@@ -1,12 +1,12 @@
-@import '../../style/mixin';
-@import '../../style/variables';
-@import '../../style/mediaQuery';
+@import "../../style/mixin";
+@import "../../style/variables";
+@import "../../style/mediaQuery";
 
 .search-back {
   @include Flex();
   background-color: $dark-font-primary-color;
   background-size: cover;
-  height: 205px;
+  height: 180px;
 
   .search-wrap {
     width: 100%;

@@ -1,6 +1,6 @@
-@import './mediaQuery';
-@import './mixin';
-@import './variables';
+@import "./mediaQuery";
+@import "./mixin";
+@import "./variables";
 
 body.dark {
   // backgrounds
@@ -98,12 +98,15 @@ body.dark {
           .event-content {
             color: $dark-font-secondary-color;
           }
-          input[type='text'] {
+          input[type="text"] {
             background: #24272b;
             color: #b6b7b8;
+            &:disabled {
+              color: #3b3c3e;
+            }
           }
           .time-check {
-            input[type='text'] {
+            input[type="text"] {
               background: inherit;
             }
           }
@@ -221,7 +224,7 @@ body.dark {
     color: $dark-font-primary-color;
   }
   .qr-img {
-    filter: invert(1) !important;
+    filter: contrast(0.55) invert(1) !important;
   }
 
   .enlisted-list-header {
@@ -276,6 +279,31 @@ body.dark {
     &:hover {
       box-shadow: none;
       border: 1px solid #252627;
+    }
+  }
+
+  .error-page-wrap {
+    display: table;
+    width: 100vw;
+    height: 100vh;
+    .error-page-inner-wrap {
+      display: table-cell;
+      text-align: center;
+      vertical-align: middle;
+      h1,
+      a {
+        align-items: center;
+        height: 6rem;
+        color: #f2f3f6;
+      }
+    }
+
+    h1 {
+      font-size: 3rem;
+    }
+
+    a {
+      font-size: 2rem;
     }
   }
 }

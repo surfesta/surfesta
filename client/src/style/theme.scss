@@ -281,6 +281,31 @@ body.dark {
       border: 1px solid #252627;
     }
   }
+
+  .error-page-wrap {
+    display: table;
+    width: 100vw;
+    height: 100vh;
+    .error-page-inner-wrap {
+      display: table-cell;
+      text-align: center;
+      vertical-align: middle;
+      h1,
+      a {
+        align-items: center;
+        height: 6rem;
+        color: #f2f3f6;
+      }
+    }
+
+    h1 {
+      font-size: 3rem;
+    }
+
+    a {
+      font-size: 2rem;
+    }
+  }
 }
 
 @include mobile {

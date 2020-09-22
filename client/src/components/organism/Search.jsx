@@ -4,6 +4,7 @@ import "./Search.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { push } from "connected-react-router";
 import { startSearchEvents } from "../../redux/modules/events";
+import API_KEY from "../../../keyStore.js";
 import axios from "axios";
 
 export default function Search({ searchedKeyword }) {
@@ -12,7 +13,7 @@ export default function Search({ searchedKeyword }) {
   const [value, setValue] = useState(searchedKeyword);
   const searchBack = useRef();
   const inputRef = useRef();
-  const UNSPLASH_API_KEY = "RGq76XlXseELsXOMgGPq_AglsX_DzwNUK1omuwzYGDc";
+  const UNSPLASH_API_KEY = API_KEY;
 
   const URL = "https://api.unsplash.com";
 

@@ -16,7 +16,7 @@ const userSchema = mongoose.Schema(
     password: { type: String, required: true },
     username: String,
     profile_img: String,
-    phone_number: Number,
+    phone_number: String,
     enlisted_events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }],
     hosting_events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }],
     liked_events: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }],

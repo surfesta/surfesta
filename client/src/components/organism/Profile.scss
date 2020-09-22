@@ -1,6 +1,6 @@
-@import "../../style/mediaQuery";
-@import "../../style/variables";
-@import "../../style/mixin";
+@import '../../style/mediaQuery';
+@import '../../style/variables';
+@import '../../style/mixin';
 
 @mixin font-title {
   font-size: 3.5rem;
@@ -14,14 +14,17 @@
   .form-div {
     margin-top: 20px;
     display: flex;
+    input[name='email'] {
+      cursor: initial;
+    }
   }
 
   .profile-info {
-    width: 690px;
+    width: 50%;
   }
   .profile-form {
-    margin-top: 65px;
-    width: 690px;
+    margin-top: 80px;
+    width: 50%;
 
     .profile-btn {
       @include text-button;
@@ -32,7 +35,7 @@
   label {
     margin-bottom: 10px;
     padding: 10px 0 0 0;
-    width: 140px;
+    width: 200px;
     font-size: 2.4rem;
     font-weight: 500;
   }
@@ -49,8 +52,6 @@
     font-size: 1.5rem;
   }
   .thumb-div {
-    margin-top: 20px;
-
     .custom-thumbnail-input {
       visibility: hidden;
       height: 0;
@@ -60,18 +61,37 @@
       cursor: pointer;
       border-radius: 150px;
       margin: 0 auto;
-      width: 300px;
-
+      width: 400px;
+      @include Flex();
       .profile-thumb {
         -webkit-user-drag: none;
         -moz-user-drag: none;
         user-select: none;
-        width: 300px;
-        height: 300px;
+        width: 250px;
+        height: 250px;
         border-radius: 150px;
         display: flex;
-        background-color: rgb(204, 204, 204);
-        margin: 0 auto;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative;
+        &:hover {
+          filter: grayscale(30%);
+          &::before {
+            content: '';
+            position: absolute;
+            top: 150px;
+            left: 150px;
+            background-image: url(/img/camera.svg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: rgb(235, 235, 235);
+            border-radius: 80px;
+            height: 80px;
+            width: 80px;
+            transform: translate3d(-50%, -50%, 0);
+          }
+        }
       }
     }
   }
@@ -91,10 +111,6 @@
 
     .profile-info {
       width: 100%;
-      .profile-thumb {
-        max-width: 300px;
-        max-height: 300px;
-      }
       .title {
         margin-top: 20px;
       }
@@ -104,6 +120,9 @@
       margin-top: 37px;
       width: 100%;
       padding-bottom: 20px;
+      .form-btn {
+        text-align: center;
+      }
     }
   }
 }
@@ -113,23 +132,12 @@
     width: 100%;
 
     .profile-info {
-      width: 100%;
-      max-width: 400px;
       .thumb-div {
         width: 100%;
-        max-width: 400px;
-      }
-      .profile-thumb {
-        max-width: 300px;
-        max-height: 300px;
       }
     }
 
     .profile-form {
-      margin-top: 37px;
-      max-width: 400px;
-      padding-bottom: 10px;
-
       .form-btn {
         div {
           text-align: center;
@@ -137,22 +145,7 @@
       }
       input {
         width: 100%;
-        max-width: 450px;
       }
-      .profile-btn {
-        margin-right: 2rem;
-      }
-    }
-  }
-}
-
-@include desktop {
-  .profile-section {
-    .profile-info {
-      width: 510px;
-    }
-    .profile-form {
-      width: 510px;
     }
   }
 }

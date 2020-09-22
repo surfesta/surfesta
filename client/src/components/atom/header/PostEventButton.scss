@@ -3,7 +3,9 @@
 
 .event-button {
   @include font-normal;
-  color: $font-tertiary-color;
+  color: $dark-font-secondary-color;
+  font-weight: 600;
+  font-size: 1.5rem;
   background-color: transparent;
   padding: 1rem;
 

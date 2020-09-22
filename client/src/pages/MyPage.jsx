@@ -16,9 +16,14 @@ function MyPage() {
   const dispatch = useDispatch();
   const clientCookie = getCookieValue("surf_auth");
   const [authDone, setAuthDone] = useState(false);
-
+  const [qr, setQr] = useState("");
   useEffect(() => {
-    if (user) setAuthDone(true);
+    if (user) {
+      setAuthDone(true);
+      setQr(
+        `https://api.qrserver.com/v1/create-qr-code/?data=${user._id}&size=240x240`
+      );
+    }
     if (error) {
       console.warn(
         "로그인인증에 문제가 생겼습니다. (토큰은 있지만, 서버에서 인증에러)"
@@ -34,6 +39,7 @@ function MyPage() {
 
   return (
     <div className="init-height">
+      <img src={qr} style={{ display: "none" }} hidden />
       {authDone && (
         <>
           <SubNavTemplate />

@@ -1,5 +1,6 @@
-@import './mixin';
-@import './variables';
+@import "./mediaQuery";
+@import "./mixin";
+@import "./variables";
 
 body.dark {
   // backgrounds
@@ -7,6 +8,7 @@ body.dark {
     background-color: #1b1d21;
     transition: all 0.2s ease-in-out;
   }
+
   .filter-wrap {
     button {
       .more {
@@ -67,11 +69,6 @@ body.dark {
       }
     }
   }
-  // .search-wrap {
-  //   input {
-  //     color: $dark-font-primary-color;
-  //   }
-  // }
   .filter-wrap {
     button {
       color: $dark-font-primary-color;
@@ -90,6 +87,9 @@ body.dark {
         #time-picker-helper-text {
           color: #fff;
         }
+        .MuiInput-underline:before {
+          border-bottom: 1px solid rgba(255, 255, 255, 0.42);
+        }
         .eventform-title {
           color: $dark-font-primary-color;
         }
@@ -98,12 +98,12 @@ body.dark {
           .event-content {
             color: $dark-font-secondary-color;
           }
-          input[type='text'] {
+          input[type="text"] {
             background: #24272b;
             color: #b6b7b8;
           }
           .time-check {
-            input[type='text'] {
+            input[type="text"] {
               background: inherit;
             }
           }
@@ -170,12 +170,6 @@ body.dark {
             }
           }
         }
-        .button-wrap {
-          .favoriteButton-wrap {
-            &.act svg {
-            }
-          }
-        }
       }
     }
   }
@@ -211,6 +205,11 @@ body.dark {
   .title,
   .logout-section h3 {
     color: $dark-font-primary-color;
+  }
+
+  .profile-section input {
+    background: #24272b;
+    color: #b6b7b8;
   }
 
   .thumb-guide,
@@ -278,5 +277,36 @@ body.dark {
       box-shadow: none;
       border: 1px solid #252627;
     }
+  }
+
+  .error-page-wrap {
+    display: table;
+    width: 100vw;
+    height: 100vh;
+    .error-page-inner-wrap {
+      display: table-cell;
+      text-align: center;
+      vertical-align: middle;
+      h1,
+      a {
+        align-items: center;
+        height: 6rem;
+        color: #f2f3f6;
+      }
+    }
+
+    h1 {
+      font-size: 3rem;
+    }
+
+    a {
+      font-size: 2rem;
+    }
+  }
+}
+
+@include mobile {
+  body.dark .filter-wrap button .more {
+    background-color: transparent;
   }
 }

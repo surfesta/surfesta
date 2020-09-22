@@ -1,9 +1,18 @@
 @import '../../../style/variables';
 @import '../../../style/mixin';
 
+.header-right-wrapper {
+  width: 135px;
+}
 .header-right {
   display: flex;
   align-items: center;
+  min-width: 130px;
+  justify-content: flex-end;
+
+  &.only-mobile {
+    min-width: unset;
+  }
 
   .MuiSvgIcon-root {
     width: 1.4em !important;

@@ -5,7 +5,6 @@
 /.pnp
 .pnp.js
 /src/setupProxy.js
-/keyStore.js
 # testing
 /coverage
 

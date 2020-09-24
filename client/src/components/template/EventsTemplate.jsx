@@ -44,6 +44,7 @@ export default function EventsTemplate({
   // Newest
   let _events =
     sort === NEWEST &&
+    Array.isArray(events) &&
     events.sort((a, b) => {
       return new Date(b.createdAt) - new Date(a.createdAt);
     });
@@ -51,6 +52,7 @@ export default function EventsTemplate({
   // Oldest
   _events =
     sort === OLDEST &&
+    Array.isArray(events) &&
     events.sort((a, b) => {
       return new Date(a.createdAt) - new Date(b.createdAt);
     });
@@ -58,6 +60,7 @@ export default function EventsTemplate({
   // Most liked
   _events =
     sort === MOSTLIKED &&
+    Array.isArray(events) &&
     events.sort((a, b) => {
       return b.like_count - a.like_count;
     });
@@ -65,6 +68,7 @@ export default function EventsTemplate({
   // Most popular
   _events =
     sort === MOSTPOPULAR &&
+    Array.isArray(events) &&
     events.sort((a, b) => {
       return b.cur_count / b.max_count - a.cur_count / a.max_count;
     });
@@ -72,6 +76,7 @@ export default function EventsTemplate({
   // Cheapest
   _events =
     sort === CHEAPEST &&
+    Array.isArray(events) &&
     events.sort((a, b) => {
       return a.price - b.price;
     });
@@ -79,15 +84,16 @@ export default function EventsTemplate({
   // Most expensice
   _events =
     sort === MOSTEXPENSIVE &&
+    Array.isArray(events) &&
     events.sort((a, b) => {
       return b.price - a.price;
     });
 
   return (
-    <main className='main'>
-      <h2 className='a11y-hidden'>이벤트 검색</h2>
+    <main className="main">
+      <h2 className="a11y-hidden">이벤트 검색</h2>
       <Search searchedKeyword={searchedKeyword} />
-      <div className='select-wrap'>
+      <div className="select-wrap">
         <Filter
           filter={filter}
           setFilter={setFilter}
@@ -96,20 +102,20 @@ export default function EventsTemplate({
         <Sort sort={sort} setSort={setSort} sortState={sortState} />
       </div>
 
-      <section className='cards-wrap'>
-        <h2 className='a11y-hidden'>이벤트 리스트</h2>
+      <section className="cards-wrap">
+        <h2 className="a11y-hidden">이벤트 리스트</h2>
 
         {error && (
-          <div className='img-wrap'>
-            <img src='/img/error.png' alt='에러' />
+          <div className="img-wrap">
+            <img src="/img/error.png" alt="에러" />
           </div>
         )}
         {imgSrc && (
-          <div className='img-wrap nosearch'>
-            <img src={imgSrc} alt='검색결과를 찾을 수 없습니다.' />
+          <div className="img-wrap nosearch">
+            <img src={imgSrc} alt="검색결과를 찾을 수 없습니다." />
           </div>
         )}
-        <div className='cards'>
+        <div className="cards">
           {Array.isArray(events) &&
             filter === ALL &&
             events.map((event) => {

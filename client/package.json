@@ -40,8 +40,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "serve": "npx serve -s build -l 3000",
-    "postbuild": "react-snap"
+    "serve": "npx serve -s build -l 3000"
   },
   "eslintConfig": {
     "extends": "react-app"

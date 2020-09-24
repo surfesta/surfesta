@@ -25,7 +25,7 @@ export default function UserSlot({ user, handleClick, hostingEvent }) {
         <span>{user.username}</span>
       </div>
       <div className="user-profile-email">{user.email}</div>
-      <div className="user-profile-number">{'0' + user.phone_number}</div>
+      <div className="user-profile-number">{user.phone_number}</div>
       <div className="user-profile-check" onClick={handleToggle}>
         <CheckIcon className={attendance ? 'O' : 'X'} />
       </div>

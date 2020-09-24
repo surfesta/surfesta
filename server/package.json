@@ -7,7 +7,6 @@
     "start": "npx nodemon server.js",
     "backend": "npx nodemon server.js",
     "frontend": "npm start --prefix ../client",
-    "prod": "concurrently \"npm run build --prefix ../client\" \"npm run backend\" \"npm run serve --prefix ../client\"",
     "dev": "concurrently \"npm run backend\" \"npm run frontend\""
   },
   "author": "",
